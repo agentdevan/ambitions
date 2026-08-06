@@ -694,7 +694,7 @@ enum CanonicalRuntimeAttachmentStore {
                 .integer(reservation.reservedBytes),
             ]
         )
-        guard ledgerChanged == 1 else {
+        guard ledgerChanged.changedRowCount == 1 else {
             let versionRows = try database.query(
                 """
                 SELECT state_version FROM runtime_blob_quota_ledgers
@@ -779,7 +779,7 @@ enum CanonicalRuntimeAttachmentStore {
               total < Int64(RuntimeAttachmentLimits.maximumHolds) else {
             throw RuntimeCanonicalAttachmentError.retentionHoldActive
         }
-        let retainBinding: SQLiteValue
+        let retainBinding: SQLiteBinding
         if let retainUntil = hold.retainUntil {
             retainBinding = .integer(try milliseconds(retainUntil))
         } else {
@@ -929,7 +929,7 @@ enum CanonicalRuntimeAttachmentStore {
                 .text(blobID.rawValue), .text(authorityID),
             ]
         )
-        guard changed == 1 else { throw RuntimeCanonicalAttachmentError.lifecycleConflict }
+        guard changed.changedRowCount == 1 else { throw RuntimeCanonicalAttachmentError.lifecycleConflict }
     }
 
     private static func insertHoldHistory(
@@ -1036,7 +1036,7 @@ enum CanonicalRuntimeAttachmentStore {
               case let .text(ownerID)? = rows[0].value(named: "owner_id"),
               reservedBytes >= maximumBytes,
               case let .integer(expiresAtMS)? = rows[0].value(named: "expires_at_ms"),
-              expiresAtMS > try milliseconds(now),
+              expiresAtMS > (try milliseconds(now)),
               rows[0].value(named: "consumed_by_blob_id") == .null,
               rows[0].value(named: "released_at_ms") == .null else {
             throw RuntimeCanonicalAttachmentError.reservationExpired
@@ -1094,7 +1094,7 @@ enum CanonicalRuntimeAttachmentStore {
                 .integer(try milliseconds(now)), .text(authorization.reservationID.rawValue),
             ]
         )
-        guard released == 1 else { throw RuntimeCanonicalAttachmentError.lifecycleConflict }
+        guard released.changedRowCount == 1 else { throw RuntimeCanonicalAttachmentError.lifecycleConflict }
         let ledger = try database.execute(
             """
             UPDATE runtime_blob_quota_ledgers
@@ -1109,7 +1109,7 @@ enum CanonicalRuntimeAttachmentStore {
                 .integer(reservedBytes),
             ]
         )
-        guard ledger == 1 else { throw RuntimeCanonicalAttachmentError.corruptAuthority }
+        guard ledger.changedRowCount == 1 else { throw RuntimeCanonicalAttachmentError.corruptAuthority }
     }
 
     static func releaseExpiredQuotaReservations(
@@ -1173,7 +1173,7 @@ enum CanonicalRuntimeAttachmentStore {
                     .integer(reservedBytes), .integer(createdAtMS), .integer(expiresAtMS),
                 ]
             )
-            guard reservationChanged == 1 else {
+            guard reservationChanged.changedRowCount == 1 else {
                 throw RuntimeCanonicalAttachmentError.lifecycleConflict
             }
             let ledgerChanged = try database.execute(
@@ -1189,7 +1189,7 @@ enum CanonicalRuntimeAttachmentStore {
                     .integer(ledgerReserved), .integer(ledgerVersion),
                 ]
             )
-            guard ledgerChanged == 1 else {
+            guard ledgerChanged.changedRowCount == 1 else {
                 throw RuntimeCanonicalAttachmentError.lifecycleConflict
             }
             releasedCount += 1
@@ -1207,6 +1207,9 @@ enum CanonicalRuntimeAttachmentStore {
         try RuntimeAttachmentCodec.validate(bundle.manifest)
         try RuntimeAttachmentCodec.validate(bundle.envelope)
         try RuntimeAttachmentCodec.validate(bundle.lifecycle)
+        let expectedManifestDigest = try RuntimeAttachmentCodec.digest(
+            bundle.manifest, maximumBytes: RuntimeAttachmentLimits.maximumManifestBytes
+        )
         guard bundle.revision.blobID == bundle.manifest.blobID,
               bundle.envelope.blobID == bundle.manifest.blobID,
               bundle.lifecycle.blobID == bundle.manifest.blobID,
@@ -1214,9 +1217,7 @@ enum CanonicalRuntimeAttachmentStore {
               bundle.lifecycle.stateVersion == 1,
               bundle.lifecycle.referenceCount == 0,
               bundle.revision.manifestDigest == bundle.lifecycle.manifestDigest,
-              bundle.revision.manifestDigest == try RuntimeAttachmentCodec.digest(
-                  bundle.manifest, maximumBytes: RuntimeAttachmentLimits.maximumManifestBytes
-              ),
+              bundle.revision.manifestDigest == expectedManifestDigest,
               bundle.manifest.plaintextByteCount == bundle.revision.classification.byteCount,
               RuntimeAttachmentPrivacyDomain(bundle.revision.privacy) == bundle.manifest.privacyDomain else {
             throw RuntimeCanonicalAttachmentError.invalidRecord
@@ -1248,7 +1249,7 @@ enum CanonicalRuntimeAttachmentStore {
             )
         }
         guard case .null? = reservation[0].value(named: "consumed_by_blob_id"),
-              expiresAt > try milliseconds(now) else {
+              expiresAt > (try milliseconds(now)) else {
             throw RuntimeCanonicalAttachmentError.reservationExpired
         }
         let completedSourceRotations = try database.query(
@@ -1440,7 +1441,7 @@ enum CanonicalRuntimeAttachmentStore {
         let lifecycleDigest = RuntimeAttachmentCodec.sha256(lifecycleBytes)
         let createdAt = try milliseconds(bundle.revision.createdAt)
 
-        let retentionBinding: SQLiteValue = if let retentionUntil = bundle.lifecycle.retentionUntil {
+        let retentionBinding: SQLiteBinding = if let retentionUntil = bundle.lifecycle.retentionUntil {
             .integer(try milliseconds(retentionUntil))
         } else {
             .null
@@ -1729,7 +1730,7 @@ enum CanonicalRuntimeAttachmentStore {
                 .text(blobID.rawValue), .text(reservationID.rawValue), .integer(try milliseconds(now)),
             ]
         )
-        guard consumed == 1 else { throw RuntimeCanonicalAttachmentError.reservationExpired }
+        guard consumed.changedRowCount == 1 else { throw RuntimeCanonicalAttachmentError.reservationExpired }
         let ledger = try database.execute(
             """
             UPDATE runtime_blob_quota_ledgers
@@ -1746,7 +1747,7 @@ enum CanonicalRuntimeAttachmentStore {
                 .integer(reservedBytes), .integer(storedBytes), .integer(orphanBytes),
             ]
         )
-        guard ledger == 1 else { throw RuntimeCanonicalAttachmentError.quotaExceeded }
+        guard ledger.changedRowCount == 1 else { throw RuntimeCanonicalAttachmentError.quotaExceeded }
     }
 
     private static func markStagingOrphanCleaned(
@@ -1780,7 +1781,7 @@ enum CanonicalRuntimeAttachmentStore {
                 .integer(try milliseconds(now)), .text(blobID.rawValue), .text(manifestDigest),
             ]
         )
-        guard changed == 1 else { throw RuntimeCanonicalAttachmentError.lifecycleConflict }
+        guard changed.changedRowCount == 1 else { throw RuntimeCanonicalAttachmentError.lifecycleConflict }
         let ledger = try database.execute(
             """
             UPDATE runtime_blob_quota_ledgers
@@ -1794,7 +1795,7 @@ enum CanonicalRuntimeAttachmentStore {
                 .text(privacyRaw), .text(ownerID), .integer(byteCount),
             ]
         )
-        guard ledger == 1 else { throw RuntimeCanonicalAttachmentError.corruptAuthority }
+        guard ledger.changedRowCount == 1 else { throw RuntimeCanonicalAttachmentError.corruptAuthority }
     }
 
     static func confirmDedupCandidate(
@@ -2058,7 +2059,7 @@ enum CanonicalRuntimeAttachmentStore {
                 )),
             ]
         )
-        guard changed == 1 else { throw RuntimeCanonicalAttachmentError.lifecycleConflict }
+        guard changed.changedRowCount == 1 else { throw RuntimeCanonicalAttachmentError.lifecycleConflict }
         let finalized = try database.execute(
             """
             UPDATE runtime_blob_finalization_intents
@@ -2070,7 +2071,7 @@ enum CanonicalRuntimeAttachmentStore {
                 .text(proof.proofDigest), .text(graph.manifest.blobID.rawValue),
             ]
         )
-        guard finalized == 1 else { throw RuntimeCanonicalAttachmentError.lifecycleConflict }
+        guard finalized.changedRowCount == 1 else { throw RuntimeCanonicalAttachmentError.lifecycleConflict }
         let marker = RuntimeAttachmentFinalizationMarker(
             version: runtimeCanonicalAttachmentModelVersion, blobID: work.manifest.blobID,
             manifestDigest: work.manifestDigest, receiptID: work.receiptID,
@@ -2347,7 +2348,7 @@ enum CanonicalRuntimeAttachmentStore {
                     .integer(nextRetryMS), .integer(nowMS),
                 ]
             )
-            guard changed == 1 else { throw RuntimeCanonicalAttachmentError.lifecycleConflict }
+            guard changed.changedRowCount == 1 else { throw RuntimeCanonicalAttachmentError.lifecycleConflict }
             return true
         }
         guard case let .text(storedOccurrence)? = row.value(named: "occurrence_fingerprint"),
@@ -2387,7 +2388,7 @@ enum CanonicalRuntimeAttachmentStore {
                     .integer(try RuntimeAttachmentCodec.sqliteInteger(nextVersion)),
                 ]
             )
-            guard inserted == 1 else { throw RuntimeCanonicalAttachmentError.lifecycleConflict }
+            guard inserted.changedRowCount == 1 else { throw RuntimeCanonicalAttachmentError.lifecycleConflict }
             let reopened = try database.execute(
                 """
                 UPDATE runtime_attachment_recovery_attempts
@@ -2404,7 +2405,7 @@ enum CanonicalRuntimeAttachmentStore {
                     .integer(resolvedAtMS), .integer(rawVersion),
                 ]
             )
-            guard reopened == 1 else { throw RuntimeCanonicalAttachmentError.lifecycleConflict }
+            guard reopened.changedRowCount == 1 else { throw RuntimeCanonicalAttachmentError.lifecycleConflict }
             return true
         }
         guard row.value(named: "resolved_at_ms") == .null else {
@@ -2437,7 +2438,7 @@ enum CanonicalRuntimeAttachmentStore {
                 .text(workKind.rawValue), .text(authorityID), .integer(rawVersion), .integer(nowMS),
             ]
         )
-        guard changed == 1 else { throw RuntimeCanonicalAttachmentError.lifecycleConflict }
+        guard changed.changedRowCount == 1 else { throw RuntimeCanonicalAttachmentError.lifecycleConflict }
         return true
     }
 
@@ -2501,7 +2502,7 @@ enum CanonicalRuntimeAttachmentStore {
                 .text(errorFingerprint), .text(workKind.rawValue), .text(authorityID),
             ]
         )
-        guard changed == 1 else { throw RuntimeCanonicalAttachmentError.lifecycleConflict }
+        guard changed.changedRowCount == 1 else { throw RuntimeCanonicalAttachmentError.lifecycleConflict }
     }
 
     static func resolveRecoveryAttempt(
@@ -2526,7 +2527,7 @@ enum CanonicalRuntimeAttachmentStore {
                 .text(authorityID), .integer(try milliseconds(now)),
             ]
         )
-        guard changed == 1 else { throw RuntimeCanonicalAttachmentError.lifecycleConflict }
+        guard changed.changedRowCount == 1 else { throw RuntimeCanonicalAttachmentError.lifecycleConflict }
     }
 
     static func claimUnownedManifestDeletion(
@@ -2632,7 +2633,7 @@ enum CanonicalRuntimeAttachmentStore {
                     .text(next.blobID.rawValue), .text(next.opaqueRelativeDirectory),
                 ]
             )
-            guard changed == 1 else { throw RuntimeCanonicalAttachmentError.lifecycleConflict }
+            guard changed.changedRowCount == 1 else { throw RuntimeCanonicalAttachmentError.lifecycleConflict }
             return next
         }
         let claim = RuntimeAttachmentManifestDeletionClaim(
@@ -2769,7 +2770,7 @@ enum CanonicalRuntimeAttachmentStore {
                 .text(claim.blobID.rawValue), .text(claim.opaqueRelativeDirectory),
             ]
         )
-        guard changed == 1 else { throw RuntimeCanonicalAttachmentError.lifecycleConflict }
+        guard changed.changedRowCount == 1 else { throw RuntimeCanonicalAttachmentError.lifecycleConflict }
         return next
     }
 
@@ -2811,7 +2812,7 @@ enum CanonicalRuntimeAttachmentStore {
               case let .text(currentDigest)? = rows[0].value(named: "claim_digest"),
               RuntimeAttachmentCodec.sha256(currentPayload) == currentDigest,
               case let .integer(version)? = rows[0].value(named: "state_version"),
-              version == try RuntimeAttachmentCodec.sqliteInteger(claim.stateVersion),
+              version == (try RuntimeAttachmentCodec.sqliteInteger(claim.stateVersion)),
               rows[0].value(named: "claimed_at_ms") == .integer(try milliseconds(claim.claimedAt)),
               rows[0].value(named: "expires_at_ms") == .integer(try milliseconds(claim.expiresAt)),
               try RuntimeAttachmentCodec.decode(
@@ -2876,7 +2877,7 @@ enum CanonicalRuntimeAttachmentStore {
                 .integer(try milliseconds(proof.deletedAt)),
             ]
         )
-        guard changed == 1 else { throw RuntimeCanonicalAttachmentError.lifecycleConflict }
+        guard changed.changedRowCount == 1 else { throw RuntimeCanonicalAttachmentError.lifecycleConflict }
         let orphanRows = try database.query(
             """
             SELECT manifest_payload, manifest_digest, opaque_relative_directory
@@ -3064,7 +3065,7 @@ enum CanonicalRuntimeAttachmentStore {
                     .integer(try RuntimeAttachmentCodec.sqliteInteger(existing.stateVersion)),
                 ]
             )
-            guard changed == 1 else { throw RuntimeCanonicalAttachmentError.lifecycleConflict }
+            guard changed.changedRowCount == 1 else { throw RuntimeCanonicalAttachmentError.lifecycleConflict }
         } else {
             let changed = try database.execute(
                 """
@@ -3077,7 +3078,7 @@ enum CanonicalRuntimeAttachmentStore {
                     .integer(wrapped ? 1 : 0), .integer(nowMS),
                 ]
             )
-            guard changed == 1 else { throw RuntimeCanonicalAttachmentError.lifecycleConflict }
+            guard changed.changedRowCount == 1 else { throw RuntimeCanonicalAttachmentError.lifecycleConflict }
         }
         guard let result = try recoveryCursor(scanKind: scanKind, database: database) else {
             throw RuntimeCanonicalAttachmentError.corruptAuthority
@@ -3195,7 +3196,7 @@ enum CanonicalRuntimeAttachmentStore {
                 )),
             ]
         )
-        guard changed == 1 else { throw RuntimeCanonicalAttachmentError.lifecycleConflict }
+        guard changed.changedRowCount == 1 else { throw RuntimeCanonicalAttachmentError.lifecycleConflict }
         try releaseDedupAuthority(blobID: graph.manifest.blobID, database: database)
         return finding
     }
@@ -3298,7 +3299,7 @@ enum CanonicalRuntimeAttachmentStore {
                 .text(relativeDirectory), .integer(nowMS),
             ]
         )
-        return changed
+        return Int(changed.changedRowCount)
     }
 
     static func quarantineForRecovery(
@@ -3382,7 +3383,7 @@ enum CanonicalRuntimeAttachmentStore {
                 )),
             ]
         )
-        guard changed == 1 else { throw RuntimeCanonicalAttachmentError.lifecycleConflict }
+        guard changed.changedRowCount == 1 else { throw RuntimeCanonicalAttachmentError.lifecycleConflict }
         try releaseDedupAuthority(blobID: graph.manifest.blobID, database: database)
     }
 
@@ -3837,7 +3838,7 @@ enum CanonicalRuntimeAttachmentStore {
                     )),
                 ]
             )
-            guard changed == 1 else { throw RuntimeCanonicalAttachmentError.lifecycleConflict }
+            guard changed.changedRowCount == 1 else { throw RuntimeCanonicalAttachmentError.lifecycleConflict }
         } else {
             try database.execute(
                 """
@@ -4020,7 +4021,7 @@ enum CanonicalRuntimeAttachmentStore {
                 )),
             ]
         )
-        guard changed == 1 else { throw RuntimeCanonicalAttachmentError.lifecycleConflict }
+        guard changed.changedRowCount == 1 else { throw RuntimeCanonicalAttachmentError.lifecycleConflict }
         var prior = try loadGCCurrentLease(blobID: blobID, database: database)
         if let active = prior, active.state == .active {
             guard active.lease.expiresAt <= now else {
@@ -4234,7 +4235,7 @@ enum CanonicalRuntimeAttachmentStore {
                 .text(privacyRaw), .text(ownerID), .integer(storedBytes),
             ]
         )
-        guard ledger == 1 else { throw RuntimeCanonicalAttachmentError.corruptAuthority }
+        guard ledger.changedRowCount == 1 else { throw RuntimeCanonicalAttachmentError.corruptAuthority }
         guard let activeLease = try loadGCCurrentLease(
             blobID: lease.blobID, database: database
         ), activeLease.state == .active, activeLease.lease == lease else {
@@ -4313,7 +4314,7 @@ enum CanonicalRuntimeAttachmentStore {
             referenceTransitions.append(referenceHistory)
             producedReference = reference
             nextCount = old.referenceCount + 1
-            nextState = old.state == .finalized || (try hasAuthenticatedCompletedFinalization(
+            nextState = try (old.state == .finalized || hasAuthenticatedCompletedFinalization(
                 blobID: intent.blobID, manifestDigest: intent.manifestDigest, database: database
             )) ? .finalized : .referenced
             if old.state == .orphaned {
@@ -4344,7 +4345,7 @@ enum CanonicalRuntimeAttachmentStore {
                     .text(intent.blobID.rawValue), .text(target.kind.rawValue), .text(target.id.rawValue),
                 ]
             )
-            guard changed == 1, old.referenceCount > 0 else {
+            guard changed.changedRowCount == 1, old.referenceCount > 0 else {
                 throw RuntimeCanonicalAttachmentError.lifecycleConflict
             }
             nextCount = old.referenceCount - 1
@@ -4430,7 +4431,7 @@ enum CanonicalRuntimeAttachmentStore {
                 .text(try RuntimeAttachmentCodec.digest(old, maximumBytes: RuntimeAttachmentLimits.maximumManifestBytes)),
             ]
         )
-        guard changed == 1 else { throw RuntimeCanonicalAttachmentError.lifecycleConflict }
+        guard changed.changedRowCount == 1 else { throw RuntimeCanonicalAttachmentError.lifecycleConflict }
         if next.state == .orphaned || next.state == .quarantined || next.state == .deletionPending {
             try releaseDedupAuthority(blobID: next.blobID, database: database)
         }

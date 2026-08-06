@@ -475,9 +475,27 @@ struct RuntimeExternalOperationMutationFacts: Codable, Sendable, Equatable {
     let kind: RuntimeExternalEffectKind
     let target: AmbitionsCommandTarget
     let title: String
+    let action: ExternalOperationCommand.Action?
+    let sourceOperationID: RuntimeExternalOperationID?
+    let sourceProviderReference: RuntimeExternalProviderReference?
+    let sourceReceiptID: RuntimeReceiptID?
+    let compensationPlanID: RuntimeRollbackPlanID?
+    let compensationPlanDigest: String?
+
     init(_ command: ExternalOperationCommand) {
-        operationID = command.operationID; kind = command.kind; target = command.target; title = command.title
+        operationID = command.operationID
+        kind = command.kind
+        target = command.target
+        title = command.title
+        action = command.action
+        sourceOperationID = command.sourceOperationID
+        sourceProviderReference = command.sourceProviderReference
+        sourceReceiptID = command.sourceReceiptID
+        compensationPlanID = command.compensationPlanID
+        compensationPlanDigest = command.compensationPlanDigest
     }
+
+    var effectiveAction: ExternalOperationCommand.Action { action ?? .create }
 }
 
 struct RuntimeAttachmentMutationFacts: Codable, Sendable, Equatable {

@@ -157,7 +157,7 @@ final class RuntimeCommittedReceiptContractTests: XCTestCase {
         let authority = RuntimeReceiptAccessAuthority(
             testingAuthentication: { _ in .denied }
         )
-        let access = try XCTUnwrap(try await authority.issue(RuntimeReceiptAccessRequest(
+        let issuedAccess = try await authority.issue(RuntimeReceiptAccessRequest(
             surface: .localInspection,
             purpose: .interactiveInspection,
             subjects: [RuntimeReceiptAccessSubject(
@@ -166,7 +166,8 @@ final class RuntimeCommittedReceiptContractTests: XCTestCase {
             )],
             maximumRows: 500,
             maximumBytes: 20_000_000
-        )))
+        ))
+        let access = try XCTUnwrap(issuedAccess)
         XCTAssertEqual(access.fullReceiptDigests, Set([receiptDigest]))
         XCTAssertTrue(access.redactedReceiptDigests.isEmpty)
         XCTAssertEqual(access.maximumRows, 50)
@@ -175,14 +176,15 @@ final class RuntimeCommittedReceiptContractTests: XCTestCase {
             RuntimeCommittedReceiptReadBounds.maximumAccessBudgetBytes
         )
         XCTAssertTrue(RuntimeStoreManifestCodec.isSHA256Hex(access.digest))
-        XCTAssertNil(try await authority.issue(RuntimeReceiptAccessRequest(
+        let encryptedVaultAccess = try await authority.issue(RuntimeReceiptAccessRequest(
             surface: .encryptedVault,
             purpose: .interactiveInspection,
             subjects: [RuntimeReceiptAccessSubject(
                 coreDigest: receiptDigest,
                 privacy: .standard
             )]
-        )))
+        ))
+        XCTAssertNil(encryptedVaultAccess)
     }
 
     func testReceiptReadAccessCanRepresentTwoMaximumEventRowsAndReceiptOverhead() async throws {
@@ -195,7 +197,7 @@ final class RuntimeCommittedReceiptContractTests: XCTestCase {
         let authority = RuntimeReceiptAccessAuthority(
             testingAuthentication: { _ in .denied }
         )
-        let access = try XCTUnwrap(try await authority.issue(RuntimeReceiptAccessRequest(
+        let issuedAccess = try await authority.issue(RuntimeReceiptAccessRequest(
             surface: .localInspection,
             purpose: .interactiveInspection,
             subjects: [RuntimeReceiptAccessSubject(
@@ -203,7 +205,8 @@ final class RuntimeCommittedReceiptContractTests: XCTestCase {
                 privacy: .standard
             )],
             maximumBytes: minimumExactAuthenticationWindow
-        )))
+        ))
+        let access = try XCTUnwrap(issuedAccess)
         XCTAssertEqual(access.maximumBytes, minimumExactAuthenticationWindow)
         XCTAssertLessThanOrEqual(
             minimumExactAuthenticationWindow,
@@ -240,20 +243,22 @@ final class RuntimeCommittedReceiptContractTests: XCTestCase {
         let deniedAuthority = RuntimeReceiptAccessAuthority(
             testingAuthentication: { _ in .denied }
         )
-        let denied = try XCTUnwrap(try await deniedAuthority.issue(request))
+        let issuedDenied = try await deniedAuthority.issue(request)
+        let denied = try XCTUnwrap(issuedDenied)
         XCTAssertTrue(denied.authorizedReceiptDigests.isEmpty)
 
         let forgedExternalReview = RuntimeReceiptAccessAuthority(
             testingAuthentication: { _ in .authenticated },
             testingReview: { _ in .unavailable }
         )
-        let externallyDenied = try XCTUnwrap(try await forgedExternalReview.issue(
+        let issuedExternallyDenied = try await forgedExternalReview.issue(
             RuntimeReceiptAccessRequest(
                 surface: .portableExport,
                 purpose: .interactiveInspection,
                 subjects: request.subjects
             )
-        ))
+        )
+        let externallyDenied = try XCTUnwrap(issuedExternallyDenied)
         XCTAssertTrue(externallyDenied.authorizedReceiptDigests.isEmpty)
 
         let ambiguousPrivacy = try await authorized.issue(RuntimeReceiptAccessRequest(

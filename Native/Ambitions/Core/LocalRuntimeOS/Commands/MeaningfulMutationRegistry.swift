@@ -558,7 +558,7 @@ enum MeaningfulMutationRegistry {
         // would claim. Keep every row unproven until terminal validation has
         // evaluated the current integrated source tree.
         let auditStatus: MeaningfulMutationStatus = .unproven
-        MeaningfulMutationDescriptor(
+        return MeaningfulMutationDescriptor(
             id: id,
             sourcePath: sourcePath,
             commandKind: commandKind,
@@ -587,7 +587,7 @@ enum MeaningfulMutationRegistry {
     ) -> MeaningfulMutationWritePathDescriptor {
         // See `mutation`: a declared write path is not executable proof.
         let auditStatus: MeaningfulMutationStatus = .unproven
-        MeaningfulMutationWritePathDescriptor(
+        return MeaningfulMutationWritePathDescriptor(
             sourcePath: sourcePath,
             executorOwner: nil,
             eventKind: nil,

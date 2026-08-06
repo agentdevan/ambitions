@@ -331,7 +331,7 @@ final class ExecutionResilienceProjectorTests: XCTestCase {
 
         XCTAssertEqual(command.operation, .recoverAction)
         guard case let .repair(repair) = command.typedPayload else { return XCTFail("Expected typed repair") }
-        XCTAssertEqual(repair.recommendation.explanationID, option.relatedExplanationID)
+        XCTAssertEqual(repair.recommendation.explanationID?.rawValue, option.relatedExplanationID)
 
         let result = await executor.execute(command, context: CommandExecutionContext(now: now))
         let events = try await ledger.fetchRecent(limit: 10)

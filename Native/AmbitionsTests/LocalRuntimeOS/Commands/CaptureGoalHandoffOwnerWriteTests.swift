@@ -238,8 +238,9 @@ final class CaptureGoalHandoffOwnerWriteTests: XCTestCase {
 
     @MainActor
     func testPreviewContainerExecutesEndToEndWithRealProjectionAndMaterializer() async throws {
-        let container = PreviewAppContainerFactory.preview
-        let repositories = container.runtime.repositories
+        let preview = PreviewAppContainerFactory.testOnlyPreview
+        let container = preview.container
+        let repositories = preview.repositories
         let created = try await SimpleStepLifecycleService(repositories: repositories)
             .createSimpleStep(title: "Preview handoff", now: fixedNow)
         let loadedGoal = try await repositories.goals.goal(id: created.goalID)

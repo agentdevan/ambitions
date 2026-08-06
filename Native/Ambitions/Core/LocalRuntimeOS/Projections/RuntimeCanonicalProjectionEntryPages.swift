@@ -1,3 +1,4 @@
+import AmbitionsRuntimeCore
 import AmbitionsRuntimeSQLite
 import Foundation
 
@@ -130,7 +131,7 @@ extension RuntimeCanonicalDerivedTransactionGateway {
               let boundScrubCompletedAt = work.baseScrubCompletedAtMilliseconds else {
             throw RuntimeCanonicalProjectionPersistenceError.generationMismatch
         }
-        let base = try requireCanonicalProjectionAuthority(
+        let base = try CanonicalRuntimeStore.requireCanonicalProjectionAuthority(
             definition: work.definition, requireNoPendingInvalidations: false,
             requireAtVerifiedHighWater: false, database: database
         )

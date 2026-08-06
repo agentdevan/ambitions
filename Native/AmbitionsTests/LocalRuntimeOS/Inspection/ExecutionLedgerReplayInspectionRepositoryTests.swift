@@ -165,7 +165,8 @@ final class ExecutionLedgerReplayInspectionRepositoryTests: XCTestCase {
             // Expected fail-closed append.
         }
 
-        let stored = try XCTUnwrap(try await repository.fetchRecord(commandID: command.id))
+        let fetchedRecord = try await repository.fetchRecord(commandID: command.id)
+        let stored = try XCTUnwrap(fetchedRecord)
         guard case let .quarantined(quarantine) = stored else {
             return XCTFail("Expected typed quarantine")
         }

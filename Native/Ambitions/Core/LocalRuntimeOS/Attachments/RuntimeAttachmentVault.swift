@@ -345,7 +345,7 @@ actor RuntimeAttachmentVault {
                 throw RuntimeCanonicalAttachmentError.protectedDataUnavailable
             }
             #endif
-            guard Darwin.flock(descriptor, LOCK_EX | LOCK_NB) == 0 else {
+            guard flock(descriptor, LOCK_EX | LOCK_NB) == 0 else {
                 throw RuntimeCanonicalAttachmentError.lifecycleConflict
             }
             try synchronizeDirectoryForProcessLock(rootDirectory)
@@ -1948,7 +1948,7 @@ private extension RuntimeAttachmentVault {
         manifest: RuntimeBlobManifestAuthority,
         key: SymmetricKey
     ) throws {
-        guard try regularFileAuthority(handle.fileDescriptor) == expectedAuthority,
+        guard try fileAuthority(for: handle.fileDescriptor) == expectedAuthority,
               expectedAuthority.byteCount == manifest.ciphertextByteCount else {
             throw RuntimeCanonicalAttachmentError.manifestInvalid
         }
@@ -2002,7 +2002,7 @@ private extension RuntimeAttachmentVault {
         )
         let trailing = try handle.read(upToCount: 1) ?? Data()
         guard trailing.isEmpty,
-              try regularFileAuthority(handle.fileDescriptor) == expectedAuthority,
+              try fileAuthority(for: handle.fileDescriptor) == expectedAuthority,
               terminal.version == manifest.formatVersion,
               terminal.blobID == manifest.blobID,
               terminal.headerDigest == manifest.headerDigest,
@@ -2134,7 +2134,7 @@ private extension RuntimeAttachmentVault {
     }
 
     func verifyOwnedDirectory(_ url: URL, expectedRelative: String) throws {
-        guard url == try ownedURL(relativeDirectory: expectedRelative) else {
+        guard try url == ownedURL(relativeDirectory: expectedRelative) else {
             throw RuntimeCanonicalAttachmentError.pathAuthorityDenied
         }
         let values = try url.resourceValues(forKeys: [.isDirectoryKey, .isSymbolicLinkKey])

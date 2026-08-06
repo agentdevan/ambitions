@@ -6,7 +6,18 @@ import Foundation
 enum PreviewAppContainerFactory {
     @MainActor
     static var preview: AppContainer {
-        preview(todayExperience: PreviewTodayScenarios.stable, timeRitualsDashboard: PreviewTimeRitualScenarios.seeded)
+        previewBundle(
+            todayExperience: PreviewTodayScenarios.stable,
+            timeRitualsDashboard: PreviewTimeRitualScenarios.seeded
+        ).container
+    }
+
+    @MainActor
+    static var testOnlyPreview: (container: AppContainer, repositories: AppRepositories) {
+        previewBundle(
+            todayExperience: PreviewTodayScenarios.stable,
+            timeRitualsDashboard: PreviewTimeRitualScenarios.seeded
+        )
     }
 
     @MainActor
@@ -14,6 +25,17 @@ enum PreviewAppContainerFactory {
         todayExperience: TodayExperience = PreviewTodayScenarios.stable,
         timeRitualsDashboard: TimeRitualsDashboard = PreviewTimeRitualScenarios.seeded
     ) -> AppContainer {
+        previewBundle(
+            todayExperience: todayExperience,
+            timeRitualsDashboard: timeRitualsDashboard
+        ).container
+    }
+
+    @MainActor
+    private static func previewBundle(
+        todayExperience: TodayExperience,
+        timeRitualsDashboard: TimeRitualsDashboard
+    ) -> (container: AppContainer, repositories: AppRepositories) {
         let fixtures = PreviewFixtures.default
         let clock = PreviewClock.environmentOverride() ?? .default
         let navigation = StageStore(selectedSurface: fixtures.preferences.preferredTab)
@@ -75,7 +97,7 @@ enum PreviewAppContainerFactory {
             )
         )
         let memoryLensService = DefaultMemoryLensService(repositories: runtime.repositories)
-        return AppContainer(
+        let container = AppContainer(
             bootstrapConfiguration: .preview,
             session: AppSession(
                 source: .preview,
@@ -141,6 +163,7 @@ enum PreviewAppContainerFactory {
                 runtimeClient: runtimeCommandClient
             )
         )
+        return (container, runtime.repositories)
     }
 
     @MainActor

@@ -1,4 +1,5 @@
 @testable import Ambitions
+import AmbitionsRuntimeCore
 import AmbitionsRuntimeSQLite
 import Foundation
 import XCTest
@@ -98,6 +99,8 @@ final class RuntimeCanonicalReplayTests: XCTestCase {
             let objectID: RuntimeDomainObjectID
             if case let .attachment(value) = command {
                 objectID = try RuntimeDomainObjectID(validating: value.intent.attachmentID.rawValue)
+            } else if case let .compensation(value) = command {
+                objectID = value.action.primaryObjectID
             } else {
                 objectID = try RuntimeDomainObjectID(validating: "writer-event-\(index)")
             }
@@ -476,7 +479,7 @@ final class RuntimeCanonicalReplayTests: XCTestCase {
         let changed = [try RuntimeDomainObjectID(validating: id.rawValue)]
         let command = CaptureCommand(
             action: .quickCapture(externalCreation: nil),
-            target: AmbitionsCommandTarget(captureID: id.rawValue, goalID: id.rawValue),
+            target: AmbitionsCommandTarget(goalID: id.rawValue, captureID: id.rawValue),
             content: RuntimeCommandContent(AmbitionsCommandPayload(title: "Atomic"))
         )
         let capture = RuntimeSemanticAggregate(kind: .capture, id: id)
@@ -1510,12 +1513,14 @@ final class RuntimeCanonicalReplayTests: XCTestCase {
 
     func testReplayRejectsMoreThan4096PendingBoundaryCertificatesWithoutWrites() async throws {
         let database = try await makeProjectionReplayDatabase(label: "boundary-cap")
-        let events = try (0..<4_097).map { index in
-            try captureEvent(
+        var events: [RuntimeSemanticEvent] = []
+        events.reserveCapacity(4_097)
+        for index in 0..<4_097 {
+            events.append(try captureEvent(
                 id: "boundary-cap", revision: UInt64(index),
                 prior: index == 0 ? nil : UInt64(index - 1),
                 action: index == 0 ? .quickCapture(externalCreation: nil) : .markWaiting
-            )
+            ))
         }
         try await Self.appendBoundarySeries(events, database: database)
 
@@ -1921,7 +1926,54 @@ final class RuntimeCanonicalReplayTests: XCTestCase {
             Self.writerAttachmentCommand(.replaceRevision),
             Self.writerAttachmentCommand(.authorizeDeletion),
             Self.writerAttachmentCommand(.quarantine),
+            Self.writerCompensationCommand(.discardCreatedCapture(
+                try RuntimeDomainObjectID(validating: "capture-compensation-writer")
+            )),
+            Self.writerCompensationCommand(.discardCreatedGoal(
+                try RuntimeDomainObjectID(validating: "goal-compensation-writer")
+            )),
+            Self.writerCompensationCommand(.discardCreatedSchedule(
+                try RuntimeDomainObjectID(validating: "schedule-compensation-writer")
+            )),
+            Self.writerCompensationCommand(.discardCreatedReminder(
+                try RuntimeDomainObjectID(validating: "reminder-compensation-writer")
+            )),
         ]
+    }
+
+    private static func writerCompensationCommand(
+        _ action: RuntimeSemanticCompensationAction
+    ) -> RuntimeCommandPayload {
+        let objectID = action.primaryObjectID
+        let aggregate = RuntimeSemanticAggregate(
+            kind: action.aggregateKind,
+            id: try! RuntimeAggregateID(validating: objectID.rawValue)
+        )
+        let target = RuntimeCompensationTargetExpectation(
+            aggregate: aggregate,
+            sourcePriorRevision: nil,
+            sourceRevision: 0,
+            sourceTransition: .create,
+            requiredCurrentRevision: 0,
+            requiredLifecycle: .active,
+            sourceStateDigest: String(repeating: "d", count: 64),
+            inverseTransition: .tombstone
+        )
+        return .compensation(RuntimeCompensationCommand(
+            sourceReceiptID: RuntimeReceiptID(rawValue: "receipt-compensation-writer")!,
+            planID: RuntimeRollbackPlanID(rawValue: "plan-compensation-writer")!,
+            planDigest: String(repeating: "a", count: 64),
+            sourceLineage: RuntimeAuthorityLineageReference(
+                eventID: RuntimeEventID(rawValue: "event-compensation-writer")!,
+                eventSequence: 1,
+                eventHash: String(repeating: "b", count: 64)
+            ),
+            action: action,
+            targets: [target],
+            requiresConfirmation: false,
+            target: action.target,
+            content: RuntimeCommandContent()
+        ))
     }
 
     private static func writerAttachmentCommand(

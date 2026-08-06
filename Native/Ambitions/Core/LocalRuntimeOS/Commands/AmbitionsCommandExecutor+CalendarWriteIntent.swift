@@ -47,8 +47,8 @@ extension AmbitionsCommandExecutor {
             start: intent.start,
             end: intent.end,
             contextLens: intent.contextLens,
-            relatedGoalID: intent.relatedGoalID?.rawValue ?? command.target.goalID,
-            relatedCaptureID: intent.relatedCaptureID?.rawValue ?? command.target.captureID,
+            relatedGoalID: intent.relatedGoalID ?? command.target.goalID,
+            relatedCaptureID: intent.relatedCaptureID ?? command.target.captureID,
             isUserConfirmed: true
         )
 

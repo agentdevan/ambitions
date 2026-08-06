@@ -681,8 +681,8 @@ enum RuntimeCommittedReceiptAuthority {
     ) throws {
         let bytes = try RuntimeCommittedReceiptCodec.encode(disposition)
         let kind: String
-        let planID: SQLiteValue
-        let evidenceDigest: SQLiteValue
+        let planID: SQLiteBinding
+        let evidenceDigest: SQLiteBinding
         switch disposition {
         case let .plan(id, _, _, _):
             kind = "plan"; planID = .text(id.rawValue); evidenceDigest = .null
@@ -717,7 +717,7 @@ enum RuntimeCommittedReceiptAuthority {
                 """,
                 bindings: [
                     .text(core.facts.receiptID.rawValue), .text(artifact.kind.rawValue),
-                    .text(artifact.stableID), artifact.digest.map(SQLiteValue.text) ?? .null,
+                    .text(artifact.stableID), artifact.digest.map(SQLiteBinding.text) ?? .null,
                 ]
             )
         }
@@ -1573,6 +1573,10 @@ enum RuntimeCommittedReceiptAuthority {
         let allowedUnfinalizedCompensation: CompensationConsumptionReference?
         private var visitedCompensationEdges: Set<CompensationConsumptionReference> = []
 
+        init(allowedUnfinalizedCompensation: CompensationConsumptionReference?) {
+            self.allowedUnfinalizedCompensation = allowedUnfinalizedCompensation
+        }
+
         mutating func begin(_ reference: CompensationConsumptionReference) -> Bool {
             visitedCompensationEdges.insert(reference).inserted
         }
@@ -1775,7 +1779,7 @@ enum RuntimeCommittedReceiptAuthority {
               reference.compensationReceiptID == compensationCore.facts.receiptID,
               reference.compensationCommandID == compensationCore.facts.commandID,
               reference.terminalEventSequence == compensationCore.facts.lineage.eventSequence,
-              reference.consumedAtMilliseconds == try milliseconds(compensationCore.facts.committedAt),
+              reference.consumedAtMilliseconds == (try milliseconds(compensationCore.facts.committedAt)),
               compensationCore.facts.correlationID == sourceCore.facts.correlationID,
               compensationEventEvidence.terminal.lineage.causationEventID == sourceCore.facts.lineage.eventID,
               compensationEventEvidence.terminal.lineage.correlationID == sourceCore.facts.correlationID,

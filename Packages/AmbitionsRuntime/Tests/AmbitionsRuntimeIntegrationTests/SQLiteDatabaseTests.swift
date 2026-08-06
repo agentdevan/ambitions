@@ -85,6 +85,27 @@ final class SQLiteDatabaseTests: XCTestCase {
         XCTAssertEqual(busyTimeout[0][0], .integer(5_000))
     }
 
+    func testBootstrapAuthorizationPermitsDeclaredIndexConstruction() async throws {
+        let database = try SQLiteDatabase(url: try databaseURL())
+        let authorization = try SQLiteBootstrapAuthorization(
+            allowedSchemaObjects: ["bootstrap_values", "bootstrap_values_id_idx"]
+        )
+
+        try await database.bootstrapTransaction(authorization: authorization) { database in
+            try database.execute(
+                "CREATE TABLE bootstrap_values (id INTEGER PRIMARY KEY, value TEXT NOT NULL)"
+            )
+            try database.execute(
+                "CREATE INDEX bootstrap_values_id_idx ON bootstrap_values(id)"
+            )
+        }
+
+        let indexes = try await database.query(
+            "SELECT name FROM sqlite_schema WHERE type = 'index' AND name = 'bootstrap_values_id_idx'"
+        )
+        XCTAssertEqual(indexes.first?.value(named: "name"), .text("bootstrap_values_id_idx"))
+    }
+
     func testTextBindingAndReadingPreserveEmbeddedNULBytes() async throws {
         let database = try SQLiteDatabase(url: try databaseURL())
         try await Self.bootstrap(

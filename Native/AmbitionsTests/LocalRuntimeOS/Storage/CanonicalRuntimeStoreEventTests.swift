@@ -224,7 +224,7 @@ final class CanonicalRuntimeStoreEventTests: XCTestCase {
                 """,
                 bindings: [.text("goal"), .text("goal-1"), .integer(revision), .integer(1), .blob(Data()), .text(String(repeating: "a", count: 64))]
             )
-            try insertCommands(commandIDs, in: isolated)
+            try Self.insertCommands(commandIDs, in: isolated)
         }
     }
 
@@ -288,11 +288,11 @@ final class CanonicalRuntimeStoreEventTests: XCTestCase {
 
     private func seedCommands(_ database: SQLiteDatabase, commandIDs: [String]) async throws {
         try await database.transaction(.immediate) { isolated in
-            try insertCommands(commandIDs, in: isolated)
+            try Self.insertCommands(commandIDs, in: isolated)
         }
     }
 
-    private func insertCommands(_ commandIDs: [String], in database: isolated SQLiteDatabase) throws {
+    private static func insertCommands(_ commandIDs: [String], in database: isolated SQLiteDatabase) throws {
         for (index, commandID) in commandIDs.enumerated() {
             try database.execute(
                 """

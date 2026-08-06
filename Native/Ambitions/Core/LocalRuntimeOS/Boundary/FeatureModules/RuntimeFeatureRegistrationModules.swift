@@ -9,7 +9,7 @@ struct RuntimeCommandCaseID: RawRepresentable, Sendable, Equatable, Hashable, Co
         self.rawValue = rawValue
     }
 
-    private init(canonicalRawValue: String) {
+    fileprivate init(canonicalRawValue: String) {
         rawValue = canonicalRawValue
     }
 
@@ -19,7 +19,7 @@ struct RuntimeCommandCaseID: RawRepresentable, Sendable, Equatable, Hashable, Co
 
     var feature: RuntimePreparationFeature? {
         let family = rawValue.split(separator: ".", maxSplits: 1).first.map(String.init)
-        switch family {
+        return switch family {
         case "capture": .capture
         case "goal", "step": .goalStep
         case "schedule", "reminder": .scheduleReminder
@@ -46,7 +46,7 @@ struct RuntimeCommandCaseID: RawRepresentable, Sendable, Equatable, Hashable, Co
         "goal.clearContextLens", "goal.addDeliverable", "goal.removeDeliverable", "goal.addScopeItem", "goal.removeScopeItem",
         "step.startSession", "step.complete", "step.delay", "step.split", "step.recover", "step.todayGoalStep",
         "schedule.createItem", "schedule.schedule", "schedule.placeStep", "schedule.protectWindow", "schedule.correctWindow",
-        "schedule.ritual", "schedule.calendarWrite",
+        "schedule.undo", "schedule.ritual", "schedule.calendarWrite",
         "reminder.create", "reminder.update", "reminder.delete",
         "profile.updatePreferences",
         "history.openDestination", "history.askWhy", "history.dismissRecommendation", "history.todayReceipt",
@@ -255,7 +255,7 @@ struct ScheduleReminderRuntimeFeatureModule: RuntimeFeatureRegistrationModule {
         reducerType: "ScheduleReminderMutationReducer",
         cases: ownership([
             "schedule.createItem", "schedule.schedule", "schedule.placeStep", "schedule.protectWindow", "schedule.correctWindow",
-            "schedule.ritual", "schedule.calendarWrite", "reminder.create", "reminder.update", "reminder.delete",
+            "schedule.undo", "schedule.ritual", "schedule.calendarWrite", "reminder.create", "reminder.update", "reminder.delete",
         ])
     )
     let mutationClientRegistration = RuntimeFeatureMutationClientRegistration(feature: .scheduleReminder, clientType: "ScheduleReminderRuntimeMutationClient")

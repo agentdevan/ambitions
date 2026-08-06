@@ -700,11 +700,12 @@ extension CanonicalRuntimeStore {
         }
         let eligibility = try compensationEligibility(
             graph: graph,
-            now: now
+            now: now,
+            database: database
         )
         let replayCoverage: RuntimeReceiptReplayCoverage
         do {
-            replayCoverage = try replayCoverage(for: core, budget: &budget, database: database)
+            replayCoverage = try Self.replayCoverage(for: core, budget: &budget, database: database)
         } catch is CancellationError {
             throw CancellationError()
         } catch RuntimeCommittedReceiptQueryError.firstRowExceedsBound {

@@ -144,7 +144,8 @@ final class RuntimeAttachmentIntakeTests: XCTestCase {
         let fixture = try makeFixture("cancel")
         let source = fixture.root.appendingPathComponent("cancel.txt")
         try Data(repeating: 0x61, count: 64_000).write(to: source)
-        let task = Task { await fixture.intake.stage(parts: [part(source: source, filename: "cancel.txt")]) }
+        let cancellationPart = part(source: source, filename: "cancel.txt")
+        let task = Task { await fixture.intake.stage(parts: [cancellationPart]) }
         task.cancel()
         let result = await task.value
         XCTAssertTrue(result.wasCancelled)

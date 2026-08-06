@@ -294,8 +294,9 @@ final class CanonicalRuntimeStoreIdempotencyCASTests: XCTestCase {
 
     func testBusyFailureLeavesNoClaimOrResult() async throws {
         let holderDatabase = try await makeDatabase()
+        let holderDatabaseURL = await holderDatabase.databaseURL
         let contenderDatabase = try SQLiteDatabase(
-            url: holderDatabase.databaseURL,
+            url: holderDatabaseURL,
             configuration: SQLiteConfiguration(
                 busyTimeoutMilliseconds: 0,
                 synchronousPolicy: .full,
@@ -458,8 +459,9 @@ final class CanonicalRuntimeStoreIdempotencyCASTests: XCTestCase {
 
     func testConcurrentIdenticalClaimsConvergeAndDistinctClaimCollides() async throws {
         let firstDatabase = try await makeDatabase()
+        let firstDatabaseURL = await firstDatabase.databaseURL
         let secondDatabase = try SQLiteDatabase(
-            url: firstDatabase.databaseURL,
+            url: firstDatabaseURL,
             configuration: CanonicalRuntimeStore.sqliteConfiguration(openMode: .existingOnly)
         )
         let firstRequest = try claimRequest(ownerID: "transaction-a")
@@ -500,8 +502,9 @@ final class CanonicalRuntimeStoreIdempotencyCASTests: XCTestCase {
 
     func testAbsentCreateRaceAndCompetingExactUpdateHaveSingleWinner() async throws {
         let firstDatabase = try await makeDatabase()
+        let firstDatabaseURL = await firstDatabase.databaseURL
         let secondDatabase = try SQLiteDatabase(
-            url: firstDatabase.databaseURL,
+            url: firstDatabaseURL,
             configuration: CanonicalRuntimeStore.sqliteConfiguration(openMode: .existingOnly)
         )
         let key = try CanonicalAggregateKey(kind: "goal", id: "race")

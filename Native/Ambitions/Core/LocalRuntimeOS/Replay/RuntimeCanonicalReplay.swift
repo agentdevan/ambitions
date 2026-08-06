@@ -1,3 +1,4 @@
+import AmbitionsRuntimeCore
 import AmbitionsRuntimeSQLite
 import Foundation
 
@@ -508,11 +509,12 @@ struct RuntimeCanonicalReplayCheckpoint: Codable, Sendable, Equatable {
 
 struct RuntimeCanonicalReplayCheckpointCodec: Sendable {
     func encode(_ checkpoint: RuntimeCanonicalReplayCheckpoint) throws -> Data {
+        let expectedManifestDigest = try manifestDigest(checkpoint)
         guard checkpoint.version == runtimeCanonicalReplayCheckpointVersion,
               checkpoint.highWaterCursor.isWellFormed,
               RuntimeStoreManifestCodec.isSHA256Hex(checkpoint.sourceChainDigest),
               RuntimeStoreManifestCodec.isSHA256Hex(checkpoint.stateDigest),
-              checkpoint.manifestDigest == try manifestDigest(checkpoint) else {
+              checkpoint.manifestDigest == expectedManifestDigest else {
             throw RuntimeCanonicalReplayError.checkpointMismatch
         }
         return try RuntimeCanonicalReplayCoding.encode(checkpoint)
@@ -909,7 +911,7 @@ enum CanonicalRuntimeReplaySchemaPlan {
                 return upper.hasPrefix("PRIMARY KEY") == false &&
                     upper.hasPrefix("FOREIGN KEY") == false &&
                     upper.hasPrefix("UNIQUE") == false &&
-                    upper.hasPrefix("CHECK") == false &&
+                    upper.hasPrefix("CHECK ") == false &&
                     upper.hasPrefix("CONSTRAINT") == false
             }
             guard columns.count == expectedColumns.count else {
@@ -2472,7 +2474,7 @@ private enum RuntimeCanonicalReplayCoding {
         return try encoder.encode(value)
     }
 
-    static func decode<Value: Decodable>(_ bytes: Data) throws -> Value {
+    static func decode<Value: Codable>(_ bytes: Data) throws -> Value {
         let decoder = JSONDecoder()
         decoder.dateDecodingStrategy = .millisecondsSince1970
         let value = try decoder.decode(Value.self, from: bytes)

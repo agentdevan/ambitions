@@ -1,4 +1,5 @@
 @testable import Ambitions
+import AmbitionsTimeFoundation
 import XCTest
 
 final class AppContainerFactoryTests: XCTestCase {
@@ -216,27 +217,17 @@ final class AppContainerFactoryTests: XCTestCase {
     }
 
     @MainActor
-    func testAppContainerExposesRuntimeWhilePreservingIPhoneServiceFacade() async throws {
+    func testAppContainerExposesRuntimeAuthorityWhilePreservingIPhoneServiceFacade() async throws {
         let container = try await AppContainerFactory.make(configuration: .preview)
 
-        XCTAssertEqual(container.runtime.clientContext.kind, .iphoneApp)
-        XCTAssertEqual(container.runtime.capabilities.syncBackendKind, .localOnly)
-        XCTAssertNotNil(container.runtime.repositories.reminders as? SwiftDataReminderRepository)
-        XCTAssertNotNil(container.runtime.repositories.actionReceiptHistory as? SwiftDataActionReceiptHistoryRepository)
-        XCTAssertNotNil(container.runtime.repositories.commandExecutionRecords as? SwiftDataAmbitionsCommandExecutionRecordRepository)
-        XCTAssertNotNil(container.runtime.repositories.commandJournal as? InMemoryCommandJournal)
-        XCTAssertNotNil(container.runtime.repositories.runtimeSnapshotLedger as? SwiftDataRuntimeSnapshotLedgerRepository)
-        XCTAssertNotNil(container.runtime.repositories.executionLedgerReplayInspection as? SwiftDataExecutionLedgerReplayInspectionRepository)
-        XCTAssertNotNil(container.runtime.repositories.graphOperationalRecords as? SwiftDataAmbitionGraphOperationalRecordRepository)
-        XCTAssertNotNil(container.runtime.repositories.graphProofRecords as? SwiftDataAmbitionGraphProofRecordRepository)
-        XCTAssertNotNil(container.runtime.repositories.graphProjectionRecords as? SwiftDataAmbitionGraphProjectionRecordRepository)
-        XCTAssertNotNil(container.runtime.goalIntelligenceService as? RepositoryBackedRuntimeGoalIntelligenceService)
+        XCTAssertEqual(container.runtimeAuthority.mode, .legacyRuntime)
+        XCTAssertNil(container.runtimeAuthority.generationRecovery)
         XCTAssertNotNil(container.todayService as? NotificationSchedulingTodayService)
         XCTAssertNotNil(container.goalsService as? NotificationSchedulingGoalsService)
         XCTAssertTrue(container.captureService is DefaultCaptureService)
         XCTAssertTrue(container.youService is RepositoryBackedYouService)
         XCTAssertEqual(container.shell.navigation.selectedTab, container.navigation.selectedTab)
-        XCTAssertEqual(container.runtimeCapability.runtime.clientContext.kind, .iphoneApp)
+        XCTAssertTrue(container.runtimeCapability.clock is PreviewClock)
         XCTAssertNotNil(container.runtimeCapability.todayService as? NotificationSchedulingTodayService)
         XCTAssertTrue(container.featureFactory.captureService is DefaultCaptureService)
         XCTAssertTrue(container.featureFactory.youService is RepositoryBackedYouService)
