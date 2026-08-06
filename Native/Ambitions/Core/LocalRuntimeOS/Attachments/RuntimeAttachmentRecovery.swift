@@ -462,7 +462,7 @@ actor RuntimeAttachmentRecovery {
         let cursor = try await store.attachmentRecoveryCursor(scanKind: scan)
         let cycle = cursor?.cycle ?? 0
         let afterBlobID = try cursor?.lastKey.map { raw in
-            guard let blobID = RuntimeBlobID(rawValue: raw) else {
+            guard let blobID = RuntimeAttachmentBlobID(rawValue: raw) else {
                 throw RuntimeCanonicalAttachmentError.corruptAuthority
             }
             return blobID
@@ -579,7 +579,7 @@ actor RuntimeAttachmentRecovery {
         workKind: RuntimeAttachmentRecoveryWorkKind,
         authorityID: String,
         issue: RuntimeAttachmentRecoveryIssue,
-        blobID: RuntimeBlobID?,
+        blobID: RuntimeAttachmentBlobID?,
         relativeDirectory: String,
         cycle: UInt64 = 0,
         now: Date,
@@ -612,7 +612,7 @@ actor RuntimeAttachmentRecovery {
 
     private func resolveFindingIfPresent(
         issue: RuntimeAttachmentRecoveryIssue,
-        blobID: RuntimeBlobID?,
+        blobID: RuntimeAttachmentBlobID?,
         relativeDirectory: String,
         now: Date
     ) async throws {
@@ -624,7 +624,7 @@ actor RuntimeAttachmentRecovery {
 
     private func makeFinding(
         issue: RuntimeAttachmentRecoveryIssue,
-        blobID: RuntimeBlobID?,
+        blobID: RuntimeAttachmentBlobID?,
         relativeDirectory: String,
         cycle: UInt64,
         now: Date

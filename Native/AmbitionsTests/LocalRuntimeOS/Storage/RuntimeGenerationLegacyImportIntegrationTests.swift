@@ -146,7 +146,7 @@ final class RuntimeGenerationLegacyImportIntegrationTests: XCTestCase {
 
     func testEveryStartupAndPreservationFaultIsRetryableWithoutPoisoningImporter() async throws {
         for (offset, phase) in RuntimeLegacyImportFaultPhase.allCases.enumerated() {
-            try await withRuntimeGenerationHarness(seed: 16_300 + offset) { harness in
+            try await withRuntimeGenerationHarness(seed: UInt64(16_300 + offset)) { harness in
                 let active = try await harness.installFirstGeneration()
                 let sourceURL = try await Self.makeExactV1Source(in: harness)
                 let sourceBytes = try Data(contentsOf: sourceURL)

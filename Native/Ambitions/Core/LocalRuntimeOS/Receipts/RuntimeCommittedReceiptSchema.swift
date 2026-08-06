@@ -1115,8 +1115,26 @@ enum CanonicalRuntimeCommittedReceiptSchemaPlan {
         """,
     ]
 
-    static let stagedIntegratedStatements =
-        CanonicalRuntimeProjectionSchemaPlan.stagedIntegratedStatements + statements
+    private static let replacedProjectionObjectNames: Set<String> = [
+        "runtime_commit_projection_invalidations_immutable_update",
+        "runtime_commit_projection_invalidations_immutable_delete",
+    ]
+
+    static let stagedIntegratedStatements: [String] = {
+        let source = CanonicalRuntimeProjectionSchemaPlan.stagedIntegratedStatements
+        let sourceNames = source.compactMap(schemaObjectName)
+        let statementNames = statements.compactMap(schemaObjectName)
+        let overlappingNames = Set(sourceNames).intersection(statementNames)
+        guard sourceNames.count == source.count,
+              statementNames.count == statements.count,
+              Set(sourceNames).count == source.count,
+              Set(statementNames).count == statements.count,
+              overlappingNames == replacedProjectionObjectNames else { return [] }
+        return source.filter { statement in
+            guard let name = schemaObjectName(statement) else { return false }
+            return replacedProjectionObjectNames.contains(name) == false
+        } + statements
+    }()
 
     static let requiredTriggerNames: Set<String> = Set(immutableTables.flatMap { table in
         ["\(table)_immutable_update", "\(table)_immutable_delete"]
@@ -1164,5 +1182,18 @@ enum CanonicalRuntimeCommittedReceiptSchemaPlan {
             throw RuntimeCanonicalReplayError.migrationRequired(expected: targetSchemaVersion, actual: actual)
         }
         try CanonicalRuntimeCommitSchemaPlan.requireIntegratedSchema(in: database)
+    }
+
+    private static func schemaObjectName(_ statement: String) -> String? {
+        let tokens = statement.split(whereSeparator: { $0.isWhitespace }).map(String.init)
+        guard tokens.first == "CREATE" else { return nil }
+        if tokens.count > 2,
+           tokens[1] == "TABLE" || tokens[1] == "TRIGGER" || tokens[1] == "INDEX" {
+            return tokens[2]
+        }
+        if tokens.count > 3, tokens[1] == "UNIQUE", tokens[2] == "INDEX" {
+            return tokens[3]
+        }
+        return nil
     }
 }

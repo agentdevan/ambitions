@@ -186,7 +186,7 @@ extension CanonicalRuntimeStore {
 
     func releaseAttachmentRetentionHold(
         holdID: RuntimeBlobHoldID,
-        blobID: RuntimeBlobID,
+        blobID: RuntimeAttachmentBlobID,
         authorityID: String,
         commandID: RuntimeCommandID,
         receiptID: RuntimeReceiptID,
@@ -272,7 +272,7 @@ extension CanonicalRuntimeStore {
 
     func confirmAttachmentDedupCandidate(
         revisionID: RuntimeAttachmentRevisionID,
-        canonicalBlobID: RuntimeBlobID,
+        canonicalBlobID: RuntimeAttachmentBlobID,
         keyedContentAddress: RuntimeAttachmentContentAddress,
         now: Date
     ) async throws -> RuntimeAttachmentAuthoritySnapshot {
@@ -459,7 +459,7 @@ extension CanonicalRuntimeStore {
 
     func attachmentRecoverySnapshots(
         limit: Int,
-        afterBlobID: RuntimeBlobID?
+        afterBlobID: RuntimeAttachmentBlobID?
     ) async throws -> [RuntimeAttachmentAuthoritySnapshot] {
         try await withCanonicalReadTransaction { database in
             try CanonicalRuntimeAttachmentStore.requireSchema(database)
@@ -497,7 +497,7 @@ extension CanonicalRuntimeStore {
 
     func resolveOpenAttachmentRecoveryFindings(
         issue: RuntimeAttachmentRecoveryIssue,
-        blobID: RuntimeBlobID?,
+        blobID: RuntimeAttachmentBlobID?,
         relativeDirectory: String,
         at now: Date
     ) async throws -> Int {
@@ -630,7 +630,7 @@ extension CanonicalRuntimeStore {
     }
 
     func hasAttachmentBlobAuthority(
-        blobID: RuntimeBlobID,
+        blobID: RuntimeAttachmentBlobID,
         manifestDigest: String,
         opaqueRelativeDirectory: String
     ) async throws -> Bool {
@@ -694,7 +694,7 @@ enum CanonicalRuntimeAttachmentStore {
                 .integer(reservation.reservedBytes),
             ]
         )
-        guard ledgerChanged == 1 else {
+        guard ledgerChanged.changedRowCount == 1 else {
             let versionRows = try database.query(
                 """
                 SELECT state_version FROM runtime_blob_quota_ledgers
@@ -779,7 +779,7 @@ enum CanonicalRuntimeAttachmentStore {
               total < Int64(RuntimeAttachmentLimits.maximumHolds) else {
             throw RuntimeCanonicalAttachmentError.retentionHoldActive
         }
-        let retainBinding: SQLiteValue
+        let retainBinding: SQLiteBinding
         if let retainUntil = hold.retainUntil {
             retainBinding = .integer(try milliseconds(retainUntil))
         } else {
@@ -892,7 +892,7 @@ enum CanonicalRuntimeAttachmentStore {
 
     static func releaseHold(
         holdID: RuntimeBlobHoldID,
-        blobID: RuntimeBlobID,
+        blobID: RuntimeAttachmentBlobID,
         authorityID: String,
         commandID: RuntimeCommandID,
         receiptID: RuntimeReceiptID,
@@ -929,12 +929,12 @@ enum CanonicalRuntimeAttachmentStore {
                 .text(blobID.rawValue), .text(authorityID),
             ]
         )
-        guard changed == 1 else { throw RuntimeCanonicalAttachmentError.lifecycleConflict }
+        guard changed.changedRowCount == 1 else { throw RuntimeCanonicalAttachmentError.lifecycleConflict }
     }
 
     private static func insertHoldHistory(
         holdID: RuntimeBlobHoldID,
-        blobID: RuntimeBlobID,
+        blobID: RuntimeAttachmentBlobID,
         transition: RuntimeBlobRetentionHoldTransitionKind,
         authorityID: String,
         commandID: RuntimeCommandID,
@@ -1036,7 +1036,7 @@ enum CanonicalRuntimeAttachmentStore {
               case let .text(ownerID)? = rows[0].value(named: "owner_id"),
               reservedBytes >= maximumBytes,
               case let .integer(expiresAtMS)? = rows[0].value(named: "expires_at_ms"),
-              expiresAtMS > try milliseconds(now),
+              expiresAtMS > (try milliseconds(now)),
               rows[0].value(named: "consumed_by_blob_id") == .null,
               rows[0].value(named: "released_at_ms") == .null else {
             throw RuntimeCanonicalAttachmentError.reservationExpired
@@ -1094,7 +1094,7 @@ enum CanonicalRuntimeAttachmentStore {
                 .integer(try milliseconds(now)), .text(authorization.reservationID.rawValue),
             ]
         )
-        guard released == 1 else { throw RuntimeCanonicalAttachmentError.lifecycleConflict }
+        guard released.changedRowCount == 1 else { throw RuntimeCanonicalAttachmentError.lifecycleConflict }
         let ledger = try database.execute(
             """
             UPDATE runtime_blob_quota_ledgers
@@ -1109,7 +1109,7 @@ enum CanonicalRuntimeAttachmentStore {
                 .integer(reservedBytes),
             ]
         )
-        guard ledger == 1 else { throw RuntimeCanonicalAttachmentError.corruptAuthority }
+        guard ledger.changedRowCount == 1 else { throw RuntimeCanonicalAttachmentError.corruptAuthority }
     }
 
     static func releaseExpiredQuotaReservations(
@@ -1173,7 +1173,7 @@ enum CanonicalRuntimeAttachmentStore {
                     .integer(reservedBytes), .integer(createdAtMS), .integer(expiresAtMS),
                 ]
             )
-            guard reservationChanged == 1 else {
+            guard reservationChanged.changedRowCount == 1 else {
                 throw RuntimeCanonicalAttachmentError.lifecycleConflict
             }
             let ledgerChanged = try database.execute(
@@ -1189,7 +1189,7 @@ enum CanonicalRuntimeAttachmentStore {
                     .integer(ledgerReserved), .integer(ledgerVersion),
                 ]
             )
-            guard ledgerChanged == 1 else {
+            guard ledgerChanged.changedRowCount == 1 else {
                 throw RuntimeCanonicalAttachmentError.lifecycleConflict
             }
             releasedCount += 1
@@ -1207,6 +1207,9 @@ enum CanonicalRuntimeAttachmentStore {
         try RuntimeAttachmentCodec.validate(bundle.manifest)
         try RuntimeAttachmentCodec.validate(bundle.envelope)
         try RuntimeAttachmentCodec.validate(bundle.lifecycle)
+        let expectedManifestDigest = try RuntimeAttachmentCodec.digest(
+            bundle.manifest, maximumBytes: RuntimeAttachmentLimits.maximumManifestBytes
+        )
         guard bundle.revision.blobID == bundle.manifest.blobID,
               bundle.envelope.blobID == bundle.manifest.blobID,
               bundle.lifecycle.blobID == bundle.manifest.blobID,
@@ -1214,9 +1217,7 @@ enum CanonicalRuntimeAttachmentStore {
               bundle.lifecycle.stateVersion == 1,
               bundle.lifecycle.referenceCount == 0,
               bundle.revision.manifestDigest == bundle.lifecycle.manifestDigest,
-              bundle.revision.manifestDigest == try RuntimeAttachmentCodec.digest(
-                  bundle.manifest, maximumBytes: RuntimeAttachmentLimits.maximumManifestBytes
-              ),
+              bundle.revision.manifestDigest == expectedManifestDigest,
               bundle.manifest.plaintextByteCount == bundle.revision.classification.byteCount,
               RuntimeAttachmentPrivacyDomain(bundle.revision.privacy) == bundle.manifest.privacyDomain else {
             throw RuntimeCanonicalAttachmentError.invalidRecord
@@ -1239,7 +1240,7 @@ enum CanonicalRuntimeAttachmentStore {
             throw RuntimeCanonicalAttachmentError.reservationExpired
         }
         if case let .text(consumedRaw)? = reservation[0].value(named: "consumed_by_blob_id") {
-            guard let consumedBlobID = RuntimeBlobID(rawValue: consumedRaw) else {
+            guard let consumedBlobID = RuntimeAttachmentBlobID(rawValue: consumedRaw) else {
                 throw RuntimeCanonicalAttachmentError.corruptAuthority
             }
             return try replayPersistedStage(
@@ -1248,7 +1249,7 @@ enum CanonicalRuntimeAttachmentStore {
             )
         }
         guard case .null? = reservation[0].value(named: "consumed_by_blob_id"),
-              expiresAt > try milliseconds(now) else {
+              expiresAt > (try milliseconds(now)) else {
             throw RuntimeCanonicalAttachmentError.reservationExpired
         }
         let completedSourceRotations = try database.query(
@@ -1309,7 +1310,7 @@ enum CanonicalRuntimeAttachmentStore {
         if existingBlob.isEmpty == false {
             guard existingBlob.count == 1,
                   case let .text(canonicalBlobRaw)? = existingBlob[0].value(named: "blob_id"),
-                  let canonicalBlobID = RuntimeBlobID(rawValue: canonicalBlobRaw),
+                  let canonicalBlobID = RuntimeAttachmentBlobID(rawValue: canonicalBlobRaw),
                   case let .text(canonicalManifestDigest)? = existingBlob[0].value(named: "manifest_digest"),
                   case let .blob(canonicalManifestBytes)? = existingBlob[0].value(named: "manifest_payload"),
                   RuntimeAttachmentCodec.sha256(canonicalManifestBytes) == canonicalManifestDigest,
@@ -1440,7 +1441,7 @@ enum CanonicalRuntimeAttachmentStore {
         let lifecycleDigest = RuntimeAttachmentCodec.sha256(lifecycleBytes)
         let createdAt = try milliseconds(bundle.revision.createdAt)
 
-        let retentionBinding: SQLiteValue = if let retentionUntil = bundle.lifecycle.retentionUntil {
+        let retentionBinding: SQLiteBinding = if let retentionUntil = bundle.lifecycle.retentionUntil {
             .integer(try milliseconds(retentionUntil))
         } else {
             .null
@@ -1531,7 +1532,7 @@ enum CanonicalRuntimeAttachmentStore {
     private static func replayPersistedStage(
         _ bundle: RuntimeAttachmentStageBundle,
         reservationID: RuntimeBlobQuotaReservationID,
-        consumedBlobID: RuntimeBlobID,
+        consumedBlobID: RuntimeAttachmentBlobID,
         quotaOwnerID: String,
         database: isolated SQLiteDatabase
     ) throws -> RuntimeAttachmentStagePersistenceResult {
@@ -1694,7 +1695,7 @@ enum CanonicalRuntimeAttachmentStore {
 
     private static func consumeReservation(
         _ reservationID: RuntimeBlobQuotaReservationID,
-        blobID: RuntimeBlobID,
+        blobID: RuntimeAttachmentBlobID,
         storedBytes: Int64,
         orphanBytes: Int64,
         now: Date,
@@ -1729,7 +1730,7 @@ enum CanonicalRuntimeAttachmentStore {
                 .text(blobID.rawValue), .text(reservationID.rawValue), .integer(try milliseconds(now)),
             ]
         )
-        guard consumed == 1 else { throw RuntimeCanonicalAttachmentError.reservationExpired }
+        guard consumed.changedRowCount == 1 else { throw RuntimeCanonicalAttachmentError.reservationExpired }
         let ledger = try database.execute(
             """
             UPDATE runtime_blob_quota_ledgers
@@ -1746,11 +1747,11 @@ enum CanonicalRuntimeAttachmentStore {
                 .integer(reservedBytes), .integer(storedBytes), .integer(orphanBytes),
             ]
         )
-        guard ledger == 1 else { throw RuntimeCanonicalAttachmentError.quotaExceeded }
+        guard ledger.changedRowCount == 1 else { throw RuntimeCanonicalAttachmentError.quotaExceeded }
     }
 
     private static func markStagingOrphanCleaned(
-        blobID: RuntimeBlobID,
+        blobID: RuntimeAttachmentBlobID,
         manifestDigest: String,
         at now: Date,
         database: isolated SQLiteDatabase
@@ -1780,7 +1781,7 @@ enum CanonicalRuntimeAttachmentStore {
                 .integer(try milliseconds(now)), .text(blobID.rawValue), .text(manifestDigest),
             ]
         )
-        guard changed == 1 else { throw RuntimeCanonicalAttachmentError.lifecycleConflict }
+        guard changed.changedRowCount == 1 else { throw RuntimeCanonicalAttachmentError.lifecycleConflict }
         let ledger = try database.execute(
             """
             UPDATE runtime_blob_quota_ledgers
@@ -1794,12 +1795,12 @@ enum CanonicalRuntimeAttachmentStore {
                 .text(privacyRaw), .text(ownerID), .integer(byteCount),
             ]
         )
-        guard ledger == 1 else { throw RuntimeCanonicalAttachmentError.corruptAuthority }
+        guard ledger.changedRowCount == 1 else { throw RuntimeCanonicalAttachmentError.corruptAuthority }
     }
 
     static func confirmDedupCandidate(
         revisionID: RuntimeAttachmentRevisionID,
-        canonicalBlobID: RuntimeBlobID,
+        canonicalBlobID: RuntimeAttachmentBlobID,
         keyedContentAddress: RuntimeAttachmentContentAddress,
         now: Date,
         database: isolated SQLiteDatabase
@@ -1872,9 +1873,9 @@ enum CanonicalRuntimeAttachmentStore {
         )
         return try rows.map { row in
             guard case let .text(losingRaw)? = row.value(named: "losing_blob_id"),
-                  let losingBlobID = RuntimeBlobID(rawValue: losingRaw),
+                  let losingBlobID = RuntimeAttachmentBlobID(rawValue: losingRaw),
                   case let .text(canonicalRaw)? = row.value(named: "canonical_blob_id"),
-                  let canonicalBlobID = RuntimeBlobID(rawValue: canonicalRaw),
+                  let canonicalBlobID = RuntimeAttachmentBlobID(rawValue: canonicalRaw),
                   case let .blob(manifestBytes)? = row.value(named: "manifest_payload"),
                   case let .text(manifestDigest)? = row.value(named: "manifest_digest"),
                   RuntimeAttachmentCodec.sha256(manifestBytes) == manifestDigest,
@@ -2058,7 +2059,7 @@ enum CanonicalRuntimeAttachmentStore {
                 )),
             ]
         )
-        guard changed == 1 else { throw RuntimeCanonicalAttachmentError.lifecycleConflict }
+        guard changed.changedRowCount == 1 else { throw RuntimeCanonicalAttachmentError.lifecycleConflict }
         let finalized = try database.execute(
             """
             UPDATE runtime_blob_finalization_intents
@@ -2070,7 +2071,7 @@ enum CanonicalRuntimeAttachmentStore {
                 .text(proof.proofDigest), .text(graph.manifest.blobID.rawValue),
             ]
         )
-        guard finalized == 1 else { throw RuntimeCanonicalAttachmentError.lifecycleConflict }
+        guard finalized.changedRowCount == 1 else { throw RuntimeCanonicalAttachmentError.lifecycleConflict }
         let marker = RuntimeAttachmentFinalizationMarker(
             version: runtimeCanonicalAttachmentModelVersion, blobID: work.manifest.blobID,
             manifestDigest: work.manifestDigest, receiptID: work.receiptID,
@@ -2209,7 +2210,7 @@ enum CanonicalRuntimeAttachmentStore {
             guard case let .text(revisionRaw)? = row.value(named: "revision_id"),
                   let revisionID = RuntimeAttachmentRevisionID(rawValue: revisionRaw),
                   case let .text(blobRaw)? = row.value(named: "blob_id"),
-                  let blobID = RuntimeBlobID(rawValue: blobRaw),
+                  let blobID = RuntimeAttachmentBlobID(rawValue: blobRaw),
                   case let .text(manifestDigest)? = row.value(named: "manifest_digest"),
                   case let .text(linkKind)? = row.value(named: "link_kind"),
                   case let .blob(payload)? = row.value(named: "artifact_payload"),
@@ -2347,7 +2348,7 @@ enum CanonicalRuntimeAttachmentStore {
                     .integer(nextRetryMS), .integer(nowMS),
                 ]
             )
-            guard changed == 1 else { throw RuntimeCanonicalAttachmentError.lifecycleConflict }
+            guard changed.changedRowCount == 1 else { throw RuntimeCanonicalAttachmentError.lifecycleConflict }
             return true
         }
         guard case let .text(storedOccurrence)? = row.value(named: "occurrence_fingerprint"),
@@ -2387,7 +2388,7 @@ enum CanonicalRuntimeAttachmentStore {
                     .integer(try RuntimeAttachmentCodec.sqliteInteger(nextVersion)),
                 ]
             )
-            guard inserted == 1 else { throw RuntimeCanonicalAttachmentError.lifecycleConflict }
+            guard inserted.changedRowCount == 1 else { throw RuntimeCanonicalAttachmentError.lifecycleConflict }
             let reopened = try database.execute(
                 """
                 UPDATE runtime_attachment_recovery_attempts
@@ -2404,7 +2405,7 @@ enum CanonicalRuntimeAttachmentStore {
                     .integer(resolvedAtMS), .integer(rawVersion),
                 ]
             )
-            guard reopened == 1 else { throw RuntimeCanonicalAttachmentError.lifecycleConflict }
+            guard reopened.changedRowCount == 1 else { throw RuntimeCanonicalAttachmentError.lifecycleConflict }
             return true
         }
         guard row.value(named: "resolved_at_ms") == .null else {
@@ -2437,7 +2438,7 @@ enum CanonicalRuntimeAttachmentStore {
                 .text(workKind.rawValue), .text(authorityID), .integer(rawVersion), .integer(nowMS),
             ]
         )
-        guard changed == 1 else { throw RuntimeCanonicalAttachmentError.lifecycleConflict }
+        guard changed.changedRowCount == 1 else { throw RuntimeCanonicalAttachmentError.lifecycleConflict }
         return true
     }
 
@@ -2466,7 +2467,7 @@ enum CanonicalRuntimeAttachmentStore {
 
     static func recoveryFindingEvidenceFingerprint(
         issue: RuntimeAttachmentRecoveryIssue,
-        blobID: RuntimeBlobID?,
+        blobID: RuntimeAttachmentBlobID?,
         relativeDirectory: String,
         cycle: UInt64
     ) throws -> String {
@@ -2501,7 +2502,7 @@ enum CanonicalRuntimeAttachmentStore {
                 .text(errorFingerprint), .text(workKind.rawValue), .text(authorityID),
             ]
         )
-        guard changed == 1 else { throw RuntimeCanonicalAttachmentError.lifecycleConflict }
+        guard changed.changedRowCount == 1 else { throw RuntimeCanonicalAttachmentError.lifecycleConflict }
     }
 
     static func resolveRecoveryAttempt(
@@ -2526,7 +2527,7 @@ enum CanonicalRuntimeAttachmentStore {
                 .text(authorityID), .integer(try milliseconds(now)),
             ]
         )
-        guard changed == 1 else { throw RuntimeCanonicalAttachmentError.lifecycleConflict }
+        guard changed.changedRowCount == 1 else { throw RuntimeCanonicalAttachmentError.lifecycleConflict }
     }
 
     static func claimUnownedManifestDeletion(
@@ -2632,7 +2633,7 @@ enum CanonicalRuntimeAttachmentStore {
                     .text(next.blobID.rawValue), .text(next.opaqueRelativeDirectory),
                 ]
             )
-            guard changed == 1 else { throw RuntimeCanonicalAttachmentError.lifecycleConflict }
+            guard changed.changedRowCount == 1 else { throw RuntimeCanonicalAttachmentError.lifecycleConflict }
             return next
         }
         let claim = RuntimeAttachmentManifestDeletionClaim(
@@ -2769,7 +2770,7 @@ enum CanonicalRuntimeAttachmentStore {
                 .text(claim.blobID.rawValue), .text(claim.opaqueRelativeDirectory),
             ]
         )
-        guard changed == 1 else { throw RuntimeCanonicalAttachmentError.lifecycleConflict }
+        guard changed.changedRowCount == 1 else { throw RuntimeCanonicalAttachmentError.lifecycleConflict }
         return next
     }
 
@@ -2811,7 +2812,7 @@ enum CanonicalRuntimeAttachmentStore {
               case let .text(currentDigest)? = rows[0].value(named: "claim_digest"),
               RuntimeAttachmentCodec.sha256(currentPayload) == currentDigest,
               case let .integer(version)? = rows[0].value(named: "state_version"),
-              version == try RuntimeAttachmentCodec.sqliteInteger(claim.stateVersion),
+              version == (try RuntimeAttachmentCodec.sqliteInteger(claim.stateVersion)),
               rows[0].value(named: "claimed_at_ms") == .integer(try milliseconds(claim.claimedAt)),
               rows[0].value(named: "expires_at_ms") == .integer(try milliseconds(claim.expiresAt)),
               try RuntimeAttachmentCodec.decode(
@@ -2876,7 +2877,7 @@ enum CanonicalRuntimeAttachmentStore {
                 .integer(try milliseconds(proof.deletedAt)),
             ]
         )
-        guard changed == 1 else { throw RuntimeCanonicalAttachmentError.lifecycleConflict }
+        guard changed.changedRowCount == 1 else { throw RuntimeCanonicalAttachmentError.lifecycleConflict }
         let orphanRows = try database.query(
             """
             SELECT manifest_payload, manifest_digest, opaque_relative_directory
@@ -2956,7 +2957,7 @@ enum CanonicalRuntimeAttachmentStore {
 
     static func recoverySnapshots(
         limit: Int,
-        afterBlobID: RuntimeBlobID?,
+        afterBlobID: RuntimeAttachmentBlobID?,
         database: isolated SQLiteDatabase
     ) throws -> [RuntimeAttachmentAuthoritySnapshot] {
         guard limit > 0, limit <= RuntimeAttachmentLimits.maximumPageSize else {
@@ -3064,7 +3065,7 @@ enum CanonicalRuntimeAttachmentStore {
                     .integer(try RuntimeAttachmentCodec.sqliteInteger(existing.stateVersion)),
                 ]
             )
-            guard changed == 1 else { throw RuntimeCanonicalAttachmentError.lifecycleConflict }
+            guard changed.changedRowCount == 1 else { throw RuntimeCanonicalAttachmentError.lifecycleConflict }
         } else {
             let changed = try database.execute(
                 """
@@ -3077,7 +3078,7 @@ enum CanonicalRuntimeAttachmentStore {
                     .integer(wrapped ? 1 : 0), .integer(nowMS),
                 ]
             )
-            guard changed == 1 else { throw RuntimeCanonicalAttachmentError.lifecycleConflict }
+            guard changed.changedRowCount == 1 else { throw RuntimeCanonicalAttachmentError.lifecycleConflict }
         }
         guard let result = try recoveryCursor(scanKind: scanKind, database: database) else {
             throw RuntimeCanonicalAttachmentError.corruptAuthority
@@ -3195,7 +3196,7 @@ enum CanonicalRuntimeAttachmentStore {
                 )),
             ]
         )
-        guard changed == 1 else { throw RuntimeCanonicalAttachmentError.lifecycleConflict }
+        guard changed.changedRowCount == 1 else { throw RuntimeCanonicalAttachmentError.lifecycleConflict }
         try releaseDedupAuthority(blobID: graph.manifest.blobID, database: database)
         return finding
     }
@@ -3208,7 +3209,7 @@ enum CanonicalRuntimeAttachmentStore {
     }
 
     static func hasBlobAuthority(
-        blobID: RuntimeBlobID,
+        blobID: RuntimeAttachmentBlobID,
         manifestDigest: String,
         opaqueRelativeDirectory: String,
         database: isolated SQLiteDatabase
@@ -3275,7 +3276,7 @@ enum CanonicalRuntimeAttachmentStore {
 
     static func resolveOpenRecoveryFindings(
         issue: RuntimeAttachmentRecoveryIssue,
-        blobID: RuntimeBlobID?,
+        blobID: RuntimeAttachmentBlobID?,
         relativeDirectory: String,
         at now: Date,
         database: isolated SQLiteDatabase
@@ -3298,7 +3299,7 @@ enum CanonicalRuntimeAttachmentStore {
                 .text(relativeDirectory), .integer(nowMS),
             ]
         )
-        return changed
+        return Int(changed.changedRowCount)
     }
 
     static func quarantineForRecovery(
@@ -3382,12 +3383,12 @@ enum CanonicalRuntimeAttachmentStore {
                 )),
             ]
         )
-        guard changed == 1 else { throw RuntimeCanonicalAttachmentError.lifecycleConflict }
+        guard changed.changedRowCount == 1 else { throw RuntimeCanonicalAttachmentError.lifecycleConflict }
         try releaseDedupAuthority(blobID: graph.manifest.blobID, database: database)
     }
 
     private static func gcLeaseHistoryEvidence(
-        blobID: RuntimeBlobID,
+        blobID: RuntimeAttachmentBlobID,
         transition: RuntimeBlobGCLeaseTransition,
         leaseID: RuntimeBlobGCLeaseID,
         leaseToken: String,
@@ -3547,7 +3548,7 @@ enum CanonicalRuntimeAttachmentStore {
     }
 
     private static func loadGCCurrentLease(
-        blobID: RuntimeBlobID,
+        blobID: RuntimeAttachmentBlobID,
         database: isolated SQLiteDatabase
     ) throws -> RuntimeBlobGCCurrentLeaseAuthority? {
         let rows = try database.query(
@@ -3837,7 +3838,7 @@ enum CanonicalRuntimeAttachmentStore {
                     )),
                 ]
             )
-            guard changed == 1 else { throw RuntimeCanonicalAttachmentError.lifecycleConflict }
+            guard changed.changedRowCount == 1 else { throw RuntimeCanonicalAttachmentError.lifecycleConflict }
         } else {
             try database.execute(
                 """
@@ -3871,7 +3872,7 @@ enum CanonicalRuntimeAttachmentStore {
         var count = 0
         for row in rows {
             guard case let .text(raw)? = row.value(named: "blob_id"),
-                  let blobID = RuntimeBlobID(rawValue: raw),
+                  let blobID = RuntimeAttachmentBlobID(rawValue: raw),
                   let active = try loadGCCurrentLease(blobID: blobID, database: database),
                   active.state == .active, active.lease.expiresAt <= now else {
                 throw RuntimeCanonicalAttachmentError.corruptAuthority
@@ -3966,7 +3967,7 @@ enum CanonicalRuntimeAttachmentStore {
         )
         guard let candidate = candidates.first,
               case let .text(blobRaw)? = candidate.value(named: "blob_id"),
-              let blobID = RuntimeBlobID(rawValue: blobRaw),
+              let blobID = RuntimeAttachmentBlobID(rawValue: blobRaw),
               case let .integer(version)? = candidate.value(named: "state_version"), version > 0,
               case let .text(stateRaw)? = candidate.value(named: "lifecycle_state"),
               let state = RuntimeAttachmentLifecycleState(rawValue: stateRaw),
@@ -4020,7 +4021,7 @@ enum CanonicalRuntimeAttachmentStore {
                 )),
             ]
         )
-        guard changed == 1 else { throw RuntimeCanonicalAttachmentError.lifecycleConflict }
+        guard changed.changedRowCount == 1 else { throw RuntimeCanonicalAttachmentError.lifecycleConflict }
         var prior = try loadGCCurrentLease(blobID: blobID, database: database)
         if let active = prior, active.state == .active {
             guard active.lease.expiresAt <= now else {
@@ -4234,7 +4235,7 @@ enum CanonicalRuntimeAttachmentStore {
                 .text(privacyRaw), .text(ownerID), .integer(storedBytes),
             ]
         )
-        guard ledger == 1 else { throw RuntimeCanonicalAttachmentError.corruptAuthority }
+        guard ledger.changedRowCount == 1 else { throw RuntimeCanonicalAttachmentError.corruptAuthority }
         guard let activeLease = try loadGCCurrentLease(
             blobID: lease.blobID, database: database
         ), activeLease.state == .active, activeLease.lease == lease else {
@@ -4313,7 +4314,7 @@ enum CanonicalRuntimeAttachmentStore {
             referenceTransitions.append(referenceHistory)
             producedReference = reference
             nextCount = old.referenceCount + 1
-            nextState = old.state == .finalized || (try hasAuthenticatedCompletedFinalization(
+            nextState = try (old.state == .finalized || hasAuthenticatedCompletedFinalization(
                 blobID: intent.blobID, manifestDigest: intent.manifestDigest, database: database
             )) ? .finalized : .referenced
             if old.state == .orphaned {
@@ -4344,7 +4345,7 @@ enum CanonicalRuntimeAttachmentStore {
                     .text(intent.blobID.rawValue), .text(target.kind.rawValue), .text(target.id.rawValue),
                 ]
             )
-            guard changed == 1, old.referenceCount > 0 else {
+            guard changed.changedRowCount == 1, old.referenceCount > 0 else {
                 throw RuntimeCanonicalAttachmentError.lifecycleConflict
             }
             nextCount = old.referenceCount - 1
@@ -4430,7 +4431,7 @@ enum CanonicalRuntimeAttachmentStore {
                 .text(try RuntimeAttachmentCodec.digest(old, maximumBytes: RuntimeAttachmentLimits.maximumManifestBytes)),
             ]
         )
-        guard changed == 1 else { throw RuntimeCanonicalAttachmentError.lifecycleConflict }
+        guard changed.changedRowCount == 1 else { throw RuntimeCanonicalAttachmentError.lifecycleConflict }
         if next.state == .orphaned || next.state == .quarantined || next.state == .deletionPending {
             try releaseDedupAuthority(blobID: next.blobID, database: database)
         }
@@ -4954,7 +4955,7 @@ enum CanonicalRuntimeAttachmentStore {
 
     private static func insertReference(
         _ value: RuntimeAttachmentReference,
-        blobID: RuntimeBlobID,
+        blobID: RuntimeAttachmentBlobID,
         database: isolated SQLiteDatabase
     ) throws {
         _ = try RuntimeAttachmentCodec.sqliteInteger(value.targetRevision)
@@ -5010,7 +5011,7 @@ enum CanonicalRuntimeAttachmentStore {
     private static func makeReferenceHistory(
         referenceID: RuntimeAttachmentReferenceID,
         revisionID: RuntimeAttachmentRevisionID,
-        blobID: RuntimeBlobID,
+        blobID: RuntimeAttachmentBlobID,
         from: RuntimeAttachmentReferenceState?,
         to: RuntimeAttachmentReferenceState,
         commandID: RuntimeCommandID,
@@ -5083,7 +5084,7 @@ enum CanonicalRuntimeAttachmentStore {
     }
 
     private static func makeHistory(
-        blobID: RuntimeBlobID, version: UInt64,
+        blobID: RuntimeAttachmentBlobID, version: UInt64,
         from: RuntimeAttachmentLifecycleState?, to: RuntimeAttachmentLifecycleState,
         fromCount: Int?, toCount: Int, commandID: RuntimeCommandID?, receiptID: RuntimeReceiptID?,
         lineage: RuntimeAuthorityLineageReference?,
@@ -5352,7 +5353,7 @@ enum CanonicalRuntimeAttachmentStore {
 
     private static func decodeLifecycleHistoryRow(
         _ row: SQLiteRow,
-        blobID: RuntimeBlobID
+        blobID: RuntimeAttachmentBlobID
     ) throws -> RuntimeAttachmentLifecycleHistory {
         guard case let .blob(bytes)? = row.value(named: "history_payload"),
               case let .text(digest)? = row.value(named: "history_digest") else {
@@ -5372,7 +5373,7 @@ enum CanonicalRuntimeAttachmentStore {
 
     private static func decodeReferenceHistoryRow(
         _ row: SQLiteRow,
-        blobID: RuntimeBlobID
+        blobID: RuntimeAttachmentBlobID
     ) throws -> RuntimeAttachmentReferenceHistory {
         guard case let .blob(bytes)? = row.value(named: "history_payload"),
               case let .text(digest)? = row.value(named: "history_digest") else {
@@ -5416,7 +5417,7 @@ enum CanonicalRuntimeAttachmentStore {
     }
 
     private static func loadReferences(
-        blobID: RuntimeBlobID,
+        blobID: RuntimeAttachmentBlobID,
         budget: inout RuntimeAttachmentDecodedByteBudget,
         database: isolated SQLiteDatabase
     ) throws -> [RuntimeAttachmentReference] {
@@ -5498,7 +5499,7 @@ enum CanonicalRuntimeAttachmentStore {
     }
 
     private static func loadHistory(
-        blobID: RuntimeBlobID,
+        blobID: RuntimeAttachmentBlobID,
         budget: inout RuntimeAttachmentDecodedByteBudget,
         database: isolated SQLiteDatabase
     ) throws -> [RuntimeAttachmentLifecycleHistory] {
@@ -5548,7 +5549,7 @@ enum CanonicalRuntimeAttachmentStore {
 
     private static func lifecycleHistoryScalarsMatch(
         _ value: RuntimeAttachmentLifecycleHistory,
-        blobID: RuntimeBlobID,
+        blobID: RuntimeAttachmentBlobID,
         row: SQLiteRow
     ) throws -> Bool {
         guard value.blobID == blobID,
@@ -5618,7 +5619,7 @@ enum CanonicalRuntimeAttachmentStore {
     }
 
     private static func loadReferenceHistory(
-        blobID: RuntimeBlobID,
+        blobID: RuntimeAttachmentBlobID,
         budget: inout RuntimeAttachmentDecodedByteBudget,
         database: isolated SQLiteDatabase
     ) throws -> [RuntimeAttachmentReferenceHistory] {
@@ -5689,7 +5690,7 @@ enum CanonicalRuntimeAttachmentStore {
     }
 
     private static func loadHolds(
-        blobID: RuntimeBlobID,
+        blobID: RuntimeAttachmentBlobID,
         budget: inout RuntimeAttachmentDecodedByteBudget,
         database: isolated SQLiteDatabase
     ) throws -> [RuntimeBlobRetentionHold] {
@@ -5724,7 +5725,7 @@ enum CanonicalRuntimeAttachmentStore {
     }
 
     private static func loadTombstone(
-        blobID: RuntimeBlobID,
+        blobID: RuntimeAttachmentBlobID,
         budget: inout RuntimeAttachmentDecodedByteBudget,
         database: isolated SQLiteDatabase
     ) throws -> RuntimeBlobDeletionTombstone? {
@@ -5773,7 +5774,7 @@ enum CanonicalRuntimeAttachmentStore {
     }
 
     private static func hasActiveHold(
-        blobID: RuntimeBlobID, at now: Date, database: isolated SQLiteDatabase
+        blobID: RuntimeAttachmentBlobID, at now: Date, database: isolated SQLiteDatabase
     ) throws -> Bool {
         try database.query(
             """
@@ -5786,7 +5787,7 @@ enum CanonicalRuntimeAttachmentStore {
     }
 
     private static func hasUnresolvedQuarantine(
-        blobID: RuntimeBlobID,
+        blobID: RuntimeAttachmentBlobID,
         database: isolated SQLiteDatabase
     ) throws -> Bool {
         try database.query(
@@ -5799,7 +5800,7 @@ enum CanonicalRuntimeAttachmentStore {
     }
 
     private static func releaseDedupAuthority(
-        blobID: RuntimeBlobID,
+        blobID: RuntimeAttachmentBlobID,
         database: isolated SQLiteDatabase
     ) throws {
         _ = try database.execute(
@@ -5809,7 +5810,7 @@ enum CanonicalRuntimeAttachmentStore {
     }
 
     private static func hasAuthenticatedCompletedFinalization(
-        blobID: RuntimeBlobID,
+        blobID: RuntimeAttachmentBlobID,
         manifestDigest: String,
         database: isolated SQLiteDatabase
     ) throws -> Bool {

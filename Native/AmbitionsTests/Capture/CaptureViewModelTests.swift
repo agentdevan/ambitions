@@ -22,27 +22,27 @@ final class CaptureViewModelTests: XCTestCase {
         ])
     }
 
-    func testArchiveAndSaveToNeedsPlaceCallServiceAndRefresh() async {
+    func testArchiveAndSaveToNeedsPlaceRemainUnavailableWithoutTypedCommands() async {
         let captureService = MutableCaptureService(captures: [capture(id: "capture-1", rawText: "First")])
         let goalsService = StaticGoalsService(items: [])
         let viewModel = CaptureViewModel()
 
-        await viewModel.archive(id: "capture-1", captureService: captureService, goalsService: goalsService, now: fixedNow)
+        await viewModel.archive(id: "capture-1")
         var stored = await captureService.capture(id: "capture-1")
-        XCTAssertEqual(stored?.status, .archived)
-        XCTAssertEqual(viewModel.actionMessage?.title, "Archived")
+        XCTAssertEqual(stored?.status, .actionable)
+        XCTAssertEqual(viewModel.actionMessage?.title, "Action not available yet")
 
         await captureService.setCaptures([capture(id: "capture-2", rawText: "Second")])
         await viewModel.saveToNeedsPlace(id: "capture-2", captureService: captureService, goalsService: goalsService, now: fixedNow)
         stored = await captureService.capture(id: "capture-2")
-        XCTAssertEqual(stored?.status, .needsTriage)
-        XCTAssertEqual(stored?.triage?.destination, .needsTriage)
+        XCTAssertEqual(stored?.status, .actionable)
+        XCTAssertNil(stored?.triage)
         XCTAssertEqual(stored?.kind, .raw)
         XCTAssertEqual(stored?.route, .captureInbox)
-        XCTAssertEqual(viewModel.actionMessage?.title, "Saved to Needs a Place")
+        XCTAssertEqual(viewModel.actionMessage?.title, "Action not available yet")
     }
 
-    func testCaptureRouteActionsCallServiceAndRefresh() async {
+    func testCaptureRouteActionsRemainUnavailableWithoutTypedCommands() async {
         let captureService = MutableCaptureService(captures: [
             capture(id: "plan", rawText: "Create spreadsheet"),
             capture(id: "waiting", rawText: "Waiting on invoice"),
@@ -52,33 +52,33 @@ final class CaptureViewModelTests: XCTestCase {
         let goalsService = StaticGoalsService(items: [])
         let viewModel = CaptureViewModel()
 
-        await viewModel.routeToTime(id: "plan", captureService: captureService, goalsService: goalsService, now: fixedNow)
+        await viewModel.routeToTime(id: "plan")
         var stored = await captureService.capture(id: "plan")
-        XCTAssertEqual(stored?.kind, .oneTimeCommitment)
-        XCTAssertEqual(stored?.route, .timeSeed)
-        XCTAssertEqual(stored?.status, .scheduled)
-        XCTAssertEqual(viewModel.actionMessage?.title, "Saved as Step · Today")
+        XCTAssertEqual(stored?.kind, .raw)
+        XCTAssertEqual(stored?.route, .captureInbox)
+        XCTAssertEqual(stored?.status, .actionable)
+        XCTAssertEqual(viewModel.actionMessage?.title, "Action not available yet")
 
-        await viewModel.markWaiting(id: "waiting", captureService: captureService, goalsService: goalsService, now: fixedNow)
+        await viewModel.markWaiting(id: "waiting")
         stored = await captureService.capture(id: "waiting")
-        XCTAssertEqual(stored?.kind, .waitingItem)
-        XCTAssertEqual(stored?.route, .waiting)
-        XCTAssertEqual(stored?.status, .waiting)
-        XCTAssertEqual(viewModel.actionMessage?.title, "Saved as Waiting")
+        XCTAssertEqual(stored?.kind, .raw)
+        XCTAssertEqual(stored?.route, .captureInbox)
+        XCTAssertEqual(stored?.status, .actionable)
+        XCTAssertEqual(viewModel.actionMessage?.title, "Action not available yet")
 
         await viewModel.markOptionalSomeday(id: "someday", captureService: captureService, goalsService: goalsService, now: fixedNow)
         stored = await captureService.capture(id: "someday")
-        XCTAssertEqual(stored?.kind, .optionalSomeday)
-        XCTAssertEqual(stored?.route, .optionalSomeday)
-        XCTAssertEqual(stored?.status, .optionalSomeday)
-        XCTAssertEqual(viewModel.actionMessage?.title, "Review later")
+        XCTAssertEqual(stored?.kind, .raw)
+        XCTAssertEqual(stored?.route, .captureInbox)
+        XCTAssertEqual(stored?.status, .actionable)
+        XCTAssertEqual(viewModel.actionMessage?.title, "Action not available yet")
 
         await viewModel.markDeliverableSeed(id: "deliverable", text: "Add another song", captureService: captureService, goalsService: goalsService, now: fixedNow)
         stored = await captureService.capture(id: "deliverable")
-        XCTAssertEqual(stored?.kind, .deliverableSeed)
-        XCTAssertEqual(stored?.route, .deliverableSeed)
-        XCTAssertEqual(stored?.status, .seed)
-        XCTAssertEqual(viewModel.actionMessage?.title, "Saved as Idea")
+        XCTAssertEqual(stored?.kind, .raw)
+        XCTAssertEqual(stored?.route, .captureInbox)
+        XCTAssertEqual(stored?.status, .actionable)
+        XCTAssertEqual(viewModel.actionMessage?.title, "Action not available yet")
     }
 
     func testD12DraftPreviewUsesSmartAttachmentAndCompactChoices() async {
@@ -415,28 +415,50 @@ final class CaptureViewModelTests: XCTestCase {
         XCTAssertEqual(viewModel.draftError, "Test capture failure")
     }
 
-    func testAttachReturnsGoalRouteTarget() async {
+    func testAttachFailureFromTypedHandoffLeavesCaptureUnchanged() async throws {
         let captureService = MutableCaptureService(captures: [capture(id: "capture-attach", rawText: "Attach")])
         let goalsService = StaticGoalsService(items: [goalItem(id: "goal-active", title: "Active goal", renderState: .active)])
         let viewModel = CaptureViewModel()
+        let store = try AmbitionsPersistenceStore(inMemory: true)
+        let repositories = AppRepositories(
+            goals: SwiftDataGoalRepository(store: store),
+            drafts: SwiftDataGoalDraftRepository(store: store),
+            evidence: SwiftDataProgressEvidenceRepository(store: store),
+            feedback: SwiftDataFeedbackEventRepository(store: store),
+            captures: SwiftDataCaptureRepository(store: store),
+            appState: SwiftDataAppStateRepository(store: store)
+        )
+        let executor = AmbitionsCommandExecutor.test()
+        let handoffService = CaptureGoalHandoffService(
+            repositories: repositories,
+            runtimeClient: RuntimeCommandClient(
+                execute: { command, context in
+                    await executor.execute(command, context: context)
+                },
+                projection: { request in
+                    throw RuntimeProjectionClientError.projectionUnavailable(request)
+                }
+            )
+        )
 
         let target = await viewModel.attachToGoal(
             captureID: "capture-attach",
             goalID: "goal-active",
             goalTitle: "Active goal",
+            captureGoalHandoffCommands: handoffService,
             captureService: captureService,
             goalsService: goalsService,
             now: fixedNow
         )
 
         let stored = await captureService.capture(id: "capture-attach")
-        XCTAssertEqual(target?.goalID, "goal-active")
-        XCTAssertEqual(stored?.status, .goalBound)
-        XCTAssertEqual(stored?.linkedGoalID, "goal-active")
-        XCTAssertEqual(viewModel.actionMessage?.title, "Attached as Proof · Active goal")
+        XCTAssertNil(target)
+        XCTAssertEqual(stored?.status, .actionable)
+        XCTAssertNil(stored?.linkedGoalID)
+        XCTAssertEqual(viewModel.actionMessage?.title, "Attach did not finish")
     }
 
-    func testTurnIntoGoalReturnsCreatedGoalRouteTarget() async {
+    func testTurnIntoGoalRemainsUnavailableWithoutTypedCommand() async {
         let captureService = MutableCaptureService(captures: [capture(id: "capture-goal", rawText: "Turn into goal")])
         let goalsService = StaticGoalsService(items: [])
         let viewModel = CaptureViewModel()
@@ -449,13 +471,13 @@ final class CaptureViewModelTests: XCTestCase {
         )
 
         let stored = await captureService.capture(id: "capture-goal")
-        XCTAssertEqual(target?.goalID, "goal-created-capture-goal")
-        XCTAssertEqual(stored?.status, .goalBound)
-        XCTAssertEqual(stored?.linkedGoalID, "goal-created-capture-goal")
-        XCTAssertEqual(viewModel.actionMessage?.title, "Saved as Goal · Creative")
+        XCTAssertNil(target)
+        XCTAssertEqual(stored?.status, .actionable)
+        XCTAssertNil(stored?.linkedGoalID)
+        XCTAssertEqual(viewModel.actionMessage?.title, "Action not available yet")
     }
 
-    func testFailuresAreSurfacedWithoutChangingDomainRulesInViewModel() async {
+    func testUnavailableTurnIntoGoalDoesNotCallLegacyCaptureService() async {
         let captureService = MutableCaptureService(captures: [], shouldThrow: true)
         let goalsService = StaticGoalsService(items: [])
         let viewModel = CaptureViewModel()
@@ -468,8 +490,8 @@ final class CaptureViewModelTests: XCTestCase {
         )
 
         XCTAssertNil(target)
-        XCTAssertEqual(viewModel.actionMessage?.title, "Save did not finish")
-        XCTAssertTrue(viewModel.actionMessage?.body.contains("Test capture failure") == true)
+        XCTAssertEqual(viewModel.actionMessage?.title, "Action not available yet")
+        XCTAssertTrue(viewModel.actionMessage?.body.contains("atomic typed capture-to-goal") == true)
     }
 
     private var fixedNow: Date {

@@ -270,6 +270,62 @@ final class SafeAutomationPolicyModelsTests: XCTestCase {
         }
     }
 
+    func testReminderCommandsMapToExternalCommandPolicyAction() throws {
+        let target = AmbitionsCommandTarget(timeID: "time-1", destination: .time)
+        let content = RuntimeCommandContent(AmbitionsCommandPayload(title: "Reminder"))
+        let reminderActions: [ReminderCommand.Action] = [.create, .update, .delete]
+        let commands = reminderActions.map { action in
+            AmbitionsCommand(
+                id: "reminder-\(action.rawValue)",
+                source: .time,
+                typedPayload: .reminder(ReminderCommand(action: action, target: target, content: content)),
+                createdAt: "2026-04-26T12:00:00Z"
+            )
+        } + [
+            AmbitionsCommand(
+                id: "external-reminder",
+                source: .system,
+                typedPayload: .externalOperation(
+                    ExternalOperationCommand(
+                        operationID: try XCTUnwrap(RuntimeExternalOperationID(rawValue: "operation-1")),
+                        kind: .reminder,
+                        target: target,
+                        title: "Reminder"
+                    )
+                ),
+                createdAt: "2026-04-26T12:00:00Z"
+            )
+        ]
+
+        XCTAssertEqual(
+            commands.map { SafeAutomationProposedAction.fromCommand($0).kind },
+            Array(repeating: .externalCommand, count: commands.count)
+        )
+
+        let compensation = AmbitionsCommand(
+            id: "compensate-created-reminder",
+            source: .system,
+            typedPayload: .compensation(RuntimeCompensationCommand(
+                sourceReceiptID: try XCTUnwrap(RuntimeReceiptID(rawValue: "receipt-1")),
+                planID: try XCTUnwrap(RuntimeRollbackPlanID(rawValue: "plan-1")),
+                planDigest: String(repeating: "a", count: 64),
+                sourceLineage: RuntimeAuthorityLineageReference(
+                    eventID: try XCTUnwrap(RuntimeEventID(rawValue: "event-1")),
+                    eventSequence: 1,
+                    eventHash: String(repeating: "b", count: 64)
+                ),
+                action: .discardCreatedReminder(try XCTUnwrap(RuntimeDomainObjectID(rawValue: "reminder-1"))),
+                targets: [],
+                requiresConfirmation: true,
+                target: target,
+                content: content
+            )),
+            createdAt: "2026-04-26T12:00:00Z"
+        )
+
+        XCTAssertEqual(SafeAutomationProposedAction.fromCommand(compensation).kind, .deleteObject)
+    }
+
     func testDataControlPolicyDecisionsFromCommandsAreAsConfigured() {
         let decisionForCommand: (AmbitionsCommandKind, AmbitionsCommandTarget) -> SafeAutomationPolicyDecision = { kind, target in
             let command = AmbitionsCommand(

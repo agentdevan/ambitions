@@ -531,8 +531,8 @@ enum CanonicalRuntimeProjectionSchemaPlan {
           OR NEW.progress_sequence != 0 OR NEW.progress_event_id IS NOT NULL
           OR NEW.progress_event_hash IS NOT NULL
           OR NEW.after_aggregate_kind != '' OR NEW.after_aggregate_id != ''
-          OR NEW.progress_source_digest != 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855'
-          OR NEW.rolling_root_digest != 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855'
+          OR NEW.progress_source_digest != '\(RuntimeCanonicalReplaySourceChain.emptyDigest.hexadecimal)'
+          OR NEW.rolling_root_digest != '\(RuntimeCanonicalReplaySourceChain.emptyDigest.hexadecimal)'
           OR NEW.shard_ordinal != 0 OR NEW.entry_count != 0
           OR NEW.sealed_entry_count != 0 OR NEW.nonlocal_entry_count != 0
           OR NEW.search_document_count != 0 OR NEW.sealed_search_document_count != 0
@@ -1224,7 +1224,7 @@ enum CanonicalRuntimeProjectionSchemaPlan {
           OR NEW.after_posting_id != '' OR NEW.after_posting_field != -1
           OR NEW.after_posting_ordinal != -1
           OR NEW.previous_last_kind != '' OR NEW.previous_last_id != ''
-          OR NEW.rolling_root_digest != 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855'
+          OR NEW.rolling_root_digest != '\(RuntimeCanonicalReplaySourceChain.emptyDigest.hexadecimal)'
           OR NEW.owner_id != 'unclaimed' OR NEW.fence_version != 1
           OR NEW.service_ticket <= 0
           OR NEW.service_ticket != COALESCE((

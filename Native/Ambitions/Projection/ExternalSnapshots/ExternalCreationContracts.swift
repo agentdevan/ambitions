@@ -494,7 +494,7 @@ struct SharedExternalCreationStore {
     }
 
     private func verifyPrivateQueueFileProtection(at url: URL) throws {
-        #if os(iOS)
+        #if os(iOS) && !targetEnvironment(simulator)
         let attributes = try fileManager.attributesOfItem(atPath: url.path)
         guard (attributes[.protectionKey] as? FileProtectionType) == .complete else {
             throw SharedExternalCreationStoreError.fileCoordinationFailed

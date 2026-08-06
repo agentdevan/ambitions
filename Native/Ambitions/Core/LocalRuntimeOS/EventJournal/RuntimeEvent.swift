@@ -252,7 +252,7 @@ extension RuntimeDomainEvent {
             guard result.status == .succeeded, case let .todayReceipt(receipt) = history.action else { return nil }
             return .todayReceiptRecorded(receipt)
         case .goal, .step, .reminder, .profile, .repair, .importDeletion, .externalOperation,
-             .compensation:
+             .attachment, .compensation:
             return nil
         }
     }

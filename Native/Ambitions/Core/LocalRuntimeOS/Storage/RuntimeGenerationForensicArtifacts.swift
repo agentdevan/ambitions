@@ -1094,6 +1094,7 @@ enum RuntimeGenerationForensicArtifactPreserver {
             case .recordMissing: "control.record_missing"
             case .recordCorrupt: "control.record_corrupt"
             case .readBudgetExceeded: "control.read_budget_exceeded"
+            case .resourcePolicyExceeded: "control.resource_policy_exceeded"
             case .reservationExpired: "control.reservation_expired"
             case .reservationConsumed: "control.reservation_consumed"
             case .activationReconciliationPending: "control.activation_reconciliation_pending"
@@ -1113,6 +1114,8 @@ enum RuntimeGenerationForensicArtifactPreserver {
             case .generationWorkerBarrierBusy: "control.worker_barrier_busy"
             case .generationWorkerBarrierMismatch: "control.worker_barrier_mismatch"
             case .controlAuthorityUnavailable: "control.authority_unavailable"
+            case .recoveryRuntimeRetirementFailed:
+                "control.recovery_runtime_retirement_failed"
             case .derivedCandidateCloseFailed: "control.derived_candidate_close_failed"
             case .derivedCanonicalMutationDenied: "control.derived_canonical_mutation_denied"
             }

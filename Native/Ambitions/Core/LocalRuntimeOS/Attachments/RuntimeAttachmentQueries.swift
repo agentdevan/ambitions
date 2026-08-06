@@ -40,7 +40,7 @@ struct RuntimeAttachmentReadGrant: Sendable, Equatable, Hashable {
 
 struct RuntimeAuthenticatedAttachmentReadAuthority: Sendable, Equatable {
     let revisionID: RuntimeAttachmentRevisionID
-    let blobID: RuntimeBlobID
+    let blobID: RuntimeAttachmentBlobID
     let manifestDigest: String
     let privacy: EventLedgerPrivacyClassification
     let receiptID: RuntimeReceiptID
@@ -149,7 +149,7 @@ actor RuntimeAttachmentAccessAuthority {
             )
             guard links.count == 1,
                   case let .text(blobRaw)? = links[0].value(named: "blob_id"),
-                  let blobID = RuntimeBlobID(rawValue: blobRaw),
+                  let blobID = RuntimeAttachmentBlobID(rawValue: blobRaw),
                   case let .text(manifestDigest)? = links[0].value(named: "manifest_digest"),
                   case let .text(linkKind)? = links[0].value(named: "link_kind"),
                   linkKind == "reference",

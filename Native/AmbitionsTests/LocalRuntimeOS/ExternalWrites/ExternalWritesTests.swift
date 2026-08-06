@@ -309,7 +309,7 @@ final class ExternalWritesTests: XCTestCase {
         XCTAssertTrue(source.contains("finishClaim(id: request.id)"))
     }
 
-    func testAppIntentBridgeAppendsExternalCreationThroughCanonicalSideEffectOwner() async throws {
+    func testAppIntentBridgeQueuesExternalCreationForCanonicalImport() async throws {
         let ledger = InMemorySideEffectLedgerRepository()
         let outbox = SideEffectOutbox(ledger: ledger, leaseDuration: 60)
         let store = SharedExternalCreationStore(baseURL: temporaryDirectory())
@@ -328,7 +328,7 @@ final class ExternalWritesTests: XCTestCase {
         )
 
         XCTAssertEqual(try store.peek(), [request])
-        XCTAssertEqual(attempt?.id, "app-intent-intake.intent-side-effect-test")
+        XCTAssertEqual(attempt, .deferredForCanonicalImport(requestID: request.id))
         let stored = try await ledger.fetchRecord(id: "app-intent-intake.intent-side-effect-test")
         XCTAssertEqual(stored?.effectKind, .externalSnapshot)
         XCTAssertEqual(stored?.actionKind, .createCapture)

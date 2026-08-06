@@ -434,7 +434,7 @@ private final class RuntimeLegacyImportReconciliationLockScope: @unchecked Senda
         }
         self.descriptor = nil
         stateLock.unlock()
-        let unlocked = Darwin.flock(descriptor, LOCK_UN) == 0
+        let unlocked = flock(descriptor, LOCK_UN) == 0
         let closed = Darwin.close(descriptor) == 0
         guard unlocked, closed else {
             throw RuntimeGenerationControlError.controlAuthorityUnavailable
@@ -447,7 +447,7 @@ private final class RuntimeLegacyImportReconciliationLockScope: @unchecked Senda
         descriptor = nil
         stateLock.unlock()
         if let descriptor = ownedDescriptor {
-            _ = Darwin.flock(descriptor, LOCK_UN)
+            _ = flock(descriptor, LOCK_UN)
             _ = Darwin.close(descriptor)
         }
     }
@@ -508,7 +508,8 @@ private enum RuntimeLegacyImportPinnedArtifactIO {
                   opened.st_mtimespec.tv_nsec == entryBefore.st_mtimespec.tv_nsec,
                   opened.st_ctimespec.tv_sec == entryBefore.st_ctimespec.tv_sec,
                   opened.st_ctimespec.tv_nsec == entryBefore.st_ctimespec.tv_nsec,
-                  Darwin.fcntl(descriptor, F_GETPROTECTIONCLASS) == PROTECTION_CLASS_A else {
+                  Darwin.fcntl(descriptor, F_GETPROTECTIONCLASS) ==
+                    RuntimeStoreFileDurability.completeProtectionClass else {
                 throw LocalRuntimeStorageError.canonicalFileIdentityChanged(
                     artifact: "legacy_import_artifact"
                 )
@@ -565,7 +566,8 @@ private enum RuntimeLegacyImportPinnedArtifactIO {
                   entryAfter.st_mtimespec.tv_nsec == opened.st_mtimespec.tv_nsec,
                   entryAfter.st_ctimespec.tv_sec == opened.st_ctimespec.tv_sec,
                   entryAfter.st_ctimespec.tv_nsec == opened.st_ctimespec.tv_nsec,
-                  Darwin.fcntl(descriptor, F_GETPROTECTIONCLASS) == PROTECTION_CLASS_A else {
+                  Darwin.fcntl(descriptor, F_GETPROTECTIONCLASS) ==
+                    RuntimeStoreFileDurability.completeProtectionClass else {
                 throw LocalRuntimeStorageError.canonicalFileIdentityChanged(
                     artifact: "legacy_import_artifact"
                 )
@@ -634,7 +636,8 @@ actor RuntimeSwiftDataTypedExporter {
         var directoryStatus = stat()
         guard fstat(parentDescriptor, &directoryStatus) == 0,
               directoryStatus.st_mode & S_IFMT == S_IFDIR,
-              Darwin.fcntl(parentDescriptor, F_GETPROTECTIONCLASS) == PROTECTION_CLASS_A else {
+              Darwin.fcntl(parentDescriptor, F_GETPROTECTIONCLASS) ==
+                RuntimeStoreFileDurability.completeProtectionClass else {
             throw LocalRuntimeStorageError.canonicalPathAuthorityDenied
         }
         let descriptor = Darwin.openat(
@@ -1032,9 +1035,13 @@ actor RuntimeSwiftDataTypedExporter {
                 let id = cursor[3]
                 predicate = #Predicate<PlanSectionRecord> {
                     $0.goalID > goalID ||
-                    ($0.goalID == goalID && $0.planID > planID) ||
-                    ($0.goalID == goalID && $0.planID == planID && $0.orderIndex > orderIndex) ||
-                    ($0.goalID == goalID && $0.planID == planID && $0.orderIndex == orderIndex && $0.id > id)
+                    ($0.goalID == goalID && (
+                        $0.planID > planID ||
+                        ($0.planID == planID && (
+                            $0.orderIndex > orderIndex ||
+                            ($0.orderIndex == orderIndex && $0.id > id)
+                        ))
+                    ))
                 }
             } else { predicate = nil }
             var descriptor = FetchDescriptor<PlanSectionRecord>(
@@ -1061,10 +1068,16 @@ actor RuntimeSwiftDataTypedExporter {
                 let id = cursor[4]
                 predicate = #Predicate<StepRecord> {
                     $0.goalID > goalID ||
-                    ($0.goalID == goalID && $0.planID > planID) ||
-                    ($0.goalID == goalID && $0.planID == planID && $0.sectionID > sectionID) ||
-                    ($0.goalID == goalID && $0.planID == planID && $0.sectionID == sectionID && $0.orderIndex > orderIndex) ||
-                    ($0.goalID == goalID && $0.planID == planID && $0.sectionID == sectionID && $0.orderIndex == orderIndex && $0.id > id)
+                    ($0.goalID == goalID && (
+                        $0.planID > planID ||
+                        ($0.planID == planID && (
+                            $0.sectionID > sectionID ||
+                            ($0.sectionID == sectionID && (
+                                $0.orderIndex > orderIndex ||
+                                ($0.orderIndex == orderIndex && $0.id > id)
+                            ))
+                        ))
+                    ))
                 }
             } else { predicate = nil }
             var descriptor = FetchDescriptor<StepRecord>(
@@ -1098,16 +1111,24 @@ actor RuntimeSwiftDataTypedExporter {
                     }
                     predicate = #Predicate<ProgressEvidenceRecord> {
                         $0.capturedAt > capturedAt ||
-                        ($0.capturedAt == capturedAt && $0.goalID > goalID) ||
-                        ($0.capturedAt == capturedAt && $0.goalID == goalID && $0.stepID != nil) ||
-                        ($0.capturedAt == capturedAt && $0.goalID == goalID && $0.stepID == nil && $0.id > id)
+                        ($0.capturedAt == capturedAt && (
+                            $0.goalID > goalID ||
+                            ($0.goalID == goalID && (
+                                $0.stepID != nil ||
+                                ($0.stepID == nil && $0.id > id)
+                            ))
+                        ))
                     }
                 } else {
                     predicate = #Predicate<ProgressEvidenceRecord> {
                         $0.capturedAt > capturedAt ||
-                        ($0.capturedAt == capturedAt && $0.goalID > goalID) ||
-                        ($0.capturedAt == capturedAt && $0.goalID == goalID && $0.stepID != nil && ($0.stepID ?? "") > stepID) ||
-                        ($0.capturedAt == capturedAt && $0.goalID == goalID && $0.stepID != nil && ($0.stepID ?? "") == stepID && $0.id > id)
+                        ($0.capturedAt == capturedAt && (
+                            $0.goalID > goalID ||
+                            ($0.goalID == goalID && $0.stepID != nil && (
+                                ($0.stepID ?? "") > stepID ||
+                                (($0.stepID ?? "") == stepID && $0.id > id)
+                            ))
+                        ))
                     }
                 }
             } else { predicate = nil }
@@ -1134,9 +1155,13 @@ actor RuntimeSwiftDataTypedExporter {
                 let id = cursor[3]
                 predicate = #Predicate<FeedbackEventRecord> {
                     $0.occurredAt > occurredAt ||
-                    ($0.occurredAt == occurredAt && $0.goalID > goalID) ||
-                    ($0.occurredAt == occurredAt && $0.goalID == goalID && $0.stepID > stepID) ||
-                    ($0.occurredAt == occurredAt && $0.goalID == goalID && $0.stepID == stepID && $0.id > id)
+                    ($0.occurredAt == occurredAt && (
+                        $0.goalID > goalID ||
+                        ($0.goalID == goalID && (
+                            $0.stepID > stepID ||
+                            ($0.stepID == stepID && $0.id > id)
+                        ))
+                    ))
                 }
             } else { predicate = nil }
             var descriptor = FetchDescriptor<FeedbackEventRecord>(
@@ -1192,14 +1217,20 @@ actor RuntimeSwiftDataTypedExporter {
                     }
                     predicate = #Predicate<ReminderRecord> {
                         $0.triggerAt != nil ||
-                        ($0.triggerAt == nil && $0.createdAt > createdAt) ||
-                        ($0.triggerAt == nil && $0.createdAt == createdAt && $0.id > id)
+                        ($0.triggerAt == nil && (
+                            $0.createdAt > createdAt ||
+                            ($0.createdAt == createdAt && $0.id > id)
+                        ))
                     }
                 } else {
                     predicate = #Predicate<ReminderRecord> {
-                        $0.triggerAt != nil && ($0.triggerAt ?? "") > triggerAt ||
-                        ($0.triggerAt != nil && ($0.triggerAt ?? "") == triggerAt && $0.createdAt > createdAt) ||
-                        ($0.triggerAt != nil && ($0.triggerAt ?? "") == triggerAt && $0.createdAt == createdAt && $0.id > id)
+                        $0.triggerAt != nil && (
+                            ($0.triggerAt ?? "") > triggerAt ||
+                            (($0.triggerAt ?? "") == triggerAt && (
+                                $0.createdAt > createdAt ||
+                                ($0.createdAt == createdAt && $0.id > id)
+                            ))
+                        )
                     }
                 }
             } else { predicate = nil }
@@ -1319,10 +1350,16 @@ actor RuntimeSwiftDataTypedExporter {
                 let id = cursor[4]
                 predicate = #Predicate<EntityRevisionTombstoneRecord> {
                     $0.recordedAt > recordedAt ||
-                    ($0.recordedAt == recordedAt && $0.entityKindRaw > entityKind) ||
-                    ($0.recordedAt == recordedAt && $0.entityKindRaw == entityKind && $0.entityID > entityID) ||
-                    ($0.recordedAt == recordedAt && $0.entityKindRaw == entityKind && $0.entityID == entityID && $0.revisionMarker > revisionMarker) ||
-                    ($0.recordedAt == recordedAt && $0.entityKindRaw == entityKind && $0.entityID == entityID && $0.revisionMarker == revisionMarker && $0.id > id)
+                    ($0.recordedAt == recordedAt && (
+                        $0.entityKindRaw > entityKind ||
+                        ($0.entityKindRaw == entityKind && (
+                            $0.entityID > entityID ||
+                            ($0.entityID == entityID && (
+                                $0.revisionMarker > revisionMarker ||
+                                ($0.revisionMarker == revisionMarker && $0.id > id)
+                            ))
+                        ))
+                    ))
                 }
             } else { predicate = nil }
             var descriptor = FetchDescriptor<EntityRevisionTombstoneRecord>(
@@ -1466,9 +1503,13 @@ actor RuntimeSwiftDataTypedExporter {
                 let id = cursor[3]
                 predicate = #Predicate<AmbitionGraphProofRecordModel> {
                     $0.ambitionID > ambitionID ||
-                    ($0.ambitionID == ambitionID && $0.version > version) ||
-                    ($0.ambitionID == ambitionID && $0.version == version && $0.proofID > proofID) ||
-                    ($0.ambitionID == ambitionID && $0.version == version && $0.proofID == proofID && $0.id > id)
+                    ($0.ambitionID == ambitionID && (
+                        $0.version > version ||
+                        ($0.version == version && (
+                            $0.proofID > proofID ||
+                            ($0.proofID == proofID && $0.id > id)
+                        ))
+                    ))
                 }
             } else { predicate = nil }
             var descriptor = FetchDescriptor<AmbitionGraphProofRecordModel>(
@@ -2818,7 +2859,7 @@ actor RuntimeGenerationLegacyImportService {
                   let pages = pageCount[0].values.first.flatMap(Self.integerValue),
                   let bytesPerPage = pageSize[0].values.first.flatMap(Self.integerValue),
                   pages >= 0, bytesPerPage > 0,
-                  pages <= Self.maximumSourceBytes / bytesPerPage else {
+                  Int64(pages) <= Self.maximumSourceBytes / Int64(bytesPerPage) else {
                 throw RuntimeGenerationControlError.readBudgetExceeded(
                     maximumBytes: Int(Self.maximumSourceBytes)
                 )
@@ -3059,7 +3100,7 @@ actor RuntimeGenerationLegacyImportService {
         afterSourceRecordID: String? = nil
     ) async throws -> [RuntimeLegacyImportItem] {
         try await ensureStartupReconciled()
-        try await controlStore.importItemsPage(
+        return try await controlStore.importItemsPage(
             importID: staging.source.importID,
             afterSourceRecordID: afterSourceRecordID,
             limit: Self.pageSize
@@ -4302,7 +4343,7 @@ private extension RuntimeGenerationLegacyImportService {
                 let bucketDigest = SHA256.hash(
                     data: Data("ambitions.import.inventory.bucket.v3\n".utf8) + material
                 )
-                let bucket = Int(bucketDigest.first ?? 0)
+                let bucket = Int(Array(bucketDigest)[0])
                 let primary = Array(SHA256.hash(
                     data: Data("ambitions.import.inventory.primary.v3\n".utf8) + material
                 ))
@@ -4428,8 +4469,9 @@ private extension RuntimeGenerationLegacyImportService {
             maximumCaptureSetBytes: Self.maximumSourceBytes
         )
         guard copied.references.count == 1,
+              copied.observations.count == 1,
               copied.references[0].preservation == .copied,
-              let artifact = copied.references[0].copiedArtifact else {
+              let artifact = copied.observations[0].observedArtifact else {
             throw RuntimeGenerationControlError.importReviewRequired
         }
         guard Darwin.fsync(stagingPin.descriptor) == 0 else {
@@ -4715,7 +4757,8 @@ private extension RuntimeGenerationLegacyImportService {
             finalEntryStatus.st_mode & S_IFMT == S_IFDIR,
             finalEntryStatus.st_dev == childStatus.st_dev,
             finalEntryStatus.st_ino == childStatus.st_ino,
-            Darwin.fcntl(childDescriptor, F_GETPROTECTIONCLASS) == PROTECTION_CLASS_A else {
+            Darwin.fcntl(childDescriptor, F_GETPROTECTIONCLASS) ==
+                RuntimeStoreFileDurability.completeProtectionClass else {
                 throw LocalRuntimeStorageError.canonicalFileIdentityChanged(
                     artifact: artifact
                 )
@@ -4764,7 +4807,7 @@ private extension RuntimeGenerationLegacyImportService {
             )
         }
         guard descriptor >= 0,
-              Darwin.flock(descriptor, LOCK_EX | LOCK_NB) == 0 else {
+              flock(descriptor, LOCK_EX | LOCK_NB) == 0 else {
             if descriptor >= 0, Darwin.close(descriptor) != 0 {
                 throw RuntimeGenerationControlError.controlAuthorityUnavailable
             }
@@ -4783,7 +4826,7 @@ private extension RuntimeGenerationLegacyImportService {
               descriptorStatus.st_nlink == 1,
               descriptorStatus.st_dev == pathStatus.st_dev,
                   descriptorStatus.st_ino == pathStatus.st_ino else {
-            let unlocked = Darwin.flock(descriptor, LOCK_UN) == 0
+            let unlocked = flock(descriptor, LOCK_UN) == 0
             let closed = Darwin.close(descriptor) == 0
             guard unlocked, closed else {
                 throw RuntimeGenerationControlError.controlAuthorityUnavailable
@@ -4801,7 +4844,7 @@ private extension RuntimeGenerationLegacyImportService {
             try controlPin.revalidate()
         } catch {
             let operationError = error
-            let unlocked = Darwin.flock(descriptor, LOCK_UN) == 0
+            let unlocked = flock(descriptor, LOCK_UN) == 0
             let closed = Darwin.close(descriptor) == 0
             guard unlocked, closed else {
                 throw RuntimeGenerationControlError.controlAuthorityUnavailable
@@ -4876,15 +4919,23 @@ private extension RuntimeGenerationLegacyImportService {
         try parentPin.revalidate()
     }
 
-    /// Actor-confined mutable staging state. It is never returned, stored in a
-    /// task, or transferred across an isolation boundary.
-    final class ImportAccumulator {
+    /// Mutable staging state shared by the import service and its isolated
+    /// streaming callbacks.
+    actor ImportAccumulator {
+        struct Snapshot: Sendable {
+            let itemCount: Int
+            let requiresQuarantine: Bool
+            let lastSourceRecordID: String?
+            let mappedArtifactSetDigest: String
+            let durableProcessedFloor: Int
+        }
+
         let importID: String
-        var itemCount = 0
-        var requiresQuarantine = false
-        var decodedByteCount: Int64 = 0
-        var lastSourceRecordID: String?
-        var mappedArtifactSetDigest: String
+        private var itemCount = 0
+        private var requiresQuarantine = false
+        private var decodedByteCount: Int64 = 0
+        private var lastSourceRecordID: String?
+        private var mappedArtifactSetDigest: String
         let durableProcessedFloor: Int
 
         init(importID: String, durableProcessedFloor: Int) {
@@ -4909,6 +4960,38 @@ private extension RuntimeGenerationLegacyImportService {
                 )
             }
             decodedByteCount += Int64(count)
+        }
+
+        func advance(with item: RuntimeLegacyImportItem) throws -> Snapshot {
+            let increment = itemCount.addingReportingOverflow(1)
+            guard increment.overflow == false else {
+                throw RuntimeGenerationControlError.readBudgetExceeded(
+                    maximumBytes: RuntimeGenerationLegacyImportService.maximumRecords
+                )
+            }
+            itemCount = increment.partialValue
+            lastSourceRecordID = item.sourceRecordID
+            if let binding = item.mappedArtifact?.bindingDigest {
+                mappedArtifactSetDigest = LocalRuntimeStorageChecksum.sha256Hex(
+                    for: "\(mappedArtifactSetDigest)\n\(item.sourceRecordID)\n\(binding)"
+                )
+            }
+            return snapshot()
+        }
+
+        func requireQuarantine(for disposition: RuntimeLegacyImportDisposition) {
+            requiresQuarantine = requiresQuarantine ||
+                [.ambiguous, .unsupported, .malformed].contains(disposition)
+        }
+
+        func snapshot() -> Snapshot {
+            Snapshot(
+                itemCount: itemCount,
+                requiresQuarantine: requiresQuarantine,
+                lastSourceRecordID: lastSourceRecordID,
+                mappedArtifactSetDigest: mappedArtifactSetDigest,
+                durableProcessedFloor: durableProcessedFloor
+            )
         }
     }
 
@@ -5151,7 +5234,7 @@ private extension RuntimeGenerationLegacyImportService {
         schemaVersion: RuntimeLegacyCanonicalSchemaVersion?,
         accumulator: ImportAccumulator
     ) async throws {
-        try accumulator.consumeDecodedBytes(
+        try await accumulator.consumeDecodedBytes(
             RuntimeGenerationControlCodec.encode(record).count
         )
         let recordDigest = try Self.decodedRecordPayloadDigest(record)
@@ -5206,8 +5289,7 @@ private extension RuntimeGenerationLegacyImportService {
         )
         try await controlStore.recordImportItem(item)
         try await advanceAccumulator(accumulator, item: item, source: source)
-        accumulator.requiresQuarantine = accumulator.requiresQuarantine ||
-            [.ambiguous, .unsupported, .malformed].contains(item.disposition)
+        await accumulator.requireQuarantine(for: item.disposition)
     }
 
     func appendMappedRecord(
@@ -5216,7 +5298,7 @@ private extension RuntimeGenerationLegacyImportService {
         source: RuntimeLegacyImportSource,
         accumulator: ImportAccumulator
     ) async throws {
-        try accumulator.consumeDecodedBytes(
+        try await accumulator.consumeDecodedBytes(
             RuntimeGenerationControlCodec.encode(mapped.payload).count
         )
         let duplicate = try await controlStore.importContainsSourceRecordDigest(
@@ -5247,6 +5329,7 @@ private extension RuntimeGenerationLegacyImportService {
         source: RuntimeLegacyImportSource,
         accumulator: ImportAccumulator
     ) async throws -> RuntimeLegacyImportStagingResult {
+        let accumulatorSnapshot = await accumulator.snapshot()
         let mappedDirectory = staged.url.deletingLastPathComponent()
             .appendingPathComponent("Mapped", isDirectory: true)
         let importDirectoryPin = try RuntimeStorePathValidation.openPinnedAppPrivateRoot(
@@ -5351,17 +5434,18 @@ private extension RuntimeGenerationLegacyImportService {
             }
             if page.count < Self.pageSize { break }
         } while true
-        guard observedCount == accumulator.itemCount else {
+        guard observedCount == accumulatorSnapshot.itemCount else {
             throw RuntimeGenerationControlError.importReviewRequired
         }
         let latest = try await controlStore.latestImportCheckpoint(importID: source.importID)
-        if latest?.phase != .decoding || latest?.processedItemCount != accumulator.itemCount {
+        if latest?.phase != .decoding ||
+            latest?.processedItemCount != accumulatorSnapshot.itemCount {
             try await appendCheckpoint(
                 source: source, phase: .decoding,
-                artifactSetDigest: accumulator.mappedArtifactSetDigest,
-                lastSourceRecordID: accumulator.lastSourceRecordID,
-                processedItemCount: accumulator.itemCount,
-                evidence: .decoding(cursorDigest: accumulator.lastSourceRecordID.map {
+                artifactSetDigest: accumulatorSnapshot.mappedArtifactSetDigest,
+                lastSourceRecordID: accumulatorSnapshot.lastSourceRecordID,
+                processedItemCount: accumulatorSnapshot.itemCount,
+                evidence: .decoding(cursorDigest: accumulatorSnapshot.lastSourceRecordID.map {
                     LocalRuntimeStorageChecksum.sha256Hex(for: $0)
                 })
             )
@@ -5375,16 +5459,16 @@ private extension RuntimeGenerationLegacyImportService {
         try await controlStore.recordImportManifest(manifest)
         try await appendCheckpoint(
             source: source, phase: .mapped,
-            artifactSetDigest: accumulator.mappedArtifactSetDigest,
-            lastSourceRecordID: accumulator.lastSourceRecordID,
-            processedItemCount: accumulator.itemCount,
+            artifactSetDigest: accumulatorSnapshot.mappedArtifactSetDigest,
+            lastSourceRecordID: accumulatorSnapshot.lastSourceRecordID,
+            processedItemCount: accumulatorSnapshot.itemCount,
             evidence: .mapped(
                 manifestDigest: manifest.manifestDigest,
-                mappedArtifactSetDigest: accumulator.mappedArtifactSetDigest
+                mappedArtifactSetDigest: accumulatorSnapshot.mappedArtifactSetDigest
             )
         )
         let quarantine: RuntimeGenerationQuarantineRecord?
-        if accumulator.requiresQuarantine {
+        if accumulatorSnapshot.requiresQuarantine {
             let quarantineArtifact = try await quarantineImportArtifact(
                 source: source
             )
@@ -5405,8 +5489,8 @@ private extension RuntimeGenerationLegacyImportService {
                 source: source,
                 phase: .quarantined,
                 artifactSetDigest: record.quarantineDigest,
-                lastSourceRecordID: accumulator.lastSourceRecordID,
-                processedItemCount: accumulator.itemCount,
+                lastSourceRecordID: accumulatorSnapshot.lastSourceRecordID,
+                processedItemCount: accumulatorSnapshot.itemCount,
                 evidence: .quarantined(
                     quarantineDigest: record.quarantineDigest,
                     recoveryActions: record.allowedActions
@@ -5428,24 +5512,14 @@ private extension RuntimeGenerationLegacyImportService {
         item: RuntimeLegacyImportItem,
         source: RuntimeLegacyImportSource
     ) async throws {
-        let increment = accumulator.itemCount.addingReportingOverflow(1)
-        guard increment.overflow == false else {
-            throw RuntimeGenerationControlError.readBudgetExceeded(maximumBytes: Self.maximumRecords)
-        }
-        accumulator.itemCount = increment.partialValue
-        accumulator.lastSourceRecordID = item.sourceRecordID
-        if let binding = item.mappedArtifact?.bindingDigest {
-            accumulator.mappedArtifactSetDigest = LocalRuntimeStorageChecksum.sha256Hex(
-                for: "\(accumulator.mappedArtifactSetDigest)\n\(item.sourceRecordID)\n\(binding)"
-            )
-        }
-        if accumulator.itemCount > accumulator.durableProcessedFloor,
-           accumulator.itemCount.isMultiple(of: Self.pageSize) {
+        let accumulatorSnapshot = try await accumulator.advance(with: item)
+        if accumulatorSnapshot.itemCount > accumulatorSnapshot.durableProcessedFloor,
+           accumulatorSnapshot.itemCount.isMultiple(of: Self.pageSize) {
             try await appendCheckpoint(
                 source: source, phase: .decoding,
-                artifactSetDigest: accumulator.mappedArtifactSetDigest,
+                artifactSetDigest: accumulatorSnapshot.mappedArtifactSetDigest,
                 lastSourceRecordID: item.sourceRecordID,
-                processedItemCount: accumulator.itemCount,
+                processedItemCount: accumulatorSnapshot.itemCount,
                 evidence: .decoding(
                     cursorDigest: LocalRuntimeStorageChecksum.sha256Hex(
                         for: item.sourceRecordID
@@ -5828,7 +5902,7 @@ private extension RuntimeGenerationLegacyImportService {
             importID: staged.id,
             sourceRecordID: mapped.sourceRecordID,
             sourceRecordDigest: mapped.sourceRecordDigest,
-            artifact: storedArtifact,
+            artifact: storedArtifact.semanticArtifact(),
             formatVersion: artifactFormatVersion,
             payloadVersion: mapped.payloadVersion
         )

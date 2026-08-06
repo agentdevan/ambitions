@@ -12,7 +12,8 @@ enum AmbitionsRuntimeFactory {
         scheduleStoreFileURL: URL? = nil,
         syncCapability: any SyncCapability = LocalOnlySyncCapability(),
         externalSnapshotReader: any RuntimeExternalSurfaceSnapshotReading = FileRuntimeExternalSurfaceSnapshotReader(),
-        knowledgeProvider: any KnowledgeProviding = LocalOnlyKnowledgeProvider()
+        knowledgeProvider: any KnowledgeProviding = LocalOnlyKnowledgeProvider(),
+        publicReferenceInspectionOverride: PublicReferenceInspectionProjection? = nil
     ) -> AmbitionsRuntime {
         let snapshotWriter = ExternalSurfaceSnapshotWriter(repositories: repositories)
         let learningService = LearningAnticipationService()
@@ -95,7 +96,8 @@ enum AmbitionsRuntimeFactory {
             repositories: repositories,
             syncCapability: syncCapability,
             notificationService: notificationService,
-            calendarRemindersService: calendarRemindersService
+            calendarRemindersService: calendarRemindersService,
+            publicReferenceInspectionOverride: publicReferenceInspectionOverride
         )
         let privateLifeRuntimeKernel = PrivateLifeRuntimeKernel()
         let actionExecutor = DefaultRuntimeActionCommandExecutor(todayService: todayService)

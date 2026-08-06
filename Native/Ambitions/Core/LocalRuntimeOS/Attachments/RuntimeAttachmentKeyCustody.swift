@@ -13,7 +13,7 @@ protocol RuntimeAttachmentKeyCustody: Sendable {
     func wrappingKey(id: RuntimeBlobKeyID, version: Int) async throws -> RuntimeAttachmentWrappingKey
     func contentAddressKey() async throws -> SymmetricKey
     func makeDataEncryptionKey() async throws -> SymmetricKey
-    func wrap(_ key: SymmetricKey, for blobID: RuntimeBlobID) async throws -> RuntimeBlobKeyEnvelope
+    func wrap(_ key: SymmetricKey, for blobID: RuntimeAttachmentBlobID) async throws -> RuntimeBlobKeyEnvelope
     func unwrap(_ envelope: RuntimeBlobKeyEnvelope) async throws -> SymmetricKey
     func prepareWrappingKeyRotation(
         replacing source: RuntimeAttachmentWrappingKey
@@ -55,7 +55,7 @@ extension RuntimeAttachmentKeyCustody {
 
     private func seal(
         _ key: SymmetricKey,
-        for blobID: RuntimeBlobID,
+        for blobID: RuntimeAttachmentBlobID,
         using wrapping: RuntimeAttachmentWrappingKey
     ) throws -> RuntimeBlobKeyEnvelope {
         let sealed = try AES.GCM.seal(
@@ -128,7 +128,7 @@ actor KeychainRuntimeAttachmentKeyCustody: RuntimeAttachmentKeyCustody {
         return SymmetricKey(size: .bits256)
     }
 
-    func wrap(_ key: SymmetricKey, for blobID: RuntimeBlobID) async throws -> RuntimeBlobKeyEnvelope {
+    func wrap(_ key: SymmetricKey, for blobID: RuntimeAttachmentBlobID) async throws -> RuntimeBlobKeyEnvelope {
         try Task.checkCancellation()
         let wrapping = try await currentWrappingKey()
         return try makeEnvelope(key, for: blobID, using: wrapping)
@@ -136,7 +136,7 @@ actor KeychainRuntimeAttachmentKeyCustody: RuntimeAttachmentKeyCustody {
 
     private func makeEnvelope(
         _ key: SymmetricKey,
-        for blobID: RuntimeBlobID,
+        for blobID: RuntimeAttachmentBlobID,
         using wrapping: RuntimeAttachmentWrappingKey
     ) throws -> RuntimeBlobKeyEnvelope {
         let sealed = try AES.GCM.seal(

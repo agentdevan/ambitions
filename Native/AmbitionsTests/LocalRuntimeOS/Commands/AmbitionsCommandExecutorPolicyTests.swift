@@ -276,23 +276,24 @@ final class AmbitionsCommandExecutorPolicyTests: XCTestCase {
               case let .calendarWrite(calendar) = schedule.action else {
             return XCTFail("Expected v1 calendar metadata to upgrade to typed calendar intent")
         }
-        XCTAssertEqual(calendar.operationID.rawValue, confirmed.id)
-        XCTAssertEqual(calendar.scheduleBlockID, "schedule-block-1")
+        XCTAssertNil(calendar.operationID)
+        XCTAssertEqual(calendar.operationIdentityProvenance, .legacyAbsent)
+        XCTAssertEqual(calendar.scheduleBlockID?.rawValue, "schedule-block-1")
         XCTAssertEqual(calendar.displacedDisposition, .notDisplaced)
         XCTAssertEqual(calendar.lifeshapeImpact, .recalculatedBeforeCommit)
 
-        let result = await executor.execute(
+        let result = await executor.executeConfirmedCalendarWriteIntent(
             confirmed,
             context: CommandExecutionContext(now: now, sourceSurface: "time")
         )
 
         let events = try await ledger.fetchRecent(limit: 10)
 
-        XCTAssertEqual(result.status, .requiresConfirmation)
-        XCTAssertEqual(result.target?.timeID, "time-block-preview")
+        XCTAssertEqual(result.status, .noOp)
+        XCTAssertEqual(result.target?.timeID, "schedule-block-1")
         XCTAssertTrue(result.eventLedgerEntryIDs.isEmpty)
-        XCTAssertEqual(result.metadata["validation"], AmbitionsCommandValidationState.needsConfirmation.rawValue)
-        XCTAssertEqual(result.metadata["approvedDurationMinutes"], "15")
+        XCTAssertEqual(result.metadata["preparationState"], "authority_required")
+        XCTAssertEqual(result.metadata["approvedDurationMinutes"], "20")
         XCTAssertEqual(result.metadata["originalBlockID"], "time-block-preview")
         XCTAssertEqual(result.metadata["destinationStepID"], "step-active")
         XCTAssertEqual(result.metadata["destinationStepTitle"], "Write outline")
@@ -315,7 +316,7 @@ final class AmbitionsCommandExecutorPolicyTests: XCTestCase {
             ),
             createdAt: "2026-04-25T12:00:00Z"
         )
-        let missingMetadataResult = await executor.execute(
+        let missingMetadataResult = await executor.executeConfirmedCalendarWriteIntent(
             missingMetadata,
             context: CommandExecutionContext(now: now.addingTimeInterval(60))
         )

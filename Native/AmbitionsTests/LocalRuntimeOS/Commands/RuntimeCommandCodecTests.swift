@@ -1,3 +1,4 @@
+import AmbitionsDesignSystem
 import Foundation
 import XCTest
 @testable import Ambitions
@@ -115,7 +116,6 @@ final class RuntimeCommandCodecTests: XCTestCase {
             .schedule(ScheduleCommand(action: .placeStep(placement), target: target, content: content)),
             .schedule(ScheduleCommand(action: .protectWindow(placement), target: target, content: content)),
             .schedule(ScheduleCommand(action: .correctWindow(TimeCorrectionCommandIntent(action: .addBuffer, start: placement.start, end: placement.end)), target: target, content: content)),
-            .schedule(ScheduleCommand(action: .undo(CommandUndoIntent(originalReceiptID: RuntimeCommandReceiptID(rawValue: "receipt-1")!, expectedProjectionVersion: 1)), target: target, content: content)),
             .schedule(ScheduleCommand(action: .calendarWrite(CalendarWriteCommandIntent(
                 operationID: try RuntimeExternalOperationID(validating: "calendar-operation-1"), userConfirmed: true,
                 placement: placement, destinationStepID: RuntimeCommandObjectID(rawValue: "step-1"), destinationStepTitle: "Step",
@@ -160,6 +160,14 @@ final class RuntimeCommandCodecTests: XCTestCase {
         let decoder = JSONDecoder()
 
         for (index, payload) in payloads.enumerated() {
+            XCTAssertTrue(RuntimeCommandCaseID.all.contains(payload.registrationCaseID))
+            XCTAssertEqual(payload.registrationCaseID.feature, RuntimeFeatureMutationRouter().feature(for: payload))
+            XCTAssertEqual(
+                payload.registrationCaseID.route,
+                ["history.openDestination", "repair.openDestination"].contains(
+                    payload.registrationCaseID.rawValue
+                ) ? .navigation : .mutation
+            )
             let command = AmbitionsCommand(
                 id: "command.family.\(index)",
                 source: .system,
@@ -168,6 +176,26 @@ final class RuntimeCommandCodecTests: XCTestCase {
             )
             let bytes = try encoder.encode(RuntimeCommandV2Envelope(command: command, payload: payload))
             XCTAssertEqual(try decoder.decode(RuntimeCommandV2Envelope.self, from: bytes).payload, payload)
+        }
+
+        let historicalUndo = RuntimeCommandPayload.schedule(ScheduleCommand(
+            action: .undo(CommandUndoIntent(
+                originalReceiptID: RuntimeCommandReceiptID(rawValue: "receipt-1")!,
+                expectedProjectionVersion: 1
+            )),
+            target: target,
+            content: content
+        ))
+        let historicalUndoCommand = AmbitionsCommand(
+            id: "command.family.historical-undo",
+            source: .system,
+            typedPayload: historicalUndo,
+            createdAt: "2026-07-24T12:00:00Z"
+        )
+        XCTAssertThrowsError(
+            try RuntimeCommandV2Envelope(command: historicalUndoCommand, payload: historicalUndo)
+        ) { error in
+            XCTAssertEqual(error as? RuntimeFoundationError, .unsupportedSchema)
         }
     }
 

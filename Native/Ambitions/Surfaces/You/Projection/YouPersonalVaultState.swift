@@ -226,6 +226,7 @@ struct YouDashboard: Sendable, Equatable {
     let trustCenter: YouTrustCenterState
     let contextVault: YouContextVaultState
     let sourceAtlasKnowledge: YouSourceAtlasKnowledgeState
+    let publicReferenceInspection: PublicReferenceInspectionProjection
     let lifeContext: YouLifeContextState
     let integrationsSection: YouSectionGroup
     let defaultsSection: YouSectionGroup
@@ -290,6 +291,7 @@ struct YouDashboard: Sendable, Equatable {
         trustCenter: YouTrustCenterState,
         contextVault: YouContextVaultState,
         sourceAtlasKnowledge: YouSourceAtlasKnowledgeState = .empty,
+        publicReferenceInspection: PublicReferenceInspectionProjection = .unavailable,
         lifeContext: YouLifeContextState = .empty,
         integrationsSection: YouSectionGroup,
         defaultsSection: YouSectionGroup,
@@ -316,6 +318,7 @@ struct YouDashboard: Sendable, Equatable {
         self.trustCenter = trustCenter
         self.contextVault = contextVault
         self.sourceAtlasKnowledge = sourceAtlasKnowledge
+        self.publicReferenceInspection = publicReferenceInspection
         self.lifeContext = lifeContext
         self.integrationsSection = integrationsSection
         self.defaultsSection = defaultsSection

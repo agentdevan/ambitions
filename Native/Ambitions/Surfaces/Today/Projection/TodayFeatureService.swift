@@ -66,6 +66,9 @@ struct RepositoryBackedTodayService: TodayServicing {
     }
 
     func performAction(_ action: TodayInlineAction, now: Date) async throws -> TodayActionResponse {
+        if action.kind == .askWhyThisMatters {
+            return try await performFeedbackAction(action, now: now)
+        }
         _ = now
         return TodayActionResponse(message: TodayInlineMessage(
             title: "Action needs the runtime",

@@ -682,7 +682,7 @@ enum RuntimeGenerationVaultGraphVerifier {
                     at: backupDirectoryURL.appendingPathComponent(expected.relativePath),
                     relativePath: expected.relativePath
                 )
-                guard observed == expected else {
+                guard observed.semanticallyMatches(expected) else {
                     throw RuntimeGenerationControlError.restoreSourceUnverified
                 }
             }
@@ -911,7 +911,7 @@ enum RuntimeGenerationVaultGraphVerifier {
 /// files require the typed legacy/import review path and are never silently
 /// adopted into an empty canonical database.
 enum RuntimeGenerationVaultInventoryReader {
-    static func prepareEmpty(
+    nonisolated(nonsending) static func prepareEmpty(
         rootURL: URL,
         keyCustody: any RuntimeAttachmentKeyCustody,
         fileManager: FileManager = .default
@@ -924,7 +924,7 @@ enum RuntimeGenerationVaultInventoryReader {
             artifact: "attachment_vault_root"
         )
         let key = try await keyCustody.currentWrappingKey()
-        return try verifyEmpty(
+        return try await verifyEmpty(
             rootURL: rootURL,
             keyID: key.id,
             keyVersion: key.version,
@@ -933,7 +933,7 @@ enum RuntimeGenerationVaultInventoryReader {
         )
     }
 
-    static func verifyEmpty(
+    nonisolated(nonsending) static func verifyEmpty(
         rootURL: URL,
         expected: RuntimeGenerationVaultInventory,
         keyCustody: any RuntimeAttachmentKeyCustody,
@@ -952,7 +952,7 @@ enum RuntimeGenerationVaultInventoryReader {
         return observed
     }
 
-    private static func verifyEmpty(
+    nonisolated(nonsending) private static func verifyEmpty(
         rootURL: URL,
         keyID: RuntimeBlobKeyID,
         keyVersion: Int,

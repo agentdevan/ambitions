@@ -260,7 +260,7 @@ extension CanonicalRuntimeAttachmentStore {
         var claims: [RuntimeAttachmentKeyRewrapClaim] = []
         for row in rows {
             guard case let .text(blobRaw)? = row.value(named: "blob_id"),
-                  let blobID = RuntimeBlobID(rawValue: blobRaw),
+                  let blobID = RuntimeAttachmentBlobID(rawValue: blobRaw),
                   case let .text(expectedDigest)? = row.value(named: "expected_envelope_digest"),
                   case let .integer(stateVersion)? = row.value(named: "state_version"),
                   stateVersion > 0,

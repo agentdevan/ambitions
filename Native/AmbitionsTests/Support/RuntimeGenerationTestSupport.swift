@@ -136,9 +136,9 @@ struct RuntimeGenerationTestHarness: Sendable {
         protectedDataChecker: any RuntimeStoreProtectedDataChecking =
             RuntimeGenerationFixedProtectedDataChecker(isAvailable: true),
         manifestActivator: any RuntimeStoreManifestActivating =
-            AtomicRuntimeStoreManifestActivator(),
-        fileManager: FileManager = .default
+            AtomicRuntimeStoreManifestActivator()
     ) async throws -> Self {
+        let fileManager = FileManager.default
         let rootURL = fileManager.temporaryDirectory.appendingPathComponent(
             "RuntimeGenerationV8-\(UUID().uuidString)",
             isDirectory: true
@@ -161,15 +161,13 @@ struct RuntimeGenerationTestHarness: Sendable {
         let manager = try RuntimeStoreGenerationManager(
             environment: environment,
             rootAuthority: rootAuthority,
-            fileManager: fileManager,
             protectedDataChecker: protectedDataChecker,
             manifestActivator: manifestActivator
         )
         let locations = await manager.locations
         let controlStore = try await RuntimeGenerationControlStore.open(
             rootAuthority: rootAuthority,
-            environment: environment,
-            fileManager: fileManager
+            environment: environment
         )
         let barrier = RuntimeGenerationBarrierAuthority(activeGenerationID: nil)
         return Self(
@@ -184,8 +182,7 @@ struct RuntimeGenerationTestHarness: Sendable {
                 controlStore: controlStore,
                 generationManager: manager,
                 barrierAuthority: barrier,
-                environment: environment,
-                fileManager: fileManager
+                environment: environment
             )
         )
     }
@@ -212,7 +209,7 @@ struct RuntimeGenerationTestHarness: Sendable {
 
     func openActiveStore() async throws -> CanonicalRuntimeStoreV8 {
         let resolved = try await resolveActive()
-        try await CanonicalRuntimeStoreV8.open(
+        return try await CanonicalRuntimeStoreV8.open(
             resolved: resolved,
             environment: environment
         )

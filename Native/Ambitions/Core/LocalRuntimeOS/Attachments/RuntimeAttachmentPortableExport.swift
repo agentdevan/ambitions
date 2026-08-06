@@ -240,7 +240,7 @@ struct RuntimeAttachmentPortableImportRequest: Sendable {
     let attachmentID: RuntimeAttachmentID
     let revisionID: RuntimeAttachmentRevisionID
     let revision: UInt64
-    let blobID: RuntimeBlobID
+    let blobID: RuntimeAttachmentBlobID
     let reservationID: RuntimeBlobQuotaReservationID
     let dedupPolicy: RuntimeAttachmentDedupPolicy
     let retentionUntil: Date?
@@ -1063,8 +1063,14 @@ actor RuntimeAttachmentPortableImporter {
         let pendingURL = importRoot.appendingPathComponent(
             ".\(jobURL.lastPathComponent).pending", isDirectory: false
         )
+        let jobEntryAvailable: Bool
+        if replacingExisting {
+            jobEntryAvailable = true
+        } else {
+            jobEntryAvailable = try pathEntryExistsNoFollow(jobURL) == false
+        }
         guard try pathEntryExistsNoFollow(pendingURL) == false,
-              replacingExisting || (try pathEntryExistsNoFollow(jobURL) == false) else {
+              jobEntryAvailable else {
             throw RuntimeCanonicalAttachmentError.pathAuthorityDenied
         }
         let descriptor = Darwin.open(

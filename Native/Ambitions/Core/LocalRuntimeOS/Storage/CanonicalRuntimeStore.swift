@@ -212,7 +212,7 @@ actor CanonicalRuntimeStore {
             let result = try await database.transaction(.deferred) { database in
                 try Task.checkCancellation()
                 try Self.requireCompiledIdentity(
-                    database, expected: expectedDatabaseIdentitySHA256
+                    database, expected: self.expectedDatabaseIdentitySHA256
                 )
                 return try operation(database)
             }
@@ -257,7 +257,7 @@ actor CanonicalRuntimeStore {
             ) { database in
                 try Task.checkCancellation()
                 try Self.requireCompiledIdentity(
-                    database, expected: expectedDatabaseIdentitySHA256
+                    database, expected: self.expectedDatabaseIdentitySHA256
                 )
                 let value = try operation(database)
                 try Task.checkCancellation()
@@ -456,7 +456,7 @@ actor CanonicalRuntimeStore {
                 let transaction = try Self.inspectReadTransaction(database)
                 try Self.requireCompiledIdentity(
                     database,
-                    expected: expectedDatabaseIdentitySHA256
+                    expected: self.expectedDatabaseIdentitySHA256
                 )
                 return try operation(transaction)
             }
@@ -539,7 +539,7 @@ actor CanonicalRuntimeStore {
                     integrity: integrity,
                     foreignKeyViolations: foreignKeyViolations,
                     databaseIdentityVerified:
-                        identity == expectedDatabaseIdentitySHA256
+                        identity == self.expectedDatabaseIdentitySHA256
                 )
             }
         } catch {
@@ -560,13 +560,13 @@ actor CanonicalRuntimeStore {
         let boundedLimit = Self.boundedPageLimit(limit)
         do {
             let page = try await database.transaction(.deferred) { database in
-                try Self.requireCompiledIdentity(database, expected: expectedDatabaseIdentitySHA256)
+                try Self.requireCompiledIdentity(database, expected: self.expectedDatabaseIdentitySHA256)
                 let page = try Self.readEvents(
                     from: database,
                     after: cursor,
                     limit: boundedLimit
                 )
-                try Self.requireCompiledIdentity(database, expected: expectedDatabaseIdentitySHA256)
+                try Self.requireCompiledIdentity(database, expected: self.expectedDatabaseIdentitySHA256)
                 return page
             }
             try pinnedFiles.validate(databaseURL: databaseURL)
@@ -584,13 +584,13 @@ actor CanonicalRuntimeStore {
         let boundedLimit = Self.boundedPageLimit(limit)
         do {
             let page = try await database.transaction(.deferred) { database in
-                try Self.requireCompiledIdentity(database, expected: expectedDatabaseIdentitySHA256)
+                try Self.requireCompiledIdentity(database, expected: self.expectedDatabaseIdentitySHA256)
                 let page = try Self.readTombstones(
                     from: database,
                     after: cursor,
                     limit: boundedLimit
                 )
-                try Self.requireCompiledIdentity(database, expected: expectedDatabaseIdentitySHA256)
+                try Self.requireCompiledIdentity(database, expected: self.expectedDatabaseIdentitySHA256)
                 return page
             }
             try pinnedFiles.validate(databaseURL: databaseURL)
@@ -934,13 +934,13 @@ extension CanonicalRuntimeStore {
 /// primitive itself; all other replay, projection, search, and control-plane
 /// tables are deliberately absent.
 private enum CanonicalRuntimeAtomicCommitWriteAuthority {
-    static let tables: Set<String> = [
+    static let tables: Set<String> = Set([
         "runtime_aggregates",
         "runtime_authority_fence",
         "runtime_command_idempotency",
         "runtime_replay_quarantine_occurrences",
         "runtime_replay_verified_high_water",
-    ]
+    ])
         .union(CanonicalRuntimeSemanticEventSchemaPlan.tables)
         .union(CanonicalRuntimeCommitSchemaPlan.tables)
         .union(CanonicalRuntimeCommittedReceiptSchemaPlan.tables)
@@ -1392,3 +1392,23 @@ private extension CanonicalRuntimeStore {
         }
     }
 }
+
+#if DEBUG
+extension CanonicalRuntimeStore {
+    static func testOnlyReadEvents(
+        from database: isolated SQLiteDatabase,
+        after cursor: CanonicalRuntimeEventCursor?,
+        limit: Int
+    ) throws -> CanonicalRuntimePage<CanonicalRuntimeEventRecord, CanonicalRuntimeEventCursor> {
+        try readEvents(from: database, after: cursor, limit: limit)
+    }
+
+    static func testOnlyReadTombstones(
+        from database: isolated SQLiteDatabase,
+        after cursor: CanonicalRuntimeTombstoneCursor?,
+        limit: Int
+    ) throws -> CanonicalRuntimePage<CanonicalRuntimeTombstoneRecord, CanonicalRuntimeTombstoneCursor> {
+        try readTombstones(from: database, after: cursor, limit: limit)
+    }
+}
+#endif

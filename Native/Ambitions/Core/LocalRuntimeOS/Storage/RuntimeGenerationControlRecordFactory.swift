@@ -144,8 +144,8 @@ enum RuntimeGenerationControlRecordFactory {
         guard record.recoveryExecutionClaimEpoch > 0,
               record.reservedAtMilliseconds >= 0,
               record.expectedVerificationID != record.expectedActivationIntentID,
-              allowEmptyDigest ||
-                try semanticDigest(record, removing: "reservationDigest") == record.reservationDigest
+              try (allowEmptyDigest ||
+                semanticDigest(record, removing: "reservationDigest") == record.reservationDigest)
         else { throw corrupt("projection_rebuild_candidate_reservation", record.candidateReservationID) }
         if !allowEmptyDigest {
             try RuntimeGenerationControlValidation.requireDigest(record.reservationDigest, field: "projection_candidate_reservation_digest")
@@ -194,7 +194,8 @@ enum RuntimeGenerationControlRecordFactory {
               record.rebuild.recoveryExecutionClaimID == record.recoveryExecutionClaimID,
               record.rebuild.recoveryExecutionClaimEpoch == record.recoveryExecutionClaimEpoch,
               record.rebuild.replayReconstructionDigest == record.replayReconstructionDigest,
-              allowEmptyDigest || try semanticDigest(record, removing: "commitmentDigest") == record.commitmentDigest
+              try (allowEmptyDigest ||
+                semanticDigest(record, removing: "commitmentDigest") == record.commitmentDigest)
         else { throw corrupt("projection_rebuild_candidate_commitment", record.commitmentID) }
         if !allowEmptyDigest {
             try RuntimeGenerationControlValidation.requireDigest(record.commitmentDigest, field: "projection_candidate_commitment_digest")
@@ -2342,8 +2343,8 @@ enum RuntimeGenerationControlRecordFactory {
         case .cancelled, nil:
             deferredReasonIsBounded = true
         }
-        let digestMatches = allowEmptyDigest ||
-            (try semanticDigest(record, removing: "auditDigest") == record.auditDigest)
+        let digestMatches = try (allowEmptyDigest ||
+            semanticDigest(record, removing: "auditDigest") == record.auditDigest)
         guard record.operationLeaseEpoch > 0,
               record.operationFencingToken > 0,
               record.auditedAtMilliseconds >= 0,

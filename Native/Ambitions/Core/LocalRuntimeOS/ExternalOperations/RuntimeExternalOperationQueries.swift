@@ -4,8 +4,8 @@ import Foundation
 struct RuntimeExternalOperationQueryCursor: RawRepresentable, Codable, Sendable, Equatable, Hashable {
     let rawValue: String
     init?(rawValue: String) {
-        guard let normalized = RuntimeIdentityNormalizer.normalize(rawValue) else { return nil }
-        self.rawValue = normalized
+        guard let operationID = RuntimeExternalOperationID(rawValue: rawValue) else { return nil }
+        self.rawValue = operationID.rawValue
     }
 }
 

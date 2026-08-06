@@ -225,6 +225,10 @@ private enum RuntimeGenerationLeaseOperationEvent<Result: Sendable>: Sendable {
     case heartbeatStopped
 }
 
+private struct RuntimeGenerationLifecycleFileManager: @unchecked Sendable {
+    let value: FileManager
+}
+
 /// Concrete schema-v8 first-install lifecycle. The same journal, verifier,
 /// barrier, and publisher are used by migration/restore/import operations;
 /// those operations additionally require a source backup and exact final fence.
@@ -233,7 +237,7 @@ actor RuntimeGenerationLifecycleService {
     private let generationManager: RuntimeStoreGenerationManager
     private let barrierAuthority: RuntimeGenerationBarrierAuthority
     private var environment: RuntimeEnvironment
-    private let fileManager: FileManager
+    private let fileManager: RuntimeGenerationLifecycleFileManager
     private let preparationScanByteLimit: Int64
     private var activeProjectionRebuildAdvances: Set<String> = []
 
@@ -249,7 +253,7 @@ actor RuntimeGenerationLifecycleService {
         self.generationManager = generationManager
         self.barrierAuthority = barrierAuthority
         self.environment = environment
-        self.fileManager = fileManager
+        self.fileManager = RuntimeGenerationLifecycleFileManager(value: fileManager)
         self.preparationScanByteLimit = preparationScanByteLimit
     }
 
@@ -313,7 +317,7 @@ actor RuntimeGenerationLifecycleService {
             try await RuntimeGenerationVaultInventoryReader.prepareEmpty(
                 rootURL: locations.attachmentVaultURL,
                 keyCustody: keyCustody,
-                fileManager: self.fileManager
+                fileManager: self.fileManager.value
             )
         }
         let vaultInventory = vaultPreparation.result
@@ -643,7 +647,7 @@ actor RuntimeGenerationLifecycleService {
                                 authorityDigest: consumption.consumptionDigest,
                                 disposedAtMilliseconds: consumedAt
                             )
-                        try await controlStore.finalizeCommittedActivation(
+                        try await self.controlStore.finalizeCommittedActivation(
                             consumption: consumption,
                             retentionTransition: transition,
                             predecessorRetentionTransition: nil,
@@ -788,7 +792,7 @@ actor RuntimeGenerationLifecycleService {
         let candidate = source.resolved.candidate
         guard selector.generationID == plan.targetGenerationID,
               candidate.authorityManifest.generationID == plan.targetGenerationID,
-              candidate.authorityManifest.activationBaseline.baselineDigest ==
+              candidate.authorityManifest.activationBaseline.candidateIdentityDigest ==
                 plan.targetActivationBaselineDigest else {
             throw RuntimeGenerationControlError.rollbackUnsafe
         }
@@ -940,14 +944,18 @@ actor RuntimeGenerationLifecycleService {
             var reconciliationRequired = false
             do {
                 let consumedAt = max(intent.createdAtMilliseconds, try nowMilliseconds())
-                let consumption = existingConsumption ?? (try
-                    RuntimeGenerationControlRecordFactory.activationConsumption(
+                let consumption: RuntimeGenerationActivationConsumption
+                if let existingConsumption {
+                    consumption = existingConsumption
+                } else {
+                    consumption = try RuntimeGenerationControlRecordFactory.activationConsumption(
                         intent: intent,
                         consumedAtMilliseconds: consumedAt,
                         installedSelectorFileSHA256: candidate.selectorFileSHA256,
                         priorGenerationID: reservation.sourceGenerationID,
                         priorGenerationDigest: reservation.sourceGenerationDigest
-                    ))
+                    )
+                }
                 let retention = try await controlStore.currentRetentionClass(
                     generationID: candidateGenerationID
                 )
@@ -1136,18 +1144,8 @@ actor RuntimeGenerationLifecycleService {
         sourceSafetyBackupID: String,
         reservationLifetimeMilliseconds: Int64 = 15 * 60 * 1_000
     ) async throws -> RuntimeGenerationProjectionRebuildAdmission {
-        let durablePlan = try await controlStore.load(
-            RuntimeGenerationRecoveryOperationPlan.self,
-            table: "runtime_generation_recovery_operation_plans",
-            idColumn: "plan_id",
-            id: plan.planID
-        )
-        let durableClaim = try await controlStore.load(
-            RuntimeGenerationRecoveryOperationExecutionClaim.self,
-            table: "runtime_generation_recovery_operation_execution_claims",
-            idColumn: "claim_id",
-            id: claim.claimID
-        )
+        let durablePlan = try await controlStore.recoveryOperationPlan(id: plan.planID)
+        let durableClaim = try await controlStore.recoveryOperationExecutionClaim(id: claim.claimID)
         let durableQuarantine = try await controlStore.quarantine(id: quarantine.quarantineID)
         let durableAuthorization = try await controlStore.recoveryAuthorization(
             id: authorization.authorizationID
@@ -1747,12 +1745,7 @@ actor RuntimeGenerationLifecycleService {
         let preparation = try await controlStore.candidatePreparation(
             generationID: commitment.candidateGenerationID
         )
-        let lease = try await controlStore.load(
-            RuntimeGenerationOperationLease.self,
-            table: "runtime_generation_operation_leases",
-            idColumn: "lease_id",
-            id: run.operationLeaseID
-        )
+        let lease = try await controlStore.operationLease(id: run.operationLeaseID)
         let now = try nowMilliseconds()
         guard plan.action == .rebuildDerivedState,
               plan.planID == commitment.recoveryExecutionPlanID,
@@ -1870,8 +1863,6 @@ actor RuntimeGenerationLifecycleService {
                 expectedPriorSelectorFileSHA256: source.resolved.selectorFileSHA256,
                 sourceStore: source,
                 expectedSourceFence: source.resolved.liveFence,
-                temporaryToken: nextID(),
-                rollbackToken: nextID(),
                 postCommitJournal: { committedAtMilliseconds in
                     do {
                         let consumedAt = max(intent.createdAtMilliseconds, committedAtMilliseconds)
@@ -1905,7 +1896,7 @@ actor RuntimeGenerationLifecycleService {
                             authorityDigest: consumption.consumptionDigest,
                             disposedAtMilliseconds: consumedAt
                         )
-                        try await controlStore.finalizeCommittedActivation(
+                        try await self.controlStore.finalizeCommittedActivation(
                             consumption: consumption,
                             retentionTransition: activeTransition,
                             predecessorRetentionTransition: predecessorTransition,
@@ -1920,7 +1911,9 @@ actor RuntimeGenerationLifecycleService {
                     } catch {
                         return false
                     }
-                }
+                },
+                temporaryToken: nextID(),
+                rollbackToken: nextID()
             )
             let cleanupWarning: Bool
             switch activation.activationState {
@@ -2040,16 +2033,10 @@ actor RuntimeGenerationLifecycleService {
             ownerInstanceID: admission.recoveryClaim.executorInstanceID,
             observedAtMilliseconds: observedAt
         )
-        let plan = try await controlStore.load(
-            RuntimeGenerationRecoveryOperationPlan.self,
-            table: "runtime_generation_recovery_operation_plans",
-            idColumn: "plan_id",
+        let plan = try await controlStore.recoveryOperationPlan(
             id: admission.recoveryPlan.planID
         )
-        let claim = try await controlStore.load(
-            RuntimeGenerationRecoveryOperationExecutionClaim.self,
-            table: "runtime_generation_recovery_operation_execution_claims",
-            idColumn: "claim_id",
+        let claim = try await controlStore.recoveryOperationExecutionClaim(
             id: admission.recoveryClaim.claimID
         )
         let authorization = try await controlStore.recoveryAuthorization(
@@ -2749,7 +2736,8 @@ actor RuntimeGenerationLifecycleService {
                 sourceSafetyFenceDigest: sourceSnapshot.fence.fenceDigest,
                 targetGenerationID: generationID,
                 targetVerificationID: report.verificationID,
-                targetActivationBaselineDigest: manifest.activationBaseline.baselineDigest,
+                targetActivationBaselineDigest:
+                    manifest.activationBaseline.candidateIdentityDigest,
                 recoveryAuthorizationID: recoveryAuthorization.authorizationID,
                 recoveryAuthorizationDigest: recoveryAuthorization.authorizationDigest,
                 preparedAtMilliseconds: preparedAt
@@ -2868,7 +2856,7 @@ actor RuntimeGenerationLifecycleService {
                                 authorityDigest: consumption.consumptionDigest,
                                 disposedAtMilliseconds: consumedAt
                             )
-                        try await controlStore.finalizeCommittedActivation(
+                        try await self.controlStore.finalizeCommittedActivation(
                             consumption: consumption,
                             retentionTransition: activeTransition,
                             predecessorRetentionTransition: predecessorTransition,
@@ -2944,7 +2932,7 @@ extension RuntimeGenerationLifecycleService {
             group.addTask { [environment] in
                 while Task.isCancelled == false {
                     let prior = await state.lease()
-                    let observedAt = try self.nowMilliseconds()
+                    let observedAt = try await self.nowMilliseconds()
                     guard observedAt >= prior.issuedAtMilliseconds,
                           observedAt < prior.expiresAtMilliseconds else {
                         throw RuntimeGenerationControlError.reservationExpired
@@ -3379,7 +3367,7 @@ extension RuntimeGenerationLifecycleService {
                     rootURL: vaultRootURL,
                     expected: vaultInventory,
                     keyCustody: keyCustody,
-                    fileManager: fileManager
+                    fileManager: fileManager.value
                 )
                 vaultEvidenceMaterial = "\(verifiedVault.blobSetDigest)\n\(verifiedVault.manifestSetDigest)\n\(verifiedVault.keyIdentityDigest)"
             }
@@ -3536,9 +3524,15 @@ extension RuntimeGenerationLifecycleService {
                     deferredReason: deferredReason,
                     replayCertificateDigest: certificateDigest,
                     reconstructionDigest: outcome == .deferred ? nil : replayStateDigest,
-                    auditedAtMilliseconds: max(operationLease.issuedAtMilliseconds, try nowMilliseconds())
+                    auditedAtMilliseconds: max(
+                        operationLease.issuedAtMilliseconds,
+                        try await self.nowMilliseconds()
+                    )
                 )
-                try await controlStore.recordCandidateReplayAudit(audit, currentLease: operationLease)
+                try await self.controlStore.recordCandidateReplayAudit(
+                    audit,
+                    currentLease: operationLease
+                )
                 switch replayAuditResult {
                 case .complete: break
                 case let .blocked(divergence, _):
@@ -3695,10 +3689,10 @@ extension RuntimeGenerationLifecycleService {
         artifact: String
     ) throws {
         try RuntimeStorePathValidation.requireContained(url, in: parent)
-        if fileManager.fileExists(atPath: url.path) {
+        if fileManager.value.fileExists(atPath: url.path) {
             try RuntimeStoreFileDurability.requireDirectory(at: url, artifact: artifact)
         } else {
-            try fileManager.createDirectory(at: url, withIntermediateDirectories: false)
+            try fileManager.value.createDirectory(at: url, withIntermediateDirectories: false)
             try RuntimeStoreFileDurability.synchronizeDirectory(at: parent)
         }
         try RuntimeStoreFileDurability.applyCompleteProtection(at: url, artifact: artifact)
@@ -3768,7 +3762,7 @@ extension RuntimeGenerationLifecycleService {
         try parent.revalidate()
     }
 
-    func preparedBackupDirectoryEvidence(
+    fileprivate func preparedBackupDirectoryEvidence(
         at directoryURL: URL,
         backup: RuntimeGenerationBackupRecord
     ) throws -> RuntimeGenerationPreparedDirectoryEvidence {
@@ -3787,7 +3781,7 @@ extension RuntimeGenerationLifecycleService {
         )
     }
 
-    func preparedDirectoryEvidence(
+    fileprivate func preparedDirectoryEvidence(
         at directoryURL: URL,
         artifacts: [RuntimeGenerationArtifact],
         witnessDomain: String
@@ -3858,7 +3852,8 @@ extension RuntimeGenerationLifecycleService {
                 )
             }
             try Task.checkCancellation()
-            guard Darwin.fcntl(descriptor, F_GETPROTECTIONCLASS) == PROTECTION_CLASS_A else {
+            guard Darwin.fcntl(descriptor, F_GETPROTECTIONCLASS) ==
+                RuntimeStoreFileDurability.completeProtectionClass else {
                 throw LocalRuntimeStorageError.canonicalFileProtectionFailure(
                     artifact: prefix.isEmpty ? "preparation_root" : prefix
                 )
@@ -4019,7 +4014,7 @@ extension RuntimeGenerationLifecycleService {
                           finalPathStatus.st_ctimespec.tv_sec == initialFileStatus.st_ctimespec.tv_sec,
                           finalPathStatus.st_ctimespec.tv_nsec == initialFileStatus.st_ctimespec.tv_nsec,
                           finalPathStatus.st_gen == initialFileStatus.st_gen,
-                          protection == PROTECTION_CLASS_A,
+                          protection == RuntimeStoreFileDurability.completeProtectionClass,
                           closeResult == 0 else {
                         throw LocalRuntimeStorageError.canonicalFileIdentityChanged(
                             artifact: relativePath

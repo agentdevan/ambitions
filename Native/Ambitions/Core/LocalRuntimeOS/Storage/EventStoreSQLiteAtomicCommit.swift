@@ -245,6 +245,8 @@ extension EventStoreSQLite {
         case let .history(value):
             if case .todayReceipt = value.action { return true }
             return false
+        case .attachment:
+            return true
         case .goal, .reminder, .profile, .repair, .importDeletion, .externalOperation,
              .compensation:
             return false
