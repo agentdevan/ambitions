@@ -769,7 +769,7 @@
     "visual_closure_planning": false,
     "visual_closure_planning_program_closed": true
   },
-  "canon_content_sha": "f3096e6036603fbd9f58b56ddea9d927059b4ee670a612d65750d5f67e54632d",
+  "canon_content_sha": "db802fd0c5828d1be58a101c8001a2cb1532ebffcce2cafc251cf7202eaaf317",
   "canon_revision": 2,
   "classification_vocabulary": [
     "ACTIVE_RECONCILED_BASELINE",

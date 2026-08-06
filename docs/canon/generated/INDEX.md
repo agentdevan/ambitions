@@ -3,9 +3,9 @@
 > Generated from normative product canon. Do not edit by hand.
 
 - Canon revision: `2`
-- Canon digest: `f3096e6036603fbd9f58b56ddea9d927059b4ee670a612d65750d5f67e54632d`
-- Documents: `65`
-- Requirements: `460`
+- Canon digest: `db802fd0c5828d1be58a101c8001a2cb1532ebffcce2cafc251cf7202eaaf317`
+- Documents: `66`
+- Requirements: `464`
 
 ## Constitution
 
@@ -48,6 +48,7 @@
 | --- | --- | ---: | ---: | --- |
 | `OBJECT-ATTACHMENT` | Attachment | 1 | 1 | [specifications/objects/attachment.md](../specifications/objects/attachment.md) |
 | `OBJECT-BRANCH-VIABILITY-CERTIFICATE` | Branch Viability Certificate | 4 | 4 | [specifications/objects/branch-viability-certificate.md](../specifications/objects/branch-viability-certificate.md) |
+| `OBJECT-CAPABILITY` | Capability | 1 | 1 | [specifications/objects/capability.md](../specifications/objects/capability.md) |
 | `OBJECT-CLOSURE` | Closure | 2 | 2 | [specifications/objects/closure.md](../specifications/objects/closure.md) |
 | `OBJECT-EVENT` | Event | 6 | 6 | [specifications/objects/event.md](../specifications/objects/event.md) |
 | `OBJECT-GOAL` | Goal | 5 | 5 | [specifications/objects/goal.md](../specifications/objects/goal.md) |
@@ -64,7 +65,7 @@
 | `OBJECT-REMINDER` | Reminder | 2 | 2 | [specifications/objects/reminder.md](../specifications/objects/reminder.md) |
 | `OBJECT-SAVED-FOR-LATER-DRAFT` | Saved-for-Later Draft | 1 | 1 | [specifications/objects/saved-for-later-draft.md](../specifications/objects/saved-for-later-draft.md) |
 | `OBJECT-SCHEDULE-PLACEMENT` | Schedule Placement | 6 | 6 | [specifications/objects/schedule-placement.md](../specifications/objects/schedule-placement.md) |
-| `OBJECT-SOURCE-REFERENCE` | Source Reference | 1 | 1 | [specifications/objects/source-reference.md](../specifications/objects/source-reference.md) |
+| `OBJECT-SOURCE-REFERENCE` | Source Reference | 2 | 2 | [specifications/objects/source-reference.md](../specifications/objects/source-reference.md) |
 | `OBJECT-STEP` | Step | 13 | 13 | [specifications/objects/step.md](../specifications/objects/step.md) |
 
 ## System
@@ -78,10 +79,10 @@
 | `SYSTEM-LOCAL-LEARNING` | Local Learning | 4 | 4 | [specifications/systems/local-learning.md](../specifications/systems/local-learning.md) |
 | `SYSTEM-NOTIFICATIONS` | Notifications | 3 | 3 | [specifications/systems/notifications.md](../specifications/systems/notifications.md) |
 | `SYSTEM-PERSISTENCE-REPLAY` | Persistence and Replay | 5 | 5 | [specifications/systems/persistence-and-replay.md](../specifications/systems/persistence-and-replay.md) |
-| `SYSTEM-PRIVACY-DATA-CLASSIFICATION` | Privacy and Data Classification | 3 | 3 | [specifications/systems/privacy-and-data-classification.md](../specifications/systems/privacy-and-data-classification.md) |
+| `SYSTEM-PRIVACY-DATA-CLASSIFICATION` | Privacy and Data Classification | 4 | 4 | [specifications/systems/privacy-and-data-classification.md](../specifications/systems/privacy-and-data-classification.md) |
 | `SYSTEM-PRIVATE-LIFE-RUNTIME` | Private Life Runtime | 6 | 6 | [specifications/systems/private-life-runtime.md](../specifications/systems/private-life-runtime.md) |
 | `SYSTEM-SCHEDULING-CAPACITY` | Scheduling and Capacity | 5 | 5 | [specifications/systems/scheduling-and-capacity.md](../specifications/systems/scheduling-and-capacity.md) |
-| `SYSTEM-SOURCE-ATLAS` | Source Atlas | 2 | 2 | [specifications/systems/source-atlas.md](../specifications/systems/source-atlas.md) |
+| `SYSTEM-SOURCE-ATLAS` | Source Atlas | 3 | 3 | [specifications/systems/source-atlas.md](../specifications/systems/source-atlas.md) |
 | `SYSTEM-SYNC-CONTINUITY` | Sync and Continuity | 9 | 9 | [specifications/systems/sync-and-continuity.md](../specifications/systems/sync-and-continuity.md) |
 
 ## Journey

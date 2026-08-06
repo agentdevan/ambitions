@@ -24,6 +24,7 @@ normative_files = [
   "specifications/journeys/start-and-complete-step.md",
   "specifications/objects/attachment.md",
   "specifications/objects/branch-viability-certificate.md",
+  "specifications/objects/capability.md",
   "specifications/objects/closure.md",
   "specifications/objects/event.md",
   "specifications/objects/goal-path.md",
