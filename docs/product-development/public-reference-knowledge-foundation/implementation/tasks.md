@@ -35,7 +35,7 @@ files are named with full repository-relative paths.
    triggers without badges, private context, or a new root surface. Tests:
    `Native/AmbitionsTests/LocalRuntimeOS/Inspection/PublicReferenceInspectionProjectionTests.swift`
    and `Native/AmbitionsUITests/PublicReferenceInspectionUITests.swift`.
-   Frontend: affected — authorized by the approved Scope frontend contract and Design frontend experience specification; Visual gate: required. Proof: approved native visual calibration, UI runtime, accessibility, and screenshot evidence are required.
+   Frontend: affected — authorized by the approved Scope frontend contract and Design frontend experience specification; Visual gate: approved. Proof: approved native visual calibration, UI runtime, accessibility, and screenshot evidence are required.
 5. Refactor `SourceAtlasPackModels+08-SourceAtlasCapabilityPathComposer.swift`
    behind `SourceAtlasPublicPlanningContextModels.swift`, then add public-only
    boundary and consumer-contract fixtures covering career, education, hobby,
