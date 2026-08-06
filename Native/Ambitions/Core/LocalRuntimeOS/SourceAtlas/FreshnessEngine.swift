@@ -76,3 +76,34 @@ struct FreshnessEngine: Sendable, Equatable, Hashable {
         max(0, Int(checkedAt.timeIntervalSince(publishedAt) / 86_400))
     }
 }
+
+struct PublicReferenceFreshnessVerdict: Codable, Sendable, Equatable, Hashable {
+    let state: PublicReferenceFreshnessState
+    let blocksCurrentUse: Bool
+    let reason: String
+}
+
+extension FreshnessEngine {
+    /// Maps the public claim's persisted, orthogonal freshness state into one
+    /// deterministic consequence. It never upgrades an aging or old claim.
+    func publicReferenceVerdict(for claim: PublicReferenceClaimEnvelope) -> PublicReferenceFreshnessVerdict {
+        switch claim.freshnessState {
+        case .current:
+            return PublicReferenceFreshnessVerdict(state: .current, blocksCurrentUse: false, reason: "current")
+        case .aging:
+            return PublicReferenceFreshnessVerdict(state: .aging, blocksCurrentUse: false, reason: "aging")
+        case .staleAllowed:
+            return PublicReferenceFreshnessVerdict(state: .staleAllowed, blocksCurrentUse: false, reason: "last_known_good")
+        case .staleBlocked:
+            return PublicReferenceFreshnessVerdict(state: .staleBlocked, blocksCurrentUse: true, reason: "stale_blocked")
+        case .sourceChanged:
+            return PublicReferenceFreshnessVerdict(state: .sourceChanged, blocksCurrentUse: true, reason: "source_changed")
+        case .revoked:
+            return PublicReferenceFreshnessVerdict(state: .revoked, blocksCurrentUse: true, reason: "revoked")
+        case .superseded:
+            return PublicReferenceFreshnessVerdict(state: .superseded, blocksCurrentUse: false, reason: "superseded_last_known_good")
+        case .unknown:
+            return PublicReferenceFreshnessVerdict(state: .unknown, blocksCurrentUse: true, reason: "unknown_freshness")
+        }
+    }
+}
