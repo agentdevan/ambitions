@@ -19,8 +19,28 @@ The package was generated from the SHA-pinned ZIP corpus and repository baseline
 - Long-paragraph duplication scan across workstreams: clear
 - State-matrix dimensions: passed
 - ZIP source-reference resolution: passed with zero warnings
+- Source-manifest hashes/counts/bytes: internally consistent
+- Literal-NUL/binary-text scan: clear
 - Output scope: documentation package only
 
-## Fresh evidence
+## Fresh local evidence
 
-Run `/mnt/data/validate_maximum_polish_review.py` against the generated package. Expected terminal result after the final generation is `ERRORS 0` and `WARNINGS 0`; the commit is permitted only after that exact result is freshly observed.
+`python3 /mnt/data/validate_maximum_polish_review.py`
+
+Result:
+
+```text
+ERRORS 0
+WARNINGS 0
+```
+
+Additional consistency checks confirmed:
+
+- manifest SHA-256 `82ae3545edd26a0f8347d44680b30b8e589518db876fa8f120a8581163487840` matches the source index, grouped manifest, and traceability ledger;
+- record count is 9,075;
+- extracted byte count is 568,960,367;
+- `SOURCE_INDEX.md` contains no binary NUL byte.
+
+## Remote repository verification
+
+Comparison against baseline `0f56e8f1cbd0e305bd50f666ca54be2d2fde3b24` showed exactly 41 added files, all under `docs/frontend/maximum-polish-system-review/`, with no production SwiftUI, canon, runtime, migration, test, or Linear changes. The temporary bootstrap placeholder is absent from the final tree.
