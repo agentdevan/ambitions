@@ -1,0 +1,108 @@
+{
+  "schema_version": 1,
+  "baseline": "0f56e8f1cbd0e305bd50f666ca54be2d2fde3b24",
+  "rows": [
+    {
+      "decision": "Four roots + global Search/Capture",
+      "authority": [
+        "docs/canon/CONSTITUTION.md",
+        "docs/canon/migration/UX_BLUEPRINT.md"
+      ],
+      "source": [
+        "Native/Ambitions/Stage/"
+      ],
+      "runtime_owner": "shell/navigation",
+      "tests": [
+        "root path",
+        "presentation return",
+        "restoration"
+      ],
+      "risk": "high"
+    },
+    {
+      "decision": "Goals Life Area-led pursuit continuity",
+      "authority": [
+        "docs/canon/specifications/surfaces/goals.md"
+      ],
+      "source": [
+        "Native/Ambitions/Surfaces/Goals/"
+      ],
+      "runtime_owner": "Goals + canonical Goal/Path domain",
+      "tests": [
+        "identity lineage",
+        "path states",
+        "owner handoff",
+        "recovery/history"
+      ],
+      "risk": "critical"
+    },
+    {
+      "decision": "Time exact chronology/truth distinctions",
+      "authority": [
+        "docs/canon/specifications/surfaces/time.md"
+      ],
+      "source": [
+        "Native/Ambitions/Surfaces/Time/"
+      ],
+      "runtime_owner": "Time/Event/Placement",
+      "tests": [
+        "current/proposed/external",
+        "reflow",
+        "recurrence",
+        "conflict"
+      ],
+      "risk": "critical"
+    },
+    {
+      "decision": "Today admission/current movement",
+      "authority": [
+        "docs/canon/specifications/surfaces/today.md"
+      ],
+      "source": [
+        "Native/Ambitions/Surfaces/Today/"
+      ],
+      "runtime_owner": "Today projections + owner commands",
+      "tests": [
+        "Start Here admission",
+        "owner transfer",
+        "settlement/return"
+      ],
+      "risk": "critical"
+    },
+    {
+      "decision": "You local/no-account",
+      "authority": [
+        "docs/canon/specifications/surfaces/you.md"
+      ],
+      "source": [
+        "Native/Ambitions/Surfaces/You/"
+      ],
+      "runtime_owner": "preference/capability owners",
+      "tests": [
+        "unsupported absence",
+        "preference mutation",
+        "privacy"
+      ],
+      "risk": "high"
+    },
+    {
+      "decision": "Owner-routed Search/Capture",
+      "authority": [
+        "docs/canon/specifications/global/",
+        "docs/canon/migration/UX_BLUEPRINT.md"
+      ],
+      "source": [
+        "Native/Ambitions/Stage/Overlays/",
+        "Native/Ambitions/Composer/Capture/"
+      ],
+      "runtime_owner": "global session + destination owner",
+      "tests": [
+        "origin return",
+        "proposal vs truth",
+        "keyboard/interruption",
+        "settlement"
+      ],
+      "risk": "critical"
+    }
+  ]
+}

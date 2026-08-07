@@ -1,0 +1,25 @@
+{
+  "schema_version": 3,
+  "zip_sha256": "74109d7227e641d0cdf1b4f5768fb944bcc1895d2987fd56ba5f1182d1e7f0e3",
+  "full_manifest_sha256": "82ae3545edd26a0f8347d44680b30b8e589518db876fa8f120a8581163487840",
+  "manifest_digest_method": "SHA-256 of sorted UTF-8 records: relative_path\\u0000size_bytes\\u0000category, joined with newline",
+  "record_count": 9075,
+  "total_bytes": 568960367,
+  "grouping": "forensic major groups; every file contributes to exactly one group digest",
+  "groups": {
+    "audit-and-baseline": {"file_count":3923,"total_bytes":208218828,"representative_paths":["Ambitions_UI_Exhaustive_Flagship_Audit_R01.md","Ambitions_UI_Exhaustive_Flagship_Resolution_Program_R01.md"],"digest_sha256":"b5b633df895df749d18c87a5c956e179faec4ebdae55b7bd7f3a17e72dd6e3cc"},
+    "dependencies-build-cache-and-other": {"file_count":705,"total_bytes":39661651,"representative_paths":[".deps/"],"digest_sha256":"f1b643e5d3006b208c605281033c2bd04c278ac63688304d0234dda6e1e36e7f"},
+    "global-object-language": {"file_count":266,"total_bytes":70266481,"representative_paths":["Ambitions_Global_Object_Language_R01/Ambitions_Global_Object_Language_R01.md"],"digest_sha256":"06cd50fbac5e260ba9b610a5faf5e0ab8ac4d9282b6ed20239a1f32a13650605"},
+    "goals-r01": {"file_count":6,"total_bytes":2602258,"representative_paths":["Ambitions_Goals_Maximum_Polish_R01.md","Ambitions_Goals_Maximum_Polish_R01_overview.png"],"digest_sha256":"ccd9d07e791a89ee9ce2b9fe68d791d536f253d00ec4d37d9fbc448926de08f7"},
+    "goals-r02": {"file_count":5,"total_bytes":1566690,"representative_paths":["Ambitions_Goals_Maximum_Polish_R02.md","Ambitions_Goals_Maximum_Polish_R02_overview.png"],"digest_sha256":"7b0ec186b1b0a7385d42a5fca9105df2f2633c49e5fd5a8fd0fde682c7c94e53"},
+    "north-star-vocabulary-pitch": {"file_count":22,"total_bytes":21875070,"representative_paths":["Ambitions_Complete_Frontend_Vocabulary.md","Ambitions_Live_Atlas_Flagship_Visual_North_Star_overview.png"],"digest_sha256":"aca33409081ef1ab4e56869c00f6354e77741084b070b9f3034f481ef7d049b3"},
+    "program-ledger": {"file_count":3,"total_bytes":314310,"representative_paths":["Ambitions_Maximum_Polish_Program/PROGRAM.json","Ambitions_Maximum_Polish_Program/STATUS.md"],"digest_sha256":"1b552eba2db4e1911d4a50c6d3e29cf4024baa0c2f08c5cdb77f80894d5a68dc"},
+    "program-tooling-and-notes": {"file_count":9,"total_bytes":86611,"representative_paths":["OWNER_APPROVAL.md","START.md"],"digest_sha256":"048131defd9d7b5c113da2e5f4ac5299ab59977e4a2054484f9dc85e643ec6f6"},
+    "proof-and-gates": {"file_count":2644,"total_bytes":102553897,"representative_paths":["evidence/PROOF_SUMMARY.md","proof/PROOF_SUMMARY.md","final/P01_P15_GATES.md","passes/FIVE_COMPOUNDING_PASSES.md"],"digest_sha256":"352c446b2b75d614cf669bdf922ffd182ba2abe8ad4e9fa3a65793a9d7fa21c1"},
+    "render-and-motion-evidence": {"file_count":54,"total_bytes":18158636,"representative_paths":["boards/","motion/"],"digest_sha256":"4895455cc14451bad5d61496fc2fe712f44792c0ff389ebdcab002a4ff262466"},
+    "research": {"file_count":21,"total_bytes":6858864,"representative_paths":["research/"],"digest_sha256":"05a4fdcfee0884b39207b747cb536166ba2ebcdc6d0dce850043aa0e71b2a09b"},
+    "shell-and-dock": {"file_count":1411,"total_bytes":89811993,"representative_paths":["Ambitions_Shell_Production_Grade_Final.md","Ambitions_Shell_Production_Grade_Final_overview.png","dock-revision-04/"],"digest_sha256":"031f846520b48f5494b3cd518a8a1f9f5ecaa8d603d3a0a4e26b96c008b703b0"},
+    "time-r01": {"file_count":3,"total_bytes":3182311,"representative_paths":["Ambitions_Time_Maximum_Polish_R01.md","Ambitions_Time_Maximum_Polish_R01_overview.png"],"digest_sha256":"ceaf3ca033c10adf31b085b48b5f6ba8dade86229d126f602494b168fab8a288"},
+    "time-r02": {"file_count":3,"total_bytes":3802767,"representative_paths":["Ambitions_Time_Maximum_Polish_R02.md","Ambitions_Time_Maximum_Polish_R02_overview.png"],"digest_sha256":"f7ed9ecfc2ed23dd15456b9f4d4b4e55deaa503ed0ce99ffe46a6d21cf5fcc56"}
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "schema_version": 1,
+  "status": "provisional_catalog",
+  "baselines": [
+    {
+      "id": "GM-SHELL-001",
+      "family": "Shell",
+      "source": "ZIP:Ambitions_Shell_Production_Grade_Final_overview.png",
+      "owner_decision": "D-001 + D-024",
+      "protected": [
+        "root/global grouping",
+        "crown/dock hierarchy",
+        "native navigation ownership",
+        "bounded dark-neutral glass expression"
+      ],
+      "variable": [
+        "exact optical geometry pending device",
+        "accent pending canon reconciliation"
+      ]
+    },
+    {
+      "id": "GM-TIME-001",
+      "family": "Time",
+      "source": "ZIP:Ambitions_Time_Maximum_Polish_R02_overview.png",
+      "owner_decision": "D-074",
+      "protected": [
+        "one temporal instrument",
+        "five-scale family",
+        "exact chronology density",
+        "current/proposed/external distinction"
+      ],
+      "variable": [
+        "production data",
+        "device optics",
+        "performance"
+      ]
+    },
+    {
+      "id": "GM-TODAY-PENDING",
+      "family": "Today",
+      "source": "program-ledger external package reference",
+      "owner_decision": "D-070",
+      "protected": [
+        "Living Dayfield approved direction"
+      ],
+      "variable": [
+        "all pixel/geometry baselines until package recovered"
+      ],
+      "status": "blocked_missing_corpus"
+    }
+  ],
+  "excluded": [
+    {
+      "family": "Goals R01",
+      "reason": "rejected D-077"
+    },
+    {
+      "family": "Goals R02",
+      "reason": "rejected D-079"
+    },
+    {
+      "family": "Global Object Language R01",
+      "reason": "blocked/revision requested"
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+surface,initial,populated,empty,loading,pending/proposed,accepted/settled,stale,conflict,error/unavailable,interrupted,recovery,completed/historical,destructive,deep navigation,keyboard,dismissal/return,restoration/relaunch,background/foreground
+Shell,defined,proven-fixture,n/a,gap,n/a,n/a,partial,partial,partial,partial,partial,n/a,n/a,proven-fixture,partial,proven-fixture,gap,gap
+Today,defined,ledger-approved,partial,partial,defined,defined,partial,partial,partial,partial,partial,partial,partial,defined,partial,defined,partial,partial
+Goals,defined,rejected-candidates,partial,partial,defined,defined,partial,defined,partial,partial,defined,defined,partial,defined,partial,partial,partial,partial
+Time,proven-fixture,proven-fixture,partial,partial,proven-fixture,proven-fixture,defined,proven-fixture,partial,partial,partial,partial,partial,proven-fixture,partial,partial,partial,partial
+You,gap,gap,gap,gap,gap,gap,gap,gap,gap,gap,gap,gap,gap,gap,gap,gap,gap,gap
+Search,defined,defined,defined,partial,partial,partial,defined,defined,defined,partial,partial,partial,partial,partial,partial,defined,partial,partial
+Capture,defined,defined,partial,partial,defined,partial,partial,partial,partial,defined,partial,partial,partial,partial,partial,defined,partial,partial
+Trust/Recovery,gap,gap,gap,gap,gap,gap,gap,gap,gap,gap,gap,gap,gap,gap,gap,gap,gap,gap

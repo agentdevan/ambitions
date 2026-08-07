@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "baseline": {
+    "zip_sha256": "74109d7227e641d0cdf1b4f5768fb944bcc1895d2987fd56ba5f1182d1e7f0e3",
+    "manifest_sha256": "82ae3545edd26a0f8347d44680b30b8e589518db876fa8f120a8581163487840",
+    "repo_head": "0f56e8f1cbd0e305bd50f666ca54be2d2fde3b24"
+  },
+  "owner_state": {
+    "latest_decision": "D-079",
+    "goals_r01": "rejected",
+    "goals_r02": "rejected",
+    "shell": "owner_approved_direction",
+    "today": "owner_approved_direction",
+    "time_r02": "owner_approved_direction",
+    "fr2": "NEXT_NOT_BEGUN"
+  },
+  "workstreams": {
+    "01": {"path": "01-canonical-state/README.md"},
+    "02": {"path": "02-owner-decision-model/README.md"},
+    "03": {"path": "03-visual-grammar/README.md"},
+    "04": {"path": "04-rejection-antipatterns/README.md"},
+    "05": {"path": "05-goals-r03-recovery/README.md"},
+    "06": {"path": "06-cross-root-coherence/README.md"},
+    "07": {"path": "07-process-failure-autopsy/README.md"},
+    "08": {"path": "08-proof-integrity/README.md"},
+    "09": {"path": "09-codex-packet-factory/README.md"},
+    "10": {"path": "10-fr2-handoff/README.md"},
+    "11": {"path": "11-golden-master-regression/README.md"},
+    "12": {"path": "12-state-interaction-completeness/README.md"},
+    "13": {"path": "13-cognitive-ergonomics/README.md"},
+    "14": {"path": "14-accessibility-transformation/README.md"},
+    "15": {"path": "15-localization-rtl-temporal/README.md"},
+    "16": {"path": "16-truth-authority-language/README.md"},
+    "17": {"path": "17-motion-haptics/README.md"},
+    "18": {"path": "18-production-traceability-fr3/README.md"},
+    "19": {"path": "19-iteration-economics/README.md"},
+    "20": {"path": "20-signature-defensibility/README.md"}
+  },
+  "canonical_findings": ["MP-001","MP-002","MP-003","MP-004","MP-005","MP-006","MP-007","MP-008","MP-009","MP-010","MP-011","MP-012","MP-013","MP-014","MP-015","MP-016","MP-017","MP-018","MP-019","MP-020","MP-021","MP-022","MP-023","MP-024","MP-025","MP-026","MP-027","MP-028","MP-029","MP-030","MP-031","MP-032"]
+}

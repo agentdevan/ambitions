@@ -1,0 +1,58 @@
+{
+  "schema_version": 2,
+  "corpus": "Maximum Polish.zip",
+  "zip_sha256": "74109d7227e641d0cdf1b4f5768fb944bcc1895d2987fd56ba5f1182d1e7f0e3",
+  "zip_bytes": 373506282,
+  "extracted_file_count": 9075,
+  "extracted_bytes": 568960367,
+  "full_manifest_sha256": "82ae3545edd26a0f8347d44680b30b8e589518db876fa8f120a8581163487840",
+  "manifest_digest_method": "SHA-256 of sorted UTF-8 records: relative_path\u0000size_bytes\u0000category, joined with newline",
+  "inventory_note": "Every extracted file was inventoried. This compact index omits per-file dependency/cache entries; SOURCE_MANIFEST_DIGESTS.json preserves directory-level counts, sizes, and digests.",
+  "category_counts": {
+    "board_or_review_image": 148,
+    "render_or_screenshot": 420,
+    "motion_evidence": 5,
+    "presentation_document": 12,
+    "machine_record": 21,
+    "narrative_or_log": 61,
+    "source_or_tooling": 14,
+    "toolchain_or_build_evidence": 6639,
+    "other_including_dependencies": 1755
+  },
+  "primary_artifacts": [
+    "Ambitions_Maximum_Polish_Program/PROGRAM.json",
+    "Ambitions_Maximum_Polish_Program/STATUS.md",
+    "Ambitions_Shell_Production_Grade_Final.md",
+    "Ambitions_Shell_Production_Grade_Final_overview.png",
+    "Ambitions_Goals_Maximum_Polish_R01.md",
+    "Ambitions_Goals_Maximum_Polish_R01_overview.png",
+    "Ambitions_Goals_Maximum_Polish_R02.md",
+    "Ambitions_Goals_Maximum_Polish_R02_overview.png",
+    "Ambitions_Time_Maximum_Polish_R01.md",
+    "Ambitions_Time_Maximum_Polish_R02.md",
+    "Ambitions_Time_Maximum_Polish_R02_overview.png",
+    "Ambitions_Global_Object_Language_R01/Ambitions_Global_Object_Language_R01.md",
+    "Ambitions_Complete_Frontend_Vocabulary.md",
+    "Ambitions_UI_Exhaustive_Flagship_Audit_R01.md",
+    "Ambitions_UI_Exhaustive_Flagship_Resolution_Program_R01.md",
+    "evidence/PROOF_SUMMARY.md",
+    "proof/PROOF_SUMMARY.md",
+    "final/P01_P15_GATES.md",
+    "passes/FIVE_COMPOUNDING_PASSES.md"
+  ],
+  "repository_baseline": {
+    "repo": "agentdevan/ambitions",
+    "main_at_zip_snapshot": "0f56e8f1cbd0e305bd50f666ca54be2d2fde3b24",
+    "repo_authority_inputs": [
+      "AGENTS.md",
+      "docs/canon/CONSTITUTION.md",
+      "docs/canon/README.md",
+      "docs/canon/generated/CODEX_START_HERE.md",
+      "docs/canon/specifications/surfaces/goals.md",
+      "docs/canon/design/VISUAL_SYSTEM_R1.md",
+      "docs/canon/migration/UX_BLUEPRINT.md",
+      "docs/qa/frontend-flagship-shippability-remediation/RECONCILED_FLAGSHIP_RECONSTRUCTION_PLAN.md",
+      "Native/Ambitions/Surfaces/Goals/"
+    ]
+  }
+}
