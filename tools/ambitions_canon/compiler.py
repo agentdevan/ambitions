@@ -45,6 +45,12 @@ VISUAL_CLOSURE_MACHINE_PATHS = (
     Path("docs/canon/design/vc-wave-3-accessibility-stress-closure.json"),
     Path("docs/canon/design/vc-14-native-matched-closure.json"),
 )
+OWNER_TASTE_MACHINE_PATH = Path(
+    "docs/canon/design/owner-taste-design-decision-system.json"
+)
+OWNER_TASTE_HUMAN_PATH = Path(
+    "docs/canon/design/OWNER_TASTE_DESIGN_DECISION_SYSTEM.md"
+)
 EXPECTED_ACTIVE_VISUAL_DIRECTIONS = (
     "AVF-DNA-S07-R00",
     "AVF-SHELL-S07-R01",
@@ -375,6 +381,70 @@ def load_visual_closure_records(root: Path) -> tuple[dict[str, Any], ...]:
             raise CanonError(f"{relative_path}: root must be an object")
         records.append(payload)
     return tuple(records)
+
+
+def validate_owner_taste_design_governance(root: Path) -> dict[str, Any]:
+    """Keep the owner-taste source a bounded reconciled reference."""
+    machine_path = _confined_path(root, OWNER_TASTE_MACHINE_PATH)
+    contract_path = _confined_path(root, VISUAL_CLOSURE_MACHINE_PATHS[0])
+    try:
+        peer = json.loads(
+            machine_path.read_text(encoding="utf-8"),
+            object_pairs_hook=_json_object_without_duplicate_keys,
+        )
+        contract = json.loads(
+            contract_path.read_text(encoding="utf-8"),
+            object_pairs_hook=_json_object_without_duplicate_keys,
+        )
+    except (OSError, UnicodeDecodeError, json.JSONDecodeError) as exc:
+        raise CanonError(f"owner-taste governance source is invalid: {exc}") from exc
+    if not isinstance(peer, dict) or not isinstance(contract, dict):
+        raise CanonError("owner-taste governance records must be JSON objects")
+    required = {
+        "record_id", "human_peer", "scope", "precedence",
+        "governing_objective", "corrective_laws", "universal_laws", "routing",
+        "interaction_laws", "evidence_governed", "hard_kill_signals",
+        "taste_gate", "physical_iphone_validation", "rankings",
+    }
+    missing = sorted(required - peer.keys())
+    if missing:
+        raise CanonError(f"owner-taste peer missing required fields: {missing}")
+    if peer["human_peer"] != OWNER_TASTE_HUMAN_PATH.as_posix():
+        raise CanonError("owner-taste peer has an unexpected human peer")
+    scope = peer["scope"]
+    if not isinstance(scope, dict) or scope.get("device_family") != "iPhone":
+        raise CanonError("owner-taste scope must be iPhone")
+    if set(scope.get("excluded", [])) != {"iPad", "Apple Watch"}:
+        raise CanonError("owner-taste scope must explicitly exclude iPad and Apple Watch")
+    evidence_governed = peer["evidence_governed"]
+    if not isinstance(evidence_governed, list) or not {
+        "accessibility_transformation", "haptic_character"
+    }.issubset(evidence_governed):
+        raise CanonError("owner-taste peer must defer accessibility and haptics to evidence")
+    reconciliation = contract.get("owner_taste_reconciliation")
+    if not isinstance(reconciliation, dict):
+        raise CanonError("visual contract is missing owner-taste reconciliation")
+    if reconciliation.get("machine_peer") != OWNER_TASTE_MACHINE_PATH.as_posix():
+        raise CanonError("visual contract has a stale owner-taste machine peer")
+    if reconciliation.get("source_record") != OWNER_TASTE_HUMAN_PATH.as_posix():
+        raise CanonError("visual contract has a stale owner-taste source record")
+    dispositions = reconciliation.get("concept_dispositions")
+    if not isinstance(dispositions, dict) or not dispositions:
+        raise CanonError("visual contract has no owner-taste dispositions")
+    invalid = sorted(
+        key for key, value in dispositions.items()
+        if value not in {
+            "PRESERVED", "NARROWED", "TRANSFORMED",
+            "SUPERSEDED_BY_OWNER_CALIBRATION", "DEFERRED_TO_EVIDENCE",
+            "NON_OVERLAPPING",
+        }
+    )
+    if invalid:
+        raise CanonError(f"owner-taste dispositions are invalid: {invalid}")
+    for evidence_concept in ("accessibility", "haptics"):
+        if dispositions.get(evidence_concept) != "DEFERRED_TO_EVIDENCE":
+            raise CanonError(f"{evidence_concept} must remain evidence-governed")
+    return peer
 
 
 @dataclass(frozen=True, slots=True)
@@ -1912,6 +1982,7 @@ def validate_design_artifacts(compilation: Compilation) -> None:
         wave_3_closure,
         vc_14_closure,
     ) = load_visual_closure_records(root)
+    validate_owner_taste_design_governance(root)
 
     state_models = blueprint.get("state_models")
     if not isinstance(state_models, list):
@@ -2704,6 +2775,8 @@ def render_codex_start(compilation: Compilation) -> bytes:
         "",
         "- [Full canon index](INDEX.md)",
         "- [Canon README and reading order](../README.md)",
+        "- [Owner Taste and Design Decision System]"
+        "(../design/OWNER_TASTE_DESIGN_DECISION_SYSTEM.md)",
         "- [Visual System R1](../design/VISUAL_SYSTEM_R1.md)",
         "- [Wave 1 Foundation Closure](../design/VC_WAVE_1_FOUNDATION_CLOSURE.md)",
         "- [Wave 2 Surface and Journey Closure]"
@@ -2851,6 +2924,7 @@ def render_visual_authority_manifest(compilation: Compilation) -> bytes:
         wave_3_closure,
         vc_14_closure,
     ) = load_visual_closure_records(compilation.root)
+    owner_taste = validate_owner_taste_design_governance(compilation.root)
     _validate_wave_2_closure(
         compilation.root,
         compilation.manifest,
@@ -2902,6 +2976,18 @@ def render_visual_authority_manifest(compilation: Compilation) -> bytes:
     payload = {
         "active_baseline": {
             **contract["active_baseline"],
+            "owner_taste_design_governance": {
+                "human_peer": owner_taste["human_peer"],
+                "machine_peer": OWNER_TASTE_MACHINE_PATH.as_posix(),
+                "record_id": owner_taste["record_id"],
+                "scope": owner_taste["scope"],
+                "evidence_governed": owner_taste["evidence_governed"],
+                "taste_gate": owner_taste["taste_gate"],
+                "physical_iphone_validation": owner_taste[
+                    "physical_iphone_validation"
+                ],
+                "reconciliation": contract["owner_taste_reconciliation"],
+            },
             "native_visual_foundry": {
                 "code_connect_in_program": False,
                 "direct_device_proof": {

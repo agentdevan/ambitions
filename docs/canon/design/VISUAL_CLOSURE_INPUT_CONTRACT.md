@@ -95,6 +95,28 @@ architecture dependencies, and source paths are in the Wave 1–3 and VC-14
 human and machine records. The VC study and synthesis labels do not create
 active AVF direction IDs.
 
+## Owner-taste reconciliation (2026-08-08)
+
+The later owner calibration is preserved in
+[`OWNER_TASTE_DESIGN_DECISION_SYSTEM.md`](OWNER_TASTE_DESIGN_DECISION_SYSTEM.md)
+and its machine peer. It is a reconciled reference feeding this contract, not a
+competing active visual authority. The machine peer records these exact
+dispositions; product/IA law and accessibility evidence still outrank taste.
+
+| Overlap | Disposition |
+| --- | --- |
+| Information richness; continuous composition | `SUPERSEDED_BY_OWNER_CALIBRATION` |
+| Appearance/atmosphere; typography; bottom navigation | `NARROWED` |
+| Localized glass; iPhone-only scope | `PRESERVED` |
+| Crown/header and sustained-scroll retreat | `TRANSFORMED` |
+| Primary action, selection, gestures, semantic drag/drop, motion, sound | `SUPERSEDED_BY_OWNER_CALIBRATION` |
+| Professional density, charts, capture typing, search, disclosure, intelligence, widgets | `SUPERSEDED_BY_OWNER_CALIBRATION` |
+| Accessibility and haptics | `DEFERRED_TO_EVIDENCE` |
+
+The resolved source adds no broad SwiftUI, production, runtime, physical-device,
+or release authorization. It supplies an owner-fit gate before expensive proof;
+the score never replaces an owner decision or evidence-based validation.
+
 ## Protected characteristics
 
 - Articulated Relief and Native Semantic Continuum remain the cross-surface

@@ -23,6 +23,8 @@ from tools.ambitions_canon.compiler import (
 
 REPOSITORY_ROOT = Path(__file__).resolve().parents[2]
 ACTIVE_DESIGN_PATHS = (
+    Path("docs/canon/design/OWNER_TASTE_DESIGN_DECISION_SYSTEM.md"),
+    Path("docs/canon/design/owner-taste-design-decision-system.json"),
     Path("docs/canon/design/VISUAL_CLOSURE_INPUT_CONTRACT.md"),
     Path("docs/canon/design/visual-closure-input-contract.json"),
     Path("docs/canon/design/VC_WAVE_1_FOUNDATION_CLOSURE.md"),
@@ -176,6 +178,56 @@ def refresh_visual_system_source_sha(
 
 
 class Wave3VisualClosureLoaderTests(unittest.TestCase):
+    def test_owner_taste_governance_validator_is_available(self) -> None:
+        self.assertTrue(
+            callable(
+                getattr(
+                    canon_compiler,
+                    "validate_owner_taste_design_governance",
+                    None,
+                )
+            )
+        )
+
+    def test_owner_taste_governance_rejects_missing_evidence_deferral(
+        self,
+    ) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            design = root / "docs/canon/design"
+            design.mkdir(parents=True)
+            peer = {
+                "record_id": "test",
+                "human_peer": "docs/canon/design/OWNER_TASTE_DESIGN_DECISION_SYSTEM.md",
+                "scope": {"device_family": "iPhone", "excluded": ["iPad", "Apple Watch"]},
+                "precedence": [], "governing_objective": "test",
+                "corrective_laws": [], "universal_laws": [], "routing": {},
+                "interaction_laws": [], "evidence_governed": [],
+                "hard_kill_signals": [], "taste_gate": {},
+                "physical_iphone_validation": [], "rankings": {},
+            }
+            contract = {
+                "owner_taste_reconciliation": {
+                    "source_record": peer["human_peer"],
+                    "machine_peer": "docs/canon/design/owner-taste-design-decision-system.json",
+                    "concept_dispositions": {
+                        "accessibility": "DEFERRED_TO_EVIDENCE",
+                        "haptics": "DEFERRED_TO_EVIDENCE",
+                    },
+                }
+            }
+            (design / "owner-taste-design-decision-system.json").write_text(
+                json.dumps(peer), encoding="utf-8"
+            )
+            (design / "visual-closure-input-contract.json").write_text(
+                json.dumps(contract), encoding="utf-8"
+            )
+            with self.assertRaisesRegex(
+                canon_compiler.CanonError,
+                "must defer accessibility and haptics to evidence",
+            ):
+                canon_compiler.validate_owner_taste_design_governance(root)
+
     def test_visual_closure_loader_includes_vc_14_in_order(self) -> None:
         records = canon_compiler.load_visual_closure_records(REPOSITORY_ROOT)
         self.assertEqual(
@@ -1077,6 +1129,10 @@ class AmbitionsCanonCompilerTests(unittest.TestCase):
 
     def test_generated_router_lists_all_visual_closure_waves_adjacent(self) -> None:
         router = self.outputs["generated/CODEX_START_HERE.md"].decode("utf-8")
+        owner_taste = (
+            "- [Owner Taste and Design Decision System]"
+            "(../design/OWNER_TASTE_DESIGN_DECISION_SYSTEM.md)"
+        )
         wave_1 = (
             "- [Wave 1 Foundation Closure]"
             "(../design/VC_WAVE_1_FOUNDATION_CLOSURE.md)"
@@ -1097,6 +1153,8 @@ class AmbitionsCanonCompilerTests(unittest.TestCase):
         self.assertEqual(router.count(wave_2), 1)
         self.assertEqual(router.count(wave_3), 1)
         self.assertEqual(router.count(vc_14), 1)
+        self.assertEqual(router.count(owner_taste), 1)
+        self.assertLess(router.index(owner_taste), router.index(wave_1))
         self.assertIn(
             wave_1 + "\n" + wave_2 + "\n" + wave_3 + "\n" + vc_14,
             router,

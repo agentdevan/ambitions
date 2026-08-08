@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "record_id": "AMB-OWNER-TASTE-DESIGN-GOVERNANCE-R01",
+  "status": "OWNER_APPROVED_SOURCE_RECONCILED_REFERENCE",
+  "human_peer": "docs/canon/design/OWNER_TASTE_DESIGN_DECISION_SYSTEM.md",
+  "scope": {"device_family": "iPhone", "excluded": ["iPad", "Apple Watch"]},
+  "provenance": {"source": "Linear Lifecycle owner-taste-design-governance", "calibration_rounds": "R01-R66", "revision": "2026-08-08"},
+  "precedence": ["product_truth", "safety_privacy_correctness_accessibility", "apple_platform_and_usability_evidence", "canon_object_semantics", "reconciled_visual_contract", "owner_taste", "local_preference", "decorative_novelty"],
+  "governing_objective": "Make the product feel richer because it understands and organizes more, not because it draws more things.",
+  "corrective_laws": ["low_reading_burden_without_low_informational_richness", "one_dominant_focus_multiple_legible_layers_one_unmistakable_next_action"],
+  "universal_laws": ["contextual_richness_plus_native_discipline", "integrated_composition_not_generic_card_stacks", "native_behavior_authored_presentation", "localized_glass_when_earned", "adult_sophistication", "context_before_chrome"],
+  "routing": {"connected_system": "integrated_contextual_canvas", "browsable_content": "visual_collection_discovery_grid", "single_rich_object": "cinematic_editorial_when_earned", "spatial": "full_spatial_canvas", "utility_configuration": "refined_native_utility"},
+  "interaction_laws": ["native_inline_primary_action", "stay_in_place_by_default", "long_press_rich_commands_swipe_frequent_shortcuts", "semantic_drop_zones_for_semantic_moves", "temporary_native_multiselect", "invisible_intelligence_while_composing", "find_contextualize_act", "crisp_damped_motion", "chrome_retreats_on_sustained_scroll", "routine_sound_restrained"],
+  "evidence_governed": ["accessibility_transformation", "dynamic_type", "voiceover_hierarchy", "reduce_motion", "haptic_character", "hierarchy_mechanism_tie_cases", "platform_safety_behavior", "system_control_behavior"],
+  "hard_kill_signals": ["boring", "juvenile", "visually_empty", "information_removed_for_reading_load", "giant_cta", "generic_card_stack", "generic_dashboard", "prototype_feel", "novelty_without_reason", "glass_as_design", "ornamental_animation", "no_interaction_pull", "explanatory_prose_required", "polish_rescuing_weak_architecture", "persistent_checkboxes", "persistent_trailing_actions", "gratuitous_pills", "expressive_bounce", "motivational_copy", "mascot_agent", "gratuitous_spatial_graph", "cinematic_utility", "maximum_density_without_scanability", "sparse_minimalism_erasing_intelligence"],
+  "taste_gate": {"dimensions": ["information_value", "reading_efficiency", "screen_utilization", "integrated_composition", "native_behavioral_credibility", "adult_sophistication", "visual_engagement", "material_restraint", "contextual_intelligence", "action_clarity", "purposeful_distinctiveness", "absence_of_decorative_novelty"], "scale": "0-2", "maximum": 24, "bands": {"21-24": "native_proof_candidate", "17-20": "revise", "13-16": "rethink", "0-12": "kill"}, "does_not_prove": ["owner_approval", "accessibility", "runtime", "release_green", "physical_device"]},
+  "physical_iphone_validation": ["scale_density", "one_handed_reach", "touch_certainty", "scroll", "crisp_damped_motion", "gestures", "semantic_drag_drop", "hardware_haptics", "sound_fatigue", "oled_material", "keyboard_occlusion", "system_gestures", "latency", "fatigue", "interaction_pull"],
+  "rankings": {"home_widget": "A>D>B>C", "lock_screen_widget": "contextual_before_ambient", "professional_table": "D>B>A/C", "analytical_chart": "D>B>C>A", "multi_select": "A>B>D>C", "drag_drop": "C>A>D>B", "gesture_affordance": "B>>A>D>never_C", "typing": "C>A>D>B", "sound": "A>D>B>C", "chart_inspection": "A>>D>C>B", "spring_damping": "A>B>D>C", "scroll_header": "D>A>B>C"}
+}

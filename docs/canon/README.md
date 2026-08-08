@@ -40,6 +40,11 @@ for implementation agents and repository tooling.
 
 ## Design canon and references
 
+- [Owner Taste and Design Decision System](design/OWNER_TASTE_DESIGN_DECISION_SYSTEM.md)
+  and its JSON peer preserve the R01–R66 owner calibration as a reconciled
+  reference. It routes contextual presentation decisions and proof preparation;
+  accessibility/haptics remain evidence-governed and the VC contract below is
+  still the sole active visual controller.
 - [Visual System R1](design/VISUAL_SYSTEM_R1.md) records the reconciled
   provisional cross-surface direction and historical Revision 1 provenance.
   Figma authorization, `APPROVED FOR SWIFTUI`, broad implementation, broad

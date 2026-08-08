@@ -1,4 +1,34 @@
 {
+  "owner_taste_reconciliation": {
+    "source_record": "docs/canon/design/OWNER_TASTE_DESIGN_DECISION_SYSTEM.md",
+    "machine_peer": "docs/canon/design/owner-taste-design-decision-system.json",
+    "authority_role": "reconciled_reference_feeding_sole_active_visual_contract",
+    "concept_dispositions": {
+      "information_richness": "SUPERSEDED_BY_OWNER_CALIBRATION",
+      "continuous_composition": "SUPERSEDED_BY_OWNER_CALIBRATION",
+      "appearance_atmosphere": "NARROWED",
+      "localized_glass": "PRESERVED",
+      "typography_personality": "NARROWED",
+      "crown_and_scroll": "TRANSFORMED",
+      "bottom_navigation": "NARROWED",
+      "primary_actions": "SUPERSEDED_BY_OWNER_CALIBRATION",
+      "selection_affordance": "SUPERSEDED_BY_OWNER_CALIBRATION",
+      "gesture_hierarchy": "SUPERSEDED_BY_OWNER_CALIBRATION",
+      "semantic_drag_drop": "SUPERSEDED_BY_OWNER_CALIBRATION",
+      "motion_damping": "SUPERSEDED_BY_OWNER_CALIBRATION",
+      "sound": "SUPERSEDED_BY_OWNER_CALIBRATION",
+      "haptics": "DEFERRED_TO_EVIDENCE",
+      "professional_density": "SUPERSEDED_BY_OWNER_CALIBRATION",
+      "analytical_charts": "SUPERSEDED_BY_OWNER_CALIBRATION",
+      "capture_typing": "SUPERSEDED_BY_OWNER_CALIBRATION",
+      "search": "SUPERSEDED_BY_OWNER_CALIBRATION",
+      "progressive_disclosure": "SUPERSEDED_BY_OWNER_CALIBRATION",
+      "intelligence_presence": "SUPERSEDED_BY_OWNER_CALIBRATION",
+      "widgets": "SUPERSEDED_BY_OWNER_CALIBRATION",
+      "accessibility": "DEFERRED_TO_EVIDENCE",
+      "device_scope": "PRESERVED"
+    }
+  },
   "active_baseline": {
     "accessibility_doctrine": {
       "direction_id": "AVF-A11Y-S07-R00",

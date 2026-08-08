@@ -81,6 +81,8 @@ generated_files = [
 
 reference_files = [
   "design/VISUAL_SYSTEM_R1.md",
+  "design/OWNER_TASTE_DESIGN_DECISION_SYSTEM.md",
+  "design/owner-taste-design-decision-system.json",
   "design/VISUAL_CLOSURE_INPUT_CONTRACT.md",
   "design/visual-closure-input-contract.json",
   "design/VC_WAVE_1_FOUNDATION_CLOSURE.md",

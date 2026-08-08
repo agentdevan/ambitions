@@ -173,6 +173,106 @@
       "real_native_frame_required": true,
       "selected_record": "VC14-NATIVE-S01 — Matched Native Flagship Proof"
     },
+    "owner_taste_design_governance": {
+      "evidence_governed": [
+        "accessibility_transformation",
+        "dynamic_type",
+        "voiceover_hierarchy",
+        "reduce_motion",
+        "haptic_character",
+        "hierarchy_mechanism_tie_cases",
+        "platform_safety_behavior",
+        "system_control_behavior"
+      ],
+      "human_peer": "docs/canon/design/OWNER_TASTE_DESIGN_DECISION_SYSTEM.md",
+      "machine_peer": "docs/canon/design/owner-taste-design-decision-system.json",
+      "physical_iphone_validation": [
+        "scale_density",
+        "one_handed_reach",
+        "touch_certainty",
+        "scroll",
+        "crisp_damped_motion",
+        "gestures",
+        "semantic_drag_drop",
+        "hardware_haptics",
+        "sound_fatigue",
+        "oled_material",
+        "keyboard_occlusion",
+        "system_gestures",
+        "latency",
+        "fatigue",
+        "interaction_pull"
+      ],
+      "reconciliation": {
+        "authority_role": "reconciled_reference_feeding_sole_active_visual_contract",
+        "concept_dispositions": {
+          "accessibility": "DEFERRED_TO_EVIDENCE",
+          "analytical_charts": "SUPERSEDED_BY_OWNER_CALIBRATION",
+          "appearance_atmosphere": "NARROWED",
+          "bottom_navigation": "NARROWED",
+          "capture_typing": "SUPERSEDED_BY_OWNER_CALIBRATION",
+          "continuous_composition": "SUPERSEDED_BY_OWNER_CALIBRATION",
+          "crown_and_scroll": "TRANSFORMED",
+          "device_scope": "PRESERVED",
+          "gesture_hierarchy": "SUPERSEDED_BY_OWNER_CALIBRATION",
+          "haptics": "DEFERRED_TO_EVIDENCE",
+          "information_richness": "SUPERSEDED_BY_OWNER_CALIBRATION",
+          "intelligence_presence": "SUPERSEDED_BY_OWNER_CALIBRATION",
+          "localized_glass": "PRESERVED",
+          "motion_damping": "SUPERSEDED_BY_OWNER_CALIBRATION",
+          "primary_actions": "SUPERSEDED_BY_OWNER_CALIBRATION",
+          "professional_density": "SUPERSEDED_BY_OWNER_CALIBRATION",
+          "progressive_disclosure": "SUPERSEDED_BY_OWNER_CALIBRATION",
+          "search": "SUPERSEDED_BY_OWNER_CALIBRATION",
+          "selection_affordance": "SUPERSEDED_BY_OWNER_CALIBRATION",
+          "semantic_drag_drop": "SUPERSEDED_BY_OWNER_CALIBRATION",
+          "sound": "SUPERSEDED_BY_OWNER_CALIBRATION",
+          "typography_personality": "NARROWED",
+          "widgets": "SUPERSEDED_BY_OWNER_CALIBRATION"
+        },
+        "machine_peer": "docs/canon/design/owner-taste-design-decision-system.json",
+        "source_record": "docs/canon/design/OWNER_TASTE_DESIGN_DECISION_SYSTEM.md"
+      },
+      "record_id": "AMB-OWNER-TASTE-DESIGN-GOVERNANCE-R01",
+      "scope": {
+        "device_family": "iPhone",
+        "excluded": [
+          "iPad",
+          "Apple Watch"
+        ]
+      },
+      "taste_gate": {
+        "bands": {
+          "0-12": "kill",
+          "13-16": "rethink",
+          "17-20": "revise",
+          "21-24": "native_proof_candidate"
+        },
+        "dimensions": [
+          "information_value",
+          "reading_efficiency",
+          "screen_utilization",
+          "integrated_composition",
+          "native_behavioral_credibility",
+          "adult_sophistication",
+          "visual_engagement",
+          "material_restraint",
+          "contextual_intelligence",
+          "action_clarity",
+          "purposeful_distinctiveness",
+          "absence_of_decorative_novelty"
+        ],
+        "does_not_prove": [
+          "owner_approval",
+          "accessibility",
+          "runtime",
+          "release_green",
+          "physical_device"
+        ],
+        "maximum": 24,
+        "scale": "0-2"
+      }
+    },
     "platform_scope": {
       "device_family": "iPhone",
       "orientation": "portrait",
@@ -769,7 +869,7 @@
     "visual_closure_planning": false,
     "visual_closure_planning_program_closed": true
   },
-  "canon_content_sha": "db802fd0c5828d1be58a101c8001a2cb1532ebffcce2cafc251cf7202eaaf317",
+  "canon_content_sha": "8893a948efd392a86f2503236c1a543229d06b83cddc2635ce9da4f5d98ef654",
   "canon_revision": 2,
   "classification_vocabulary": [
     "ACTIVE_RECONCILED_BASELINE",
@@ -3232,7 +3332,7 @@
       "superseded": "AVF-TODAY-S09-R00"
     }
   ],
-  "traceability_input_sha": "e2faa95083302b10ef7604bd1325e156aaab799214f71ed31e891b242dd60457",
+  "traceability_input_sha": "aead326600c3bc7ab662f4bb8d29eefa8656963d9f64abfa08df95d513a97cde",
   "unsupported_visual_behaviors": [
     "active_serif_interface_type",
     "oled_dark",
