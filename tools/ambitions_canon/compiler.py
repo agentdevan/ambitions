@@ -32,7 +32,7 @@ GENERATED_PATHS = (
 )
 
 VISUAL_CLASSIFICATIONS = {
-    "ACTIVE_RECONCILED_BASELINE",
+    "OWNER_TASTE_SUBORDINATE_CALIBRATION",
     "HISTORICAL_REFERENCE",
     "DEFERRED_CANDIDATE_REQUIRING_OWNER_REVIEW",
     "IMPLEMENTATION_DETAIL_NOT_YET_AUTHORIZED",
@@ -121,23 +121,24 @@ FINAL_AUTHORIZATION = {
     "visual_closure_planning_program_closed": True,
 }
 EXPECTED_WAVE_2_CANONICAL_SHA256 = (
-    "a7adda3b7dc609e1626bc9456ad05ded0aea4d8619416db055d547e4790cb323"
+    "e9d2484c2e2199c75e10afada378c7385ce35eb11ffddce16964b2d0390f7428"
 )
 EXPECTED_WAVE_3_CANONICAL_SHA256 = (
-    "4d68629ba6da8d9d2b04f39ebf1b1ca189fe81f3b40bdd0fa91d4524eb1f240e"
+    "a205130b7af8c695804bc47336fc82496bd0a2f2f4857b428fcd4f107280c604"
 )
 EXPECTED_WAVE_3_HUMAN_SHA256 = (
-    "bf4586bf1eabb92e6048795052e5703f9430e86a32f2a614a30bfb9ec63dc437"
+    "d0488b34406905feb619cf7ccd9947d8a4d6c2a1eae5ce98390c6a6ef9bee226"
 )
 EXPECTED_VC_14_CANONICAL_SHA256 = (
-    "981e301d1c96071128cb1c22eee25c9670382fe45d69fb28f85ed6864f4ec0fe"
+    "16a6832866a820bb3d61566b905c6079213aaf6d9ec21c36a050a4449d901b89"
 )
 EXPECTED_VC_14_HUMAN_SHA256 = (
-    "c443ee806e05261b0a118ca78ded33f0284a07c851bcf83efb6fe892a86f4010"
+    "e3a9aee587fa2bbeec1bf19f33c47380e14f785080e320c7c9180729d95fce13"
 )
 WAVE_2_TOP_LEVEL_FIELDS = {
     "active_direction_ids",
     "architecture_dependencies",
+    "authority_role",
     "authorization_state",
     "date",
     "deferred_calibration_register",
@@ -379,12 +380,21 @@ def load_visual_closure_records(root: Path) -> tuple[dict[str, Any], ...]:
             raise CanonError(f"{relative_path}: invalid JSON: {exc}") from exc
         if not isinstance(payload, dict):
             raise CanonError(f"{relative_path}: root must be an object")
+        if (
+            relative_path != VISUAL_CLOSURE_MACHINE_PATHS[0]
+            and payload.get("authority_role")
+            != "subordinate_implementation_calibration"
+        ):
+            raise CanonError(
+                f"{relative_path}: visual closure package must be subordinate "
+                "implementation calibration"
+            )
         records.append(payload)
     return tuple(records)
 
 
 def validate_owner_taste_design_governance(root: Path) -> dict[str, Any]:
-    """Keep the owner-taste source a bounded reconciled reference."""
+    """Enforce Owner Taste as supreme design authority over VC calibration."""
     machine_path = _confined_path(root, OWNER_TASTE_MACHINE_PATH)
     contract_path = _confined_path(root, VISUAL_CLOSURE_MACHINE_PATHS[0])
     try:
@@ -401,7 +411,8 @@ def validate_owner_taste_design_governance(root: Path) -> dict[str, Any]:
     if not isinstance(peer, dict) or not isinstance(contract, dict):
         raise CanonError("owner-taste governance records must be JSON objects")
     required = {
-        "record_id", "human_peer", "scope", "precedence",
+        "record_id", "status", "human_peer", "scope", "authority_model",
+        "precedence", "constraint_boundary",
         "governing_objective", "corrective_laws", "universal_laws", "routing",
         "interaction_laws", "evidence_governed", "hard_kill_signals",
         "taste_gate", "physical_iphone_validation", "rankings",
@@ -411,39 +422,89 @@ def validate_owner_taste_design_governance(root: Path) -> dict[str, Any]:
         raise CanonError(f"owner-taste peer missing required fields: {missing}")
     if peer["human_peer"] != OWNER_TASTE_HUMAN_PATH.as_posix():
         raise CanonError("owner-taste peer has an unexpected human peer")
+    if peer["status"] != "OWNER_APPROVED_SUPREME_DESIGN_AUTHORITY":
+        raise CanonError("owner-taste source must be the supreme design authority")
+    authority_model = peer["authority_model"]
+    if authority_model != {
+        "role": "supreme_design_authority",
+        "conflict_rule": "owner_taste_supersedes_all_other_design_authority",
+        "visual_closure_role": "subordinate_implementation_calibration",
+        "constraints_are_design_authorities": False,
+        "evidence_effect": (
+            "may_invalidate_implementation_or_proof_but_cannot_install_"
+            "competing_design_direction"
+        ),
+    }:
+        raise CanonError("owner-taste authority model is invalid")
+    if peer["precedence"] != [
+        "owner_taste",
+        "owner_approved_surface_decision",
+        "visual_closure_implementation_calibration",
+        "historical_design_provenance",
+        "local_preference",
+        "decorative_novelty",
+    ]:
+        raise CanonError("owner-taste design precedence is invalid")
+    constraint_boundary = peer["constraint_boundary"]
+    if not isinstance(constraint_boundary, list) or not {
+        "product_truth",
+        "domain_and_object_semantics",
+        "safety",
+        "privacy",
+        "correctness",
+        "accessibility_requirements",
+        "apple_platform_requirements",
+        "verified_usability_limits",
+    }.issubset(constraint_boundary):
+        raise CanonError("owner-taste non-design constraint boundary is invalid")
     scope = peer["scope"]
     if not isinstance(scope, dict) or scope.get("device_family") != "iPhone":
         raise CanonError("owner-taste scope must be iPhone")
     if set(scope.get("excluded", [])) != {"iPad", "Apple Watch"}:
-        raise CanonError("owner-taste scope must explicitly exclude iPad and Apple Watch")
+        raise CanonError(
+            "owner-taste scope must explicitly exclude iPad and Apple Watch"
+        )
     evidence_governed = peer["evidence_governed"]
     if not isinstance(evidence_governed, list) or not {
-        "accessibility_transformation", "haptic_character"
+        "accessibility_conformance", "physical_haptic_realization"
     }.issubset(evidence_governed):
-        raise CanonError("owner-taste peer must defer accessibility and haptics to evidence")
-    reconciliation = contract.get("owner_taste_reconciliation")
-    if not isinstance(reconciliation, dict):
-        raise CanonError("visual contract is missing owner-taste reconciliation")
-    if reconciliation.get("machine_peer") != OWNER_TASTE_MACHINE_PATH.as_posix():
+        raise CanonError(
+            "owner-taste peer must require accessibility and physical haptic evidence"
+        )
+    authority = contract.get("owner_taste_authority")
+    if not isinstance(authority, dict):
+        raise CanonError("visual contract is missing owner-taste authority")
+    if authority.get("machine_peer") != OWNER_TASTE_MACHINE_PATH.as_posix():
         raise CanonError("visual contract has a stale owner-taste machine peer")
-    if reconciliation.get("source_record") != OWNER_TASTE_HUMAN_PATH.as_posix():
+    if authority.get("source_record") != OWNER_TASTE_HUMAN_PATH.as_posix():
         raise CanonError("visual contract has a stale owner-taste source record")
-    dispositions = reconciliation.get("concept_dispositions")
+    if authority.get("authority_role") != (
+        "supreme_design_authority_over_visual_closure"
+    ):
+        raise CanonError("visual contract must recognize supreme owner-taste authority")
+    if authority.get("visual_closure_role") != "subordinate_implementation_calibration":
+        raise CanonError(
+            "visual closure must be subordinate implementation calibration"
+        )
+    dispositions = authority.get("concept_dispositions")
     if not isinstance(dispositions, dict) or not dispositions:
         raise CanonError("visual contract has no owner-taste dispositions")
     invalid = sorted(
         key for key, value in dispositions.items()
         if value not in {
-            "PRESERVED", "NARROWED", "TRANSFORMED",
-            "SUPERSEDED_BY_OWNER_CALIBRATION", "DEFERRED_TO_EVIDENCE",
-            "NON_OVERLAPPING",
+            "OWNER_TASTE_CONTROLS",
+            "VC_CALIBRATION_CONSISTENT",
+            "CONSTRAINED_BY_NON_DESIGN_REQUIREMENTS",
         }
     )
     if invalid:
         raise CanonError(f"owner-taste dispositions are invalid: {invalid}")
-    for evidence_concept in ("accessibility", "haptics"):
-        if dispositions.get(evidence_concept) != "DEFERRED_TO_EVIDENCE":
-            raise CanonError(f"{evidence_concept} must remain evidence-governed")
+    if dispositions.get("accessibility") != (
+        "CONSTRAINED_BY_NON_DESIGN_REQUIREMENTS"
+    ):
+        raise CanonError("accessibility must remain a non-design requirement")
+    if dispositions.get("haptics") != "OWNER_TASTE_CONTROLS":
+        raise CanonError("owner taste must control haptic intent")
     return peer
 
 
@@ -1195,7 +1256,9 @@ def _validate_wave_2_closure(
                 f"selected record set for {package_id}"
             )
 
-    expected_status_line = "Status: `CLOSED / ACTIVE_WAVE_2_CLOSURE_AUTHORITY`"
+    expected_status_line = (
+        "Status: `CLOSED / OWNER_TASTE_SUBORDINATE_CALIBRATION`"
+    )
     if human_markdown.splitlines().count(expected_status_line) != 1:
         raise CanonError(
             "Wave 2 closure human/machine mismatch: authority status"
@@ -2129,9 +2192,9 @@ def validate_design_artifacts(compilation: Compilation) -> None:
         )
 
     if visual_contract.get("status") != (
-        "ACTIVE_RECONCILED_BASELINE_VISUAL_CLOSURE_CLOSED"
+        "SUBORDINATE_IMPLEMENTATION_CALIBRATION_VISUAL_CLOSURE_CLOSED"
     ):
-        raise CanonError("visual closure input status must be active reconciled")
+        raise CanonError("visual closure input status must be subordinate calibration")
     if set(visual_contract.get("classification_vocabulary", [])) != (
         VISUAL_CLASSIFICATIONS
     ):
@@ -2139,12 +2202,12 @@ def validate_design_artifacts(compilation: Compilation) -> None:
     authorization = visual_contract.get("authorization")
     if authorization != FINAL_AUTHORIZATION:
         raise CanonError("visual closure authorization state is invalid")
-    active_baseline = visual_contract.get("active_baseline")
-    if not isinstance(active_baseline, dict):
-        raise CanonError("visual closure active_baseline must be an object")
-    if active_baseline.get("directions") != list(ACTIVE_VISUAL_DIRECTIONS):
+    implementation_calibration = visual_contract.get("implementation_calibration")
+    if not isinstance(implementation_calibration, dict):
+        raise CanonError("visual closure implementation_calibration must be an object")
+    if implementation_calibration.get("directions") != list(ACTIVE_VISUAL_DIRECTIONS):
         raise CanonError("visual closure active direction IDs are invalid")
-    typography = active_baseline.get("typography")
+    typography = implementation_calibration.get("typography")
     if not isinstance(typography, dict) or any(
         typography.get(key) != value
         for key, value in {
@@ -2165,14 +2228,14 @@ def validate_design_artifacts(compilation: Compilation) -> None:
         "action_or_return",
     ]:
         raise CanonError("visual closure semantic cadence is invalid")
-    appearance = active_baseline.get("appearance")
+    appearance = implementation_calibration.get("appearance")
     if (
         not isinstance(appearance, dict)
         or appearance.get("choices") != ["System", "Light", "Dark"]
         or appearance.get("selected_synthesis") != "Mineral Relief Continuum"
     ):
         raise CanonError("visual closure active appearance choices are invalid")
-    accent = active_baseline.get("accent")
+    accent = implementation_calibration.get("accent")
     if (
         not isinstance(accent, dict)
         or accent.get("default_family") != "restrained_violet_indigo"
@@ -2426,7 +2489,7 @@ def validate_design_artifacts(compilation: Compilation) -> None:
         root, Path("docs/canon/design/VC_WAVE_1_FOUNDATION_CLOSURE.md")
     ).read_text(encoding="utf-8")
     for required_text in (
-        "Status: `CLOSED / ACTIVE_WAVE_1_CLOSURE_AUTHORITY`",
+        "Status: `CLOSED / OWNER_TASTE_SUBORDINATE_CALIBRATION`",
         "`VC-01` | `CLOSED`",
         "`VC-06` | `CLOSED`",
         "`VC-07` | `OPEN`",
@@ -2449,7 +2512,7 @@ def validate_design_artifacts(compilation: Compilation) -> None:
     _validate_wave_3_closure(root, compilation.manifest, wave_3_closure)
     _validate_vc_14_closure(root, compilation.manifest, vc_14_closure)
 
-    mappings = visual_contract.get("visual_requirement_mappings")
+    mappings = visual_contract.get("calibration_requirement_mappings")
     if not isinstance(mappings, list) or not mappings:
         raise CanonError("visual closure requirement mappings must be a list")
     mapping_directions = [
@@ -2462,7 +2525,7 @@ def validate_design_artifacts(compilation: Compilation) -> None:
     for mapping in mappings:
         if not isinstance(mapping, dict):
             raise CanonError("visual closure has an invalid requirement mapping")
-        if mapping.get("status") != "ACTIVE_RECONCILED_BASELINE":
+        if mapping.get("status") != "OWNER_TASTE_SUBORDINATE_CALIBRATION":
             raise CanonError("active visual mapping has a non-active status")
         requirement_ids = mapping.get("requirement_ids")
         if not isinstance(requirement_ids, list) or not requirement_ids or not all(
@@ -2472,7 +2535,7 @@ def validate_design_artifacts(compilation: Compilation) -> None:
         inactive = sorted(set(requirement_ids) - active_requirement_ids)
         if inactive:
             raise CanonError(
-                "visual authority references inactive requirement: "
+                "visual calibration references inactive requirement: "
                 f"{inactive[0]}"
             )
 
@@ -2916,7 +2979,7 @@ def render_requirement_traceability(compilation: Compilation) -> bytes:
 
 
 def render_visual_authority_manifest(compilation: Compilation) -> bytes:
-    """Render the active visual authority from its source-owned VC contract."""
+    """Render supreme Owner Taste authority and subordinate VC calibration."""
     (
         contract,
         wave_1_closure,
@@ -2944,6 +3007,9 @@ def render_visual_authority_manifest(compilation: Compilation) -> bytes:
         _confined_path(compilation.root, relative_path).read_bytes()
         for relative_path in VISUAL_CLOSURE_MACHINE_PATHS
     )
+    owner_taste_source = _confined_path(
+        compilation.root, OWNER_TASTE_MACHINE_PATH
+    ).read_bytes()
 
     def project_record(index: int, record: dict[str, Any]) -> dict[str, Any]:
         return {
@@ -2974,20 +3040,25 @@ def render_visual_authority_manifest(compilation: Compilation) -> bytes:
         ),
     }
     payload = {
-        "active_baseline": {
-            **contract["active_baseline"],
-            "owner_taste_design_governance": {
-                "human_peer": owner_taste["human_peer"],
-                "machine_peer": OWNER_TASTE_MACHINE_PATH.as_posix(),
-                "record_id": owner_taste["record_id"],
-                "scope": owner_taste["scope"],
-                "evidence_governed": owner_taste["evidence_governed"],
-                "taste_gate": owner_taste["taste_gate"],
-                "physical_iphone_validation": owner_taste[
-                    "physical_iphone_validation"
-                ],
-                "reconciliation": contract["owner_taste_reconciliation"],
-            },
+        "supreme_design_authority": {
+            "authority_model": owner_taste["authority_model"],
+            "constraint_boundary": owner_taste["constraint_boundary"],
+            "evidence_governed": owner_taste["evidence_governed"],
+            "human_peer": owner_taste["human_peer"],
+            "machine_peer": OWNER_TASTE_MACHINE_PATH.as_posix(),
+            "physical_iphone_validation": owner_taste[
+                "physical_iphone_validation"
+            ],
+            "precedence": owner_taste["precedence"],
+            "record_id": owner_taste["record_id"],
+            "scope": owner_taste["scope"],
+            "source_input_sha": hashlib.sha256(owner_taste_source).hexdigest(),
+            "status": owner_taste["status"],
+            "taste_gate": owner_taste["taste_gate"],
+        },
+        "implementation_calibration": {
+            **contract["implementation_calibration"],
+            "owner_taste_authority": contract["owner_taste_authority"],
             "native_visual_foundry": {
                 "code_connect_in_program": False,
                 "direct_device_proof": {
@@ -3014,10 +3085,10 @@ def render_visual_authority_manifest(compilation: Compilation) -> bytes:
                 wave_3_closure
             ),
         },
-        "authorities": [
+        "implementation_calibration_directions": [
             {
-                "authority_role": "active_reconciled_direction",
-                "authority_status": "provisional",
+                "calibration_role": "owner_taste_subordinate_direction",
+                "calibration_status": "provisional",
                 "canon_revision": compilation.manifest.canon_revision,
                 "classification": mapping["status"],
                 "implementation_status": (
@@ -3025,11 +3096,11 @@ def render_visual_authority_manifest(compilation: Compilation) -> bytes:
                 ),
                 "requirement_ids": mapping["requirement_ids"],
                 "source": VISUAL_CLOSURE_MACHINE_PATHS[0].as_posix(),
-                "visual_authority_id": mapping["direction_id"],
+                "direction_id": mapping["direction_id"],
             }
-            for mapping in contract["visual_requirement_mappings"]
+            for mapping in contract["calibration_requirement_mappings"]
         ],
-        "authority_state": contract["authorization"],
+        "authorization_state": contract["authorization"],
         "canon_content_sha": compilation.canon_digest,
         "canon_revision": compilation.manifest.canon_revision,
         "classification_vocabulary": contract["classification_vocabulary"],
@@ -3044,21 +3115,21 @@ def render_visual_authority_manifest(compilation: Compilation) -> bytes:
             "vc_14": vc_14_projection,
             "visual_closure_planning_program": "CLOSED",
         },
-        "compiler_version": "0.6.0",
+        "compiler_version": "0.7.0",
         "contract_id": contract["contract_id"],
         "historical_figma_references": contract["historical_figma_references"],
         "legacy_contract_classifications": contract[
             "legacy_contract_classifications"
         ],
-        "schema_version": 4,
-        "source_contract": VISUAL_CLOSURE_MACHINE_PATHS[0].as_posix(),
+        "schema_version": 5,
+        "source_calibration_contract": VISUAL_CLOSURE_MACHINE_PATHS[0].as_posix(),
         "supersessions": contract["supersessions"],
         "traceability_input_sha": hashlib.sha256(source_bytes[0]).hexdigest(),
-        "unsupported_visual_behaviors": contract[
-            "unsupported_visual_behaviors"
+        "implementation_calibration_exclusions": contract[
+            "implementation_calibration_exclusions"
         ],
-        "visual_validation_decisions": contract[
-            "visual_validation_decisions"
+        "calibration_validation_decisions": contract[
+            "calibration_validation_decisions"
         ],
         "wave_1_foundation_closure": wave_1_projection,
         "wave_2_surface_journey_closure": wave_2_projection,

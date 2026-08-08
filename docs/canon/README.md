@@ -41,17 +41,19 @@ for implementation agents and repository tooling.
 ## Design canon and references
 
 - [Owner Taste and Design Decision System](design/OWNER_TASTE_DESIGN_DECISION_SYSTEM.md)
-  and its JSON peer preserve the R01–R66 owner calibration as a reconciled
-  reference. It routes contextual presentation decisions and proof preparation;
-  accessibility/haptics remain evidence-governed and the VC contract below is
-  still the sole active visual controller.
+  and its JSON peer preserve the R01–R66 owner calibration as the supreme
+  Ambitions design authority. Owner Taste wins every conflict with another
+  design source. Product truth, safety, privacy, correctness, accessibility and
+  platform requirements, and verified usability limits remain non-design
+  constraints on feasible implementation.
 - [Visual System R1](design/VISUAL_SYSTEM_R1.md) records the reconciled
   provisional cross-surface direction and historical Revision 1 provenance.
   Figma authorization, `APPROVED FOR SWIFTUI`, broad implementation, broad
   frontend reconstruction, and legacy cutover authorization are false.
 - [VC-01–VC-14 Visual Closure Input Contract](design/VISUAL_CLOSURE_INPUT_CONTRACT.md)
-  and its JSON peer are the sole active visual-closure baseline. The compiler
-  projects that source into the generated visual-authority manifest.
+  and its JSON peer are the subordinate implementation/calibration baseline
+  beneath Owner Taste. The compiler projects both layers into the generated
+  visual-authority manifest without granting VC independent design authority.
 - [Wave 1 Foundation Closure](design/VC_WAVE_1_FOUNDATION_CLOSURE.md) and its
   JSON peer install the closed VC-01 through VC-06 decisions beneath the input
   contract.

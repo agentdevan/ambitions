@@ -2,7 +2,7 @@
 
 # Ambitions Visual System Revision 1 — RP-Reconciled VC Baseline
 
-Status: `ACTIVE_RECONCILED_BASELINE / VC_01_THROUGH_VC_14_CLOSED / NATIVE_PROVING_ACTIVE / FIGMA_NOT_AUTHORIZED`
+Status: `SUBORDINATE_IMPLEMENTATION_CALIBRATION / VC_01_THROUGH_VC_14_CLOSED / NATIVE_PROVING_ACTIVE / FIGMA_NOT_AUTHORIZED`
 
 Date: 2026-07-23
 
@@ -20,34 +20,38 @@ Design-input provenance:
 - state-inventory matrix SHA-256 embedded in that file: `f319153d552ab557798f289d7e838e94364a2e21b43903343c672af207dbdbbe`;
 - requirement-disposition file SHA-256 for `docs/canon/migration/ux-blueprint-requirement-dispositions.json`: `562c499ebbc1e47a65ff271c4e4a05d626b048ed074d62a50391b44bd8090fdd`;
 - requirement-disposition matrix SHA-256: `8b7d5ed10ff173162092f3b3d687ddf25c42c15fda2bfa7716d127e5e261af84`;
-- VC input Markdown SHA-256 for `docs/canon/design/VISUAL_CLOSURE_INPUT_CONTRACT.md`: `24e2ab1fcfca375e9eeb812d1c1597146daa3e8342b558ea4539646877ca4bbf`;
-- VC input JSON SHA-256 for `docs/canon/design/visual-closure-input-contract.json`: `aead326600c3bc7ab662f4bb8d29eefa8656963d9f64abfa08df95d513a97cde`;
-- Wave 1 closure Markdown SHA-256 for `docs/canon/design/VC_WAVE_1_FOUNDATION_CLOSURE.md`: `7273a1c320f7e13f694d6bad07ee15586b675d9ae72688361217ee51a4b8e3bd`;
-- Wave 1 closure JSON SHA-256 for `docs/canon/design/vc-wave-1-foundation-closure.json`: `5cab7b582cc2940a492beaba39c7d4e46a479ed2fd3147399156e95ec34bb640`;
-- Wave 2 closure Markdown SHA-256 for `docs/canon/design/VC_WAVE_2_SURFACE_JOURNEY_CLOSURE.md`: `d7978fd3a28889feb88dc261f7108f114c2f40afa61083f6bc250af2e9614e6f`;
-- Wave 2 closure JSON SHA-256 for `docs/canon/design/vc-wave-2-surface-journey-closure.json`: `ce2c06c08aa837a47dc614d79afe274debf8f205aa4149daf83a654afef3f1d2`;
-- Wave 3 closure Markdown SHA-256 for `docs/canon/design/VC_WAVE_3_ACCESSIBILITY_STRESS_CLOSURE.md`: `bf4586bf1eabb92e6048795052e5703f9430e86a32f2a614a30bfb9ec63dc437`;
-- Wave 3 closure JSON SHA-256 for `docs/canon/design/vc-wave-3-accessibility-stress-closure.json`: `e7c5d9110276c14593efa18a4f6ba6244fa4782a85a8c55c183ca38ae6405e44`;
-- VC-14 closure Markdown SHA-256 for `docs/canon/design/VC_14_NATIVE_MATCHED_CLOSURE.md`: `c443ee806e05261b0a118ca78ded33f0284a07c851bcf83efb6fe892a86f4010`;
-- VC-14 closure JSON SHA-256 for `docs/canon/design/vc-14-native-matched-closure.json`: `9e77f9ebb92620a9ec3a95f6dfb65fc747efe166d2ff1a194c3309875c6ed0d1`;
-- visual-mapping manifest SHA-256 for `docs/canon/generated/visual-authority-manifest.json`: `6e36954b4eb25f5ac3c33ac8ca41aac4a807240bcfe2cb055ae3b339ad9d535f`;
+- VC input Markdown SHA-256 for `docs/canon/design/VISUAL_CLOSURE_INPUT_CONTRACT.md`: `362ea0580c9a854c093f2bf865174024d29296e5df8f552040e105fd28ed6a8d`;
+- VC input JSON SHA-256 for `docs/canon/design/visual-closure-input-contract.json`: `2105ee012788d0cf6e50d4ef348af2a90e0e24927718c4e471694981fadc7863`;
+- Wave 1 closure Markdown SHA-256 for `docs/canon/design/VC_WAVE_1_FOUNDATION_CLOSURE.md`: `192fa55e8cc4330f7223f5b12f7cc3fb32e5b5cff751438bf63e59f3ab066870`;
+- Wave 1 closure JSON SHA-256 for `docs/canon/design/vc-wave-1-foundation-closure.json`: `cf79b4ba8860d8cda21b23b93642f2ce024eff520eba7a050eafd1fa3490aef3`;
+- Wave 2 closure Markdown SHA-256 for `docs/canon/design/VC_WAVE_2_SURFACE_JOURNEY_CLOSURE.md`: `a9161898f82cf1d697dc8219a8d4d01404e2ac8d41e7caed5e65eae60a8343c2`;
+- Wave 2 closure JSON SHA-256 for `docs/canon/design/vc-wave-2-surface-journey-closure.json`: `7ccf544e03b586b3010d2babc75900f18efa322a558dafe256065fd76035f4d4`;
+- Wave 3 closure Markdown SHA-256 for `docs/canon/design/VC_WAVE_3_ACCESSIBILITY_STRESS_CLOSURE.md`: `d0488b34406905feb619cf7ccd9947d8a4d6c2a1eae5ce98390c6a6ef9bee226`;
+- Wave 3 closure JSON SHA-256 for `docs/canon/design/vc-wave-3-accessibility-stress-closure.json`: `a52f23cee5a05d1e8701422acbea9cc6f718181ff0452286caa6344864ef6c12`;
+- VC-14 closure Markdown SHA-256 for `docs/canon/design/VC_14_NATIVE_MATCHED_CLOSURE.md`: `e3a9aee587fa2bbeec1bf19f33c47380e14f785080e320c7c9180729d95fce13`;
+- VC-14 closure JSON SHA-256 for `docs/canon/design/vc-14-native-matched-closure.json`: `ad57b9a9510ae952052aac6123142fb8b968a2734914443013fb6ced87ccd27f`;
+- visual-mapping manifest SHA-256 for `docs/canon/generated/visual-authority-manifest.json`: `c53dc5ceea85f067bc58c2db297321f97366a82d9fb4813243f00baaf97c5763`;
 
 This document preserves the Revision 1 corpus and routes current visual closure
 to `docs/canon/design/VISUAL_CLOSURE_INPUT_CONTRACT.md`. That contract, its
 machine peer, and the installed `VC_WAVE_1_FOUNDATION_CLOSURE.md`,
 `VC_WAVE_2_SURFACE_JOURNEY_CLOSURE.md`, and
 `VC_WAVE_3_ACCESSIBILITY_STRESS_CLOSURE.md`, and
-`VC_14_NATIVE_MATCHED_CLOSURE.md` packages define the active baseline. Native
+`VC_14_NATIVE_MATCHED_CLOSURE.md` packages define the current implementation
+calibration beneath the supreme Owner Taste authority. Native
 SwiftUI previews and the running native application are the primary visual
 proving environments. The Figma frames, exact tokens, component descriptions, and archived
 appearance studies below are historical or deferred according to their explicit
 classification; none is a current selection, component API, implementation
 instruction, or proof.
 
-## 1. Active reconciled VC baseline
+## 1. Owner-taste-subordinate VC calibration
 
-The controlling owner record is
-`docs/audits/rp-01-08-evidence-audit/13-owner-reconciliation-decisions.md`.
+The supreme design authority is
+`docs/canon/design/OWNER_TASTE_DESIGN_DECISION_SYSTEM.md`. The earlier
+controlling owner record at
+`docs/audits/rp-01-08-evidence-audit/13-owner-reconciliation-decisions.md`
+remains provenance beneath it.
 It preserves `AVF-DNA-S07-R00`, `AVF-COHERENCE-S07-R00`, and
 `AVF-A11Y-S07-R00`; authorizes provisional structural branches
 `AVF-GOALS-S08-R00` and `AVF-TODAY-S10-R00`; and authorizes targeted revisions
@@ -72,7 +76,7 @@ Today flagship calibration slice, and screenshot-based owner review are
 separately true. These narrow permissions do not redefine a broad
 authorization as true.
 
-The active Wave 1 selections are:
+The current Wave 1 calibration selections are:
 
 - `VC01-TYPE-STUDY-D — Semantic Cadence`;
 - `Mineral Relief Continuum`;
@@ -143,7 +147,7 @@ Figma authorization is false. `APPROVED FOR SWIFTUI`, broad production
 implementation, broad frontend reconstruction, and legacy frontend cutover
 authorization are false.
 
-The complete active decisions, rejections, deferred calibration, architecture
+The complete calibration decisions, rejections, deferred calibration, architecture
 dependencies, and validation requirements are defined in
 `VC_WAVE_1_FOUNDATION_CLOSURE.md`, `vc-wave-1-foundation-closure.json`,
 `VC_WAVE_2_SURFACE_JOURNEY_CLOSURE.md`, and
@@ -158,13 +162,13 @@ dividers, material recipes, radii, shadows, crown and dock geometry, motion,
 haptics, Figma variables, component tokens, and component APIs remain deferred.
 
 Every `VAD-R1-*` contract below carries one classification from the closed
-vocabulary `ACTIVE_RECONCILED_BASELINE`, `HISTORICAL_REFERENCE`,
+vocabulary `OWNER_TASTE_SUBORDINATE_CALIBRATION`, `HISTORICAL_REFERENCE`,
 `DEFERRED_CANDIDATE_REQUIRING_OWNER_REVIEW`,
 `IMPLEMENTATION_DETAIL_NOT_YET_AUTHORIZED`, or `SUPERSEDED`. A non-active
 contract remains evidence only even when its original prose uses imperative or
-present-tense language. Only clauses repeated in the visual-closure input
-contract or installed Wave 1, Wave 2, Wave 3, and VC-14 closures may control
-VC-01 through VC-14.
+present-tense language. Clauses repeated in the visual-closure input contract
+or installed Wave 1, Wave 2, Wave 3, and VC-14 closures control only the VC
+implementation/calibration layer and never override Owner Taste.
 
 ### VC-14 native matched closure
 

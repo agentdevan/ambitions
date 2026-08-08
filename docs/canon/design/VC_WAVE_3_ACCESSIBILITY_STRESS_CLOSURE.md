@@ -1,6 +1,6 @@
 # Ambitions VC Wave 3 Accessibility and Content Stress Closure
 
-Status: `CLOSED / ACTIVE_WAVE_3_ACCESSIBILITY_STRESS_AUTHORITY`
+Status: `CLOSED / OWNER_TASTE_SUBORDINATE_CALIBRATION`
 
 Date: 2026-07-23
 
@@ -11,11 +11,13 @@ Machine peer: `docs/canon/design/vc-wave-3-accessibility-stress-closure.json`
 Repository baseline used for this package:
 `4eeebd2ff4619b3798d23d2592e6ce5bb40aa46c`
 
-## 1. Authority boundary
+## 1. Calibration boundary
 
 This record installs the completed `VC-13` accessibility and content
-extreme-state validation beneath the unchanged active AVF direction set and the
-closed Wave 1 and Wave 2 closure records.
+extreme-state validation beneath the supreme Owner Taste authority, the
+selected AVF direction set, and the closed Wave 1 and Wave 2 calibration
+records. It validates implementation behavior and cannot narrow or override
+Owner Taste.
 
 It closes the visual validation of the locked system under Dynamic Type,
 assistive input, reduced effects, density, long content, RTL, keyboard pressure,
@@ -822,7 +824,8 @@ These remain calibration and proof questions, not open structural decisions.
 
 The matched-baseline campaign must:
 
-1. use the exact active AVF set and closed `VC-01` through `VC-13` authority;
+1. use the exact selected AVF set and closed `VC-01` through `VC-13`
+   calibration;
 2. produce matched representative states across Today, Goals, Time, You, Search,
    Capture, focused objects, editing, review, conflict, recovery, settlement,
    Light, Dark, and accessibility transformation;

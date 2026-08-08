@@ -2,7 +2,7 @@
 
 # Ambitions VC-14 Native Matched Closure
 
-Status: `CLOSED / ACTIVE_VC_14_NATIVE_MATCHED_CLOSURE_AUTHORITY`
+Status: `CLOSED / OWNER_TASTE_SUBORDINATE_CALIBRATION`
 
 Date: 2026-07-23
 
@@ -13,11 +13,12 @@ Machine peer: `docs/canon/design/vc-14-native-matched-closure.json`
 Repository baseline used for this package:
 `8ae1a587fa6400cbf5495dd0c6457e8cb17016f3`
 
-## 1. Authority boundary
+## 1. Calibration boundary
 
-This record installs the final `VC-14` visual-closure decision beneath the
-unchanged active AVF direction set and the closed Wave 1, Wave 2, and Wave 3
-records. The selected synthesis is:
+This record installs the final `VC-14` implementation/calibration decision
+beneath the supreme Owner Taste authority, the selected AVF direction set, and
+the closed Wave 1, Wave 2, and Wave 3 calibration records. It cannot narrow or
+override Owner Taste. The selected synthesis is:
 
 **`VC14-NATIVE-S01 — Matched Native Flagship Proof`**
 

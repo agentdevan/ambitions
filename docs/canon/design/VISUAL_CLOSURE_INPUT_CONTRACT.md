@@ -1,25 +1,29 @@
 # Ambitions VC-01–VC-14 Visual Closure Input Contract
 
-Status: `ACTIVE_RECONCILED_BASELINE / VISUAL_CLOSURE_PROGRAM_CLOSED / NATIVE_PROVING_ACTIVE`
+Status: `SUBORDINATE_IMPLEMENTATION_CALIBRATION / VISUAL_CLOSURE_PROGRAM_CLOSED / NATIVE_PROVING_ACTIVE`
 
 Date: 2026-07-23
 
 Machine peer: `docs/canon/design/visual-closure-input-contract.json`
 
-This contract is the sole active visual input for VC-01 through VC-14. It
-normalizes the provisional visual system against the controlling owner record,
-accepted reconciliation ADRs, canonical UX Blueprint, and reconstruction plan.
+This contract is the current implementation and calibration layer beneath the
+[`Owner Taste and Design Decision System`](OWNER_TASTE_DESIGN_DECISION_SYSTEM.md),
+which is the supreme design authority. It normalizes the provisional visual
+system against that authority, accepted reconciliation ADRs, canonical UX
+Blueprint, and reconstruction plan. Any conflict with Owner Taste is resolved
+in favor of Owner Taste; a closed VC package cannot narrow or override it.
 The Wave 1, Wave 2, Wave 3, and VC-14 human and machine peers install the
-completed VC-01 through VC-14 decisions beneath this contract. Figma is not
-visual authority; native SwiftUI previews and the running native application
-are the primary proving environments. The final closure authorizes only the
-bounded native calibration permissions recorded below. It does not approve
+completed VC-01 through VC-14 calibration decisions beneath this contract.
+Figma is not design authority; native SwiftUI previews and the running native
+application are the primary proving environments. The final closure authorizes
+only the bounded native calibration permissions recorded below. It does not approve
 SwiftUI broadly, authorize production implementation or frontend
 reconstruction, permit legacy cutover, or prove runtime capability.
 
 ## Classification vocabulary
 
-- `ACTIVE_RECONCILED_BASELINE`: current input to VC-01–VC-14.
+- `OWNER_TASTE_SUBORDINATE_CALIBRATION`: current VC implementation/calibration
+  input, valid only where consistent with Owner Taste.
 - `HISTORICAL_REFERENCE`: retained provenance that cannot control current work.
 - `DEFERRED_CANDIDATE_REQUIRING_OWNER_REVIEW`: candidate that may be assessed
   but cannot become current without the named review.
@@ -31,7 +35,8 @@ Every `VAD-R1-*` record in `VISUAL_SYSTEM_R1.md` is classified by the machine
 peer. The historical Revision 1 corpus cannot become active by implication;
 only rules repeated in this contract are active.
 
-- `ACTIVE_RECONCILED_BASELINE`: `VAD-R1-SYS-001`, `VAD-R1-SYS-003`, and
+- `OWNER_TASTE_SUBORDINATE_CALIBRATION`: `VAD-R1-SYS-001`,
+  `VAD-R1-SYS-003`, and
   `VAD-R1-SPACE-001`.
 - `HISTORICAL_REFERENCE`: `VAD-R1-FIGMA-001` and `VAD-R1-FIGMA-003`.
 - `DEFERRED_CANDIDATE_REQUIRING_OWNER_REVIEW`:
@@ -95,34 +100,34 @@ architecture dependencies, and source paths are in the Wave 1–3 and VC-14
 human and machine records. The VC study and synthesis labels do not create
 active AVF direction IDs.
 
-## Owner-taste reconciliation (2026-08-08)
+## Owner-taste authority (2026-08-08)
 
-The later owner calibration is preserved in
+The owner-approved decision system is installed in
 [`OWNER_TASTE_DESIGN_DECISION_SYSTEM.md`](OWNER_TASTE_DESIGN_DECISION_SYSTEM.md)
-and its machine peer. It is a reconciled reference feeding this contract, not a
-competing active visual authority. The machine peer records these exact
-dispositions; product/IA law and accessibility evidence still outrank taste.
+and its machine peer as the supreme design authority. This contract is a
+subordinate implementation/calibration layer. The machine peer records the
+relationship explicitly. Product truth, safety, privacy, correctness,
+accessibility requirements, platform requirements, and verified usability
+limits constrain feasible implementations but are not rival design authorities.
 
 | Overlap | Disposition |
 | --- | --- |
-| Information richness; continuous composition | `SUPERSEDED_BY_OWNER_CALIBRATION` |
-| Appearance/atmosphere; typography; bottom navigation | `NARROWED` |
-| Localized glass; iPhone-only scope | `PRESERVED` |
-| Crown/header and sustained-scroll retreat | `TRANSFORMED` |
-| Primary action, selection, gestures, semantic drag/drop, motion, sound | `SUPERSEDED_BY_OWNER_CALIBRATION` |
-| Professional density, charts, capture typing, search, disclosure, intelligence, widgets | `SUPERSEDED_BY_OWNER_CALIBRATION` |
-| Accessibility and haptics | `DEFERRED_TO_EVIDENCE` |
+| Information richness; continuous composition; appearance/atmosphere; typography; bottom navigation | `OWNER_TASTE_CONTROLS` |
+| Primary action, selection, gestures, semantic drag/drop, motion, sound, haptic intent | `OWNER_TASTE_CONTROLS` |
+| Professional density, charts, capture typing, search, disclosure, intelligence, widgets | `OWNER_TASTE_CONTROLS` |
+| Localized glass; crown/header retreat; iPhone scope | `VC_CALIBRATION_CONSISTENT` |
+| Accessibility conformance; physical haptic realization | `CONSTRAINED_BY_NON_DESIGN_REQUIREMENTS` |
 
 The resolved source adds no broad SwiftUI, production, runtime, physical-device,
 or release authorization. It supplies an owner-fit gate before expensive proof;
 the score never replaces an owner decision or evidence-based validation.
 
-## Protected characteristics
+## Current implementation/calibration characteristics
 
-- Articulated Relief and Native Semantic Continuum remain the cross-surface
-  foundation.
-- The Crowned Edge Dock remains the target shell under one shell owner and the
-  accepted native/custom boundary.
+- Articulated Relief and Native Semantic Continuum are the current cross-surface
+  calibration.
+- The Crowned Edge Dock is the current target shell under one shell owner and
+  the accepted native/custom boundary.
 - Today, Goals, Time, and You are the only roots. Search and Capture are global
   non-root systems.
 - Goals is Life-Area-led, then Goal-owned, with the inline Linked Goal Lens and
@@ -138,6 +143,11 @@ the score never replaces an owner decision or evidence-based validation.
   presentations are capability-gated.
 - Adaptive Semantic Continuity supplies equivalent meaning across accessibility
   transformations; it is a proof obligation, not a completion claim.
+
+These characteristics are selected working implementations, not independent
+design law. Owner Taste may retain, revise, or supersede them without reopening
+the historical VC planning program; product and evidence obligations still
+require proportionate verification of the resulting implementation.
 
 ## Typography
 
@@ -168,9 +178,9 @@ symbols, provenance, chronology, preview breadth, and secondary relationships
 before it removes Place, Identity, Current truth, Applicable state,
 Consequence, Required action, Conflict, or Return.
 
-New York and every other serif are absent from the active baseline. Historical
-serif explorations remain `SUPERSEDED`. Exact sizes, line heights, tracking,
-named Figma text styles, and Dynamic Type mappings remain deferred. No custom
+New York and every other serif are absent from the current VC calibration.
+Historical serif explorations remain `SUPERSEDED`. Exact sizes, line heights,
+tracking, named Figma text styles, and Dynamic Type mappings remain deferred. No custom
 tracking, all-regular low-contrast hierarchy, uppercase state system, branded
 button typeface, or microcopy-dependent hierarchy is active.
 
@@ -181,7 +191,7 @@ matte, continuous environment of `AVF-APPEARANCE-D01-R00` with the slightly
 stronger localized articulation of `AVF-APPEARANCE-D04-R00`, without theatrical
 material behavior. This name is a VC synthesis label, not an active AVF ID.
 
-The only active appearance choices are System, Light, and Dark. System follows
+The current VC calibration offers System, Light, and Dark. System follows
 the operating-system Light or Dark selection; it is not a third palette. Light
 uses a mineral-neutral plane rather than stark productivity white, deep
 graphite text, restrained dividers, clearer functional chrome, and small tonal
@@ -206,8 +216,9 @@ violet-indigo and candidate values are not fixed by this contract.
 
 Purely flat D01 calibration, strongly sculpted D04 calibration, OLED Dark,
 atmosphere families, photography-derived appearance, decorative gradients,
-glow, glass content panels, and appearance-dependent hierarchy are rejected as
-active authority.
+glow, glass content panels, and appearance-dependent hierarchy are not selected
+by this VC calibration. That non-selection cannot override a contrary Owner
+Taste decision.
 
 ## Crown state family
 

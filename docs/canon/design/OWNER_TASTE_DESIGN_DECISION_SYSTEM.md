@@ -1,24 +1,35 @@
 # Owner Taste and Design Decision System
 
-Status: `OWNER_APPROVED_SOURCE / RECONCILED_REFERENCE`  
-Scope: Ambitions iPhone and future iPhone-native surfaces  
+Status: `OWNER_APPROVED / SUPREME_DESIGN_AUTHORITY`
+Scope: Ambitions iPhone and future iPhone-native surfaces
 Machine peer: `docs/canon/design/owner-taste-design-decision-system.json`
 
-This is the durable record of the owner's R01–R66 calibration. It is a source
-of contextual presentation preference, not a second active visual controller:
-the VC-01–VC-14 Visual Closure Input Contract remains the sole active visual
-input. Its reconciliation table is the only way this record changes active
-visual direction.
+This is the durable record of the owner's R01–R66 calibration and the supreme
+active design authority for Ambitions. When this source conflicts with any
+other visual system, closure package, surface treatment, design precedent,
+local preference, or decorative convention, this source wins. The VC-01–VC-14
+Visual Closure Input Contract and its packages are subordinate implementation
+and calibration material. They may realize, test, or refine this source, but
+they may not narrow, reinterpret, or override it.
 
 ## Precedence and boundary
 
-Apply product truth and domain meaning; safety, privacy, correctness, and
-accessibility; current Apple behavior and strong usability evidence; canon and
-object semantics; the reconciled visual contract; then this record. Decorative
-novelty is last. Accessibility transformation, Dynamic Type, VoiceOver,
-Reduce Motion, haptic character, platform safety behavior, and hierarchy
-mechanism tie cases are evidence-governed, not owner taste. Current scope is
-iPhone only; iPad and Apple Watch are excluded.
+Owner Taste is first in the design-authority order. Owner-approved
+surface-specific decisions follow it; Visual Closure implementation and
+calibration follows those; historical design provenance, local preference, and
+decorative novelty follow last. No subordinate design source may win a
+conflict with Owner Taste by being older, more detailed, implemented, or
+described as closed.
+
+Product truth, domain and object semantics, safety, privacy, correctness,
+accessibility requirements, Apple platform requirements, and verified
+usability limits are non-design boundary conditions rather than competing
+taste authorities. They define the feasible and truthful solution space.
+Within that space, Owner Taste controls presentation, interaction character,
+hierarchy, atmosphere, motion, sound, and haptic intent. Evidence may reject an
+implementation or proof claim that fails those constraints; it cannot install
+a competing design direction. Current scope is iPhone only; iPad and Apple
+Watch are excluded.
 
 ## Governing objective
 
@@ -95,14 +106,15 @@ wrong for a daily glance; full push is for a genuinely new destination.
 
 ## Appearance and authored presentation
 
-Owner preference is cool ink/subtle navy-black before graphite, OLED black,
+Owner direction is cool ink/subtle navy-black before graphite, OLED black,
 and warm black; light mode favors tinted atmosphere before mineral neutral,
 warm editorial, and stock white. Use atmosphere families plus stable semantic
 color families, restrained abstract/neutral utility backgrounds, role-based
 tight geometry, and intentional axes. Imagery may dominate only where it is
-the content. These preferences are constrained by the active contract's
-reconciliation and semantic/accessibility requirements; they do not authorize
-ambient color, glow, decorative gradients, or custom control behavior.
+the content. Visual Closure may offer a current implementation calibration for
+these decisions but cannot turn a conflicting calibration into authority.
+Semantic meaning, accessibility requirements, and native control behavior
+remain boundary conditions.
 
 ## Hard kill signals
 
@@ -125,11 +137,14 @@ action clarity, purposeful distinctiveness, and absence of decorative novelty.
 kill wins regardless of score. The score is not owner approval, accessibility
 proof, runtime proof, release Green, or physical-device proof.
 
-Physical iPhone validation remains the final authority for scale/density,
-one-handed reach, touch certainty, scroll and motion character, gesture and
-semantic drag/drop clarity, hardware haptics, repeated-use sound, OLED/material
-behavior, keyboard occlusion, system-gesture coexistence, latency, fatigue,
-and interaction pull. Screenshots and simulator frames cannot certify these.
+Physical iPhone validation remains the final proving environment for
+scale/density, one-handed reach, touch certainty, scroll and motion character,
+gesture and semantic drag/drop clarity, hardware haptic realization,
+repeated-use sound, OLED/material behavior, keyboard occlusion, system-gesture
+coexistence, latency, fatigue, and interaction pull. A failed observation can
+invalidate the tested implementation or proof claim and require a new
+calibration; it does not create design authority above Owner Taste. Screenshots
+and simulator frames cannot certify these properties.
 
 ## Domain-scoped calibration evidence
 

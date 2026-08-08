@@ -1,4 +1,5 @@
 {
+  "authority_role": "subordinate_implementation_calibration",
   "active_direction_ids": [
     "AVF-DNA-S07-R00",
     "AVF-SHELL-S07-R01",

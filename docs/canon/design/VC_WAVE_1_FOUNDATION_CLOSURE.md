@@ -1,6 +1,6 @@
 # Ambitions VC Wave 1 Foundation Closure
 
-Status: `CLOSED / ACTIVE_WAVE_1_CLOSURE_AUTHORITY`
+Status: `CLOSED / OWNER_TASTE_SUBORDINATE_CALIBRATION`
 
 Date: 2026-07-22
 
@@ -8,24 +8,26 @@ Package ID: `AMB-VC-WAVE-1-FOUNDATION-CLOSURE`
 
 Machine peer: `docs/canon/design/vc-wave-1-foundation-closure.json`
 
-## 1. Status and authority boundary
+## 1. Status and calibration boundary
 
 This record installs the completed visual-foundation decisions for `VC-01`
-through `VC-06`. It is active visual-closure authority beneath the exact active
-AVF direction set. It closes the shared foundation needed for later surface,
-journey, stress, and matched-baseline work without creating another direction,
-changing product scope, or claiming runtime capability.
+through `VC-06`. It is implementation/calibration beneath the supreme Owner
+Taste authority and the selected AVF direction set. It closes the shared
+foundation needed for later surface, journey, stress, and matched-baseline work
+without creating another direction, changing product scope, or claiming
+runtime capability. No closed package may narrow or override Owner Taste.
 
 This record is not a Figma selection, SwiftUI approval, implementation
 authorization, final token system, component library, rendered proof, or
-accessibility completion claim. It does not reopen the owner decisions in
-`docs/audits/rp-01-08-evidence-audit/13-owner-reconciliation-decisions.md`.
+accessibility completion claim. The earlier owner decisions in
+`docs/audits/rp-01-08-evidence-audit/13-owner-reconciliation-decisions.md`
+remain provenance beneath the current Owner Taste source.
 Target architecture may remain ahead of current runtime support; unsupported
 behavior stays labelled target-only, unavailable, or capability-gated.
 
-## 2. Active AVF direction set
+## 2. Current calibration direction set
 
-The active set remains exact and closed:
+The selected calibration set remains exact and closed:
 
 1. `AVF-DNA-S07-R00`
 2. `AVF-SHELL-S07-R01`
@@ -129,8 +131,8 @@ Consequence, Required action, Conflict, or Return.
 Serif accents, New York, oversized editorial root titles, instrument
 typography as a universal character, permanent accessibility scaffolding,
 all-regular low-contrast hierarchy, custom tracking as brand identity,
-microcopy-dependent layouts, and uppercase state systems are rejected as
-active authority.
+microcopy-dependent layouts, and uppercase state systems are not selected by
+this calibration. That non-selection cannot override Owner Taste.
 
 Exact sizes, line heights, tracking, final named Figma text styles, and exact
 Dynamic Type mappings remain deferred.
@@ -182,8 +184,8 @@ and Reduce Transparency receives an authored opaque equivalent.
 
 Purely flat D01 calibration, strongly sculpted D04 calibration, OLED Dark,
 atmosphere families, photography-derived appearance, decorative gradients,
-glow, glass content panels, and appearance-dependent hierarchy are rejected as
-active authority.
+glow, glass content panels, and appearance-dependent hierarchy are not selected
+by this calibration. That non-selection cannot override Owner Taste.
 
 Exact Light canvas values, Dark graphite values, violet-indigo values, relief
 intensity, shadows, divider contrast, and opaque material substitutions remain
@@ -562,7 +564,9 @@ set. Each surface or journey study must:
 
 This closure is interpreted with, and does not replace:
 
-- the controlling owner record:
+- the supreme Owner Taste authority:
+  `docs/canon/design/OWNER_TASTE_DESIGN_DECISION_SYSTEM.md`;
+- the earlier owner-reconciliation provenance:
   `docs/audits/rp-01-08-evidence-audit/13-owner-reconciliation-decisions.md`;
 - the shell/navigation/restoration ADR:
   `docs/adr/ADR-2026-07-22-shell-navigation-restoration-reconciliation.md`;

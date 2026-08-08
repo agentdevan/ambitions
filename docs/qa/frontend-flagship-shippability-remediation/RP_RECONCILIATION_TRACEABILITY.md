@@ -11,15 +11,15 @@ Evidence remains in `docs/audits/rp-01-08-evidence-audit/`; this map does not re
 ```text
 current source and tests (implementation evidence)
         + Constitution and normative specifications (product law)
-        + owner reconciliation (D-DEV-01..10 product choices)
+        + Owner Taste (supreme design authority)
         v
 accepted reconciliation ADRs (architecture/runtime decisions)
         v
 canonical UX Blueprint requirements (design input, not proof)
         v
-VC-01–VC-14 visual closure input contract (active reconciled baseline)
+VC-01–VC-14 visual closure input contract (implementation/calibration)
         v
-Wave 1 foundation closure (VC-01..VC-06 closed authority)
+Wave 1 foundation closure (VC-01..VC-06 closed calibration)
         v
 reconciled flagship reconstruction plan (sequencing)
         v

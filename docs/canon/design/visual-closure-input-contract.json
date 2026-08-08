@@ -1,35 +1,36 @@
 {
-  "owner_taste_reconciliation": {
+  "owner_taste_authority": {
     "source_record": "docs/canon/design/OWNER_TASTE_DESIGN_DECISION_SYSTEM.md",
     "machine_peer": "docs/canon/design/owner-taste-design-decision-system.json",
-    "authority_role": "reconciled_reference_feeding_sole_active_visual_contract",
+    "authority_role": "supreme_design_authority_over_visual_closure",
+    "visual_closure_role": "subordinate_implementation_calibration",
     "concept_dispositions": {
-      "information_richness": "SUPERSEDED_BY_OWNER_CALIBRATION",
-      "continuous_composition": "SUPERSEDED_BY_OWNER_CALIBRATION",
-      "appearance_atmosphere": "NARROWED",
-      "localized_glass": "PRESERVED",
-      "typography_personality": "NARROWED",
-      "crown_and_scroll": "TRANSFORMED",
-      "bottom_navigation": "NARROWED",
-      "primary_actions": "SUPERSEDED_BY_OWNER_CALIBRATION",
-      "selection_affordance": "SUPERSEDED_BY_OWNER_CALIBRATION",
-      "gesture_hierarchy": "SUPERSEDED_BY_OWNER_CALIBRATION",
-      "semantic_drag_drop": "SUPERSEDED_BY_OWNER_CALIBRATION",
-      "motion_damping": "SUPERSEDED_BY_OWNER_CALIBRATION",
-      "sound": "SUPERSEDED_BY_OWNER_CALIBRATION",
-      "haptics": "DEFERRED_TO_EVIDENCE",
-      "professional_density": "SUPERSEDED_BY_OWNER_CALIBRATION",
-      "analytical_charts": "SUPERSEDED_BY_OWNER_CALIBRATION",
-      "capture_typing": "SUPERSEDED_BY_OWNER_CALIBRATION",
-      "search": "SUPERSEDED_BY_OWNER_CALIBRATION",
-      "progressive_disclosure": "SUPERSEDED_BY_OWNER_CALIBRATION",
-      "intelligence_presence": "SUPERSEDED_BY_OWNER_CALIBRATION",
-      "widgets": "SUPERSEDED_BY_OWNER_CALIBRATION",
-      "accessibility": "DEFERRED_TO_EVIDENCE",
-      "device_scope": "PRESERVED"
+      "information_richness": "OWNER_TASTE_CONTROLS",
+      "continuous_composition": "OWNER_TASTE_CONTROLS",
+      "appearance_atmosphere": "OWNER_TASTE_CONTROLS",
+      "localized_glass": "VC_CALIBRATION_CONSISTENT",
+      "typography_personality": "OWNER_TASTE_CONTROLS",
+      "crown_and_scroll": "VC_CALIBRATION_CONSISTENT",
+      "bottom_navigation": "OWNER_TASTE_CONTROLS",
+      "primary_actions": "OWNER_TASTE_CONTROLS",
+      "selection_affordance": "OWNER_TASTE_CONTROLS",
+      "gesture_hierarchy": "OWNER_TASTE_CONTROLS",
+      "semantic_drag_drop": "OWNER_TASTE_CONTROLS",
+      "motion_damping": "OWNER_TASTE_CONTROLS",
+      "sound": "OWNER_TASTE_CONTROLS",
+      "haptics": "OWNER_TASTE_CONTROLS",
+      "professional_density": "OWNER_TASTE_CONTROLS",
+      "analytical_charts": "OWNER_TASTE_CONTROLS",
+      "capture_typing": "OWNER_TASTE_CONTROLS",
+      "search": "OWNER_TASTE_CONTROLS",
+      "progressive_disclosure": "OWNER_TASTE_CONTROLS",
+      "intelligence_presence": "OWNER_TASTE_CONTROLS",
+      "widgets": "OWNER_TASTE_CONTROLS",
+      "accessibility": "CONSTRAINED_BY_NON_DESIGN_REQUIREMENTS",
+      "device_scope": "VC_CALIBRATION_CONSISTENT"
     }
   },
-  "active_baseline": {
+  "implementation_calibration": {
     "accessibility_doctrine": {
       "direction_id": "AVF-A11Y-S07-R00",
       "meaning_must_survive": [
@@ -304,7 +305,7 @@
     "visual_closure_planning_program_closed": true
   },
   "classification_vocabulary": [
-    "ACTIVE_RECONCILED_BASELINE",
+    "OWNER_TASTE_SUBORDINATE_CALIBRATION",
     "HISTORICAL_REFERENCE",
     "DEFERRED_CANDIDATE_REQUIRING_OWNER_REVIEW",
     "IMPLEMENTATION_DETAIL_NOT_YET_AUTHORIZED",
@@ -438,7 +439,7 @@
     "VAD-R1-FIGMA-005": "IMPLEMENTATION_DETAIL_NOT_YET_AUTHORIZED",
     "VAD-R1-MATERIAL-001": "SUPERSEDED",
     "VAD-R1-MOTION-001": "IMPLEMENTATION_DETAIL_NOT_YET_AUTHORIZED",
-    "VAD-R1-SPACE-001": "ACTIVE_RECONCILED_BASELINE",
+    "VAD-R1-SPACE-001": "OWNER_TASTE_SUBORDINATE_CALIBRATION",
     "VAD-R1-SURFACE-001": "SUPERSEDED",
     "VAD-R1-SURFACE-002": "SUPERSEDED",
     "VAD-R1-SURFACE-003": "SUPERSEDED",
@@ -447,9 +448,9 @@
     "VAD-R1-SURFACE-006": "SUPERSEDED",
     "VAD-R1-SURFACE-007": "SUPERSEDED",
     "VAD-R1-SURFACE-008": "SUPERSEDED",
-    "VAD-R1-SYS-001": "ACTIVE_RECONCILED_BASELINE",
+    "VAD-R1-SYS-001": "OWNER_TASTE_SUBORDINATE_CALIBRATION",
     "VAD-R1-SYS-002": "SUPERSEDED",
-    "VAD-R1-SYS-003": "ACTIVE_RECONCILED_BASELINE",
+    "VAD-R1-SYS-003": "OWNER_TASTE_SUBORDINATE_CALIBRATION",
     "VAD-R1-SYSTEM-001": "SUPERSEDED",
     "VAD-R1-SYSTEM-002": "IMPLEMENTATION_DETAIL_NOT_YET_AUTHORIZED",
     "VAD-R1-SYSTEM-003": "SUPERSEDED",
@@ -461,7 +462,7 @@
     "VAD-R1-TODAY-005": "SUPERSEDED",
     "VAD-R1-TYPE-001": "SUPERSEDED"
   },
-  "status": "ACTIVE_RECONCILED_BASELINE_VISUAL_CLOSURE_CLOSED",
+  "status": "SUBORDINATE_IMPLEMENTATION_CALIBRATION_VISUAL_CLOSURE_CLOSED",
   "supersessions": [
     {
       "replacement": "AVF-GOALS-S08-R00",
@@ -474,7 +475,7 @@
       "superseded": "AVF-TODAY-S09-R00"
     }
   ],
-  "unsupported_visual_behaviors": [
+  "implementation_calibration_exclusions": [
     "active_serif_interface_type",
     "oled_dark",
     "atmosphere_families",
@@ -499,7 +500,7 @@
     "unsupported_permission_or_platform"
   ],
   "version": 3,
-  "visual_requirement_mappings": [
+  "calibration_requirement_mappings": [
     {
       "direction_id": "AVF-DNA-S07-R00",
       "requirement_ids": [
@@ -507,7 +508,7 @@
         "DESIGN-002",
         "DESIGN-003"
       ],
-      "status": "ACTIVE_RECONCILED_BASELINE"
+      "status": "OWNER_TASTE_SUBORDINATE_CALIBRATION"
     },
     {
       "direction_id": "AVF-SHELL-S07-R01",
@@ -516,56 +517,56 @@
         "SPEC-APP-SHELL-GLOBAL-ACTIONS-001",
         "SPEC-APP-SHELL-ROOT-NAVIGATION-001"
       ],
-      "status": "ACTIVE_RECONCILED_BASELINE"
+      "status": "OWNER_TASTE_SUBORDINATE_CALIBRATION"
     },
     {
       "direction_id": "AVF-CAPTURE-S07-R01",
       "requirement_ids": [
         "SPEC-GLOBAL-CAPTURE-VISUAL-AUTHORITY-001"
       ],
-      "status": "ACTIVE_RECONCILED_BASELINE"
+      "status": "OWNER_TASTE_SUBORDINATE_CALIBRATION"
     },
     {
       "direction_id": "AVF-GOALS-S08-R00",
       "requirement_ids": [
         "SPEC-SURFACE-GOALS-VISUAL-AUTHORITY-001"
       ],
-      "status": "ACTIVE_RECONCILED_BASELINE"
+      "status": "OWNER_TASTE_SUBORDINATE_CALIBRATION"
     },
     {
       "direction_id": "AVF-TIME-S07-R01",
       "requirement_ids": [
         "SPEC-SURFACE-TIME-VISUAL-AUTHORITY-001"
       ],
-      "status": "ACTIVE_RECONCILED_BASELINE"
+      "status": "OWNER_TASTE_SUBORDINATE_CALIBRATION"
     },
     {
       "direction_id": "AVF-TODAY-S10-R00",
       "requirement_ids": [
         "SPEC-SURFACE-TODAY-VISUAL-AUTHORITY-001"
       ],
-      "status": "ACTIVE_RECONCILED_BASELINE"
+      "status": "OWNER_TASTE_SUBORDINATE_CALIBRATION"
     },
     {
       "direction_id": "AVF-SEARCH-D07-R01",
       "requirement_ids": [
         "SPEC-GLOBAL-SEARCH-VISUAL-AUTHORITY-001"
       ],
-      "status": "ACTIVE_RECONCILED_BASELINE"
+      "status": "OWNER_TASTE_SUBORDINATE_CALIBRATION"
     },
     {
       "direction_id": "AVF-YOU-D07-R02",
       "requirement_ids": [
         "SPEC-SURFACE-YOU-VISUAL-AUTHORITY-001"
       ],
-      "status": "ACTIVE_RECONCILED_BASELINE"
+      "status": "OWNER_TASTE_SUBORDINATE_CALIBRATION"
     },
     {
       "direction_id": "AVF-RECOVERY-S07-R01",
       "requirement_ids": [
         "SPEC-GLOBAL-TRUST-VISUAL-AUTHORITY-001"
       ],
-      "status": "ACTIVE_RECONCILED_BASELINE"
+      "status": "OWNER_TASTE_SUBORDINATE_CALIBRATION"
     },
     {
       "direction_id": "AVF-A11Y-S07-R00",
@@ -576,7 +577,7 @@
         "A11Y-READING-FOCUS-001",
         "A11Y-REDUCED-EFFECTS-001"
       ],
-      "status": "ACTIVE_RECONCILED_BASELINE"
+      "status": "OWNER_TASTE_SUBORDINATE_CALIBRATION"
     },
     {
       "direction_id": "AVF-COHERENCE-S07-R00",
@@ -584,10 +585,10 @@
         "DESIGN-003",
         "PLATFORM-NATIVE-IPHONE-001"
       ],
-      "status": "ACTIVE_RECONCILED_BASELINE"
+      "status": "OWNER_TASTE_SUBORDINATE_CALIBRATION"
     }
   ],
-  "visual_validation_decisions": [
+  "calibration_validation_decisions": [
     "sf_pro_exact_metrics_named_styles_and_dynamic_type_mappings_within_closed_roles",
     "light_dark_canvas_and_surface_relationships",
     "violet_indigo_exact_values_and_existing_accent_candidate_disposition",

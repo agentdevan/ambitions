@@ -1,6 +1,6 @@
 # Ambitions VC Wave 2 Surface and Journey Closure
 
-Status: `CLOSED / ACTIVE_WAVE_2_CLOSURE_AUTHORITY`
+Status: `CLOSED / OWNER_TASTE_SUBORDINATE_CALIBRATION`
 
 Date: 2026-07-22
 
@@ -8,11 +8,12 @@ Package ID: `AMB-VC-WAVE-2-SURFACE-JOURNEY-CLOSURE`
 
 Machine peer: `docs/canon/design/vc-wave-2-surface-journey-closure.json`
 
-## 1. Authority boundary
+## 1. Calibration boundary
 
 This record installs the completed visual-closure decisions for `VC-07` through
-`VC-12`. It is active provisional visual authority beneath the exact reconciled
-AVF direction set and the closed Wave 1 foundation.
+`VC-12`. It is provisional implementation/calibration beneath the supreme
+Owner Taste authority, the selected AVF direction set, and the closed Wave 1
+foundation. No closure decision can narrow or override Owner Taste.
 
 It closes root anatomy, global Search and Capture geometry, focused temporal and
 pursuit passages, You and Appearance Studio structure, and combined-state
@@ -672,7 +673,8 @@ This closure is interpreted with, and does not replace:
 - `docs/canon/design/VC_WAVE_1_FOUNDATION_CLOSURE.md`;
 - `docs/canon/design/VISUAL_CLOSURE_INPUT_CONTRACT.md` and its JSON peer;
 - `docs/canon/design/VISUAL_SYSTEM_R1.md`;
-- the controlling owner reconciliation record;
+- the supreme Owner Taste authority and earlier owner-reconciliation
+  provenance;
 - the four accepted 2026-07-22 ADRs;
 - `docs/canon/migration/UX_BLUEPRINT.md`;
 - the accessibility/platform proof plan; and

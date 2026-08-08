@@ -198,21 +198,54 @@ class Wave3VisualClosureLoaderTests(unittest.TestCase):
             design.mkdir(parents=True)
             peer = {
                 "record_id": "test",
+                "status": "OWNER_APPROVED_SUPREME_DESIGN_AUTHORITY",
                 "human_peer": "docs/canon/design/OWNER_TASTE_DESIGN_DECISION_SYSTEM.md",
-                "scope": {"device_family": "iPhone", "excluded": ["iPad", "Apple Watch"]},
-                "precedence": [], "governing_objective": "test",
+                "scope": {
+                    "device_family": "iPhone",
+                    "excluded": ["iPad", "Apple Watch"],
+                },
+                "authority_model": {
+                    "role": "supreme_design_authority",
+                    "conflict_rule": (
+                        "owner_taste_supersedes_all_other_design_authority"
+                    ),
+                    "visual_closure_role": "subordinate_implementation_calibration",
+                    "constraints_are_design_authorities": False,
+                    "evidence_effect": (
+                        "may_invalidate_implementation_or_proof_but_cannot_install_"
+                        "competing_design_direction"
+                    ),
+                },
+                "precedence": [
+                    "owner_taste",
+                    "owner_approved_surface_decision",
+                    "visual_closure_implementation_calibration",
+                    "historical_design_provenance",
+                    "local_preference",
+                    "decorative_novelty",
+                ],
+                "constraint_boundary": [
+                    "product_truth", "domain_and_object_semantics", "safety",
+                    "privacy", "correctness", "accessibility_requirements",
+                    "apple_platform_requirements", "verified_usability_limits",
+                ],
+                "governing_objective": "test",
                 "corrective_laws": [], "universal_laws": [], "routing": {},
                 "interaction_laws": [], "evidence_governed": [],
                 "hard_kill_signals": [], "taste_gate": {},
                 "physical_iphone_validation": [], "rankings": {},
             }
             contract = {
-                "owner_taste_reconciliation": {
+                "owner_taste_authority": {
                     "source_record": peer["human_peer"],
-                    "machine_peer": "docs/canon/design/owner-taste-design-decision-system.json",
+                    "machine_peer": (
+                        "docs/canon/design/owner-taste-design-decision-system.json"
+                    ),
+                    "authority_role": "supreme_design_authority_over_visual_closure",
+                    "visual_closure_role": "subordinate_implementation_calibration",
                     "concept_dispositions": {
-                        "accessibility": "DEFERRED_TO_EVIDENCE",
-                        "haptics": "DEFERRED_TO_EVIDENCE",
+                        "accessibility": "CONSTRAINED_BY_NON_DESIGN_REQUIREMENTS",
+                        "haptics": "OWNER_TASTE_CONTROLS",
                     },
                 }
             }
@@ -224,7 +257,65 @@ class Wave3VisualClosureLoaderTests(unittest.TestCase):
             )
             with self.assertRaisesRegex(
                 canon_compiler.CanonError,
-                "must defer accessibility and haptics to evidence",
+                "must require accessibility and physical haptic evidence",
+            ):
+                canon_compiler.validate_owner_taste_design_governance(root)
+
+    def test_owner_taste_governance_rejects_subordinate_owner_status(
+        self,
+    ) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            design = root / "docs/canon/design"
+            design.mkdir(parents=True)
+            peer = json.loads(
+                (REPOSITORY_ROOT / canon_compiler.OWNER_TASTE_MACHINE_PATH)
+                .read_text(encoding="utf-8")
+            )
+            contract = json.loads(
+                (REPOSITORY_ROOT / canon_compiler.VISUAL_CLOSURE_MACHINE_PATHS[0])
+                .read_text(encoding="utf-8")
+            )
+            peer["status"] = "OWNER_APPROVED_SOURCE_RECONCILED_REFERENCE"
+            (design / "owner-taste-design-decision-system.json").write_text(
+                json.dumps(peer), encoding="utf-8"
+            )
+            (design / "visual-closure-input-contract.json").write_text(
+                json.dumps(contract), encoding="utf-8"
+            )
+            with self.assertRaisesRegex(
+                canon_compiler.CanonError,
+                "must be the supreme design authority",
+            ):
+                canon_compiler.validate_owner_taste_design_governance(root)
+
+    def test_owner_taste_governance_rejects_visual_closure_control(
+        self,
+    ) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            design = root / "docs/canon/design"
+            design.mkdir(parents=True)
+            peer = json.loads(
+                (REPOSITORY_ROOT / canon_compiler.OWNER_TASTE_MACHINE_PATH)
+                .read_text(encoding="utf-8")
+            )
+            contract = json.loads(
+                (REPOSITORY_ROOT / canon_compiler.VISUAL_CLOSURE_MACHINE_PATHS[0])
+                .read_text(encoding="utf-8")
+            )
+            contract["owner_taste_authority"]["visual_closure_role"] = (
+                "sole_active_visual_controller"
+            )
+            (design / "owner-taste-design-decision-system.json").write_text(
+                json.dumps(peer), encoding="utf-8"
+            )
+            (design / "visual-closure-input-contract.json").write_text(
+                json.dumps(contract), encoding="utf-8"
+            )
+            with self.assertRaisesRegex(
+                canon_compiler.CanonError,
+                "must be subordinate implementation calibration",
             ):
                 canon_compiler.validate_owner_taste_design_governance(root)
 
@@ -450,7 +541,7 @@ class AmbitionsCanonCompilerTests(unittest.TestCase):
         self.assertNotIn("task pack", serialized_manifest)
         self.assertNotIn("separately authorized", visual_system.casefold())
 
-    def test_visual_closure_contract_renders_exact_active_baseline(self) -> None:
+    def test_visual_closure_renders_owner_subordinate_calibration(self) -> None:
         contract = json.loads(
             (
                 REPOSITORY_ROOT
@@ -461,25 +552,37 @@ class AmbitionsCanonCompilerTests(unittest.TestCase):
             self.outputs["generated/visual-authority-manifest.json"]
         )
         self.assertEqual(
-            contract["active_baseline"]["directions"],
+            contract["implementation_calibration"]["directions"],
             list(canon_compiler.ACTIVE_VISUAL_DIRECTIONS),
         )
         self.assertEqual(
-            [item["visual_authority_id"] for item in manifest["authorities"]],
+            [
+                item["direction_id"]
+                for item in manifest["implementation_calibration_directions"]
+            ],
             list(canon_compiler.ACTIVE_VISUAL_DIRECTIONS),
         )
-        authority = manifest["authority_state"]
-        self.assertFalse(authority["approved_for_swiftui"])
-        self.assertFalse(authority["broad_frontend_reconstruction"])
-        self.assertFalse(authority["broad_production_implementation"])
-        self.assertFalse(authority["figma"])
-        self.assertFalse(authority["implementation"])
-        self.assertFalse(authority["legacy_frontend_cutover"])
-        self.assertFalse(authority["swiftui"])
-        self.assertFalse(authority["visual_closure_planning"])
-        self.assertTrue(authority["visual_closure_planning_program_closed"])
+        supreme = manifest["supreme_design_authority"]
         self.assertEqual(
-            authority["calibration"],
+            supreme["status"], "OWNER_APPROVED_SUPREME_DESIGN_AUTHORITY"
+        )
+        self.assertEqual(
+            supreme["authority_model"]["visual_closure_role"],
+            "subordinate_implementation_calibration",
+        )
+        self.assertEqual(supreme["precedence"][0], "owner_taste")
+        authorization = manifest["authorization_state"]
+        self.assertFalse(authorization["approved_for_swiftui"])
+        self.assertFalse(authorization["broad_frontend_reconstruction"])
+        self.assertFalse(authorization["broad_production_implementation"])
+        self.assertFalse(authorization["figma"])
+        self.assertFalse(authorization["implementation"])
+        self.assertFalse(authorization["legacy_frontend_cutover"])
+        self.assertFalse(authorization["swiftui"])
+        self.assertFalse(authorization["visual_closure_planning"])
+        self.assertTrue(authorization["visual_closure_planning_program_closed"])
+        self.assertEqual(
+            authorization["calibration"],
             {
                 "fixture_driven_preview_construction": True,
                 "native_visual_foundry_bootstrap": True,
@@ -487,45 +590,51 @@ class AmbitionsCanonCompilerTests(unittest.TestCase):
                 "today_flagship_calibration_slice": True,
             },
         )
-        self.assertFalse(contract["active_baseline"]["typography"]["serif_active"])
+        self.assertFalse(
+            contract["implementation_calibration"]["typography"]["serif_active"]
+        )
         self.assertEqual(
-            contract["active_baseline"]["typography"]["core_family"],
+            contract["implementation_calibration"]["typography"]["core_family"],
             "San Francisco",
         )
         self.assertEqual(
-            contract["active_baseline"]["typography"]["interface_roles"],
+            contract["implementation_calibration"]["typography"]["interface_roles"],
             "SF Pro",
         )
         self.assertEqual(
-            contract["active_baseline"]["appearance"]["choices"],
+            contract["implementation_calibration"]["appearance"]["choices"],
             ["System", "Light", "Dark"],
         )
         self.assertEqual(
-            contract["active_baseline"]["appearance"]["selected_synthesis"],
+            contract["implementation_calibration"]["appearance"]
+            ["selected_synthesis"],
             "Mineral Relief Continuum",
         )
         self.assertEqual(
-            contract["active_baseline"]["accent"]["exact_values_status"],
+            contract["implementation_calibration"]["accent"]
+            ["exact_values_status"],
             "deferred_calibration",
         )
         self.assertEqual(
-            contract["active_baseline"]["dock"]["expanded"],
+            contract["implementation_calibration"]["dock"]["expanded"],
             "one_compact_articulated_edge_tray_overlay",
         )
         self.assertEqual(
-            contract["active_baseline"]["dock"]["adaptive_equivalent"],
+            contract["implementation_calibration"]["dock"]["adaptive_equivalent"],
             "VC04-DOCK-D06 — Adaptive Navigation Passage",
         )
         self.assertEqual(
-            contract["active_baseline"]["state_grammar"]["primary_study"],
+            contract["implementation_calibration"]["state_grammar"]
+            ["primary_study"],
             "VC05-STATE-D04 — Semantic State Covenant",
         )
         self.assertEqual(
-            contract["active_baseline"]["foundational_grammar"]["primary_study"],
+            contract["implementation_calibration"]["foundational_grammar"]
+            ["primary_study"],
             "VC06-GRAMMAR-D04 — Articulated Native Grammar",
         )
         self.assertEqual(
-            contract["active_baseline"]["foundational_grammar"]
+            contract["implementation_calibration"]["foundational_grammar"]
             ["minimum_interaction_target_points"],
             {"height": 44, "width": 44},
         )
@@ -735,11 +844,14 @@ class AmbitionsCanonCompilerTests(unittest.TestCase):
             self.outputs["generated/visual-authority-manifest.json"]
         )
         self.assertEqual(
-            manifest["active_baseline"]["directions"],
+            manifest["implementation_calibration"]["directions"],
             EXPECTED_ACTIVE_VISUAL_DIRECTIONS,
         )
         self.assertEqual(
-            [item["visual_authority_id"] for item in manifest["authorities"]],
+            [
+                item["direction_id"]
+                for item in manifest["implementation_calibration_directions"]
+            ],
             EXPECTED_ACTIVE_VISUAL_DIRECTIONS,
         )
 
@@ -752,7 +864,7 @@ class AmbitionsCanonCompilerTests(unittest.TestCase):
         expected = {"figma": False, "implementation": False, "swiftui": False}
         self.assertEqual(
             {
-                key: manifest["authority_state"][key]
+                key: manifest["authorization_state"][key]
                 for key in expected
             },
             expected,
@@ -771,7 +883,7 @@ class AmbitionsCanonCompilerTests(unittest.TestCase):
         manifest = json.loads(
             self.outputs["generated/visual-authority-manifest.json"]
         )
-        summaries = manifest["active_baseline"]["wave_2_summaries"]
+        summaries = manifest["implementation_calibration"]["wave_2_summaries"]
         self.assertEqual(summaries, EXPECTED_WAVE_2_SUMMARIES)
         self.assertTrue(all(isinstance(value, dict) for value in summaries.values()))
         self.assertEqual(
@@ -817,7 +929,7 @@ class AmbitionsCanonCompilerTests(unittest.TestCase):
             "VC14-NATIVE-S01 — Matched Native Flagship Proof",
         )
         self.assertEqual(
-            manifest["active_baseline"]["native_visual_foundry"],
+            manifest["implementation_calibration"]["native_visual_foundry"],
             {
                 "code_connect_in_program": False,
                 "direct_device_proof": {
@@ -835,12 +947,12 @@ class AmbitionsCanonCompilerTests(unittest.TestCase):
                 ),
             },
         )
-        authority = manifest["authority_state"]
-        self.assertFalse(authority["approved_for_swiftui"])
-        self.assertFalse(authority["broad_frontend_reconstruction"])
-        self.assertFalse(authority["broad_production_implementation"])
-        self.assertFalse(authority["legacy_frontend_cutover"])
-        self.assertTrue(all(authority["calibration"].values()))
+        authorization = manifest["authorization_state"]
+        self.assertFalse(authorization["approved_for_swiftui"])
+        self.assertFalse(authorization["broad_frontend_reconstruction"])
+        self.assertFalse(authorization["broad_production_implementation"])
+        self.assertFalse(authorization["legacy_frontend_cutover"])
+        self.assertTrue(all(authorization["calibration"].values()))
 
     def test_wave_3_projects_stress_closure_without_authorizing_implementation(
         self,
@@ -853,16 +965,16 @@ class AmbitionsCanonCompilerTests(unittest.TestCase):
             wave_3["selected_record"],
             "VC13-A11Y-S01 — Stress-Proven Adaptive Semantic Continuity",
         )
-        self.assertFalse(manifest["authority_state"]["figma"])
-        self.assertFalse(manifest["authority_state"]["swiftui"])
-        self.assertFalse(manifest["authority_state"]["implementation"])
+        self.assertFalse(manifest["authorization_state"]["figma"])
+        self.assertFalse(manifest["authorization_state"]["swiftui"])
+        self.assertFalse(manifest["authorization_state"]["implementation"])
 
     def test_wave_3_closure_projects_exact_active_directions(self) -> None:
         manifest = json.loads(
             self.outputs["generated/visual-authority-manifest.json"]
         )
         self.assertEqual(
-            manifest["active_baseline"]["directions"],
+            manifest["implementation_calibration"]["directions"],
             EXPECTED_ACTIVE_VISUAL_DIRECTIONS,
         )
         self.assertEqual(
@@ -874,7 +986,9 @@ class AmbitionsCanonCompilerTests(unittest.TestCase):
         manifest = json.loads(
             self.outputs["generated/visual-authority-manifest.json"]
         )
-        stress = manifest["active_baseline"]["wave_3_accessibility_stress"]
+        stress = manifest["implementation_calibration"][
+            "wave_3_accessibility_stress"
+        ]
         for field in (
             "shared_first_viewport_doctrine",
             "compression_order",
@@ -902,7 +1016,7 @@ class AmbitionsCanonCompilerTests(unittest.TestCase):
         manifest = json.loads(
             self.outputs["generated/visual-authority-manifest.json"]
         )
-        proof_register = manifest["active_baseline"][
+        proof_register = manifest["implementation_calibration"][
             "wave_3_accessibility_stress"
         ]["direct_device_proof_register"]
         self.assertTrue(proof_register)
@@ -1167,7 +1281,7 @@ class AmbitionsCanonCompilerTests(unittest.TestCase):
             REPOSITORY_ROOT / "docs/canon/design/VISUAL_SYSTEM_R1.md"
         ).read_text(encoding="utf-8")
         expected = (
-            "Status: `ACTIVE_RECONCILED_BASELINE / "
+            "Status: `SUBORDINATE_IMPLEMENTATION_CALIBRATION / "
             "VC_01_THROUGH_VC_14_CLOSED / NATIVE_PROVING_ACTIVE / "
             "FIGMA_NOT_AUTHORIZED`"
         )
@@ -1253,8 +1367,10 @@ class AmbitionsCanonCompilerTests(unittest.TestCase):
         self.assertEqual(
             {
                 requirement_id
-                for authority in visual_manifest["authorities"]
-                for requirement_id in authority["requirement_ids"]
+                for calibration in visual_manifest[
+                    "implementation_calibration_directions"
+                ]
+                for requirement_id in calibration["requirement_ids"]
             }
             - requirement_ids,
             set(),
@@ -1361,15 +1477,23 @@ class AmbitionsCanonCompilerTests(unittest.TestCase):
                 Path("docs/canon/design/visual-closure-input-contract.json"),
                 lambda payload: {
                     **payload,
-                    "visual_requirement_mappings": [
+                    "calibration_requirement_mappings": [
                         {
-                            **payload["visual_requirement_mappings"][0],
+                            **payload["calibration_requirement_mappings"][0],
                             "requirement_ids": ["RETIRED-REQUIREMENT-001"],
                         },
-                        *payload["visual_requirement_mappings"][1:],
+                        *payload["calibration_requirement_mappings"][1:],
                     ],
                 },
-                "visual authority references inactive requirement",
+                "visual calibration references inactive requirement",
+            ),
+            (
+                Path("docs/canon/design/vc-wave-1-foundation-closure.json"),
+                lambda payload: {
+                    **payload,
+                    "authority_role": "independent_design_authority",
+                },
+                "must be subordinate implementation calibration",
             ),
             (
                 Path("docs/canon/design/vc-wave-1-foundation-closure.json"),
