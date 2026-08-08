@@ -84,11 +84,11 @@ fi
 DESTINATION=""
 RESULT_BUNDLE=""
 DERIVED_DATA_PATH=""
-IS_TEST_ACTION=0
+XCODEBUILD_TEST_ACTION=""
 for ((i = 0; i < ${#XCODEBUILD_ARGS[@]}; i++)); do
   case "${XCODEBUILD_ARGS[$i]}" in
     test|test-without-building)
-      IS_TEST_ACTION=1
+      XCODEBUILD_TEST_ACTION="${XCODEBUILD_ARGS[$i]}"
       ;;
     -destination)
       if (( i + 1 < ${#XCODEBUILD_ARGS[@]} )); then
@@ -108,8 +108,8 @@ for ((i = 0; i < ${#XCODEBUILD_ARGS[@]}; i++)); do
   esac
 done
 
-if [[ -n "$TEST_LAUNCH_TIMEOUT" && "$IS_TEST_ACTION" -ne 1 ]]; then
-  echo "--test-launch-timeout requires an xcodebuild test or test-without-building action" >&2
+if [[ -n "$TEST_LAUNCH_TIMEOUT" && "$XCODEBUILD_TEST_ACTION" != "test-without-building" ]]; then
+  echo "--test-launch-timeout requires an xcodebuild test-without-building action" >&2
   exit 2
 fi
 
@@ -140,6 +140,8 @@ fi
 
 printf -v LANE_COMMAND '%q ' "${CMD[@]}"
 LANE_TOKEN="$(python3 scripts/ambitions-xcode-lane-lock.py acquire --command "$LANE_COMMAND" --owner-pid "$$" --owner-parent-pid "$PPID")"
+# Invoked through EXIT and signal traps installed below.
+# shellcheck disable=SC2329
 release_xcode_lane() {
   [[ -n "$LANE_TOKEN" ]] || return 0
   python3 scripts/ambitions-xcode-lane-lock.py release --token "$LANE_TOKEN" >/dev/null || true
@@ -225,6 +227,8 @@ for pid in sorted(targets, reverse=True):
 PY
 }
 
+# Invoked through the EXIT trap installed below.
+# shellcheck disable=SC2329
 cleanup_bounded_runner() {
   if [[ "$RUNNER_CLEANUP_STARTED" -eq 1 ]]; then
     return 0
@@ -239,6 +243,8 @@ cleanup_bounded_runner() {
   [[ -z "$MONITOR_WATCH_FILE" ]] || rm -f "$MONITOR_WATCH_FILE"
 }
 
+# Invoked through signal traps installed below.
+# shellcheck disable=SC2329
 handle_bounded_runner_signal() {
   local signal_status="$1"
   cleanup_bounded_runner
