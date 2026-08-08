@@ -19,8 +19,24 @@ enum RuntimeBootstrap {
             notificationService: notificationService,
             calendarRemindersService: calendarRemindersService,
             scheduleStoreFileURL: scheduleStoreFileURL,
-            publicReferenceInspectionOverride: debugPublicReferenceInspectionOverride()
+            publicReferenceInspectionOverride: debugPublicReferenceInspectionOverride(),
+            publicReferenceInspectionUpdateOverride: debugPublicReferenceInspectionUpdateOverride()
         )
+    }
+
+    private static func debugPublicReferenceInspectionUpdateOverride() -> PublicReferenceInspectionUpdateOverride? {
+        #if DEBUG
+        let environment = ProcessInfo.processInfo.environment
+        guard environment["AMBITIONS_UI_PUBLIC_REFERENCE_UPDATE_FIXTURE"] == "1" else {
+            return nil
+        }
+        return PublicReferenceInspectionUpdateOverride(
+            projection: .previewUpdated,
+            returnsStaleOnAcceptance: environment["AMBITIONS_UI_PUBLIC_REFERENCE_STALE_FIXTURE"] == "1"
+        )
+        #else
+        return nil
+        #endif
     }
 
     private static func debugPublicReferenceInspectionOverride() -> PublicReferenceInspectionProjection? {

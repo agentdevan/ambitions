@@ -21,6 +21,34 @@ struct YouRootDetailRouteSurface: View {
     }
 
     var body: some View {
+        refreshPolicyContent
+            .accessibilityIdentifier("you.screen")
+            .accessibilityLabel("\(detail.title). You detail.")
+            .accessibilityHint("Review this User System Profile detail.")
+            .task {
+                await viewModel.load(using: featureFactory.youService)
+                syncAppearanceFromLoadedDashboard()
+            }
+            .onChange(of: viewModel.appearancePreference) { _, _ in
+                applyAppearancePreviewFromEditor()
+            }
+            .onChange(of: viewModel.accentFamily) { _, _ in
+                applyAppearancePreviewFromEditor()
+            }
+    }
+
+    @ViewBuilder
+    private var refreshPolicyContent: some View {
+        if detail == .sourceSettings {
+            detailScrollView
+        } else {
+            detailScrollView.refreshable {
+                await refresh()
+            }
+        }
+    }
+
+    private var detailScrollView: some View {
         ScrollView {
             LazyVStack(alignment: .leading, spacing: theme.spacing.lg) {
                 switch viewModel.state {
@@ -47,7 +75,8 @@ struct YouRootDetailRouteSurface: View {
                         onEnableNotifications: requestNotificationAuthorization,
                         notificationPermissionState: notificationPermissionState(for: profileProjection),
                         onOpenSystemSettings: openSystemSettingsIfAvailable,
-                        onOpenDetail: openDetail
+                        onOpenDetail: openDetail,
+                        onPublicReferenceRecheck: recheckPublicReference
                     )
                 }
             }
@@ -55,27 +84,26 @@ struct YouRootDetailRouteSurface: View {
             .padding(.vertical, theme.spacing.md)
         }
         .scrollIndicators(.hidden)
-        .refreshable {
-            await refresh()
-        }
-        .accessibilityIdentifier("you.screen")
-        .accessibilityLabel("\(detail.title). You detail.")
-        .accessibilityHint("Review this User System Profile detail.")
-        .task {
-            await viewModel.load(using: featureFactory.youService)
-            syncAppearanceFromLoadedDashboard()
-        }
-        .onChange(of: viewModel.appearancePreference) { _, _ in
-            applyAppearancePreviewFromEditor()
-        }
-        .onChange(of: viewModel.accentFamily) { _, _ in
-            applyAppearancePreviewFromEditor()
-        }
     }
 
     func refresh() async {
         await viewModel.refresh(using: featureFactory.youService)
         syncAppearanceFromLoadedDashboard()
+    }
+
+    func recheckPublicReference(
+        observedSourceRevision: String,
+        updateToken: PublicReferenceUpdateToken?,
+        selectedClaimID: PublicReferenceClaimID?
+    ) async -> YouViewModel.PublicReferenceRecheckOutcome {
+        let outcome = await viewModel.recheckPublicReference(
+            using: featureFactory.youService,
+            observedSourceRevision: observedSourceRevision,
+            updateToken: updateToken,
+            selectedClaimID: selectedClaimID
+        )
+        syncAppearanceFromLoadedDashboard()
+        return outcome
     }
 
     func savePreferences() {

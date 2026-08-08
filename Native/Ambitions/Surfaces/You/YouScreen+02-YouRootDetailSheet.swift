@@ -20,6 +20,11 @@ struct YouRootDetailSheet: View {
     let onEnableNotifications: () -> Void
     let notificationPermissionState: DegradedStatePresentation?
     let onOpenSystemSettings: () -> Void
+    let onPublicReferenceRecheck: @MainActor (
+        String,
+        PublicReferenceUpdateToken?,
+        PublicReferenceClaimID?
+    ) async -> YouViewModel.PublicReferenceRecheckOutcome
 
     var body: some View {
         NavigationStack {
@@ -39,7 +44,8 @@ struct YouRootDetailSheet: View {
                             onEnableNotifications: onEnableNotifications,
                             notificationPermissionState: notificationPermissionState,
                             onOpenSystemSettings: onOpenSystemSettings,
-                            onOpenDetail: nil
+                            onOpenDetail: nil,
+                            onPublicReferenceRecheck: onPublicReferenceRecheck
                         )
                     } else {
                         AsyncStateCard(.loading(lines: 6))
@@ -81,7 +87,9 @@ struct YouPersonalRuntimeStatusControlGroup: View {
                     SettingsItem(
                         id: "you-personal-runtime-controls",
                         title: "Edit, reset, disable, delete, export controls",
-                        subtitle: "\(profileProjection.memoryControls.localLearningControls.count) local learning controls and \(profileProjection.personalVault.sections.flatMap(\.rows).count) vault rows expose user-owned control labels without silently mutating data.",
+                        subtitle: "\(profileProjection.memoryControls.localLearningControls.count) local learning controls and " +
+                            "\(profileProjection.personalVault.sections.flatMap(\.rows).count) vault rows expose user-owned " +
+                            "control labels without silently mutating data.",
                         icon: "slider.horizontal.3",
                         valueLabel: "user-owned"
                     ),
@@ -378,7 +386,9 @@ private enum YouPrivacyControlReviewKind: String, CaseIterable, Identifiable {
             YouPrivacyControlReview(
                 kind: self,
                 title: "Receipts & History",
-                summary: receiptExampleCount == 0 ? "History is available for inspection even when this fixture has no receipt examples yet." : "\(receiptExampleCount) receipt example\(receiptExampleCount == 1 ? "" : "s") can show what changed and what remained private.",
+                summary: receiptExampleCount == 0
+                    ? "History is available for inspection even when this fixture has no receipt examples yet."
+                    : "\(receiptExampleCount) receipt example\(receiptExampleCount == 1 ? "" : "s") can show what changed and what remained private.",
                 boundary: "History shows summaries first and keeps sensitive detail behind contextual inspection.",
                 receipt: "Control changes must leave a local receipt before stronger claims are made.",
                 statusLabel: "Local",

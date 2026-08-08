@@ -1,6 +1,22 @@
 import AmbitionsDesignSystem
 import Foundation
 
+struct PublicReferenceInspectionUpdateOverride: Sendable {
+    let projection: PublicReferenceInspectionProjection
+    let returnsStaleOnAcceptance: Bool
+
+    var token: PublicReferenceUpdateToken {
+        PublicReferenceUpdateToken(pointer: PublicReferenceVerifiedReleasePointer(
+            artifactID: PublicReferencePackAdapter.approvedArtifactID,
+            manifestVersionID: "ui-proof",
+            manifestSHA256: String(repeating: "a", count: 64),
+            packSHA256: String(repeating: "b", count: 64),
+            packSource: .bundled,
+            sourceRevision: projection.sourceRevision
+        ))
+    }
+}
+
 /// A production-grade implementation of `YouServicing` that aggregates and orchestrates settings,
 /// system preferences, trust parameters, and external service permissions.
 ///
@@ -13,6 +29,7 @@ struct RepositoryBackedYouService: YouServicing {
     let calendarRemindersService: any CalendarRemindersServicing
     let publicReferenceQueryService: PublicReferenceQueryService
     let publicReferenceInspectionOverride: PublicReferenceInspectionProjection?
+    let publicReferenceInspectionUpdateOverride: PublicReferenceInspectionUpdateOverride?
 
     /// Initializes the service with designated repositories and integration dependencies.
     ///
@@ -29,7 +46,8 @@ struct RepositoryBackedYouService: YouServicing {
         publicReferenceQueryService: PublicReferenceQueryService = PublicReferenceQueryService(
             repository: .defaultApp
         ),
-        publicReferenceInspectionOverride: PublicReferenceInspectionProjection? = nil
+        publicReferenceInspectionOverride: PublicReferenceInspectionProjection? = nil,
+        publicReferenceInspectionUpdateOverride: PublicReferenceInspectionUpdateOverride? = nil
     ) {
         self.repositories = repositories
         self.syncCapability = syncCapability
@@ -37,6 +55,7 @@ struct RepositoryBackedYouService: YouServicing {
         self.calendarRemindersService = calendarRemindersService
         self.publicReferenceQueryService = publicReferenceQueryService
         self.publicReferenceInspectionOverride = publicReferenceInspectionOverride
+        self.publicReferenceInspectionUpdateOverride = publicReferenceInspectionUpdateOverride
     }
 
     /// Compiles a thread-safe dashboard representation by reading user data models and authorization parameters concurrently.
@@ -44,12 +63,71 @@ struct RepositoryBackedYouService: YouServicing {
     /// - Returns: A `YouDashboard` projection suited for rendering in visual and non-visual surfaces.
     /// - Throws: An error if loading data snapshot fails.
     func loadYouDashboard() async throws -> YouDashboard {
+        try await loadYouDashboard(publicReferenceInspection: nil)
+    }
+
+    func checkPublicReferenceUpdate(since observedSourceRevision: String) async throws -> PublicReferenceUpdateCheck {
+        if let publicReferenceInspectionUpdateOverride {
+            return observedSourceRevision == publicReferenceInspectionUpdateOverride.projection.sourceRevision
+                ? .current
+                : .updateAvailable(publicReferenceInspectionUpdateOverride.token)
+        }
+        guard publicReferenceInspectionOverride == nil else { return .current }
+        return try await publicReferenceQueryService.checkUpdate(
+            artifactID: PublicReferencePackAdapter.approvedArtifactID,
+            since: observedSourceRevision
+        )
+    }
+
+    func acceptPublicReferenceUpdate(
+        _ token: PublicReferenceUpdateToken,
+        selectedClaimID: PublicReferenceClaimID?
+    ) async throws -> PublicReferenceUpdateAcceptance {
+        if let publicReferenceInspectionUpdateOverride,
+           token == publicReferenceInspectionUpdateOverride.token {
+            guard publicReferenceInspectionUpdateOverride.returnsStaleOnAcceptance == false else {
+                return .stale
+            }
+            return .accepted(try await loadYouDashboard(
+                publicReferenceInspection: publicReferenceInspectionUpdateOverride.projection
+            ))
+        }
+        if let publicReferenceInspectionOverride {
+            guard publicReferenceInspectionOverride.sourceRevision == token.sourceRevision else {
+                return .stale
+            }
+            return .accepted(try await loadYouDashboard(
+                publicReferenceInspection: publicReferenceInspectionOverride
+            ))
+        }
+        let result: PublicReferenceInspectionQueryResult
+        do {
+            result = try await publicReferenceQueryService.inspectCurrent(
+                matchingExactPointer: token.pointer,
+                claimID: selectedClaimID
+            )
+        } catch PublicReferenceInspectionQueryError.recheckFailed(.superseded) {
+            return .stale
+        }
+        return .accepted(try await loadYouDashboard(
+            publicReferenceInspection: .make(from: result)
+        ))
+    }
+
+    private func loadYouDashboard(
+        publicReferenceInspection suppliedPublicReferenceInspection: PublicReferenceInspectionProjection?
+    ) async throws -> YouDashboard {
         async let snapshot = loadSnapshot()
         async let syncStatus = syncCapability.status()
         async let notificationAuthorization = notificationService.currentAuthorizationState()
         async let remindersAuthorization = calendarRemindersService.authorizationState(for: .reminders)
         async let calendarAuthorization = calendarRemindersService.authorizationState(for: .calendarEvents)
-        async let publicReferenceInspection = loadPublicReferenceInspection()
+        let publicReferenceInspection: PublicReferenceInspectionProjection
+        if let suppliedPublicReferenceInspection {
+            publicReferenceInspection = suppliedPublicReferenceInspection
+        } else {
+            publicReferenceInspection = await loadPublicReferenceInspection()
+        }
 
         return try await makeDashboard(
             snapshot: snapshot,

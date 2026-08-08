@@ -51,6 +51,8 @@ extension SourceAtlasPublicReferenceVerifiedArtifact {
                 predicateID: predicateID,
                 value: PublicReferenceClaimValue(text: claim.text, languageCode: "en"),
                 sourceRecordID: source.id,
+                sourceNativeFieldID: components[2],
+                sourceLocator: source.locator,
                 authority: PublicReferenceAuthority(
                     publisherID: "onet",
                     lane: Self.authorityLane(for: predicateID),
