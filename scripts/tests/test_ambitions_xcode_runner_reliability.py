@@ -376,15 +376,19 @@ wait "$child_pid"
 call_count="$(grep -c '^CALL$' "$FAKE_XCODEBUILD_LOG")"
 result_bundle=""
 previous=""
+action=""
 for argument in "$@"; do
   printf 'ARG=%s\n' "$argument" >> "$FAKE_XCODEBUILD_LOG"
+  case "$argument" in
+    build-for-testing|test|test-without-building) action="$argument" ;;
+  esac
   if [ "$previous" = "-resultBundlePath" ]; then
     result_bundle="$argument"
   fi
   previous="$argument"
 done
 launch_failure=0
-if [ "${FAKE_ALWAYS_LAUNCH_FAILURE:-0}" = "1" ] || { [ "${FAKE_FIRST_LAUNCH_FAILURE:-0}" = "1" ] && [ "$call_count" = "1" ]; }; then
+if [ "$action" != "build-for-testing" ] && { [ "${FAKE_ALWAYS_LAUNCH_FAILURE:-0}" = "1" ] || { [ "${FAKE_FIRST_LAUNCH_FAILURE:-0}" = "1" ] && [ "$call_count" = "1" ]; }; }; then
   launch_failure=1
 fi
 if [ -n "$result_bundle" ] && [ "${FAKE_SKIP_RESULT_BUNDLE:-0}" != "1" ]; then
@@ -397,6 +401,12 @@ if [ "$launch_failure" = "1" ]; then
   echo 'XCODEBUILD_TEST_LAUNCH_TIMEOUT=1'
   exit 124
 fi
+if [ "$action" = "build-for-testing" ]; then
+  sleep "${FAKE_BUILD_DELAY_SECONDS:-0}"
+  echo '** TEST BUILD SUCCEEDED **'
+  exit "${FAKE_BUILD_EXIT:-${FAKE_XCODEBUILD_EXIT:-0}}"
+fi
+sleep "${FAKE_TEST_DELAY_SECONDS:-0}"
 echo 'Testing started'
 echo "Executed ${FAKE_EXECUTED_TESTS:-2} tests, with 0 failures (0 unexpected) in 0.001 (0.002) seconds"
 if [ "${FAKE_TEST_FAILURE:-0}" = "1" ]; then
@@ -460,6 +470,10 @@ exit "${FAKE_XCODEBUILD_EXIT:-0}"
                 "devices": [{"deviceId": MCP_UDID}],
                 "testNodes": [{"name": "Ambitions", "nodeType": "Test Plan", "children": test_bundles}],
             })
+        execution_mode_args = [] if env.get("FAKE_FOCUSED_DEFAULT_ACTION") == "1" else [
+            "--without-building",
+            "--skip-prebuild",
+        ]
         result = subprocess.run(
             [
                 "bash",
@@ -475,20 +489,147 @@ exit "${FAKE_XCODEBUILD_EXIT:-0}"
                 "--timeout",
                 "10s",
                 "--test-launch-timeout",
-                "3s",
-                "--without-building",
-                "--skip-prebuild",
+                env.get("FAKE_TEST_LAUNCH_TIMEOUT", "3s"),
+                *execution_mode_args,
                 *filter_args,
             ],
             cwd=REPO_ROOT,
             env=env,
             capture_output=True,
             text=True,
-            timeout=12,
+            timeout=float(env.get("FAKE_FOCUSED_RUN_TIMEOUT_SECONDS", "12")),
         )
         summaries = sorted((self.root / "summaries" / batch).glob("*/focused-test-summary.json"))
         payload = json.loads(summaries[-1].read_text(encoding="utf-8")) if summaries else {}
         return result, payload
+
+    def test_default_focused_run_prebuilds_before_launch_timeout(self):
+        env = self.focused_env()
+        env["FAKE_FOCUSED_DEFAULT_ACTION"] = "1"
+        env["FAKE_TEST_LAUNCH_TIMEOUT"] = "1s"
+        env["FAKE_BUILD_DELAY_SECONDS"] = "1.5"
+
+        result, summary = self.run_focused(
+            env,
+            "default-two-phase",
+            "--test",
+            "AmbitionsTests/TwoPhaseTests",
+        )
+
+        self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+        calls = self.xcodebuild_calls()
+        self.assertEqual(len(calls), 2)
+        self.assertIn("build-for-testing", calls[0])
+        self.assertIn("test-without-building", calls[1])
+        self.assertNotIn("XCODEBUILD_TEST_LAUNCH_TIMEOUT=1", result.stdout + result.stderr)
+        self.assertTrue(summary["prebuild_required"])
+        self.assertEqual(summary["prebuild_status"], "passed")
+        self.assertFalse(summary["ui_prebuild_required"])
+        self.assertEqual(summary["ui_prebuild_status"], "not_run")
+
+    def test_legacy_ui_prebuild_setting_does_not_disable_unit_prebuild(self):
+        env = self.focused_env()
+        env["FAKE_FOCUSED_DEFAULT_ACTION"] = "1"
+        env["AMBITIONS_XCODE_UI_PREBUILD"] = "never"
+
+        result, summary = self.run_focused(
+            env,
+            "legacy-ui-setting-unit",
+            "--test",
+            "AmbitionsTests/LegacyUISettingTests",
+        )
+
+        self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+        calls = self.xcodebuild_calls()
+        self.assertEqual(len(calls), 2)
+        self.assertIn("build-for-testing", calls[0])
+        self.assertIn("test-without-building", calls[1])
+        self.assertTrue(summary["prebuild_required"])
+        self.assertFalse(summary["ui_prebuild_required"])
+
+    def test_legacy_ui_prebuild_setting_remains_ui_scoped(self):
+        env = self.focused_env()
+        env["FAKE_FOCUSED_DEFAULT_ACTION"] = "1"
+        env["AMBITIONS_XCODE_UI_PREBUILD"] = "never"
+
+        result, summary = self.run_focused(
+            env,
+            "legacy-ui-setting-ui",
+            "--test",
+            "AmbitionsUITests/LegacyUISettingTests",
+        )
+
+        self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+        calls = self.xcodebuild_calls()
+        self.assertEqual(len(calls), 1)
+        self.assertIn("test", calls[0])
+        self.assertNotIn("test-without-building", calls[0])
+        self.assertFalse(summary["prebuild_required"])
+        self.assertFalse(summary["ui_prebuild_required"])
+
+    def test_default_focused_run_enforces_launch_timeout_after_prebuild(self):
+        env = self.focused_env()
+        env["FAKE_FOCUSED_DEFAULT_ACTION"] = "1"
+        env["FAKE_TEST_LAUNCH_TIMEOUT"] = "1s"
+        env["FAKE_TEST_DELAY_SECONDS"] = "2"
+        env["FAKE_FOCUSED_RUN_TIMEOUT_SECONDS"] = "30"
+
+        result, summary = self.run_focused(
+            env,
+            "post-prebuild-launch-timeout",
+            "--test",
+            "AmbitionsTests/PostPrebuildLaunchTimeoutTests",
+        )
+
+        self.assertNotEqual(result.returncode, 0, result.stdout + result.stderr)
+        calls = self.xcodebuild_calls()
+        self.assertEqual(len(calls), 3)
+        self.assertIn("build-for-testing", calls[0])
+        self.assertIn("test-without-building", calls[1])
+        self.assertIn("test-without-building", calls[2])
+        self.assertIn("XCODEBUILD_TEST_LAUNCH_TIMEOUT=1", result.stdout + result.stderr)
+        self.assertTrue(summary["prebuild_required"])
+        self.assertEqual(summary["prebuild_status"], "passed")
+
+    def test_skip_prebuild_runs_one_combined_test_without_launch_timeout(self):
+        env = self.focused_env()
+        env["FAKE_FOCUSED_DEFAULT_ACTION"] = "1"
+        env["FAKE_TEST_LAUNCH_TIMEOUT"] = "1s"
+
+        result, summary = self.run_focused(
+            env,
+            "skip-prebuild-combined-test",
+            "--skip-prebuild",
+            "--test",
+            "AmbitionsTests/SkipPrebuildTests",
+        )
+
+        self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+        calls = self.xcodebuild_calls()
+        self.assertEqual(len(calls), 1)
+        self.assertIn("test", calls[0])
+        self.assertNotIn("test-without-building", calls[0])
+        self.assertNotIn("XCODEBUILD_TEST_LAUNCH_TIMEOUT=1", result.stdout + result.stderr)
+        self.assertFalse(summary["prebuild_required"])
+
+    def test_default_focused_run_stops_when_prebuild_fails(self):
+        env = self.focused_env()
+        env["FAKE_FOCUSED_DEFAULT_ACTION"] = "1"
+        env["FAKE_BUILD_EXIT"] = "65"
+
+        result, summary = self.run_focused(
+            env,
+            "default-prebuild-failure",
+            "--test",
+            "AmbitionsTests/PrebuildFailureTests",
+        )
+
+        self.assertNotEqual(result.returncode, 0, result.stdout + result.stderr)
+        calls = self.xcodebuild_calls()
+        self.assertEqual(len(calls), 1)
+        self.assertIn("build-for-testing", calls[0])
+        self.assertEqual(summary["prebuild_status"], "failed")
+        self.assertEqual(summary["executed_tests"], 0)
 
     def test_batched_focused_run_requires_every_selector_in_xcresult(self):
         env = self.focused_env()
@@ -597,6 +738,27 @@ exit "${FAKE_XCODEBUILD_EXIT:-0}"
         )
         return result, time.monotonic() - started
 
+    def test_launch_timeout_rejects_combined_build_and_test_action(self):
+        env = self.install_fake_timeout_and_xcodebuild("echo 'Testing started'\nexit 0\n")
+        result = subprocess.run(
+            [
+                "bash",
+                str(BOUNDED_XCODEBUILD),
+                "--test-launch-timeout",
+                "1s",
+                "--",
+                "test",
+            ],
+            cwd=REPO_ROOT,
+            env=env,
+            capture_output=True,
+            text=True,
+            timeout=4,
+        )
+
+        self.assertEqual(result.returncode, 2, result.stdout + result.stderr)
+        self.assertIn("requires an xcodebuild test-without-building action", result.stderr)
+
     def test_missing_test_start_hits_30_second_launcher_deadline(self):
         env = self.install_fake_timeout_and_xcodebuild("sleep 4\nexit 0\n")
         log = self.root / "missing-start.log"
@@ -698,15 +860,24 @@ done
                 sentinel.wait(timeout=2)
 
     def test_mcp_and_retained_runners_use_canonical_cache(self):
-        canonical = str(REPO_ROOT / ".codex/DerivedData/Ambitions")
+        common_root = Path(subprocess.run(
+            ["git", "rev-parse", "--path-format=absolute", "--git-common-dir"],
+            cwd=REPO_ROOT,
+            capture_output=True,
+            text=True,
+            check=True,
+        ).stdout.strip()).parent
+        config_canonical = str(common_root / ".codex/DerivedData/Ambitions")
         config = MCP_CONFIG.read_text(encoding="utf-8")
         focused = FOCUSED_RUNNER.read_text(encoding="utf-8")
         prebuild = BUILD_FOR_TESTING.read_text(encoding="utf-8")
 
-        self.assertIn(f"derivedDataPath: {canonical}", config)
+        self.assertIn(f"derivedDataPath: {config_canonical}", config)
         self.assertNotIn("output/DerivedData-XcodeBuildMCP", config)
         self.assertIn('DERIVED_DATA="$REPO_ROOT/.codex/DerivedData/Ambitions"', focused)
         self.assertIn('--test-launch-timeout "$TEST_LAUNCH_TIMEOUT"', focused)
+        self.assertIn('TEST_LAUNCH_TIMEOUT="${AMBITIONS_XCODE_TEST_LAUNCH_TIMEOUT:-120s}"', focused)
+        self.assertIn('AMBITIONS_SIM_HEALTH_TIMEOUT:-90s', focused)
         self.assertIn("-skipPackageUpdates", focused)
         self.assertIn("-skipPackageUpdates", prebuild)
 
