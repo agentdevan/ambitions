@@ -93,6 +93,22 @@ protocol InsightsServicing: Sendable {
     func loadInsightsDashboard() async throws -> InsightsDashboard
 }
 
+struct PublicReferenceUpdateToken: Sendable, Equatable {
+    let pointer: PublicReferenceVerifiedReleasePointer
+
+    var sourceRevision: String { pointer.sourceRevision }
+}
+
+enum PublicReferenceUpdateCheck: Sendable, Equatable {
+    case current
+    case updateAvailable(PublicReferenceUpdateToken)
+}
+
+enum PublicReferenceUpdateAcceptance: Sendable, Equatable {
+    case accepted(YouDashboard)
+    case stale
+}
+
 /// A service protocol that acts as the coordinator and model producer for the 'You' (system settings & trust center) domain.
 ///
 /// `YouServicing` consolidates all on-device configurations, local preference states, calendar boundaries,
@@ -100,14 +116,25 @@ protocol InsightsServicing: Sendable {
 ///
 /// Conforms to `Sendable` to guarantee safe thread execution across Swift 6 concurrency boundaries.
 protocol YouServicing: Sendable {
-    
+
     /// Compiles and returns a complete, immutable snapshot of the user's local operating system settings,
     /// trust center metrics, data map boundaries, and visual appearance preferences.
     ///
     /// - Returns: A complete, structured `YouDashboard` containing active state and visual configuration metrics.
     /// - Throws: An error if persistence retrieval fails or system permissions cannot be resolved.
     func loadYouDashboard() async throws -> YouDashboard
-    
+
+    /// Revalidates the fixed approved public artifact once and returns the
+    /// exact verified revision that may be accepted without another fetch.
+    func checkPublicReferenceUpdate(since observedSourceRevision: String) async throws -> PublicReferenceUpdateCheck
+
+    /// Accepts only the already-detected local revision. If another revision
+    /// has since become current, the caller must review that revision first.
+    func acceptPublicReferenceUpdate(
+        _ token: PublicReferenceUpdateToken,
+        selectedClaimID: PublicReferenceClaimID?
+    ) async throws -> PublicReferenceUpdateAcceptance
+
     /// Persists visual accent and functional preference updates to on-device storage and returns the updated dashboard model.
     ///
     /// - Parameter preferences: The preference patch containing requested changes to appearance, cadence, and tab configurations.
@@ -115,7 +142,6 @@ protocol YouServicing: Sendable {
     /// - Throws: An error if storage persistence fails.
     func saveYouPreferences(_ preferences: YouPreferencesUpdate) async throws -> YouDashboard
 }
-
 
 protocol CaptureServicing: Sendable {
     func createCapture(_ request: CreateCaptureRequest, now: Date) async throws -> Capture
@@ -255,6 +281,18 @@ struct StubInsightsService: InsightsServicing {
 struct StubYouService: YouServicing {
     let fixtures: PreviewFixtures
     func loadYouDashboard() async throws -> YouDashboard { fixtures.youDashboard }
+    func checkPublicReferenceUpdate(since observedSourceRevision: String) async throws -> PublicReferenceUpdateCheck {
+        _ = observedSourceRevision
+        return .current
+    }
+    func acceptPublicReferenceUpdate(
+        _ token: PublicReferenceUpdateToken,
+        selectedClaimID: PublicReferenceClaimID?
+    ) async throws -> PublicReferenceUpdateAcceptance {
+        _ = selectedClaimID
+        guard token.sourceRevision == fixtures.youDashboard.publicReferenceInspection.sourceRevision else { return .stale }
+        return .accepted(fixtures.youDashboard)
+    }
     func saveYouPreferences(_ preferences: YouPreferencesUpdate) async throws -> YouDashboard {
         _ = preferences
         return fixtures.youDashboard

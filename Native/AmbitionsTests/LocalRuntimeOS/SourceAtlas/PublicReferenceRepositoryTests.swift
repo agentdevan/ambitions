@@ -34,6 +34,8 @@ final class PublicReferenceRepositoryTests: XCTestCase {
         let offline = await repository.offlineSnapshot()
         XCTAssertEqual(offline?.delivery, .bundled)
         XCTAssertEqual(offline?.release.claims.first?.deliveryState, .bundled)
+        XCTAssertEqual(offline?.release.claims.first?.sourceNativeFieldID, "task-1")
+        XCTAssertEqual(offline?.release.claims.first?.sourceLocator, "https://www.onetcenter.org/database.html")
         XCTAssertEqual(offline?.release.sourceRevision, Self.sourceRevision(artifact))
 
         let reopened = PublicReferenceRepository(
@@ -283,7 +285,7 @@ final class PublicReferenceRepositoryTests: XCTestCase {
         let sourceID = SourceAtlasPublicReferenceVerifiedArtifactProvider.approvedSourceID
         let subjectID = SourceAtlasPublicReferenceVerifiedArtifactProvider.approvedSubjectID
         let predicateID = "occupation.task"
-        let claimID = "\(subjectID)::\(predicateID)::task-\(hash)"
+        let claimID = "\(subjectID)::\(predicateID)::task-1"
         let pack = SourceAtlasPack(
             manifest: SourceAtlasPackManifest(
                 id: SourceAtlasPublicReferenceVerifiedArtifactProvider.approvedArtifactID,
@@ -420,6 +422,8 @@ final class PublicReferenceRepositoryTests: XCTestCase {
             predicateID: predicateID,
             value: PublicReferenceClaimValue(text: "Develop software systems."),
             sourceRecordID: "onet-30.3-15-1252.00",
+            sourceNativeFieldID: "task-1",
+            sourceLocator: "https://www.onetcenter.org/database.html",
             authority: PublicReferenceAuthority(
                 publisherID: "onet",
                 lane: .description,

@@ -1,6 +1,6 @@
 import Foundation
 
-let publicReferenceKnowledgeSchemaVersion = "public_reference_knowledge.native.v1"
+let publicReferenceKnowledgeSchemaVersion = "public_reference_knowledge.native.v2"
 
 struct PublicReferenceClaimID: Codable, Sendable, Equatable, Hashable, Identifiable {
     let rawValue: String
@@ -121,6 +121,8 @@ struct PublicReferenceClaimEnvelope: Codable, Sendable, Equatable, Hashable, Ide
     let predicateID: String
     let value: PublicReferenceClaimValue
     let sourceRecordID: String
+    let sourceNativeFieldID: String
+    let sourceLocator: String
     let authority: PublicReferenceAuthority
     let jurisdiction: PublicReferenceJurisdiction
     let release: PublicReferenceRelease
@@ -143,6 +145,8 @@ struct PublicReferenceClaimEnvelope: Codable, Sendable, Equatable, Hashable, Ide
         predicateID: String,
         value: PublicReferenceClaimValue,
         sourceRecordID: String,
+        sourceNativeFieldID: String,
+        sourceLocator: String,
         authority: PublicReferenceAuthority,
         jurisdiction: PublicReferenceJurisdiction,
         release: PublicReferenceRelease,
@@ -166,6 +170,8 @@ struct PublicReferenceClaimEnvelope: Codable, Sendable, Equatable, Hashable, Ide
         self.predicateID = predicateID.trimmingCharacters(in: .whitespacesAndNewlines)
         self.value = value
         self.sourceRecordID = sourceRecordID.trimmingCharacters(in: .whitespacesAndNewlines)
+        self.sourceNativeFieldID = sourceNativeFieldID.trimmingCharacters(in: .whitespacesAndNewlines)
+        self.sourceLocator = sourceLocator.trimmingCharacters(in: .whitespacesAndNewlines)
         self.authority = authority
         self.jurisdiction = jurisdiction
         self.release = release
@@ -208,6 +214,8 @@ struct PublicReferenceClaimEnvelope: Codable, Sendable, Equatable, Hashable, Ide
             predicateID.isEmpty == false &&
             value.text.isEmpty == false &&
             sourceRecordID.isEmpty == false &&
+            sourceNativeFieldID.isEmpty == false &&
+            sourceLocator.isEmpty == false &&
             authority.publisherID.isEmpty == false &&
             authority.statement.isEmpty == false &&
             jurisdiction.code.isEmpty == false &&

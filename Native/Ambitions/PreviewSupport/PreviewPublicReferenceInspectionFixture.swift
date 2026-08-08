@@ -9,6 +9,8 @@ extension PublicReferenceInspectionProjection {
             title: "Task",
             value: "Analyze information to determine, recommend, and plan installation of a new system or modification of an existing system.",
             sourceNativeIdentity: "15-1252.00 · occupation.task · task-1",
+            claimScope: "O*NET provides this release-specific descriptive occupation fact. It does not describe the user or authorize a recommendation.",
+            currentUse: "authoritative. Semantic review: complete. Risk: descriptive.",
             authority: "onet — O*NET descriptive authority.",
             jurisdictionAndRelease: "United States (US), release 30.3",
             retrieval: "Bundled with the approved 30.3 release; checked 2026-08-06",
@@ -17,6 +19,8 @@ extension PublicReferenceInspectionProjection {
             conflicts: "No recorded conflicts.",
             supersession: "No recorded supersession.",
             attribution: "O*NET 30.3. Use terms: approved with attribution.",
+            sourceLocator: SourceAtlasPublicReferenceVerifiedArtifactProvider.approvedSourceLocator,
+            crossSourceRelationship: "No approved cross-source relationship",
             accessibilityLabel: "Task public reference claim",
             accessibilityValue: [
                 "Public task description",
@@ -43,6 +47,7 @@ extension PublicReferenceInspectionProjection {
             freshness: "current",
             selectedClaimID: nil,
             selectedClaim: nil,
+            unavailableRequestedClaimID: nil,
             claims: [selectedClaim],
             recheckTrigger: RecheckTrigger(
                 title: "Check approved source release",
@@ -52,4 +57,28 @@ extension PublicReferenceInspectionProjection {
             isReadOnly: true
         )
     }()
+
+    static let previewUpdated = PublicReferenceInspectionProjection(
+        id: "public-reference-inspection-onet-30.3-30.3-updated",
+        title: previewCurrent.title,
+        corpusTitle: previewCurrent.corpusTitle,
+        availability: previewCurrent.availability,
+        sourceRevision: "30.3|preview-updated",
+        delivery: "Cached verified",
+        semanticUse: previewCurrent.semanticUse,
+        recommendationReadiness: previewCurrent.recommendationReadiness,
+        authority: previewCurrent.authority,
+        retrieval: "Updated approved 30.3 release; checked 2026-08-08",
+        freshness: previewCurrent.freshness,
+        selectedClaimID: previewCurrent.selectedClaimID,
+        selectedClaim: previewCurrent.selectedClaim,
+        unavailableRequestedClaimID: previewCurrent.unavailableRequestedClaimID,
+        claims: previewCurrent.claims,
+        recheckTrigger: RecheckTrigger(
+            title: "Check approved source release",
+            detail: "A later check may use the approved public artifact only; this inspection does not fetch or change data.",
+            isRequired: false
+        ),
+        isReadOnly: true
+    )
 }

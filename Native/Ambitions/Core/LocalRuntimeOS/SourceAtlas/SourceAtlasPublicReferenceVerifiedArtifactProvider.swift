@@ -86,19 +86,21 @@ struct SourceAtlasPublicReferenceVerifiedArtifactProvider: Sendable, Equatable, 
     static let approvedArtifactID = "onet-30.3"
     static let approvedReleaseID = "30.3"
     static let approvedSourceID = "onet.database"
+    static let approvedSourceLocator = "https://www.onetcenter.org/database.html"
     static let approvedSubjectID = "15-1252.00"
     static let approvedLicenseIdentifier = "CC-BY-4.0"
     static let approvedAttribution = "O*NET 30.3, CC BY 4.0"
-    static let approvedPredicateIDs: Set<String> = [
-        "occupation.identity",
-        "occupation.task",
-        "occupation.skill",
-        "occupation.knowledge",
-        "occupation.work_activity",
-        "occupation.work_context",
-        "occupation.education",
-        "occupation.experience"
+    static let approvedSourceFieldsByPredicate: [String: Set<String>] = [
+        "occupation.identity": ["identity-1"],
+        "occupation.task": ["task-1"],
+        "occupation.skill": ["skill-1"],
+        "occupation.knowledge": ["knowledge-1"],
+        "occupation.work_activity": ["work-activity-1"],
+        "occupation.work_context": ["work-context-1"],
+        "occupation.education": ["education-1"],
+        "occupation.experience": ["experience-1"]
     ]
+    static let approvedPredicateIDs = Set(approvedSourceFieldsByPredicate.keys)
 
     private let manifestVerifier: ManifestVerifier
     private let store: SourceAtlasStore
@@ -331,6 +333,7 @@ private extension SourceAtlasPublicReferenceVerifiedArtifactProvider {
             pack.sources[0].id == Self.approvedSourceID &&
             pack.sources[0].kind == .official &&
             pack.sources[0].approvedForOfficialClaims &&
+            pack.sources[0].locator == Self.approvedSourceLocator &&
             pack.sources[0].licenseIdentifier == Self.approvedLicenseIdentifier &&
             pack.sources[0].requiredAttribution == Self.approvedAttribution
         let hasOnlyApprovedOfficialClaims = pack.claims.allSatisfy {
@@ -356,9 +359,7 @@ private extension SourceAtlasPublicReferenceVerifiedArtifactProvider {
                 failures.insert(.unsupportedSubject)
             }
             let predicate = components[1]
-            let expectedFieldPrefix = predicate.replacingOccurrences(of: "occupation.", with: "") + "-"
-            if Self.approvedPredicateIDs.contains(predicate) == false ||
-                components[2].hasPrefix(expectedFieldPrefix) == false {
+            if Self.approvedSourceFieldsByPredicate[predicate]?.contains(components[2]) != true {
                 failures.insert(.unsupportedPredicate)
             } else {
                 predicates.insert(predicate)

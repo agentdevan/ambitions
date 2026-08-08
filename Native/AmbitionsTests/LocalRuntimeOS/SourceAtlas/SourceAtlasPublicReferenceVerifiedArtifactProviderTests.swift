@@ -20,7 +20,25 @@ final class SourceAtlasPublicReferenceVerifiedArtifactProviderTests: XCTestCase 
         let publicArtifact = result.artifact?.publicReferencePackArtifact()
         XCTAssertEqual(publicArtifact?.id, "onet-30.3")
         XCTAssertEqual(publicArtifact?.claims.map(\.predicateID), ["occupation.task"])
+        XCTAssertEqual(publicArtifact?.claims.map(\.sourceNativeFieldID), ["task-1"])
+        XCTAssertEqual(publicArtifact?.claims.map(\.sourceLocator), ["https://www.onetcenter.org/database.html"])
         XCTAssertTrue(publicArtifact?.verificationEvidence.signatureResult.isVerified == true)
+    }
+
+    func testEveryExplicitPredicateFieldBindingIsAcceptedAndNoPrefixWildcardIsUsed() throws {
+        for predicateID in SourceAtlasPublicReferenceVerifiedArtifactProvider.approvedSourceFieldsByPredicate.keys.sorted() {
+            let sourceNativeFieldID = try XCTUnwrap(
+                SourceAtlasPublicReferenceVerifiedArtifactProvider.approvedSourceFieldsByPredicate[predicateID]?.first
+            )
+            let fixture = try Self.fixture(
+                predicateID: predicateID,
+                sourceNativeFieldID: sourceNativeFieldID
+            )
+
+            let result = SourceAtlasPublicReferenceVerifiedArtifactProvider().verify(fixture.input)
+
+            XCTAssertEqual(result.failures, [], "Expected explicit binding for \(predicateID) / \(sourceNativeFieldID)")
+        }
     }
 
     func testMissingTrustRootFailsClosed() throws {
@@ -136,7 +154,9 @@ final class SourceAtlasPublicReferenceVerifiedArtifactProviderTests: XCTestCase 
     func testUnapprovedRightsOrSourceNativeFieldFailsClosed() throws {
         let cases = [
             (try Self.fixture(sourceLicenseIdentifier: nil), SourceAtlasPublicReferenceVerifiedArtifactFailure.unsupportedSource),
-            (try Self.fixture(sourceNativeFieldID: "skill-1"), .unsupportedPredicate)
+            (try Self.fixture(sourceLocator: "https://example.com/onet"), .unsupportedSource),
+            (try Self.fixture(sourceNativeFieldID: "skill-1"), .unsupportedPredicate),
+            (try Self.fixture(sourceNativeFieldID: "task-arbitrary"), .unsupportedPredicate)
         ]
 
         for (fixture, expectedFailure) in cases {
@@ -234,6 +254,7 @@ private extension SourceAtlasPublicReferenceVerifiedArtifactProviderTests {
         let sourceKind: SourceAtlasSourceKind
         let sourceApprovedForOfficialClaims: Bool
         let sourceLicenseIdentifier: String?
+        let sourceLocator: String
         let sourceNativeFieldID: String
         let claimState: SourceAtlasClaimState
         let duplicateSource: Bool
@@ -252,6 +273,7 @@ private extension SourceAtlasPublicReferenceVerifiedArtifactProviderTests {
         sourceKind: SourceAtlasSourceKind = .official,
         sourceApprovedForOfficialClaims: Bool = true,
         sourceLicenseIdentifier: String? = SourceAtlasPublicReferenceVerifiedArtifactProvider.approvedLicenseIdentifier,
+        sourceLocator: String = SourceAtlasPublicReferenceVerifiedArtifactProvider.approvedSourceLocator,
         sourceNativeFieldID: String = "task-1",
         claimState: SourceAtlasClaimState = .official,
         duplicateSource: Bool = false,
@@ -269,6 +291,7 @@ private extension SourceAtlasPublicReferenceVerifiedArtifactProviderTests {
             sourceKind: sourceKind,
             sourceApprovedForOfficialClaims: sourceApprovedForOfficialClaims,
             sourceLicenseIdentifier: sourceLicenseIdentifier,
+            sourceLocator: sourceLocator,
             sourceNativeFieldID: sourceNativeFieldID,
             claimState: claimState,
             duplicateSource: duplicateSource,
@@ -334,7 +357,7 @@ private extension SourceAtlasPublicReferenceVerifiedArtifactProviderTests {
             id: configuration.sourceID,
             title: "O*NET Database 30.3",
             kind: configuration.sourceKind,
-            locator: "https://www.onetcenter.org/database.html",
+            locator: configuration.sourceLocator,
             retrievedAt: "2026-08-06T00:00:00Z",
             contentHash: "source-hash",
             approvedForOfficialClaims: configuration.sourceApprovedForOfficialClaims,

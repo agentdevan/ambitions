@@ -11,6 +11,8 @@ struct PublicReferenceInspectionProjection: Codable, Sendable, Equatable, Hashab
         let title: String
         let value: String
         let sourceNativeIdentity: String
+        let claimScope: String
+        let currentUse: String
         let authority: String
         let jurisdictionAndRelease: String
         let retrieval: String
@@ -19,6 +21,8 @@ struct PublicReferenceInspectionProjection: Codable, Sendable, Equatable, Hashab
         let conflicts: String
         let supersession: String
         let attribution: String
+        let sourceLocator: String
+        let crossSourceRelationship: String
         let accessibilityLabel: String
         let accessibilityValue: String
     }
@@ -42,14 +46,19 @@ struct PublicReferenceInspectionProjection: Codable, Sendable, Equatable, Hashab
     let freshness: String
     let selectedClaimID: PublicReferenceClaimID?
     let selectedClaim: Claim?
+    let unavailableRequestedClaimID: PublicReferenceClaimID?
     let claims: [Claim]
     let recheckTrigger: RecheckTrigger
     let isReadOnly: Bool
 
     static func make(from result: PublicReferenceInspectionQueryResult) -> PublicReferenceInspectionProjection {
         let release = result.snapshot.release
-        let ordered = release.claims.sorted(by: claimOrdering).map(claim)
-        let selected = result.selectedClaim.map(claim)
+        let ordered = release.claims.sorted(by: claimOrdering).map {
+            claim($0, releaseClaims: release.claims)
+        }
+        let selected = result.selectedClaim.map {
+            claim($0, releaseClaims: release.claims)
+        }
         let source = release.claims.first
         let authority = source.map { "\($0.authority.publisherID) — \($0.authority.statement)" } ?? "Unavailable"
         let retrieval = source.map { "Retrieved \($0.retrievedAt); checked \($0.checkedAt)" } ?? "Unavailable"
@@ -70,6 +79,7 @@ struct PublicReferenceInspectionProjection: Codable, Sendable, Equatable, Hashab
             freshness: freshness,
             selectedClaimID: result.selectedClaim?.id,
             selectedClaim: selected,
+            unavailableRequestedClaimID: result.unavailableRequestedClaimID,
             claims: ordered,
             recheckTrigger: RecheckTrigger(
                 title: result.sourceChangedSinceObservation ? "Review update" : "Check approved source release",
@@ -92,38 +102,82 @@ struct PublicReferenceInspectionProjection: Codable, Sendable, Equatable, Hashab
         return left == right ? lhs.id.rawValue < rhs.id.rawValue : left < right
     }
 
-    private static func claim(_ value: PublicReferenceClaimEnvelope) -> Claim {
+    private static func claim(
+        _ value: PublicReferenceClaimEnvelope,
+        releaseClaims: [PublicReferenceClaimEnvelope]
+    ) -> Claim {
         let limits = [
             "Authority lane: \(value.authority.lane.rawValue.replacingOccurrences(of: "_", with: " "))",
             "Rights: \(value.rightsState.rawValue.replacingOccurrences(of: "_", with: " "))",
             "Risk: \(value.riskState)"
         ].joined(separator: ". ")
-        let conflicts = value.conflictIDs.isEmpty ? "No recorded conflicts." : value.conflictIDs.map(\.rawValue).joined(separator: ", ")
+        let conflicts = value.conflictIDs.isEmpty
+            ? "No recorded conflicts."
+            : "Review required. Conflicting statements remain separate: " +
+                relationshipStatements(value.conflictIDs, releaseClaims: releaseClaims)
         let supersessionIDs = value.supersedesIDs + value.supersededByIDs
-        let supersession = supersessionIDs.isEmpty ? "No recorded supersession." : supersessionIDs.map(\.rawValue).joined(separator: ", ")
+        let supersession = supersessionIDs.isEmpty
+            ? "No recorded supersession."
+            : "Revision relationship: " + relationshipStatements(supersessionIDs, releaseClaims: releaseClaims) +
+                ". The current statement is not silently substituted."
         let freshness = value.freshnessState.rawValue.replacingOccurrences(of: "_", with: " ")
         let title = value.predicateID.replacingOccurrences(of: "occupation.", with: "").replacingOccurrences(of: "_", with: " ").capitalized
+        let claimScope: String
+        switch value.authority.lane {
+        case .classification:
+            claimScope = "O*NET identifies this occupation in its release-specific classification. It does not classify the user."
+        case .typicalPreparation:
+            claimScope = "O*NET reports descriptive typical preparation for this occupation. It is not a universal qualification or employer gate."
+        default:
+            claimScope = "O*NET provides this release-specific descriptive occupation fact. It does not describe the user or authorize a recommendation."
+        }
+        let availability = value.availability.rawValue.replacingOccurrences(of: "_", with: " ")
+        let reviewState = value.semanticReviewState.rawValue.replacingOccurrences(of: "_", with: " ")
+        let currentUse = "\(availability). Semantic review: \(reviewState). Risk: \(value.riskState)."
         return Claim(
             id: value.id, title: title, value: value.value.text,
-            sourceNativeIdentity: "\(value.sourceNativeSubjectID) · \(value.predicateID) · \(value.sourceRecordID)",
+            sourceNativeIdentity: [
+                value.sourceNativeSubjectID,
+                value.predicateID,
+                value.sourceNativeFieldID
+            ].joined(separator: " · "),
+            claimScope: claimScope,
+            currentUse: currentUse,
             authority: "\(value.authority.publisherID) — \(value.authority.statement)",
             jurisdictionAndRelease: "\(value.jurisdiction.label) (\(value.jurisdiction.code)), release \(value.release.id)",
             retrieval: "Retrieved \(value.retrievedAt); checked \(value.checkedAt)",
             freshness: freshness,
             limits: limits, conflicts: conflicts, supersession: supersession,
             attribution: "\(value.requiredAttribution). Use terms: \(value.rightsState.rawValue.replacingOccurrences(of: "_", with: " ")).",
+            sourceLocator: value.sourceLocator,
+            crossSourceRelationship: "No approved cross-source relationship",
             accessibilityLabel: "\(title) public reference claim",
             accessibilityValue: [
                 value.value.text,
+                "What this source can claim \(claimScope)",
+                "Current use \(currentUse)",
                 "Authority \(value.authority.publisherID) — \(value.authority.statement)",
                 "Jurisdiction and release \(value.jurisdiction.label), \(value.release.id)",
                 "Freshness \(freshness)",
                 "Limits \(limits)",
                 "Conflicts \(conflicts)",
                 "Supersession \(supersession)",
+                "No approved cross-source relationship",
                 "Attribution \(value.requiredAttribution). Use terms \(value.rightsState.rawValue.replacingOccurrences(of: "_", with: " "))"
             ].joined(separator: ". ")
         )
+    }
+
+    private static func relationshipStatements(
+        _ ids: [PublicReferenceClaimID],
+        releaseClaims: [PublicReferenceClaimEnvelope]
+    ) -> String {
+        ids.map { id in
+            guard let relatedClaim = releaseClaims.first(where: { $0.id == id }) else {
+                return "\(id.rawValue) — statement unavailable in this release"
+            }
+            return "\(id.rawValue) — \(relatedClaim.value.text)"
+        }.joined(separator: "; ")
     }
 }
 
@@ -142,6 +196,7 @@ extension PublicReferenceInspectionProjection {
         freshness: "Unavailable",
         selectedClaimID: nil,
         selectedClaim: nil,
+        unavailableRequestedClaimID: nil,
         claims: [],
         recheckTrigger: RecheckTrigger(
             title: "Check approved source release",

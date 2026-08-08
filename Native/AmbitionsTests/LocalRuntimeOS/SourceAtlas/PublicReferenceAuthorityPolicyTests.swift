@@ -100,6 +100,8 @@ final class PublicReferenceAuthorityPolicyTests: XCTestCase {
             predicateID: "occupation.description",
             value: PublicReferenceClaimValue(text: "Research, design, and develop computer software."),
             sourceRecordID: "onet-30.3-15-1252.00",
+            sourceNativeFieldID: "description-1",
+            sourceLocator: "https://www.onetcenter.org/database.html",
             authority: PublicReferenceAuthority(publisherID: "onet", lane: .description, statement: "O*NET owns this descriptive claim."),
             jurisdiction: PublicReferenceJurisdiction(code: "US", label: "United States"),
             release: PublicReferenceRelease(id: "30.3"),

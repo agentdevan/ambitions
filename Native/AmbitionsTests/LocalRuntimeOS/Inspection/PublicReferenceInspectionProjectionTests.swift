@@ -28,7 +28,7 @@ final class PublicReferenceInspectionProjectionTests: XCTestCase {
         XCTAssertTrue(projection.selectedClaim?.limits.contains("Rights: approved with attribution") == true)
         XCTAssertEqual(projection.semanticUse, "Complete for approved descriptive claims")
         XCTAssertEqual(projection.recommendationReadiness, "Not approved for recommendation use")
-        XCTAssertEqual(projection.selectedClaim?.sourceNativeIdentity, "15-1252.00 · occupation.task · onet.database")
+        XCTAssertEqual(projection.selectedClaim?.sourceNativeIdentity, "15-1252.00 · occupation.task · task-1")
         XCTAssertTrue(projection.selectedClaim?.accessibilityValue.contains("Limits Authority lane: description") == true)
         XCTAssertTrue(projection.selectedClaim?.accessibilityValue.contains("Conflicts No recorded conflicts.") == true)
         XCTAssertTrue(projection.selectedClaim?.accessibilityValue.contains("Supersession No recorded supersession.") == true)
@@ -59,8 +59,10 @@ final class PublicReferenceInspectionProjectionTests: XCTestCase {
 
         let projection = PublicReferenceInspectionProjection.make(from: result)
 
-        XCTAssertEqual(projection.selectedClaim?.conflicts, "conflict-1")
-        XCTAssertTrue(projection.selectedClaim?.accessibilityValue.contains("Conflicts conflict-1") == true)
+        XCTAssertTrue(projection.selectedClaim?.conflicts.contains("conflict-1 — statement unavailable") == true)
+        XCTAssertTrue(projection.selectedClaim?.conflicts.contains("Conflicting statements remain separate") == true)
+        XCTAssertTrue(projection.selectedClaim?.supersession.contains("superseded-by-1 — statement unavailable") == true)
+        XCTAssertTrue(projection.selectedClaim?.accessibilityValue.contains("Conflicts Review required") == true)
     }
 
     func testUnavailableProjectionKeepsLocalPlanningAvailableWithoutInventingSourceFacts() {
@@ -87,6 +89,108 @@ final class PublicReferenceInspectionProjectionTests: XCTestCase {
         } catch {
             XCTFail("Unexpected error \(error)")
         }
+    }
+
+    func testRecheckReportsUnavailableInsteadOfClaimingSuccessOnOldState() async {
+        let service = PublicReferenceQueryService(repository: PublicReferenceRepository())
+
+        do {
+            _ = try await service.checkUpdate(artifactID: "onet-30.3", since: "old")
+            XCTFail("Expected unavailable recheck")
+        } catch let error as PublicReferenceInspectionQueryError {
+            XCTAssertEqual(error, .recheckFailed(.unavailable))
+        } catch {
+            XCTFail("Unexpected error \(error)")
+        }
+    }
+
+    func testRecheckReturnsTheExactVerifiedPointerForThePromotedRevision() async throws {
+        let first = try PublicReferenceRepositoryTests.verifiedArtifact(hash: "recheck-first")
+        let second = try PublicReferenceRepositoryTests.verifiedArtifact(hash: "recheck-second")
+        let repository = PublicReferenceRepository(
+            provider: SequencedInspectionVerifiedArtifactProvider(artifacts: [first, second])
+        )
+        _ = await repository.refresh()
+        let initialSnapshot = await repository.currentSnapshot()
+        let observedRevision = try XCTUnwrap(initialSnapshot).release.sourceRevision
+        let service = PublicReferenceQueryService(repository: repository)
+
+        let check = try await service.checkUpdate(
+            artifactID: PublicReferencePackAdapter.approvedArtifactID,
+            since: observedRevision
+        )
+
+        guard case let .updateAvailable(token) = check else {
+            return XCTFail("Expected a verified update token")
+        }
+        let currentPointer = await service.currentVerifiedPointer()
+        XCTAssertNotEqual(token.sourceRevision, observedRevision)
+        XCTAssertEqual(token.pointer, currentPointer)
+        XCTAssertEqual(token.pointer.manifestSHA256, second.evidence.manifestSHA256)
+        XCTAssertEqual(token.pointer.packSHA256, second.evidence.packSHA256)
+    }
+
+    func testExactPointerInspectionFailsStaleAfterAnInterveningPromotion() async throws {
+        let first = try PublicReferenceRepositoryTests.verifiedArtifact(hash: "race-first")
+        let second = try PublicReferenceRepositoryTests.verifiedArtifact(hash: "race-second")
+        let repository = PublicReferenceRepository(
+            provider: SequencedInspectionVerifiedArtifactProvider(artifacts: [first, second])
+        )
+        _ = await repository.refresh()
+        let service = PublicReferenceQueryService(repository: repository)
+        let firstPointerValue = await service.currentVerifiedPointer()
+        let firstPointer = try XCTUnwrap(firstPointerValue)
+        _ = await repository.refresh()
+
+        do {
+            _ = try await service.inspectCurrent(
+                matchingExactPointer: firstPointer,
+                claimID: PublicReferenceClaimID("task-1")
+            )
+            XCTFail("Expected the intervening promotion to stale the checked pointer")
+        } catch let error as PublicReferenceInspectionQueryError {
+            XCTAssertEqual(error, .recheckFailed(.superseded))
+        } catch {
+            XCTFail("Unexpected error \(error)")
+        }
+    }
+
+    func testSourceLinkPolicyAllowsOnlyParameterFreeApprovedHTTPSHosts() {
+        XCTAssertNotNil(PublicReferenceSourceLinkPolicy.approvedURL(
+            "https://www.onetcenter.org/database.html"
+        ))
+        XCTAssertNil(PublicReferenceSourceLinkPolicy.approvedURL("http://www.onetcenter.org/database.html"))
+        XCTAssertNil(PublicReferenceSourceLinkPolicy.approvedURL("https://user@www.onetcenter.org/database.html"))
+        XCTAssertNil(PublicReferenceSourceLinkPolicy.approvedURL("https://www.onetcenter.org/database.html?private=1"))
+        XCTAssertNil(PublicReferenceSourceLinkPolicy.approvedURL("https://www.onetcenter.org/database.html#claim"))
+        XCTAssertNil(PublicReferenceSourceLinkPolicy.approvedURL("https://evilonetcenter.org/database.html"))
+        XCTAssertNil(PublicReferenceSourceLinkPolicy.approvedURL("https://www.onetonline.org/link/summary/15-1252.00"))
+    }
+
+    func testMissingDirectClaimKeepsIndependentVerifiedClaimsInspectable() async throws {
+        let verified = try PublicReferenceRepositoryTests.verifiedArtifact(hash: "missing-direct-claim")
+        let repository = PublicReferenceRepository(
+            provider: InspectionVerifiedArtifactProvider(artifact: verified)
+        )
+        _ = await repository.refresh()
+        let missingID = PublicReferenceClaimID("withdrawn-direct-link")
+
+        let result = try await PublicReferenceQueryService(repository: repository).inspect(
+            PublicReferenceInspectionQuery(artifactID: "onet-30.3", claimID: missingID)
+        )
+        let projection = PublicReferenceInspectionProjection.make(from: result)
+
+        XCTAssertNil(result.selectedClaim)
+        XCTAssertEqual(result.unavailableRequestedClaimID, missingID)
+        XCTAssertEqual(projection.unavailableRequestedClaimID, missingID)
+        XCTAssertFalse(projection.claims.isEmpty)
+        XCTAssertEqual(projection.availability, .available)
+        XCTAssertTrue(projection.claims.allSatisfy {
+            $0.crossSourceRelationship == "No approved cross-source relationship"
+        })
+        XCTAssertTrue(projection.claims.allSatisfy {
+            $0.sourceLocator == "https://www.onetcenter.org/database.html"
+        })
     }
 
     private static func artifact(claimConflicts: [PublicReferenceClaimID] = []) -> PublicReferencePackArtifact {
@@ -130,6 +234,8 @@ final class PublicReferenceInspectionProjectionTests: XCTestCase {
             id: PublicReferenceClaimID(id), sourceNativeSubjectID: "15-1252.00",
             predicateID: predicate, value: PublicReferenceClaimValue(text: "Public \(predicate) claim."),
             sourceRecordID: "record",
+            sourceNativeFieldID: "\(predicate.replacingOccurrences(of: "occupation.", with: ""))-1",
+            sourceLocator: "https://www.onetcenter.org/database.html",
             authority: PublicReferenceAuthority(
                 publisherID: "onet", lane: .description, statement: "O*NET descriptive authority."
             ),
@@ -157,5 +263,21 @@ private struct InspectionVerifiedArtifactProvider: PublicReferenceVerifiedPackPr
                 pointer?.packSHA256 == artifact.evidence.packSHA256
         ) else { return nil }
         return artifact
+    }
+}
+
+private actor SequencedInspectionVerifiedArtifactProvider: PublicReferenceVerifiedPackProviding {
+    private var artifacts: [SourceAtlasPublicReferenceVerifiedArtifact]
+
+    init(artifacts: [SourceAtlasPublicReferenceVerifiedArtifact]) {
+        self.artifacts = artifacts
+    }
+
+    func verifiedSourceAtlasArtifact(
+        matching pointer: PublicReferenceVerifiedReleasePointer?
+    ) async -> SourceAtlasPublicReferenceVerifiedArtifact? {
+        _ = pointer
+        guard artifacts.isEmpty == false else { return nil }
+        return artifacts.removeFirst()
     }
 }

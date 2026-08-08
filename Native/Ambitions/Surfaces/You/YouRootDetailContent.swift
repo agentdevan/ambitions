@@ -16,6 +16,11 @@ struct YouRootDetailContent: View {
     let notificationPermissionState: DegradedStatePresentation?
     let onOpenSystemSettings: () -> Void
     let onOpenDetail: ((YouRootDetail) -> Void)?
+    let onPublicReferenceRecheck: @MainActor (
+        String,
+        PublicReferenceUpdateToken?,
+        PublicReferenceClaimID?
+    ) async -> YouViewModel.PublicReferenceRecheckOutcome
 
     var body: some View {
         switch detail {
@@ -145,7 +150,10 @@ struct YouRootDetailContent: View {
         case .capturePreferences:
             YouControlGroup(eyebrow: "Capture", section: captureSettingsSection, accessibilityIdentifier: "you.capture-preferences-control-group")
         case .sourceSettings:
-            PublicReferenceInspectionView(projection: profileProjection.publicReferenceInspection)
+            PublicReferenceInspectionView(
+                projection: profileProjection.publicReferenceInspection,
+                onRecheck: onPublicReferenceRecheck
+            )
             SourceInspectionView(presentation: sourceSettingsInspectionPresentation)
             YouControlGroup(
                 eyebrow: "Sources",

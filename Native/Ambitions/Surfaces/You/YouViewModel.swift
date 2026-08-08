@@ -5,6 +5,13 @@ import Observation
 @MainActor
 @Observable
 final class YouViewModel {
+    enum PublicReferenceRecheckOutcome: Sendable, Equatable {
+        case current
+        case updateAvailable(PublicReferenceUpdateToken)
+        case stale
+        case failed
+    }
+
     var state: AsyncViewState<YouDashboard>
     var preferredTab: AmbitionsSurface
     var appearancePreference: AppAppearancePreference
@@ -19,7 +26,15 @@ final class YouViewModel {
         case .loading:
             return "loading"
         case let .loaded(dashboard):
-            return "loaded:\(dashboard.hero.stats.count):\(dashboard.trustCenter.items.count):\(dashboard.controlRoom.entries.count):\(dashboard.memoryControls.items.count):\(dashboard.contextVault.items.count):\(dashboard.integrationsSection.items.count)"
+            let counts = [
+                dashboard.hero.stats.count,
+                dashboard.trustCenter.items.count,
+                dashboard.controlRoom.entries.count,
+                dashboard.memoryControls.items.count,
+                dashboard.contextVault.items.count,
+                dashboard.integrationsSection.items.count
+            ]
+            return "loaded:\(counts.map(String.init).joined(separator: ":"))"
         case let .failed(message):
             return "failed:\(message)"
         }
@@ -59,6 +74,37 @@ final class YouViewModel {
             state = .loaded(dashboard)
         } catch {
             state = .failed("Unable to load You: \(error.localizedDescription)")
+        }
+    }
+
+    func recheckPublicReference(
+        using service: any YouServicing,
+        observedSourceRevision: String,
+        updateToken: PublicReferenceUpdateToken?,
+        selectedClaimID: PublicReferenceClaimID?
+    ) async -> PublicReferenceRecheckOutcome {
+        do {
+            guard let updateToken else {
+                switch try await service.checkPublicReferenceUpdate(since: observedSourceRevision) {
+                case .current:
+                    return .current
+                case let .updateAvailable(token):
+                    return .updateAvailable(token)
+                }
+            }
+            switch try await service.acceptPublicReferenceUpdate(
+                updateToken,
+                selectedClaimID: selectedClaimID
+            ) {
+            case let .accepted(dashboard):
+                syncEditor(with: dashboard)
+                state = .loaded(dashboard)
+                return .current
+            case .stale:
+                return .stale
+            }
+        } catch {
+            return .failed
         }
     }
 

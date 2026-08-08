@@ -24,6 +24,22 @@ struct PublicReferenceVerifiedReleasePointer: Codable, Sendable, Equatable, Hash
         self.packSource = artifact.verificationEvidence.packSource
         self.sourceRevision = release.sourceRevision
     }
+
+    init(
+        artifactID: String,
+        manifestVersionID: String,
+        manifestSHA256: String,
+        packSHA256: String,
+        packSource: SourceAtlasStorePayloadSource,
+        sourceRevision: String
+    ) {
+        self.artifactID = artifactID
+        self.manifestVersionID = manifestVersionID
+        self.manifestSHA256 = manifestSHA256
+        self.packSHA256 = packSHA256
+        self.packSource = packSource
+        self.sourceRevision = sourceRevision
+    }
 }
 
 struct PublicReferenceRepositoryPersistedState: Codable, Sendable, Equatable, Hashable {
@@ -257,6 +273,19 @@ actor PublicReferenceRepository {
         return snapshot(release: currentRelease, delivery: currentDelivery ?? .cachedVerified)
     }
 
+    func currentVerifiedPointer() async -> PublicReferenceVerifiedReleasePointer? {
+        await loadPersistedStateIfNeeded()
+        return currentPointer
+    }
+
+    func currentSnapshot(
+        matchingExactPointer expectedPointer: PublicReferenceVerifiedReleasePointer
+    ) async -> PublicReferenceRepositorySnapshot? {
+        await loadPersistedStateIfNeeded()
+        guard currentPointer == expectedPointer else { return nil }
+        return snapshot(release: currentRelease, delivery: currentDelivery ?? .cachedVerified)
+    }
+
     func offlineSnapshot() async -> PublicReferenceRepositorySnapshot? {
         await loadPersistedStateIfNeeded()
         if let current = snapshot(release: currentRelease, delivery: currentDelivery ?? .cachedVerified) {
@@ -434,6 +463,8 @@ private extension PublicReferenceRepository {
             predicateID: claim.predicateID,
             value: claim.value,
             sourceRecordID: claim.sourceRecordID,
+            sourceNativeFieldID: claim.sourceNativeFieldID,
+            sourceLocator: claim.sourceLocator,
             authority: claim.authority,
             jurisdiction: claim.jurisdiction,
             release: claim.release,
