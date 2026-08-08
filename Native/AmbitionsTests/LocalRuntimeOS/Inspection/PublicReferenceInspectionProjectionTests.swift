@@ -3,27 +3,38 @@ import XCTest
 
 final class PublicReferenceInspectionProjectionTests: XCTestCase {
     func testProjectionShowsPublicAuthorityFreshnessLimitsConflictsAndSourceUpdateTrigger() async throws {
-        let repository = PublicReferenceRepository()
-        _ = await repository.migrateAdditively(bundled: Self.artifact())
+        let verified = try PublicReferenceRepositoryTests.verifiedArtifact(hash: "inspection")
+        let repository = PublicReferenceRepository(
+            provider: InspectionVerifiedArtifactProvider(artifact: verified)
+        )
+        _ = await repository.refresh()
+        let claimID = try XCTUnwrap(verified.publicReferencePackArtifact()?.claims.first?.id)
         let service = PublicReferenceQueryService(repository: repository)
-        let result = try await service.inspect(PublicReferenceInspectionQuery(artifactID: "onet-30.3", claimID: PublicReferenceClaimID("task"), observedSourceRevision: "old"))
+        let result = try await service.inspect(PublicReferenceInspectionQuery(
+            artifactID: "onet-30.3",
+            claimID: claimID,
+            observedSourceRevision: "old"
+        ))
         let projection = PublicReferenceInspectionProjection.make(from: result)
 
         XCTAssertTrue(projection.isReadOnly)
-        XCTAssertEqual(projection.selectedClaim?.authority, "onet — O*NET descriptive authority.")
+        XCTAssertEqual(
+            projection.selectedClaim?.authority,
+            "onet — O*NET is authoritative for this descriptive occupation claim."
+        )
         XCTAssertEqual(projection.selectedClaim?.freshness, "current")
         XCTAssertEqual(projection.selectedClaim?.conflicts, "No recorded conflicts.")
-        XCTAssertEqual(projection.selectedClaim?.supersession, "superseded-by-1")
+        XCTAssertEqual(projection.selectedClaim?.supersession, "No recorded supersession.")
         XCTAssertTrue(projection.selectedClaim?.limits.contains("Rights: approved with attribution") == true)
         XCTAssertEqual(projection.semanticUse, "Complete for approved descriptive claims")
         XCTAssertEqual(projection.recommendationReadiness, "Not approved for recommendation use")
-        XCTAssertEqual(projection.selectedClaim?.sourceNativeIdentity, "15-1252.00 · occupation.task · record")
+        XCTAssertEqual(projection.selectedClaim?.sourceNativeIdentity, "15-1252.00 · occupation.task · onet.database")
         XCTAssertTrue(projection.selectedClaim?.accessibilityValue.contains("Limits Authority lane: description") == true)
         XCTAssertTrue(projection.selectedClaim?.accessibilityValue.contains("Conflicts No recorded conflicts.") == true)
-        XCTAssertTrue(projection.selectedClaim?.accessibilityValue.contains("Supersession superseded-by-1") == true)
-        XCTAssertTrue(projection.selectedClaim?.accessibilityValue.contains("Attribution O*NET 30.3") == true)
+        XCTAssertTrue(projection.selectedClaim?.accessibilityValue.contains("Supersession No recorded supersession.") == true)
+        XCTAssertTrue(projection.selectedClaim?.accessibilityValue.contains("Attribution O*NET 30.3, CC BY 4.0") == true)
         XCTAssertEqual(projection.recheckTrigger.title, "Review update")
-        XCTAssertEqual(projection.claims.map(\.title), ["Identity", "Task"])
+        XCTAssertEqual(projection.claims.map(\.title), ["Task"])
     }
 
     func testProjectionSurfacesConflictMetadataWithoutWeakeningRepositoryAdmission() {
@@ -95,7 +106,22 @@ final class PublicReferenceInspectionProjectionTests: XCTestCase {
             ),
             release: PublicReferenceRelease(id: "30.3"), publisherID: "onet",
             jurisdiction: PublicReferenceJurisdiction(code: "US", label: "United States"),
-            signatureVerified: true, claims: [task, identity]
+            verificationEvidence: verificationEvidence(), claims: [task, identity]
+        )
+    }
+
+    private static func verificationEvidence() -> SourceAtlasPublicReferenceArtifactVerificationEvidence {
+        SourceAtlasPublicReferenceArtifactVerificationEvidence(
+            artifactID: "onet-30.3",
+            manifestVersionID: "30.3",
+            manifestSHA256: String(repeating: "b", count: 64),
+            packSHA256: String(repeating: "a", count: 64),
+            packSource: .bundled,
+            checkedAt: Date(timeIntervalSince1970: 1_780_000_000),
+            sourceNativeSubjectID: "15-1252.00",
+            predicateIDs: ["occupation.identity", "occupation.task"],
+            sourceIDs: ["record"],
+            signatureResult: SignatureVerificationResult(signature: "test", issues: [])
         )
     }
 
@@ -115,5 +141,21 @@ final class PublicReferenceInspectionProjectionTests: XCTestCase {
             riskState: "descriptive", conflictIDs: conflicts, supersededByIDs: supersededBy,
             contentHash: hash
         )
+    }
+}
+
+private struct InspectionVerifiedArtifactProvider: PublicReferenceVerifiedPackProviding {
+    let artifact: SourceAtlasPublicReferenceVerifiedArtifact
+
+    func verifiedSourceAtlasArtifact(
+        matching pointer: PublicReferenceVerifiedReleasePointer?
+    ) async -> SourceAtlasPublicReferenceVerifiedArtifact? {
+        guard pointer == nil || (
+            pointer?.artifactID == artifact.evidence.artifactID &&
+                pointer?.manifestVersionID == artifact.evidence.manifestVersionID &&
+                pointer?.manifestSHA256 == artifact.evidence.manifestSHA256 &&
+                pointer?.packSHA256 == artifact.evidence.packSHA256
+        ) else { return nil }
+        return artifact
     }
 }

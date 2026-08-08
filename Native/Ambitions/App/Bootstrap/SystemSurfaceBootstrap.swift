@@ -90,7 +90,8 @@ enum SystemSurfaceBootstrap {
             registry: SourceAtlasPublicPackRefreshTargetRegistryArtifactLoader.defaultAppRegistry(),
             transport: SourceAtlasURLSessionPublicPackRemoteTransport(
                 endpoint: .sourceAtlasPublicGateway
-            )
+            ),
+            publicReferenceRepository: .defaultApp
         )
 
         return SystemSurfaceServices(
@@ -117,6 +118,7 @@ enum SystemSurfaceBootstrap {
         notificationService: any NotificationServicing,
         clock: any AmbitionsClock
     ) async {
+        _ = await PublicReferenceRepository.defaultApp.migrateAdditively()
         await notificationService.registerCategories()
         await runtime.snapshotWriter.refresh(now: clock.now)
         await notificationService.refreshSchedule(now: clock.now)

@@ -27,7 +27,7 @@ struct RepositoryBackedYouService: YouServicing {
         notificationService: any NotificationServicing = StubNotificationService(),
         calendarRemindersService: any CalendarRemindersServicing = StubCalendarRemindersService(),
         publicReferenceQueryService: PublicReferenceQueryService = PublicReferenceQueryService(
-            repository: PublicReferenceRepository()
+            repository: .defaultApp
         ),
         publicReferenceInspectionOverride: PublicReferenceInspectionProjection? = nil
     ) {

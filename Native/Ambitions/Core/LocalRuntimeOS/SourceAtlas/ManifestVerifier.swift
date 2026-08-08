@@ -27,6 +27,30 @@ struct ManifestVerifier: Sendable, Equatable, Hashable {
         self.signatureVerifier = signatureVerifier
     }
 
+    static func signingPayload(
+        for manifest: SourceAtlasFreshnessManifest
+    ) throws -> Data {
+        let payload = SigningManifest(
+            schemaVersion: manifest.schemaVersion,
+            versionID: manifest.versionID,
+            publishedAt: manifest.publishedAt,
+            packIndex: manifest.packIndex.map {
+                SigningPackEntry(
+                    packID: $0.packID,
+                    currentSHA256: $0.currentSHA256,
+                    rollbackPointers: $0.rollbackPointers,
+                    changedClaimIDs: $0.changedClaimIDs,
+                    claimStateBuckets: $0.claimStateBuckets
+                )
+            },
+            globalClaimStateBuckets: manifest.globalClaimStateBuckets
+        )
+        let encoder = JSONEncoder()
+        encoder.dateEncodingStrategy = .millisecondsSince1970
+        encoder.outputFormatting = [.sortedKeys]
+        return try encoder.encode(payload)
+    }
+
     func verify(
         manifest: SourceAtlasFreshnessManifest,
         packID: String,
@@ -63,10 +87,14 @@ struct ManifestVerifier: Sendable, Equatable, Hashable {
             issues.insert(.staleManifest)
         }
 
+        let usesCanonicalManifestSignature = entry.currentSignature.hasPrefix("ed25519:") && manifestData != nil
+        let signedData = usesCanonicalManifestSignature
+            ? ((try? Self.signingPayload(for: manifest)) ?? Data())
+            : Data(entry.currentSHA256.utf8)
         let signatureResult = signatureVerifier.verify(
             signature: entry.currentSignature,
-            signedData: manifestData ?? Data(entry.currentSHA256.utf8),
-            expectedSHA256: expectedManifestSHA256,
+            signedData: signedData,
+            expectedSHA256: usesCanonicalManifestSignature ? nil : expectedManifestSHA256,
             ed25519PublicKey: ed25519PublicKey
         )
         if signatureResult.isVerified == false {
@@ -80,4 +108,20 @@ struct ManifestVerifier: Sendable, Equatable, Hashable {
             signatureResult: signatureResult
         )
     }
+}
+
+private struct SigningManifest: Encodable {
+    let schemaVersion: Int
+    let versionID: String
+    let publishedAt: Date
+    let packIndex: [SigningPackEntry]
+    let globalClaimStateBuckets: [SourceAtlasFreshnessBrokerClaimStateBucket]
+}
+
+private struct SigningPackEntry: Encodable {
+    let packID: String
+    let currentSHA256: String
+    let rollbackPointers: [String: String]
+    let changedClaimIDs: [String]
+    let claimStateBuckets: [SourceAtlasFreshnessBrokerClaimStateBucket]
 }
