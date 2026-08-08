@@ -19,9 +19,9 @@
     {
       "id": "m09.local.pr.review",
       "area": "privacy-security",
-      "availability": "available",
-      "command": "bash scripts/ci/ambitions-pr-review-local.sh --continue",
-      "proofExpectation": "Local PR review stack output with pass/fail counts."
+      "availability": "not_available",
+      "notAvailableReason": "The legacy local PR review stack was intentionally removed when repository governance was simplified; Code Quality is the active replacement.",
+      "proofExpectation": "Record as unavailable; use the repository Code Quality workflow instead."
     },
     {
       "id": "m09.green.standard.audit",

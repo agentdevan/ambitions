@@ -20,7 +20,6 @@ from foundry.validator import validate_bundle, validate_r2_object_keys
 
 DEFAULT_TARGETS = [
     "tools/source-atlas/fixtures/boundary",
-    "source-atlas/fixtures",
 ]
 
 

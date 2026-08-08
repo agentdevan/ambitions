@@ -18,7 +18,7 @@ final class SourceAtlasNoPrivateGraphEgressAuditTests: XCTestCase {
                 surface: .inspectionDetail,
                 identifier: "source-inspection-current",
                 inspectedValue: SourceInspectionPresentationFixtures.defaultDetail.accessibilityValue
-            ),
+            )
         ]
 
         XCTAssertEqual(SourceAtlasNoPrivateGraphEgressAudit.validate(records), [])
@@ -49,7 +49,7 @@ final class SourceAtlasNoPrivateGraphEgressAuditTests: XCTestCase {
             "personalization_signal=protect mornings",
             "personalization_factor=energy",
             "final_schedule=tomorrow",
-            "step_list=call person",
+            "step_list=call person"
         ]
 
         let records = forbiddenValues.enumerated().map { index, value in
@@ -69,6 +69,28 @@ final class SourceAtlasNoPrivateGraphEgressAuditTests: XCTestCase {
         XCTAssertTrue(findings.contains { $0.forbiddenToken == "account_secret" })
         XCTAssertTrue(findings.contains { $0.forbiddenToken == "inferred_priority" })
         XCTAssertTrue(findings.contains { $0.forbiddenToken == "personalization" })
+    }
+
+    func testConsumerBoundaryRejectsPrivateSelectorsAndDerivedIdentityInputs() {
+        let records = [
+            SourceAtlasNoPrivateGraphEgressRecord(
+                surface: .requestShape,
+                identifier: "private-selector",
+                inspectedValue: "goal_id=goal-private capability_id=capability-private schedule_capacity=friday"
+            ),
+            SourceAtlasNoPrivateGraphEgressRecord(
+                surface: .objectKey,
+                identifier: "derived-object-key",
+                inspectedValue: "private_graph_hash=derived-from-user-context"
+            )
+        ]
+
+        let findings = SourceAtlasNoPrivateGraphEgressAudit.validate(records)
+
+        XCTAssertTrue(findings.contains { $0.forbiddenToken == "goal_id" })
+        XCTAssertTrue(findings.contains { $0.forbiddenToken == "capability_id" })
+        XCTAssertTrue(findings.contains { $0.forbiddenToken == "schedule_capacity" })
+        XCTAssertTrue(findings.contains { $0.forbiddenToken == "private_graph_hash" })
     }
 
     private static let hash = String(repeating: "a", count: 64)

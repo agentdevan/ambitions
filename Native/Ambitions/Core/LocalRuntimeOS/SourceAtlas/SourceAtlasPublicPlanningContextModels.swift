@@ -1,5 +1,6 @@
 import Foundation
 
+// swiftlint:disable:next identifier_name
 let sourceAtlasVerifiedPublicPackProviderSchemaVersion = "source_atlas_verified_public_pack_provider.native.v1"
 
 enum SourceAtlasPublicPlanningContextRequestIssue: String, Codable, Sendable, Equatable, Hashable, CaseIterable {
@@ -324,5 +325,199 @@ struct SourceAtlasVerifiedPublicPackProviderOutput: Codable, Sendable, Equatable
 
     var canProvidePublicPlanningContext: Bool {
         context != nil && requestIssues.isEmpty && egressFindings.isEmpty
+    }
+}
+
+enum SourceAtlasPublicPlanningConsumerKind: String, Codable, Sendable, Equatable, Hashable, CaseIterable {
+    case career
+    case education
+    case hobby
+    case credential
+
+    var approvedDomainIDs: Set<String> {
+        switch self {
+        case .career:
+            ["occupation_foundation"]
+        case .education, .credential:
+            ["education_credentialing"]
+        case .hobby:
+            ["hobbies_recreation"]
+        }
+    }
+}
+
+enum SourceAtlasPublicPlanningArtifactIdentityOrigin: String, Codable, Sendable, Equatable, Hashable {
+    case approvedPublicRegistry = "approved_public_registry"
+    case derivedFromPrivateState = "derived_from_private_state"
+}
+
+enum SourceAtlasPublicPlanningConsumerOperation: String, Codable, Sendable, Equatable, Hashable {
+    case validateBoundary = "validate_boundary"
+    case readVerifiedLocalArtifact = "read_verified_local_artifact"
+    case fetchAllowlistedArtifact = "fetch_allowlisted_artifact"
+    case projectForLocalPlanning = "project_for_local_planning"
+}
+
+enum SourceAtlasPublicPlanningConsumerIssue: String, Codable, Sendable, Equatable, Hashable, CaseIterable {
+    case contextUnavailable = "context_unavailable"
+    case ownershipViolation = "ownership_violation"
+    case privateField = "private_field"
+    case derivedArtifactIdentity = "derived_artifact_identity"
+    case openEndedQuery = "open_ended_query"
+    case artifactMismatch = "artifact_mismatch"
+    case unsupportedArtifactID = "unsupported_artifact_id"
+    case domainMismatch = "domain_mismatch"
+    case unsupportedSource = "unsupported_source"
+    case invalidOperationOrder = "invalid_operation_order"
+    case networkBeforeValidation = "network_before_validation"
+}
+
+struct SourceAtlasPublicPlanningConsumerRequest: Sendable, Equatable, Hashable {
+    let consumer: SourceAtlasPublicPlanningConsumerKind
+    let context: SourceAtlasPublicPlanningContext
+    let artifactID: String
+    let domainID: String
+    let sourceID: String
+    let artifactIdentityOrigin: SourceAtlasPublicPlanningArtifactIdentityOrigin
+    let openEndedQuery: String?
+    let boundaryFields: [String: String]
+    let operationOrder: [SourceAtlasPublicPlanningConsumerOperation]
+
+    init(
+        consumer: SourceAtlasPublicPlanningConsumerKind,
+        context: SourceAtlasPublicPlanningContext,
+        artifactID: String,
+        domainID: String,
+        sourceID: String,
+        artifactIdentityOrigin: SourceAtlasPublicPlanningArtifactIdentityOrigin,
+        openEndedQuery: String?,
+        boundaryFields: [String: String],
+        operationOrder: [SourceAtlasPublicPlanningConsumerOperation]
+    ) {
+        self.consumer = consumer
+        self.context = context
+        self.artifactID = artifactID.trimmingCharacters(in: .whitespacesAndNewlines)
+        self.domainID = domainID.trimmingCharacters(in: .whitespacesAndNewlines)
+        self.sourceID = sourceID.trimmingCharacters(in: .whitespacesAndNewlines)
+        self.artifactIdentityOrigin = artifactIdentityOrigin
+        self.openEndedQuery = openEndedQuery?.trimmingCharacters(in: .whitespacesAndNewlines)
+        self.boundaryFields = boundaryFields
+        self.operationOrder = operationOrder
+    }
+}
+
+struct SourceAtlasPublicPlanningConsumerDecision: Sendable, Equatable, Hashable {
+    let canExposeToLocalPlanning: Bool
+    let acceptedArtifactID: String?
+    let issues: [SourceAtlasPublicPlanningConsumerIssue]
+
+    fileprivate init(
+        acceptedArtifactID: String?,
+        issues: [SourceAtlasPublicPlanningConsumerIssue]
+    ) {
+        self.canExposeToLocalPlanning = acceptedArtifactID != nil && issues.isEmpty
+        self.acceptedArtifactID = self.canExposeToLocalPlanning ? acceptedArtifactID : nil
+        self.issues = issues
+    }
+}
+
+struct SourceAtlasPublicPlanningConsumerPolicy: Sendable, Equatable, Hashable {
+    func evaluate(
+        _ request: SourceAtlasPublicPlanningConsumerRequest
+    ) -> SourceAtlasPublicPlanningConsumerDecision {
+        var findings: Set<SourceAtlasPublicPlanningConsumerIssue> = []
+        let context = request.context
+
+        if context.canInformLocalPlanning == false ||
+            context.availability.canSupportCurrentPublicReferenceUse == false ||
+            context.availability.localPlanningBlocked ||
+            context.useMode == .unavailable {
+            findings.insert(.contextUnavailable)
+        }
+        if context.ownership != .publicReferenceOnly {
+            findings.insert(.ownershipViolation)
+        }
+        if request.artifactIdentityOrigin != .approvedPublicRegistry {
+            findings.insert(.derivedArtifactIdentity)
+        }
+        if request.openEndedQuery?.isEmpty == false {
+            findings.insert(.openEndedQuery)
+        }
+        if request.artifactID != context.selectedPackID {
+            findings.insert(.artifactMismatch)
+        }
+        if Self.isSupportedArtifactID(request.artifactID, domainID: request.domainID) == false {
+            findings.insert(.unsupportedArtifactID)
+        }
+        if request.domainID != context.requestDomainID ||
+            request.domainID != context.selectedPackDomainID ||
+            request.consumer.approvedDomainIDs.contains(request.domainID) == false {
+            findings.insert(.domainMismatch)
+        }
+        if context.sourceIDs.contains(request.sourceID) == false {
+            findings.insert(.unsupportedSource)
+        }
+        if Self.hasPrivateBoundaryField(request.boundaryFields) {
+            findings.insert(.privateField)
+        }
+        if Self.hasValidOperationOrder(request.operationOrder) == false {
+            findings.insert(.invalidOperationOrder)
+        }
+        if Self.networkRunsBeforeValidation(request.operationOrder) {
+            findings.insert(.networkBeforeValidation)
+        }
+
+        let issues = SourceAtlasPublicPlanningConsumerIssue.allCases.filter(findings.contains)
+        return SourceAtlasPublicPlanningConsumerDecision(
+            acceptedArtifactID: issues.isEmpty ? request.artifactID : nil,
+            issues: issues
+        )
+    }
+
+    private static func hasPrivateBoundaryField(_ fields: [String: String]) -> Bool {
+        let records = fields.sorted { $0.key < $1.key }.map { key, value in
+            SourceAtlasNoPrivateGraphEgressRecord(
+                surface: .requestShape,
+                identifier: key,
+                inspectedValue: "\(key)=\(value)"
+            )
+        }
+        return SourceAtlasNoPrivateGraphEgressAudit.validate(records).isEmpty == false
+    }
+
+    private static func isSupportedArtifactID(_ artifactID: String, domainID: String) -> Bool {
+        let components = artifactID.split(separator: "/", omittingEmptySubsequences: false)
+        guard components.count == 5,
+              components[0] == "source-atlas",
+              components[1] == "v1",
+              components[2] == "domain",
+              components[3] == Substring(domainID),
+              components[4].isEmpty == false else {
+            return false
+        }
+        let allowed = CharacterSet.alphanumerics.union(CharacterSet(charactersIn: "-_."))
+        return components.allSatisfy { component in
+            component.unicodeScalars.allSatisfy(allowed.contains)
+        }
+    }
+
+    private static func hasValidOperationOrder(
+        _ operations: [SourceAtlasPublicPlanningConsumerOperation]
+    ) -> Bool {
+        operations.first == .validateBoundary &&
+            operations.last == .projectForLocalPlanning &&
+            Set(operations).count == operations.count
+    }
+
+    private static func networkRunsBeforeValidation(
+        _ operations: [SourceAtlasPublicPlanningConsumerOperation]
+    ) -> Bool {
+        guard let fetchIndex = operations.firstIndex(of: .fetchAllowlistedArtifact) else {
+            return false
+        }
+        guard let validationIndex = operations.firstIndex(of: .validateBoundary) else {
+            return true
+        }
+        return fetchIndex < validationIndex
     }
 }

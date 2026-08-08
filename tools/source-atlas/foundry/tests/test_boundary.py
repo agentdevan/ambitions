@@ -178,6 +178,16 @@ def _load_no_private_graph_audit():
     return module
 
 
+def _load_boundary_audit():
+    script_path = REPO_ROOT / "scripts" / "source-atlas-boundary-audit.py"
+    spec = importlib.util.spec_from_file_location("source_atlas_boundary_audit", script_path)
+    assert spec is not None
+    assert spec.loader is not None
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+
 def _run_no_private_graph_audit(args: list[str]) -> int:
     audit = _load_no_private_graph_audit()
     with redirect_stdout(StringIO()):
@@ -190,6 +200,13 @@ def test_no_private_graph_audit_uses_committed_contract_schema_target():
     assert "tools/source-atlas/foundry/contracts" in audit.DEFAULT_TARGETS
     assert "tools/source-atlas/schemas" not in audit.DEFAULT_TARGETS
     assert _run_no_private_graph_audit(["tools/source-atlas/foundry/contracts"]) == 0
+
+
+def test_boundary_audit_default_targets_exist():
+    audit = _load_boundary_audit()
+
+    assert audit.DEFAULT_TARGETS
+    assert all((REPO_ROOT / target).exists() for target in audit.DEFAULT_TARGETS)
 
 
 def test_no_private_graph_audit_missing_mandatory_target_fails(tmp_path: Path):
