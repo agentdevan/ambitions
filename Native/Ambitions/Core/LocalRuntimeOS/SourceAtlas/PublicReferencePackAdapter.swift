@@ -18,7 +18,7 @@ struct PublicReferencePackArtifact: Codable, Sendable, Equatable, Hashable {
     let release: PublicReferenceRelease
     let publisherID: String
     let jurisdiction: PublicReferenceJurisdiction
-    let signatureVerified: Bool
+    let verificationEvidence: SourceAtlasPublicReferenceArtifactVerificationEvidence
     let claims: [PublicReferenceClaimEnvelope]
 
     init(
@@ -27,7 +27,7 @@ struct PublicReferencePackArtifact: Codable, Sendable, Equatable, Hashable {
         release: PublicReferenceRelease,
         publisherID: String,
         jurisdiction: PublicReferenceJurisdiction,
-        signatureVerified: Bool,
+        verificationEvidence: SourceAtlasPublicReferenceArtifactVerificationEvidence,
         claims: [PublicReferenceClaimEnvelope]
     ) {
         self.id = id.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -35,7 +35,7 @@ struct PublicReferencePackArtifact: Codable, Sendable, Equatable, Hashable {
         self.release = release
         self.publisherID = publisherID.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
         self.jurisdiction = jurisdiction
-        self.signatureVerified = signatureVerified
+        self.verificationEvidence = verificationEvidence
         self.claims = claims.sorted { $0.id.rawValue < $1.id.rawValue }
     }
 }
@@ -94,7 +94,7 @@ struct PublicReferencePackAdapter: Sendable, Equatable, Hashable {
 
         let certificate = PublicReferenceAuthorityCertificate(
             artifactID: artifact.id,
-            signatureVerified: artifact.signatureVerified,
+            signatureVerified: artifact.verificationEvidence.signatureResult.isVerified,
             permittedJurisdictionCodes: [Self.approvedJurisdictionCode],
             permittedAuthorityLanes: [.classification, .description, .typicalPreparation]
         )
@@ -125,7 +125,7 @@ struct PublicReferencePackAdapter: Sendable, Equatable, Hashable {
                 artifactID: artifact.id,
                 release: artifact.release,
                 claims: artifact.claims,
-                sourceRevision: "\(artifact.release.id)|\(artifact.claims.map(\.contentHash).joined(separator: ","))"
+                sourceRevision: "\(artifact.release.id)|\(artifact.verificationEvidence.packSHA256)"
             ),
             quarantines: []
         )
@@ -146,6 +146,15 @@ private extension PublicReferencePackAdapter {
         }
         if artifact.jurisdiction.code.uppercased() != Self.approvedJurisdictionCode {
             failures.append(.unsupportedJurisdiction)
+        }
+        if artifact.verificationEvidence.artifactID != Self.approvedArtifactID ||
+            artifact.verificationEvidence.manifestVersionID != Self.approvedReleaseID ||
+            artifact.verificationEvidence.packSHA256.isEmpty ||
+            artifact.verificationEvidence.manifestSHA256.isEmpty ||
+            artifact.verificationEvidence.signatureResult.isVerified == false ||
+            Set(artifact.claims.map(\.predicateID)) != Set(artifact.verificationEvidence.predicateIDs) ||
+            Set(artifact.claims.map(\.sourceRecordID)) != Set(artifact.verificationEvidence.sourceIDs) {
+            failures.append(.unsupportedArtifact)
         }
         return failures
     }

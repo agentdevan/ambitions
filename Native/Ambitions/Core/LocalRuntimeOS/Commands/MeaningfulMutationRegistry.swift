@@ -37,7 +37,7 @@ struct MeaningfulMutationWritePathDescriptor: Sendable, Hashable {
 
 enum MeaningfulMutationRegistry {
     static let declaredMutationRowCount = 124
-    static let declaredWritePathRowCount = 70
+    static let declaredWritePathRowCount = 71
 
     static let descriptors: [MeaningfulMutationDescriptor] = [
         mutation(
@@ -425,6 +425,11 @@ enum MeaningfulMutationRegistry {
         writePath(sourcePath: "Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/SourceAtlasPublicPackCacheFileRepository+Storage.swift", status: .unproven, rationale: "Public-pack cache storage is inventory-only and lacks row-specific executable adapter proof."),
         writePath(sourcePath: "Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/SourceAtlasPublicPackCacheFileRepository.swift", status: .unproven, rationale: "Public-pack cache repository is inventory-only and does not prove adapter lineage."),
         writePath(sourcePath: "Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/SourceAtlasPublicPackLifecycleRefreshService.swift", status: .unproven, rationale: "Public-pack refresh cache access is inventory-only without row-specific lineage tests."),
+        writePath(
+            sourcePath: "Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/PublicReferenceRepository.swift",
+            status: .unproven,
+            rationale: "The public-only pointer store atomically selects already verified immutable Source Atlas artifacts; restart, rollback, cancellation, and mismatch tests cover this bounded cache metadata write."
+        ),
         writePath(sourcePath: "Native/Ambitions/Core/LocalRuntimeOS/Storage/AppGroupSnapshotStore.swift", status: .unproven, rationale: "App-group snapshot writes lack row-specific projection-only proof."),
         writePath(sourcePath: "Native/Ambitions/Core/LocalRuntimeOS/Storage/BackupStore.swift", status: .unproven, rationale: "BackupStore writes lack complete restore and replay proof."),
         writePath(sourcePath: "Native/Ambitions/Core/LocalRuntimeOS/Storage/BlobStoreFileSystem.swift", status: .unproven, rationale: "Blob file-system writes lack row-specific mutation lineage proof."),

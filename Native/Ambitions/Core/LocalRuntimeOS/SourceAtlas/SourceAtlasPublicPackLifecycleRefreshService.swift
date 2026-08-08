@@ -12,6 +12,9 @@ enum SourceAtlasPublicPackLifecycleRefreshIssue: String, Codable, Sendable, Equa
     case missingApprovalArtifact = "missing_approval_artifact"
     case privateTargetMetadata = "private_target_metadata"
     case unsafeManifestRequest = "unsafe_manifest_request"
+    case publicReferenceUnavailable = "public_reference_unavailable"
+    case publicReferenceQuarantined = "public_reference_quarantined"
+    case publicReferencePersistenceFailed = "public_reference_persistence_failed"
 }
 
 struct SourceAtlasPublicPackLifecycleRefreshTarget: Codable, Sendable, Equatable, Hashable, Identifiable {
@@ -66,7 +69,7 @@ struct SourceAtlasPublicPackLifecycleRefreshTarget: Codable, Sendable, Equatable
                 "app_version=\(appVersion)",
                 "locale=\(publicLocale ?? "")",
                 "target_pack_id=\(targetPackID)",
-                "environment=\(environment)",
+                "environment=\(environment)"
             ].joined(separator: " ")
         )
     }
@@ -89,15 +92,6 @@ struct SourceAtlasPublicPackLifecycleRefreshInput: Sendable, Equatable, Hashable
     let networkReachability: SourceAtlasNetworkReachability
     let checkedAt: Date
 
-    init(
-        mode: SourceAtlasPublicPackLifecycleRefreshMode,
-        networkReachability: SourceAtlasNetworkReachability,
-        checkedAt: Date
-    ) {
-        self.mode = mode
-        self.networkReachability = networkReachability
-        self.checkedAt = checkedAt
-    }
 }
 
 struct SourceAtlasPublicPackLifecycleRefreshResolution: Sendable, Equatable, Hashable {
@@ -135,12 +129,14 @@ actor SourceAtlasPublicPackLifecycleRefreshService: SourceAtlasPublicPackLifecyc
     private let transport: SourceAtlasPublicPackRemoteTransport
     private let repository: SourceAtlasPublicPackCacheFileRepository
     private let task: SourceAtlasPublicPackBackgroundRefreshTask
+    private let publicReferenceRepository: PublicReferenceRepository?
 
     init(
         targets: [SourceAtlasPublicPackLifecycleRefreshTarget] = [],
         transport: SourceAtlasPublicPackRemoteTransport = SourceAtlasStaticPublicPackRemoteTransport(objectsByKey: [:]),
         repository: SourceAtlasPublicPackCacheFileRepository = SourceAtlasPublicPackCacheFileRepository.defaultAppCacheRepository(),
-        task: SourceAtlasPublicPackBackgroundRefreshTask = SourceAtlasPublicPackBackgroundRefreshTask()
+        task: SourceAtlasPublicPackBackgroundRefreshTask = SourceAtlasPublicPackBackgroundRefreshTask(),
+        publicReferenceRepository: PublicReferenceRepository? = nil
     ) {
         self.registry = SourceAtlasPublicPackRefreshTargetRegistry(
             entries: targets.map {
@@ -154,18 +150,21 @@ actor SourceAtlasPublicPackLifecycleRefreshService: SourceAtlasPublicPackLifecyc
         self.transport = transport
         self.repository = repository
         self.task = task
+        self.publicReferenceRepository = publicReferenceRepository
     }
 
     init(
         registry: SourceAtlasPublicPackRefreshTargetRegistry,
         transport: SourceAtlasPublicPackRemoteTransport = SourceAtlasStaticPublicPackRemoteTransport(objectsByKey: [:]),
         repository: SourceAtlasPublicPackCacheFileRepository = SourceAtlasPublicPackCacheFileRepository.defaultAppCacheRepository(),
-        task: SourceAtlasPublicPackBackgroundRefreshTask = SourceAtlasPublicPackBackgroundRefreshTask()
+        task: SourceAtlasPublicPackBackgroundRefreshTask = SourceAtlasPublicPackBackgroundRefreshTask(),
+        publicReferenceRepository: PublicReferenceRepository? = nil
     ) {
         self.registry = registry
         self.transport = transport
         self.repository = repository
         self.task = task
+        self.publicReferenceRepository = publicReferenceRepository
     }
 
     func refreshPublicSourceAtlasPacks(
@@ -212,6 +211,21 @@ actor SourceAtlasPublicPackLifecycleRefreshService: SourceAtlasPublicPackLifecyc
             if Task.isCancelled {
                 issues.insert(.cancelled)
                 break
+            }
+        }
+
+        if let publicReferenceRepository {
+            switch await publicReferenceRepository.refresh() {
+            case .promoted, .rolledBack, .superseded:
+                break
+            case .cancelled:
+                issues.insert(.cancelled)
+            case .unavailable:
+                issues.insert(.publicReferenceUnavailable)
+            case .quarantined:
+                issues.insert(.publicReferenceQuarantined)
+            case .persistenceFailed:
+                issues.insert(.publicReferencePersistenceFailed)
             }
         }
 
@@ -293,7 +307,7 @@ private extension SourceAtlasPublicPackLifecycleRefreshService {
             "private_context",
             "private_user_context",
             "life_graph",
-            "personalized",
+            "personalized"
         ]
         let standardFindings = SourceAtlasNoPrivateGraphEgressAudit.validate(records)
         let extraFindings = records.flatMap { record in

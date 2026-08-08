@@ -39,9 +39,16 @@ pack bytes and metadata separately from the private graph. Cache migration is
 additive; incompatible packs remain last-known-good or unavailable, never
 silently reinterpreted. Refresh is actor-isolated and revisioned; network timing
 cannot change deterministic local claim ordering. V1 uses the existing signed
-Source Atlas JSON pack envelope, SQLite-backed verified-pack metadata, and
-existing signature/schema verifier rather than introducing a second format or
-store.
+Source Atlas JSON pack envelope and the existing file-backed public-pack cache:
+immutable pack and manifest artifacts, hash-addressed indexes, and the cache
+journal. Current and last-known-good selection is persisted as an atomic,
+versioned public-only pointer over those verified artifacts. The implementation
+must call the existing signature, manifest, schema, and payload-hash verifiers;
+it must not accept a caller-supplied verification assertion or introduce a
+parallel artifact format or persistence system. Until an exact approved O*NET
+30.3 artifact and trusted verification material exist in the registry, the
+production query path remains honestly unavailable rather than installing a
+synthetic or weakly verified release.
 
 ## Rollout and implementation order
 

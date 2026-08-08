@@ -296,6 +296,8 @@ struct SourceAtlasSourceRecord: Codable, Sendable, Equatable, Hashable, Identifi
     let retrievedAt: String?
     let contentHash: String?
     let approvedForOfficialClaims: Bool
+    let licenseIdentifier: String?
+    let requiredAttribution: String?
 
     init(
         id: String,
@@ -304,7 +306,9 @@ struct SourceAtlasSourceRecord: Codable, Sendable, Equatable, Hashable, Identifi
         locator: String,
         retrievedAt: String? = nil,
         contentHash: String? = nil,
-        approvedForOfficialClaims: Bool = false
+        approvedForOfficialClaims: Bool = false,
+        licenseIdentifier: String? = nil,
+        requiredAttribution: String? = nil
     ) {
         self.id = id.trimmingCharacters(in: .whitespacesAndNewlines)
         self.title = title.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -313,5 +317,7 @@ struct SourceAtlasSourceRecord: Codable, Sendable, Equatable, Hashable, Identifi
         self.retrievedAt = retrievedAt
         self.contentHash = contentHash
         self.approvedForOfficialClaims = approvedForOfficialClaims
+        self.licenseIdentifier = licenseIdentifier?.trimmingCharacters(in: .whitespacesAndNewlines)
+        self.requiredAttribution = requiredAttribution?.trimmingCharacters(in: .whitespacesAndNewlines)
     }
 }
