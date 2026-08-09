@@ -10,11 +10,17 @@ permissions:
   contents: read
 
 concurrency:
-  group: linear-control-events-${{ github.event.workflow_run.head_sha || github.sha }}
+  group: linear-control-events-main
   cancel-in-progress: false
 
 jobs:
   deliver:
+    if: >-
+      (github.event_name == 'workflow_run' &&
+      github.event.workflow_run.conclusion == 'success' &&
+      github.event.workflow_run.event == 'push' &&
+      github.event.workflow_run.head_branch == 'main') ||
+      (github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main')
     runs-on: ubuntu-latest
     environment: Ambitions Linear Control
     env:
@@ -26,6 +32,8 @@ jobs:
         env:
           AUTHORITY_COMMIT: ${{ github.event.workflow_run.head_sha || github.sha }}
           CONCLUSION: ${{ github.event.workflow_run.conclusion || 'manual' }}
+          WORKFLOW_EVENT: ${{ github.event.workflow_run.event || 'workflow_dispatch' }}
+          HEAD_BRANCH: ${{ github.event.workflow_run.head_branch || github.ref_name }}
           DELIVERY_ID: ${{ github.run_id }}-${{ github.run_attempt }}
         run: |
           set -euo pipefail
@@ -33,9 +41,11 @@ jobs:
           test -n "$CONTROL_SECRET"
           payload="$(jq -cn \
             --arg commit "$AUTHORITY_COMMIT" \
-            --arg conclusion "$CONCLUSION" \
-            --arg repository "$GITHUB_REPOSITORY" \
-            '{schemaVersion:1,kind:"code-quality",authorityCommit:$commit,conclusion:$conclusion,repository:$repository}')"
+              --arg conclusion "$CONCLUSION" \
+              --arg workflowEvent "$WORKFLOW_EVENT" \
+              --arg headBranch "$HEAD_BRANCH" \
+              --arg repository "$GITHUB_REPOSITORY" \
+              '{schemaVersion:1,kind:"code-quality",authorityCommit:$commit,conclusion:$conclusion,workflowEvent:$workflowEvent,headBranch:$headBranch,repository:$repository}')"
           signature="$(printf '%s' "$payload" | openssl dgst -sha256 -hmac "$CONTROL_SECRET" -hex | awk '{print $2}')"
           curl --fail-with-body --silent --show-error \
             --request POST "$CONTROL_URL/events/github" \

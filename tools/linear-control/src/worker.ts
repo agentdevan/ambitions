@@ -15,6 +15,253 @@ declare global {
 }
 
 const encoder = new TextEncoder();
+const exactCommitSha = /^[0-9a-f]{40}$/;
+const exactContentHash = /^[0-9a-f]{64}$/;
+type Fetcher = typeof fetch;
+
+function exactCommitFromProperty(
+  payload: unknown,
+  property: string,
+): string | null {
+  if (typeof payload !== "object" || payload === null) return null;
+  const value: unknown = Reflect.get(payload, property);
+  return typeof value === "string" && exactCommitSha.test(value) ? value : null;
+}
+
+export function authorityCommitFromPayload(payload: unknown): string | null {
+  return exactCommitFromProperty(payload, "authorityCommit");
+}
+
+function property(payload: unknown, name: string): unknown {
+  return typeof payload === "object" && payload !== null
+    ? Reflect.get(payload, name)
+    : undefined;
+}
+
+function githubEvidenceIsEligible(payload: unknown, env: Env): boolean {
+  const workflowEvent = property(payload, "workflowEvent");
+  const conclusion = property(payload, "conclusion");
+  const isMainPush = workflowEvent === "push" && conclusion === "success";
+  const isMainDispatch =
+    workflowEvent === "workflow_dispatch" && conclusion === "manual";
+  return (
+    property(payload, "schemaVersion") === 1 &&
+    property(payload, "kind") === "code-quality" &&
+    property(payload, "repository") === env.GITHUB_REPOSITORY &&
+    property(payload, "headBranch") === "main" &&
+    (isMainPush || isMainDispatch)
+  );
+}
+
+export function repositoryRawUrl(
+  repository: string,
+  authorityCommit: string,
+  path: string,
+): string {
+  if (!/^[A-Za-z0-9_.-]+\/[A-Za-z0-9_.-]+$/.test(repository))
+    throw new Error("INVALID_GITHUB_REPOSITORY");
+  if (!exactCommitSha.test(authorityCommit))
+    throw new Error("INVALID_REPOSITORY_AUTHORITY_COMMIT");
+  const segments = path.split("/");
+  if (
+    path.startsWith("/") ||
+    segments.some((segment) => !segment || segment === "." || segment === "..")
+  )
+    throw new Error("INVALID_REPOSITORY_PATH");
+  return `https://raw.githubusercontent.com/${repository}/${authorityCommit}/${segments.map(encodeURIComponent).join("/")}`;
+}
+
+interface PinnedAuthority {
+  commit: string;
+  pinnedAt: string;
+}
+
+async function latestVerifiedGithubAuthority(
+  env: Env,
+): Promise<PinnedAuthority | null> {
+  const latest = await env.CONTROL_DB.prepare(
+    "SELECT authority_commit, authority_pinned_at FROM deliveries WHERE source = 'github' AND status = 'verified' AND authority_commit IS NOT NULL AND authority_pinned_at IS NOT NULL ORDER BY authority_pinned_at DESC LIMIT 1",
+  ).first<{
+    authority_commit: string | null;
+    authority_pinned_at: string | null;
+  }>();
+  return latest?.authority_commit &&
+    exactCommitSha.test(latest.authority_commit) &&
+    latest.authority_pinned_at
+    ? { commit: latest.authority_commit, pinnedAt: latest.authority_pinned_at }
+    : null;
+}
+
+async function currentGithubMainCommit(
+  env: Env,
+  fetcher: Fetcher,
+): Promise<string> {
+  const response = await fetcher(
+    `https://api.github.com/repos/${env.GITHUB_REPOSITORY}/commits/main`,
+    {
+      headers: {
+        Accept: "application/vnd.github+json",
+        "User-Agent": "ambitions-linear-control",
+        "X-GitHub-Api-Version": "2022-11-28",
+      },
+    },
+  );
+  if (!response.ok) throw new Error(`GITHUB_HEAD_HTTP_${response.status}`);
+  const payload: unknown = await response.json();
+  const commit = exactCommitFromProperty(payload, "sha");
+  if (!commit) throw new Error("GITHUB_HEAD_INVALID");
+  return commit;
+}
+
+export async function pinEventAuthority(
+  env: Env,
+  event: EventEnvelope,
+  fetcher: Fetcher = fetch,
+): Promise<{ event: EventEnvelope; newlyPinned: boolean }> {
+  if (event.authorityCommit) {
+    if (!exactCommitSha.test(event.authorityCommit))
+      throw new Error("INVALID_REPOSITORY_AUTHORITY_COMMIT");
+    return { event, newlyPinned: false };
+  }
+  const stored = await env.CONTROL_DB.prepare(
+    "SELECT authority_commit, authority_pinned_at FROM deliveries WHERE id = ?",
+  )
+    .bind(event.deliveryId)
+    .first<{
+      authority_commit: string | null;
+      authority_pinned_at: string | null;
+    }>();
+  if (
+    stored?.authority_commit &&
+    exactCommitSha.test(stored.authority_commit) &&
+    stored.authority_pinned_at
+  )
+    return {
+      event: {
+        ...event,
+        authorityCommit: stored.authority_commit,
+        authorityPinnedAt: stored.authority_pinned_at,
+      },
+      newlyPinned: false,
+    };
+  const authorityCommit = await currentGithubMainCommit(env, fetcher);
+  const authorityPinnedAt = new Date().toISOString();
+  const result = await env.CONTROL_DB.prepare(
+    "UPDATE deliveries SET authority_commit = ?, authority_pinned_at = ?, updated_at = ? WHERE id = ? AND authority_commit IS NULL",
+  )
+    .bind(
+      authorityCommit,
+      authorityPinnedAt,
+      authorityPinnedAt,
+      event.deliveryId,
+    )
+    .run();
+  if (result.meta.changes > 0)
+    return {
+      event: { ...event, authorityCommit, authorityPinnedAt },
+      newlyPinned: true,
+    };
+  const winner = await env.CONTROL_DB.prepare(
+    "SELECT authority_commit, authority_pinned_at FROM deliveries WHERE id = ?",
+  )
+    .bind(event.deliveryId)
+    .first<{
+      authority_commit: string | null;
+      authority_pinned_at: string | null;
+    }>();
+  if (
+    !winner?.authority_commit ||
+    !exactCommitSha.test(winner.authority_commit) ||
+    !winner.authority_pinned_at
+  )
+    throw new Error("DELIVERY_AUTHORITY_PIN_FAILED");
+  return {
+    event: {
+      ...event,
+      authorityCommit: winner.authority_commit,
+      authorityPinnedAt: winner.authority_pinned_at,
+    },
+    newlyPinned: false,
+  };
+}
+
+export async function authorityIsCurrent(
+  env: Env,
+  event: EventEnvelope,
+  fetcher: Fetcher = fetch,
+): Promise<boolean> {
+  if (!event.authorityCommit || !exactCommitSha.test(event.authorityCommit))
+    return false;
+  if (event.source === "github")
+    return (
+      event.authorityCommit === (await currentGithubMainCommit(env, fetcher))
+    );
+  const verified = await latestVerifiedGithubAuthority(env);
+  if (!verified)
+    return (
+      event.authorityCommit === (await currentGithubMainCommit(env, fetcher))
+    );
+  if (event.authorityCommit === verified.commit) return true;
+  if (!event.authorityPinnedAt)
+    return (
+      event.authorityCommit === (await currentGithubMainCommit(env, fetcher))
+    );
+  return event.authorityPinnedAt >= verified.pinnedAt;
+}
+
+export async function loadManifestForEvent(
+  env: Env,
+  event: EventEnvelope,
+  fetcher: Fetcher = fetch,
+): Promise<DesiredWorkspaceManifest> {
+  if (!event.authorityCommit)
+    throw new Error("REPOSITORY_AUTHORITY_COMMIT_UNPINNED");
+  const repositoryUrl = repositoryRawUrl(
+    env.GITHUB_REPOSITORY,
+    event.authorityCommit,
+    env.MANIFEST_PATH,
+  );
+  const response = await fetcher(repositoryUrl, {
+    headers: { "User-Agent": "ambitions-linear-control" },
+  });
+  if (!response.ok) throw new Error(`MANIFEST_HTTP_${response.status}`);
+  const payload: unknown = await response.json();
+  const authorityCommit = exactCommitFromProperty(payload, "authorityCommit");
+  if (!authorityCommit) throw new Error("MANIFEST_AUTHORITY_COMMIT_INVALID");
+  const contractHash = property(payload, "contractHash");
+  const projects = property(payload, "projects");
+  const schedule = property(payload, "schedule");
+  if (
+    property(payload, "schemaVersion") !== 1 ||
+    typeof contractHash !== "string" ||
+    !exactContentHash.test(contractHash) ||
+    !Array.isArray(projects) ||
+    !Array.isArray(schedule)
+  )
+    throw new Error("MANIFEST_CONTRACT_INVALID");
+  return {
+    schemaVersion: 1,
+    authorityCommit,
+    contractHash,
+    projects: projects as unknown as DesiredWorkspaceManifest["projects"],
+    schedule: schedule as unknown as DesiredWorkspaceManifest["schedule"],
+  };
+}
+
+export async function fetchRepositoryText(
+  env: Env,
+  authorityCommit: string,
+  path: string,
+  fetcher: Fetcher = fetch,
+): Promise<string> {
+  const sourceResponse = await fetcher(
+    repositoryRawUrl(env.GITHUB_REPOSITORY, authorityCommit, path),
+    { headers: { "User-Agent": "ambitions-linear-control" } },
+  );
+  if (!sourceResponse.ok)
+    throw new Error(`REPOSITORY_SOURCE_HTTP_${sourceResponse.status}:${path}`);
+  return sourceResponse.text();
+}
 
 async function executeD1Batches(
   database: D1Database,
@@ -102,11 +349,22 @@ async function signedEnvelope(
     )
       throw new Error("STALE_SIGNATURE");
   }
+  const authorityCommit =
+    source === "github" ? authorityCommitFromPayload(payload) : null;
+  if (source === "github") {
+    if (!authorityCommit) throw new Error("MISSING_AUTHORITY_COMMIT");
+    if (!githubEvidenceIsEligible(payload, env))
+      throw new Error("INELIGIBLE_GITHUB_EVIDENCE");
+  }
+  const receivedAt = new Date().toISOString();
   return {
     schemaVersion: 1,
     deliveryId,
     source,
-    receivedAt: new Date().toISOString(),
+    receivedAt,
+    ...(authorityCommit
+      ? { authorityCommit, authorityPinnedAt: receivedAt }
+      : {}),
     payload,
   };
 }
@@ -118,7 +376,7 @@ async function persistDelivery(
   const hash = await sha256Text(JSON.stringify(event.payload));
   const now = new Date().toISOString();
   const result = await env.CONTROL_DB.prepare(
-    "INSERT OR IGNORE INTO deliveries (id, source, schema_version, payload_hash, payload_json, status, authority_commit, received_at, updated_at) VALUES (?, ?, ?, ?, ?, 'queued', ?, ?, ?)",
+    "INSERT OR IGNORE INTO deliveries (id, source, schema_version, payload_hash, payload_json, status, authority_commit, authority_pinned_at, received_at, updated_at) VALUES (?, ?, ?, ?, ?, 'queued', ?, ?, ?, ?)",
   )
     .bind(
       event.deliveryId,
@@ -127,6 +385,7 @@ async function persistDelivery(
       hash,
       JSON.stringify(event.payload),
       event.authorityCommit ?? null,
+      event.authorityPinnedAt ?? (event.authorityCommit ? now : null),
       now,
       now,
     )
@@ -147,11 +406,14 @@ async function enqueue(
   );
 }
 
-async function processEvent(env: Env, event: EventEnvelope): Promise<void> {
+async function processEvent(
+  env: Env,
+  receivedEvent: EventEnvelope,
+): Promise<void> {
   const existing = await env.CONTROL_DB.prepare(
     "SELECT status FROM deliveries WHERE id = ?",
   )
-    .bind(event.deliveryId)
+    .bind(receivedEvent.deliveryId)
     .first<{ status: string }>();
   if (existing?.status === "verified" || existing?.status === "superseded")
     return;
@@ -159,16 +421,20 @@ async function processEvent(env: Env, event: EventEnvelope): Promise<void> {
   await env.CONTROL_DB.prepare(
     "UPDATE deliveries SET status = 'processing', attempts = attempts + 1, updated_at = ? WHERE id = ?",
   )
-    .bind(started, event.deliveryId)
+    .bind(started, receivedEvent.deliveryId)
     .run();
+  const pinned = await pinEventAuthority(env, receivedEvent);
+  const event = pinned.event;
+  if (!pinned.newlyPinned && !(await authorityIsCurrent(env, event))) {
+    await env.CONTROL_DB.prepare(
+      "UPDATE deliveries SET status = 'superseded', updated_at = ?, last_error = 'Superseded before reconciliation by newer main authority' WHERE id = ?",
+    )
+      .bind(started, event.deliveryId)
+      .run();
+    return;
+  }
   const runId = crypto.randomUUID();
-  const repositoryUrl = `https://raw.githubusercontent.com/${env.GITHUB_REPOSITORY}/main/${env.MANIFEST_PATH}`;
-  const manifestResponse = await fetch(repositoryUrl, {
-    headers: { "User-Agent": "ambitions-linear-control" },
-  });
-  if (!manifestResponse.ok)
-    throw new Error(`MANIFEST_HTTP_${manifestResponse.status}`);
-  const manifest: DesiredWorkspaceManifest = await manifestResponse.json();
+  const manifest = await loadManifestForEvent(env, event);
   const commit = manifest.authorityCommit;
   const desiredHash = manifest.contractHash;
   await env.CONTROL_DB.prepare(
@@ -182,15 +448,7 @@ async function processEvent(env: Env, event: EventEnvelope): Promise<void> {
     env.MUTATIONS_ENABLED,
     {
       loadRepositoryText: async (path) => {
-        const sourceResponse = await fetch(
-          `https://raw.githubusercontent.com/${env.GITHUB_REPOSITORY}/main/${path}`,
-          { headers: { "User-Agent": "ambitions-linear-control" } },
-        );
-        if (!sourceResponse.ok)
-          throw new Error(
-            `REPOSITORY_SOURCE_HTTP_${sourceResponse.status}:${path}`,
-          );
-        return sourceResponse.text();
+        return fetchRepositoryText(env, commit, path);
       },
     },
   );
@@ -339,7 +597,7 @@ export default {
         if (typeof requested.deliveryId !== "string")
           return json({ error: "DELIVERY_ID_REQUIRED" }, 400);
         const stored = await env.CONTROL_DB.prepare(
-          "SELECT source, schema_version, payload_json, authority_commit FROM deliveries WHERE id = ?",
+          "SELECT source, schema_version, payload_json, authority_commit, authority_pinned_at FROM deliveries WHERE id = ?",
         )
           .bind(requested.deliveryId)
           .first<{
@@ -347,6 +605,7 @@ export default {
             schema_version: 1;
             payload_json: string | null;
             authority_commit: string | null;
+            authority_pinned_at: string | null;
           }>();
         if (!stored?.payload_json)
           return json({ error: "DELIVERY_NOT_REPLAYABLE" }, 404);
@@ -356,7 +615,12 @@ export default {
           source: stored.source,
           receivedAt: new Date().toISOString(),
           ...(stored.authority_commit
-            ? { authorityCommit: stored.authority_commit }
+            ? {
+                authorityCommit: stored.authority_commit,
+                ...(stored.authority_pinned_at
+                  ? { authorityPinnedAt: stored.authority_pinned_at }
+                  : {}),
+              }
             : {}),
           payload: JSON.parse(stored.payload_json) as unknown,
         });
