@@ -4,24 +4,34 @@ import type {
   DesiredWorkspaceManifest,
   IssueState,
   ProjectContract,
+  ScheduleGroup,
   TaskContract,
 } from "./types.js";
 import { CONTROLLED_TEMPLATES, OPERATIONAL_VIEWS } from "./definitions.js";
 import { sha256Text, stableJson } from "./hash.js";
+import { desiredProjectPhase } from "./policy.js";
 import {
   initiativeIndexMirror,
   issueAuthorityEnvelope,
+  milestoneAuthorityMirror,
+  projectAuthorityMirror,
+  projectSummaryMirror,
   repositoryMirror,
+  type ProjectMirrorProgress,
   type MirrorSource,
 } from "./mirrors.js";
 
 interface LiveProject {
   id: string;
   name: string;
+  summary?: string | null;
   description?: string | null;
   status: { id: string; name: string };
+  initiatives: { nodes: Array<{ name: string }> };
   labels: { nodes: Array<{ id: string; name: string }> };
-  projectMilestones: { nodes: Array<{ name: string }> };
+  projectMilestones: {
+    nodes: Array<{ id: string; name: string; description?: string | null }>;
+  };
   documents: {
     nodes: Array<{ id: string; title: string; content?: string | null }>;
   };
@@ -62,6 +72,8 @@ export interface LiveRepairReceipt {
   canonicalKey: string;
   operation:
     | "document-authority-update"
+    | "project-authority-update"
+    | "project-milestone-update"
     | "issue-authority-update"
     | "issue-state-update"
     | "issue-label-update";
@@ -232,22 +244,41 @@ function exception(
   return { canonicalKey, category: "drift", severity, summary };
 }
 
-function projectLifecycleState(
-  projectSlug: string,
-  issuesByKey: ReadonlyMap<string, LiveIssue>,
-): string {
-  const states = [...issuesByKey.entries()]
-    .filter(([key]) => key.startsWith(`${projectSlug}:T`))
-    .map(([, issue]) => issue.state.name);
-  if (states.length > 0 && states.every((state) => state === "Done"))
-    return "Completed";
-  if (
-    states.some((state) =>
-      ["In Progress", "In Review", "Needs Repair", "Done"].includes(state),
-    )
-  )
-    return "Building";
-  return "Grooming";
+const terminalTaskStates = new Set<IssueState>([
+  "Done",
+  "Canceled",
+  "Duplicate",
+  "Won’t Do",
+]);
+
+export function desiredProjectMirrorProgress(
+  project: ProjectContract,
+  group: ScheduleGroup,
+  schedule: readonly ScheduleGroup[],
+  statesByKey: ReadonlyMap<string, IssueState>,
+): ProjectMirrorProgress {
+  const canonicalStates = project.tasks.map(
+    (task) => statesByKey.get(task.canonicalKey) ?? "Backlog",
+  );
+  const nextTask = project.tasks
+    .slice()
+    .sort((left, right) => left.order - right.order)
+    .find((task) => {
+      const state = statesByKey.get(task.canonicalKey);
+      return state !== undefined && !terminalTaskStates.has(state);
+    });
+  return {
+    phase: desiredProjectPhase(canonicalStates, true),
+    terminalTasks: canonicalStates.filter((state) =>
+      terminalTaskStates.has(state),
+    ).length,
+    verifiedTasks: canonicalStates.filter((state) => state === "Done").length,
+    totalTasks: project.tasks.length,
+    ...(nextTask ? { nextTask } : {}),
+    groupOrdinal: schedule.indexOf(group) + 1,
+    totalGroups: schedule.length,
+    projectOrdinal: group.projectSlugs.indexOf(project.slug) + 1,
+  };
 }
 
 async function mirrorSourcesFromCurrentContent(
@@ -278,9 +309,10 @@ export async function auditLiveWorkspace(
   }>(`query {
     projects(first: 50) {
       nodes {
-        id name description status { id name }
+        id name summary description status { id name }
+        initiatives { nodes { name } }
         labels { nodes { id name } }
-        projectMilestones { nodes { name } }
+        projectMilestones { nodes { id name description } }
         documents { nodes { id title content } }
       }
     }
@@ -289,6 +321,7 @@ export async function auditLiveWorkspace(
     workflowStates: { nodes: Array<{ id: string; name: string }> };
     issueLabels: { nodes: Array<{ id: string; name: string }> };
     projectLabels: { nodes: Array<{ name: string }> };
+    projectStatuses: { nodes: Array<{ id: string; name: string }> };
     customViews: { nodes: Array<{ name: string }> };
     templates: Array<{ name: string }>;
     initiatives: { nodes: Array<{ name: string }> };
@@ -297,6 +330,7 @@ export async function auditLiveWorkspace(
     workflowStates(first: 50, filter: { team: { id: { eq: "ae5289a0-e901-4ff3-97c2-82a7e7e8ec96" } } }) { nodes { id name } }
     issueLabels(first: 250) { nodes { id name } }
     projectLabels(first: 100) { nodes { name } }
+    projectStatuses(first: 50) { nodes { id name } }
     customViews(first: 50) { nodes { name } }
     templates { name }
     initiatives(first: 50) { nodes { name } }
@@ -418,6 +452,9 @@ export async function auditLiveWorkspace(
   const issueLabelIds = new Map(
     controlData.issueLabels.nodes.map((label) => [label.name, label.id]),
   );
+  const projectStatusIds = new Map(
+    controlData.projectStatuses.nodes.map((status) => [status.name, status.id]),
+  );
   for (const project of admitted) {
     const live = projectsBySlug.get(project.slug);
     if (!live) {
@@ -483,7 +520,183 @@ export async function auditLiveWorkspace(
       );
       continue;
     }
-    const phase = projectLifecycleState(project.slug, issuesByKey);
+    const statesByKey = new Map(
+      project.tasks.flatMap((task) => {
+        const state = issuesByKey.get(task.canonicalKey)?.state.name;
+        return state ? [[task.canonicalKey, state] as const] : [];
+      }),
+    );
+    const progress = desiredProjectMirrorProgress(
+      project,
+      group,
+      desired.schedule,
+      statesByKey,
+    );
+    const phase = progress.phase;
+    const liveInitiatives = live.initiatives.nodes.map((item) => item.name);
+    if (
+      project.primaryInitiative &&
+      (!liveInitiatives.includes(project.primaryInitiative) ||
+        liveInitiatives.length !== 1)
+    )
+      exceptions.push(
+        exception(
+          project.canonicalKey,
+          `Primary Initiative relationship should be exactly ${project.primaryInitiative}`,
+        ),
+      );
+    const desiredSummary = projectSummaryMirror(group, progress);
+    const desiredProjectDescription = projectAuthorityMirror(
+      project,
+      group,
+      desired.authorityCommit,
+      desired.contractHash,
+      progress,
+    );
+    if (
+      live.summary !== desiredSummary ||
+      live.description !== desiredProjectDescription ||
+      live.status.name !== phase
+    ) {
+      if (!mutationsEnabled) {
+        exceptions.push(
+          exception(project.canonicalKey, "Lifecycle Project mirror is stale"),
+        );
+      } else {
+        const statusId = projectStatusIds.get(phase);
+        if (!statusId) {
+          exceptions.push(
+            exception(
+              project.canonicalKey,
+              `Controlled Project status is missing: ${phase}`,
+            ),
+          );
+        } else {
+          const beforeHash = await sha256Text(
+            stableJson({
+              summary: live.summary ?? "",
+              description: live.description ?? "",
+              status: live.status.name,
+            }),
+          );
+          const desiredHash = await sha256Text(
+            stableJson({
+              summary: desiredSummary,
+              description: desiredProjectDescription,
+              status: phase,
+            }),
+          );
+          const updated = await client.request<{
+            projectUpdate: {
+              success: boolean;
+              project?: {
+                summary?: string | null;
+                description?: string | null;
+                status: { name: string };
+              } | null;
+            };
+          }>(
+            `mutation($id: String!, $input: ProjectUpdateInput!) {
+              projectUpdate(id: $id, input: $input) {
+                success
+                project { summary description status { name } }
+              }
+            }`,
+            {
+              id: live.id,
+              input: {
+                summary: desiredSummary,
+                description: desiredProjectDescription,
+                statusId,
+              },
+            },
+          );
+          const result = updated.projectUpdate.project;
+          const resultHash = await sha256Text(
+            stableJson({
+              summary: result?.summary ?? "",
+              description: result?.description ?? "",
+              status: result?.status.name ?? "",
+            }),
+          );
+          const matches =
+            updated.projectUpdate.success && resultHash === desiredHash;
+          repairReceipts.push({
+            canonicalKey: project.canonicalKey,
+            operation: "project-authority-update",
+            beforeHash,
+            desiredHash,
+            resultHash,
+            verified: matches,
+          });
+          repairs += 1;
+          if (!matches)
+            exceptions.push(
+              exception(
+                project.canonicalKey,
+                "Lifecycle Project mirror repair did not verify",
+              ),
+            );
+        }
+      }
+    }
+    for (const milestone of live.projectMilestones.nodes) {
+      if (!milestones.includes(milestone.name)) continue;
+      const desiredDescription = milestoneAuthorityMirror(
+        milestone.name,
+        project,
+        desired.authorityCommit,
+        progress,
+      );
+      const currentDescription = milestone.description ?? "";
+      if (currentDescription === desiredDescription) continue;
+      if (!mutationsEnabled) {
+        exceptions.push(
+          exception(
+            project.canonicalKey,
+            `Lifecycle milestone mirror is stale: ${milestone.name}`,
+          ),
+        );
+        continue;
+      }
+      const beforeHash = await sha256Text(currentDescription);
+      const desiredHash = await sha256Text(desiredDescription);
+      const updated = await client.request<{
+        projectMilestoneUpdate: {
+          success: boolean;
+          projectMilestone?: { description?: string | null } | null;
+        };
+      }>(
+        `mutation($id: String!, $input: ProjectMilestoneUpdateInput!) {
+          projectMilestoneUpdate(id: $id, input: $input) {
+            success
+            projectMilestone { description }
+          }
+        }`,
+        { id: milestone.id, input: { description: desiredDescription } },
+      );
+      const resultHash = await sha256Text(
+        updated.projectMilestoneUpdate.projectMilestone?.description ?? "",
+      );
+      const matches =
+        updated.projectMilestoneUpdate.success && resultHash === desiredHash;
+      repairReceipts.push({
+        canonicalKey: `${project.canonicalKey}:${milestone.name}`,
+        operation: "project-milestone-update",
+        beforeHash,
+        desiredHash,
+        resultHash,
+        verified: matches,
+      });
+      repairs += 1;
+      if (!matches)
+        exceptions.push(
+          exception(
+            project.canonicalKey,
+            `Lifecycle milestone repair did not verify: ${milestone.name}`,
+          ),
+        );
+    }
     const issueIdentifiers = new Map(
       project.tasks.map((task) => [
         task.canonicalKey,

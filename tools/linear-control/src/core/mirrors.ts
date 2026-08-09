@@ -10,6 +10,95 @@ export interface MirrorSource {
   content: string;
 }
 
+export interface ProjectMirrorProgress {
+  phase: string;
+  terminalTasks: number;
+  verifiedTasks: number;
+  totalTasks: number;
+  nextTask?: TaskContract;
+  groupOrdinal: number;
+  totalGroups: number;
+  projectOrdinal: number;
+}
+
+export function projectSummaryMirror(
+  group: ScheduleGroup,
+  progress: ProjectMirrorProgress,
+): string {
+  const next = progress.nextTask ? ` • next ${progress.nextTask.id}` : "";
+  return `${group.id} • ${progress.phase} • ${progress.terminalTasks}/${progress.totalTasks} terminal • ${progress.verifiedTasks} verified on current main${next}`;
+}
+
+export function projectAuthorityMirror(
+  project: ProjectContract,
+  group: ScheduleGroup,
+  authorityCommit: string,
+  contractHash: string,
+  progress: ProjectMirrorProgress,
+): string {
+  const peers = group.projectSlugs.filter((slug) => slug !== project.slug);
+  const fullyVerified = progress.verifiedTasks === progress.totalTasks;
+  const terminallyClosed = progress.phase === "Completed";
+  return [
+    "# Lifecycle Project",
+    "",
+    `Repository authority: https://github.com/agentdevan/ambitions/tree/${authorityCommit}/${project.folder}`,
+    "",
+    `- Canonical folder: ${project.folder}/`,
+    `- Repository commit: ${authorityCommit}`,
+    `- Lifecycle contract SHA-256: ${contractHash}`,
+    `- Lifecycle phase: ${progress.phase}`,
+    `- Primary Initiative: ${project.primaryInitiative ?? "Linear Initiative relationship is authoritative for portfolio ownership"}`,
+    `- Portfolio execution group: ${group.id} of ${progress.totalGroups}`,
+    `- Portfolio order: ${String(progress.groupOrdinal).padStart(2, "0")}.${String(progress.projectOrdinal).padStart(2, "0")}`,
+    `- Cross-Project prerequisites: ${project.projectDependencies.join(", ") || "none"}`,
+    `- Parallel-safe peers: ${peers.join(", ") || "none"}`,
+    `- Implementation-plan tasks: ${progress.totalTasks}`,
+    `- Progress: ${progress.terminalTasks} of ${progress.totalTasks} Plan Tasks terminal; ${progress.verifiedTasks} verified on current main`,
+    `- Next Plan Task: ${progress.nextTask?.canonicalKey ?? "none"}`,
+    `- Milestones: M0-M3 passed; M4 ${fullyVerified ? "passed" : terminallyClosed ? "closed without implementation proof" : "in progress"}; M5 ${fullyVerified ? "passed" : terminallyClosed ? "closed without validation proof" : "pending"}; M6 ${terminallyClosed ? "closed" : "pending"}`,
+    `- Frontend contract: ${project.frontendAudit.status}`,
+    `- Visual gate: ${project.frontendAudit.visualGate}${project.frontendAudit.firstFrontendTaskKey ? `; first frontend task ${project.frontendAudit.firstFrontendTaskKey}` : ""}`,
+    "",
+    "Repository content is authoritative. Linear is the execution mirror and portfolio dependency surface.",
+  ].join("\n");
+}
+
+export function milestoneAuthorityMirror(
+  name: string,
+  project: ProjectContract,
+  authorityCommit: string,
+  progress: ProjectMirrorProgress,
+): string {
+  const fullyVerified = progress.verifiedTasks === progress.totalTasks;
+  const terminallyClosed = progress.phase === "Completed";
+  if (name === "M0 — Research Passed")
+    return `PASS — Research approved and repository mirror refreshed at current main ${authorityCommit}. No implementation proof is implied.`;
+  if (name === "M1 — Scope Passed")
+    return `PASS — Scope approved and repository mirror refreshed at current main ${authorityCommit}. No implementation proof is implied.`;
+  if (name === "M2 — Design Passed")
+    return `PASS — Design approved and repository mirror refreshed at current main ${authorityCommit}.${project.frontendAudit.visualGate === "required" ? ` Frontend visual approval remains required before ${project.frontendAudit.firstFrontendTaskKey ?? "the first frontend task"}.` : ""}`;
+  if (name === "M3 — Groomed for Implementation")
+    return `PASS — Implementation plan groomed and synchronized at current main ${authorityCommit}.`;
+  if (name === "M4 — Implementation Complete")
+    return fullyVerified
+      ? `PASS — ${progress.verifiedTasks} of ${progress.totalTasks} canonical Plan Tasks are verified on current main.`
+      : terminallyClosed
+        ? `CLOSED — ${progress.terminalTasks} of ${progress.totalTasks} canonical Plan Tasks are terminal, but only ${progress.verifiedTasks} are verified on current main. No implementation-complete proof is claimed.`
+        : `IN PROGRESS — ${progress.terminalTasks} of ${progress.totalTasks} canonical Plan Tasks are terminal; ${progress.verifiedTasks} are verified on current main. ${progress.nextTask ? `${progress.nextTask.id} is next in portfolio order.` : "No executable next task is currently identified."}`;
+  if (name === "M5 — Validation and Merge")
+    return fullyVerified
+      ? "PASS — Project-level validation and current-main merge proof are complete."
+      : terminallyClosed
+        ? "CLOSED — Terminal dispositions are recorded. No project-level validation or current-main merge proof is claimed."
+        : "PENDING — Project-level validation and merge closes only after all implementation tasks and required proof pass.";
+  return terminallyClosed
+    ? fullyVerified
+      ? "PASS — Every canonical Plan Task is verified on current main and repository/Linear closeout is synchronized."
+      : "CLOSED — Every canonical Plan Task has a terminal disposition and repository/Linear closeout is synchronized. No implementation or validation proof is implied."
+    : "PENDING — Closeout requires every canonical Plan Task terminal, all visual gates resolved, and repository/Linear convergence.";
+}
+
 function textFence(content: string): string {
   const longest = Math.max(
     0,

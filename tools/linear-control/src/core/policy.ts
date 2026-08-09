@@ -87,7 +87,10 @@ export function desiredProjectPhase(
     states.length > 0 &&
     states.every(
       (state) =>
-        state === "Done" || state === "Canceled" || state === "Won’t Do",
+        state === "Done" ||
+        state === "Canceled" ||
+        state === "Duplicate" ||
+        state === "Won’t Do",
     )
   )
     return "Completed";
