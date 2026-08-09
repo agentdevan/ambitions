@@ -90,6 +90,10 @@ class RepairingLinearClient {
   freshIssueReadCalls = 0;
   freshIssueReadIds: string[] = [];
   freshStateOverrideOnce?: IssueState;
+  issueInverseRelations: Array<{
+    type: string;
+    issue: { id: string; state: { name: IssueState } };
+  }> = [];
   additionalIssues: Array<{
     id: string;
     identifier: string;
@@ -159,7 +163,9 @@ class RepairingLinearClient {
         })),
       },
       relations: { nodes: [] },
-      inverseRelations: { nodes: [] },
+      inverseRelations: {
+        nodes: record.id === "issue-id" ? this.issueInverseRelations : [],
+      },
     };
   }
 
@@ -1061,6 +1067,50 @@ describe("live authority mirror repair", () => {
     expect(authorityChecks).toHaveBeenCalledTimes(3);
     expect(persistedIntents).toHaveLength(3);
     expect(mutationClaims).toBe(3);
+  });
+
+  it("plans from live inverse blockers so continuations do not replay a Blocked-to-Ready prefix", async () => {
+    const { client, desired, sourceByPath } = await fixture();
+    client.issueState = "Blocked";
+    client.issueInverseRelations = [
+      {
+        type: "blocks",
+        issue: {
+          id: "external-blocker",
+          state: { name: "In Progress" },
+        },
+      },
+    ];
+    const stateMutationIntents: string[] = [];
+    const options = runtimeOptions(sourceByPath, {
+      onMutationIntent: async (intent) => {
+        await Promise.resolve();
+        if (intent.operation === "issue-state-update")
+          stateMutationIntents.push(intent.canonicalKey);
+      },
+    });
+
+    const first = await auditLiveWorkspace(
+      client as unknown as LinearClient,
+      desired,
+      true,
+      options,
+    );
+    const second = await auditLiveWorkspace(
+      client as unknown as LinearClient,
+      desired,
+      true,
+      options,
+    );
+
+    expect(client.issueState).toBe("Blocked");
+    expect(client.issueStateMutationCalls).toBe(0);
+    expect(stateMutationIntents).toEqual([]);
+    expect(
+      [...first.repairReceipts, ...second.repairReceipts].filter(
+        (receipt) => receipt.operation === "issue-state-update",
+      ),
+    ).toEqual([]);
   });
 
   it("recovers a pending receipt after a successful write and preserves it across a later audit failure", async () => {
