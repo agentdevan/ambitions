@@ -8,13 +8,22 @@ vi.mock("../src/core/live-audit.js", async (importOriginal) => {
   return { ...actual, auditLiveWorkspace: auditMock };
 });
 
-import worker from "../src/worker.js";
+import worker, {
+  EVENT_REPAIR_BUDGET,
+  EXTERNAL_REQUEST_ATTEMPT_LIMIT,
+} from "../src/worker.js";
 import { RepairBudgetExhausted } from "../src/core/live-audit.js";
 import { sha256Text, stableJson } from "../src/core/hash.js";
 import type { EventEnvelope } from "../src/core/types.js";
 import type { LinearClient } from "../src/adapters/linear.js";
 
 describe("bounded event continuation", () => {
+  it("uses recovered continuation headroom without weakening the hard request ceiling", () => {
+    expect(EVENT_REPAIR_BUDGET).toBe(8);
+    expect(EVENT_REPAIR_BUDGET).toBeLessThan(EXTERNAL_REQUEST_ATTEMPT_LIMIT);
+    expect(EXTERNAL_REQUEST_ATTEMPT_LIMIT).toBeLessThan(50);
+  });
+
   it("requeues the exact pinned envelope and acknowledges normal continuation", async () => {
     const authorityCommit = "a".repeat(40);
     const semantic = {

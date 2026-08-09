@@ -38,7 +38,11 @@ declare global {
 }
 
 const encoder = new TextEncoder();
-export const EVENT_REPAIR_BUDGET = 3;
+// The shared outbound-attempt budget remains the hard Cloudflare safety
+// boundary. This higher logical ceiling lets later continuations use the
+// request headroom recovered from persisted proof receipts instead of
+// stopping after three repairs regardless of remaining capacity.
+export const EVENT_REPAIR_BUDGET = 8;
 export const EXTERNAL_REQUEST_ATTEMPT_LIMIT = 44;
 const CONTINUATION_DELAY_SECONDS = 5;
 const exactCommitSha = /^[0-9a-f]{40}$/;
