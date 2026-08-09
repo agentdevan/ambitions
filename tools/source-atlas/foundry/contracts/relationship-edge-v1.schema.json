@@ -287,7 +287,10 @@
           ]
         },
         "revision": {
-          "const": "1.0.0"
+          "enum": [
+            "1.0.0",
+            "1.1.0"
+          ]
         }
       }
     },
@@ -795,6 +798,9 @@
               "properties": {
                 "profileId": {
                   "const": "cip-edition-migration-v1"
+                },
+                "revision": {
+                  "const": "1.1.0"
                 }
               }
             },
@@ -803,11 +809,29 @@
                 "subject_to_object"
               ]
             },
+            "predicate": {
+              "properties": {
+                "predicateId": {
+                  "enum": [
+                    "cip:unchanged",
+                    "cip:textChanged",
+                    "cip:movedFrom",
+                    "cip:movedTo",
+                    "cip:reportUnder",
+                    "cip:split",
+                    "cip:merge"
+                  ]
+                }
+              }
+            },
             "subject": {
               "properties": {
                 "lifecycleState": {
                   "enum": [
-                    "current_for_mapping"
+                    "current_for_mapping",
+                    "changed",
+                    "split",
+                    "merged"
                   ]
                 }
               }
@@ -908,6 +932,187 @@
                   }
                 }
               }
+            },
+            {
+              "if": {
+                "properties": {
+                  "predicate": {
+                    "properties": {
+                      "predicateId": {
+                        "enum": [
+                          "cip:unchanged",
+                          "cip:movedTo"
+                        ]
+                      }
+                    }
+                  }
+                }
+              },
+              "then": {
+                "properties": {
+                  "subject": {
+                    "properties": {
+                      "lifecycleState": {
+                        "const": "current_for_mapping"
+                      }
+                    }
+                  },
+                  "object": {
+                    "properties": {
+                      "lifecycleState": {
+                        "const": "current_for_mapping"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "if": {
+                "properties": {
+                  "predicate": {
+                    "properties": {
+                      "predicateId": {
+                        "enum": [
+                          "cip:movedFrom",
+                          "cip:reportUnder"
+                        ]
+                      }
+                    }
+                  }
+                }
+              },
+              "then": {
+                "properties": {
+                  "subject": {
+                    "properties": {
+                      "lifecycleState": {
+                        "const": "current_for_mapping"
+                      }
+                    }
+                  },
+                  "object": {
+                    "properties": {
+                      "lifecycleState": {
+                        "const": "current_for_mapping"
+                      }
+                    }
+                  },
+                  "eligiblePurposes": {
+                    "const": [
+                      "inspection"
+                    ]
+                  }
+                }
+              }
+            },
+            {
+              "if": {
+                "properties": {
+                  "predicate": {
+                    "properties": {
+                      "predicateId": {
+                        "const": "cip:textChanged"
+                      }
+                    }
+                  }
+                }
+              },
+              "then": {
+                "properties": {
+                  "subject": {
+                    "properties": {
+                      "lifecycleState": {
+                        "const": "changed"
+                      }
+                    }
+                  },
+                  "object": {
+                    "properties": {
+                      "lifecycleState": {
+                        "const": "current_for_mapping"
+                      }
+                    }
+                  },
+                  "eligiblePurposes": {
+                    "const": [
+                      "inspection"
+                    ]
+                  }
+                }
+              }
+            },
+            {
+              "if": {
+                "properties": {
+                  "predicate": {
+                    "properties": {
+                      "predicateId": {
+                        "const": "cip:split"
+                      }
+                    }
+                  }
+                }
+              },
+              "then": {
+                "properties": {
+                  "subject": {
+                    "properties": {
+                      "lifecycleState": {
+                        "const": "split"
+                      }
+                    }
+                  },
+                  "object": {
+                    "properties": {
+                      "lifecycleState": {
+                        "const": "current_for_mapping"
+                      }
+                    }
+                  },
+                  "eligiblePurposes": {
+                    "const": [
+                      "inspection"
+                    ]
+                  }
+                }
+              }
+            },
+            {
+              "if": {
+                "properties": {
+                  "predicate": {
+                    "properties": {
+                      "predicateId": {
+                        "const": "cip:merge"
+                      }
+                    }
+                  }
+                }
+              },
+              "then": {
+                "properties": {
+                  "subject": {
+                    "properties": {
+                      "lifecycleState": {
+                        "const": "merged"
+                      }
+                    }
+                  },
+                  "object": {
+                    "properties": {
+                      "lifecycleState": {
+                        "const": "current_for_mapping"
+                      }
+                    }
+                  },
+                  "eligiblePurposes": {
+                    "const": [
+                      "inspection"
+                    ]
+                  }
+                }
+              }
             }
           ]
         },
@@ -917,6 +1122,9 @@
               "properties": {
                 "profileId": {
                   "const": "cip-soc-relevance-v1"
+                },
+                "revision": {
+                  "const": "1.0.0"
                 }
               }
             },
@@ -1046,6 +1254,9 @@
               "properties": {
                 "profileId": {
                   "const": "onet-soc-overlay-v1"
+                },
+                "revision": {
+                  "const": "1.0.0"
                 }
               }
             },
@@ -1169,6 +1380,9 @@
               "properties": {
                 "profileId": {
                   "const": "mapping-candidate-review-v1"
+                },
+                "revision": {
+                  "const": "1.0.0"
                 }
               }
             },

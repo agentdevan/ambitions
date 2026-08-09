@@ -1,7 +1,7 @@
 {
   "schemaVersion": "relationship-registry-use-profiles-v1",
   "kind": "relationshipRegistryUseProfiles",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "unknownProfilePolicy": "reject",
   "sourcePredicateGrantsEligibility": false,
   "profiles": [
@@ -9,7 +9,7 @@
       "schemaVersion": "relationship-use-profile-v1",
       "kind": "relationshipUseProfile",
       "profileId": "cip-edition-migration-v1",
-      "revision": "1.0.0",
+      "revision": "1.1.0",
       "mappingSetClasses": [
         "cip_edition_migration"
       ],
@@ -25,7 +25,10 @@
         "approved"
       ],
       "requiredEndpointStates": [
-        "current_for_mapping"
+        "current_for_mapping",
+        "changed",
+        "split",
+        "merged"
       ],
       "allowedRightsStates": [
         "approved",

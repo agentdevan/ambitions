@@ -1,0 +1,119 @@
+{
+  "schemaVersion": "relationship-registry-cip-version-fixture-v1",
+  "kind": "relationshipRegistryCIPVersionFixture",
+  "fixtureClass": "synthetic_contract",
+  "authority": {
+    "mappingSetId": "nces.cip-2010-2020.synthetic",
+    "mappingSetRevision": "1.0.0",
+    "releaseId": "nces.cip-2010-2020.synthetic-v1",
+    "subjectSchemeId": "cip",
+    "subjectSchemeVersion": "2010",
+    "objectSchemeId": "cip",
+    "objectSchemeVersion": "2020",
+    "rightsId": "ambitions.synthetic.relationship-rights",
+    "rightsVersion": "1.0.0",
+    "rightsState": "approved"
+  },
+  "rows": [
+    {
+      "sourceRow": "cipv-unchanged",
+      "action": "unchanged",
+      "fromConcepts": [
+        {"conceptId": "01.0000", "label": "Synthetic unchanged program", "locator": null}
+      ],
+      "toConcepts": [
+        {"conceptId": "01.0000", "label": "Synthetic unchanged program", "locator": null}
+      ],
+      "sourceSpecificFields": []
+    },
+    {
+      "sourceRow": "cipv-text-changed",
+      "action": "text changed",
+      "fromConcepts": [
+        {"conceptId": "02.0000", "label": "Synthetic legacy wording", "locator": null}
+      ],
+      "toConcepts": [
+        {"conceptId": "02.0000", "label": "Synthetic revised wording", "locator": null}
+      ],
+      "sourceSpecificFields": []
+    },
+    {
+      "sourceRow": "cipv-new",
+      "action": "new",
+      "fromConcepts": [],
+      "toConcepts": [
+        {"conceptId": "03.0000", "label": "Synthetic new program", "locator": null}
+      ],
+      "sourceSpecificFields": []
+    },
+    {
+      "sourceRow": "cipv-deleted",
+      "action": "deleted",
+      "fromConcepts": [
+        {"conceptId": "04.0000", "label": "Synthetic deleted program", "locator": null}
+      ],
+      "toConcepts": [],
+      "sourceSpecificFields": []
+    },
+    {
+      "sourceRow": "cipv-moved-from",
+      "action": "moved from",
+      "fromConcepts": [
+        {"conceptId": "05.0000", "label": "Synthetic moved-from program", "locator": null}
+      ],
+      "toConcepts": [
+        {"conceptId": "05.0001", "label": "Synthetic receiving program", "locator": null}
+      ],
+      "sourceSpecificFields": []
+    },
+    {
+      "sourceRow": "cipv-moved-to",
+      "action": "moved to",
+      "fromConcepts": [
+        {"conceptId": "06.0000", "label": "Synthetic legacy program", "locator": null}
+      ],
+      "toConcepts": [
+        {"conceptId": "06.0001", "label": "Synthetic current program", "locator": null}
+      ],
+      "sourceSpecificFields": [
+        {"name": "publisherNote", "value": "Synthetic moved-to fixture"}
+      ]
+    },
+    {
+      "sourceRow": "cipv-report-under",
+      "action": "report under",
+      "fromConcepts": [
+        {"conceptId": "07.0000", "label": "Synthetic reporting source", "locator": null}
+      ],
+      "toConcepts": [
+        {"conceptId": "07.0001", "label": "Synthetic reporting target A", "locator": null},
+        {"conceptId": "07.0002", "label": "Synthetic reporting target B", "locator": null}
+      ],
+      "sourceSpecificFields": []
+    },
+    {
+      "sourceRow": "cipv-split",
+      "action": "split",
+      "fromConcepts": [
+        {"conceptId": "08.0000", "label": "Synthetic pre-split program", "locator": null}
+      ],
+      "toConcepts": [
+        {"conceptId": "08.0001", "label": "Synthetic split program A", "locator": null},
+        {"conceptId": "08.0002", "label": "Synthetic split program B", "locator": null}
+      ],
+      "sourceSpecificFields": []
+    },
+    {
+      "sourceRow": "cipv-merge",
+      "action": "merge",
+      "fromConcepts": [
+        {"conceptId": "09.0001", "label": "Synthetic merge source A", "locator": null},
+        {"conceptId": "09.0002", "label": "Synthetic merge source B", "locator": null}
+      ],
+      "toConcepts": [
+        {"conceptId": "09.0000", "label": "Synthetic merged program", "locator": null}
+      ],
+      "sourceSpecificFields": []
+    }
+  ]
+}
