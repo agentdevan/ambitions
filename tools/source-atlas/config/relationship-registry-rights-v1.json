@@ -1,0 +1,97 @@
+{
+  "schemaVersion": "relationship-registry-rights-v1",
+  "kind": "relationshipRegistryRights",
+  "version": "1.0.0",
+  "unknownRightsPolicy": "deny_all_and_quarantine",
+  "schemaLicenseNeverAuthorizesSourceContent": true,
+  "operationVocabulary": [
+    "package",
+    "transform",
+    "display",
+    "retain",
+    "derive"
+  ],
+  "withdrawalPolicy": {
+    "blockReadsImmediately": true,
+    "purgeRaw": true,
+    "purgeDerived": true,
+    "purgeIndexes": true,
+    "purgeRenderedCaches": true,
+    "purgeExports": true,
+    "resumeAfterInterruption": true
+  },
+  "rights": [
+    {
+      "rightsId": "nces-cip-2010-2020-rights",
+      "version": "1.0.0",
+      "sourceId": "nces-cip-2010-2020-crosswalk",
+      "state": "review_required",
+      "allowedOperations": [],
+      "attribution": null,
+      "changeNoticeRequired": false,
+      "trademarkLimits": [],
+      "reviewEvidence": [],
+      "admissionState": "unavailable"
+    },
+    {
+      "rightsId": "nces-bls-cip-soc-rights",
+      "version": "1.0.0",
+      "sourceId": "nces-bls-cip-2020-soc-2018-crosswalk",
+      "state": "review_required",
+      "allowedOperations": [],
+      "attribution": null,
+      "changeNoticeRequired": false,
+      "trademarkLimits": [],
+      "reviewEvidence": [],
+      "admissionState": "unavailable"
+    },
+    {
+      "rightsId": "onet-soc-crosswalk-rights",
+      "version": "1.0.0",
+      "sourceId": "onet-soc-2019-soc-2018-crosswalk",
+      "state": "review_required",
+      "allowedOperations": [],
+      "attribution": null,
+      "changeNoticeRequired": false,
+      "trademarkLimits": [],
+      "reviewEvidence": [],
+      "admissionState": "unavailable"
+    },
+    {
+      "rightsId": "official-onet-esco-crosswalk-rights",
+      "version": "1.0.0",
+      "sourceId": "official-onet-esco-crosswalk",
+      "state": "review_required",
+      "allowedOperations": [],
+      "attribution": null,
+      "changeNoticeRequired": false,
+      "trademarkLimits": [],
+      "reviewEvidence": [],
+      "admissionState": "unavailable"
+    },
+    {
+      "rightsId": "publisher-ctdl-case-alignment-rights",
+      "version": "1.0.0",
+      "sourceId": "publisher-ctdl-case-alignments",
+      "state": "review_required",
+      "allowedOperations": [],
+      "attribution": null,
+      "changeNoticeRequired": false,
+      "trademarkLimits": [],
+      "reviewEvidence": [],
+      "admissionState": "unavailable"
+    },
+    {
+      "rightsId": "relationship-mapping-candidate-rights",
+      "version": "1.0.0",
+      "sourceId": "relationship-mapping-candidates",
+      "state": "review_required",
+      "allowedOperations": [],
+      "attribution": null,
+      "changeNoticeRequired": false,
+      "trademarkLimits": [],
+      "reviewEvidence": [],
+      "admissionState": "unavailable"
+    }
+  ]
+}

@@ -1,5 +1,5 @@
 {
-  "canon_digest": "8893a948efd392a86f2503236c1a543229d06b83cddc2635ce9da4f5d98ef654",
+  "canon_digest": "6a978c1a910e70b758dbafd4c9172ab7d039385ff67c7488568ee5b6ce26e4b8",
   "concepts": {
     "accessibility.dynamic-type": {
       "owner_spec_id": "STANDARD-ACCESSIBILITY",
@@ -653,6 +653,10 @@
       "owner_spec_id": "GLOBAL-TRUST-INSPECTION",
       "requirement_id": "SPEC-GLOBAL-TRUST-PROPORTIONAL-RECEIPTS-001"
     },
+    "global.trust.relationship-inspection": {
+      "owner_spec_id": "GLOBAL-TRUST-INSPECTION",
+      "requirement_id": "SPEC-GLOBAL-TRUST-RELATIONSHIP-INSPECTION-001"
+    },
     "global.trust.visual-authority": {
       "owner_spec_id": "GLOBAL-TRUST-INSPECTION",
       "requirement_id": "SPEC-GLOBAL-TRUST-VISUAL-AUTHORITY-001"
@@ -1180,6 +1184,10 @@
     "object.source-reference.public-claim-identity": {
       "owner_spec_id": "OBJECT-SOURCE-REFERENCE",
       "requirement_id": "OBJ-SOURCE-REFERENCE-PUBLIC-CLAIM-BOUNDARY-002"
+    },
+    "object.source-reference.relationship-endpoint": {
+      "owner_spec_id": "OBJECT-SOURCE-REFERENCE",
+      "requirement_id": "OBJ-SOURCE-REFERENCE-RELATIONSHIP-ENDPOINT-001"
     },
     "object.state.orthogonal-axes": {
       "owner_spec_id": "OBJECT-LIFE-AREA",
@@ -1789,6 +1797,26 @@
       "owner_spec_id": "SYSTEM-PRIVACY-DATA-CLASSIFICATION",
       "requirement_id": "SYSTEM-PRIVACY-PUBLIC-REFERENCE-BOUNDARY-003"
     },
+    "system.privacy.relationship-registry-public-only": {
+      "owner_spec_id": "SYSTEM-PRIVACY-DATA-CLASSIFICATION",
+      "requirement_id": "SYSTEM-PRIVACY-RELATIONSHIP-REGISTRY-001"
+    },
+    "system.relationship-registry.consumer-boundary": {
+      "owner_spec_id": "SYSTEM-RELATIONSHIP-REGISTRY",
+      "requirement_id": "SYSTEM-RELATIONSHIP-REGISTRY-CONSUMER-001"
+    },
+    "system.relationship-registry.lifecycle": {
+      "owner_spec_id": "SYSTEM-RELATIONSHIP-REGISTRY",
+      "requirement_id": "SYSTEM-RELATIONSHIP-REGISTRY-LIFECYCLE-001"
+    },
+    "system.relationship-registry.purpose-boundary": {
+      "owner_spec_id": "SYSTEM-RELATIONSHIP-REGISTRY",
+      "requirement_id": "SYSTEM-RELATIONSHIP-REGISTRY-PURPOSE-001"
+    },
+    "system.relationship-registry.release-authority": {
+      "owner_spec_id": "SYSTEM-RELATIONSHIP-REGISTRY",
+      "requirement_id": "SYSTEM-RELATIONSHIP-REGISTRY-RELEASE-001"
+    },
     "system.runtime.cloud-independence": {
       "owner_spec_id": "SYSTEM-PRIVATE-LIFE-RUNTIME",
       "requirement_id": "SYSTEM-RUNTIME-CLOUD-INDEPENDENCE-001"
@@ -1844,6 +1872,10 @@
     "system.source-atlas.public-reference": {
       "owner_spec_id": "SYSTEM-SOURCE-ATLAS",
       "requirement_id": "SYSTEM-SOURCE-ATLAS-PUBLIC-001"
+    },
+    "system.source-atlas.relationship-release-delivery": {
+      "owner_spec_id": "SYSTEM-SOURCE-ATLAS",
+      "requirement_id": "SYSTEM-SOURCE-ATLAS-RELATIONSHIP-DELIVERY-001"
     },
     "test.runtime-contract": {
       "owner_spec_id": "STANDARD-TESTING-FIXTURES",
@@ -2161,6 +2193,7 @@
         "SYSTEM-CERTIFIED-EXECUTABLE-BRANCH-RECONCILIATION",
         "SYSTEM-DIAGNOSTICS",
         "SYSTEM-LOCAL-LEARNING",
+        "SYSTEM-RELATIONSHIP-REGISTRY",
         "SYSTEM-SOURCE-ATLAS"
       ],
       "owner_spec_id": "CONSTITUTION",
@@ -2631,6 +2664,7 @@
         "SYSTEM-DIAGNOSTICS",
         "SYSTEM-LOCAL-LEARNING",
         "SYSTEM-PRIVACY-DATA-CLASSIFICATION",
+        "SYSTEM-RELATIONSHIP-REGISTRY",
         "SYSTEM-SOURCE-ATLAS",
         "SYSTEM-SYNC-CONTINUITY"
       ],
@@ -2649,6 +2683,7 @@
         "SYSTEM-LOCAL-LEARNING",
         "SYSTEM-PRIVACY-DATA-CLASSIFICATION",
         "SYSTEM-PRIVATE-LIFE-RUNTIME",
+        "SYSTEM-RELATIONSHIP-REGISTRY",
         "SYSTEM-SOURCE-ATLAS",
         "SYSTEM-SYNC-CONTINUITY"
       ],
@@ -2660,6 +2695,7 @@
         "OBJECT-SOURCE-REFERENCE",
         "STANDARD-SECURITY-PRIVACY",
         "SYSTEM-PRIVACY-DATA-CLASSIFICATION",
+        "SYSTEM-RELATIONSHIP-REGISTRY",
         "SYSTEM-SOURCE-ATLAS"
       ],
       "owner_spec_id": "CONSTITUTION",
@@ -3192,6 +3228,11 @@
       "owner_spec_id": "OBJECT-SOURCE-REFERENCE",
       "source_path": "specifications/objects/source-reference.md"
     },
+    "OBJ-SOURCE-REFERENCE-RELATIONSHIP-ENDPOINT-001": {
+      "inherited_by": [],
+      "owner_spec_id": "OBJECT-SOURCE-REFERENCE",
+      "source_path": "specifications/objects/source-reference.md"
+    },
     "OBJ-STATE-AXES-001": {
       "inherited_by": [],
       "owner_spec_id": "OBJECT-LIFE-AREA",
@@ -3663,6 +3704,11 @@
       "source_path": "specifications/global/trust-inspection.md"
     },
     "SPEC-GLOBAL-TRUST-PROPORTIONAL-RECEIPTS-001": {
+      "inherited_by": [],
+      "owner_spec_id": "GLOBAL-TRUST-INSPECTION",
+      "source_path": "specifications/global/trust-inspection.md"
+    },
+    "SPEC-GLOBAL-TRUST-RELATIONSHIP-INSPECTION-001": {
       "inherited_by": [],
       "owner_spec_id": "GLOBAL-TRUST-INSPECTION",
       "source_path": "specifications/global/trust-inspection.md"
@@ -4358,6 +4404,31 @@
       "owner_spec_id": "SYSTEM-PRIVACY-DATA-CLASSIFICATION",
       "source_path": "specifications/systems/privacy-and-data-classification.md"
     },
+    "SYSTEM-PRIVACY-RELATIONSHIP-REGISTRY-001": {
+      "inherited_by": [],
+      "owner_spec_id": "SYSTEM-PRIVACY-DATA-CLASSIFICATION",
+      "source_path": "specifications/systems/privacy-and-data-classification.md"
+    },
+    "SYSTEM-RELATIONSHIP-REGISTRY-CONSUMER-001": {
+      "inherited_by": [],
+      "owner_spec_id": "SYSTEM-RELATIONSHIP-REGISTRY",
+      "source_path": "specifications/systems/relationship-registry.md"
+    },
+    "SYSTEM-RELATIONSHIP-REGISTRY-LIFECYCLE-001": {
+      "inherited_by": [],
+      "owner_spec_id": "SYSTEM-RELATIONSHIP-REGISTRY",
+      "source_path": "specifications/systems/relationship-registry.md"
+    },
+    "SYSTEM-RELATIONSHIP-REGISTRY-PURPOSE-001": {
+      "inherited_by": [],
+      "owner_spec_id": "SYSTEM-RELATIONSHIP-REGISTRY",
+      "source_path": "specifications/systems/relationship-registry.md"
+    },
+    "SYSTEM-RELATIONSHIP-REGISTRY-RELEASE-001": {
+      "inherited_by": [],
+      "owner_spec_id": "SYSTEM-RELATIONSHIP-REGISTRY",
+      "source_path": "specifications/systems/relationship-registry.md"
+    },
     "SYSTEM-REPAIR-001": {
       "inherited_by": [],
       "owner_spec_id": "SYSTEM-IMPORT-EXPORT-REPAIR",
@@ -4429,6 +4500,11 @@
       "source_path": "specifications/systems/source-atlas.md"
     },
     "SYSTEM-SOURCE-ATLAS-PUBLIC-CLAIM-STATE-002": {
+      "inherited_by": [],
+      "owner_spec_id": "SYSTEM-SOURCE-ATLAS",
+      "source_path": "specifications/systems/source-atlas.md"
+    },
+    "SYSTEM-SOURCE-ATLAS-RELATIONSHIP-DELIVERY-001": {
       "inherited_by": [],
       "owner_spec_id": "SYSTEM-SOURCE-ATLAS",
       "source_path": "specifications/systems/source-atlas.md"
@@ -4701,6 +4777,7 @@
         "SYSTEM-PERSISTENCE-REPLAY",
         "SYSTEM-PRIVACY-DATA-CLASSIFICATION",
         "SYSTEM-PRIVATE-LIFE-RUNTIME",
+        "SYSTEM-RELATIONSHIP-REGISTRY",
         "SYSTEM-SCHEDULING-CAPACITY",
         "SYSTEM-SOURCE-ATLAS",
         "SYSTEM-SYNC-CONTINUITY"
@@ -4803,7 +4880,8 @@
         "SYSTEM-CERTIFIED-EXECUTABLE-BRANCH-RECONCILIATION",
         "SYSTEM-LOCAL-LEARNING",
         "SYSTEM-PRIVACY-DATA-CLASSIFICATION",
-        "SYSTEM-PRIVATE-LIFE-RUNTIME"
+        "SYSTEM-PRIVATE-LIFE-RUNTIME",
+        "SYSTEM-RELATIONSHIP-REGISTRY"
       ],
       "inherits": [
         "LAW-IA-TRUST-001",
@@ -5407,6 +5485,7 @@
       "dependents": [
         "JOURNEY-EXTERNAL-CALENDAR-IMPORT",
         "OBJECT-IMPORT-DIFF-RECORD",
+        "SYSTEM-RELATIONSHIP-REGISTRY",
         "SYSTEM-SOURCE-ATLAS"
       ],
       "inherits": [
@@ -5819,6 +5898,7 @@
         "SYSTEM-IMPORT-EXPORT-REPAIR",
         "SYSTEM-LOCAL-LEARNING",
         "SYSTEM-NOTIFICATIONS",
+        "SYSTEM-RELATIONSHIP-REGISTRY",
         "SYSTEM-SOURCE-ATLAS",
         "SYSTEM-SYNC-CONTINUITY"
       ],
@@ -5859,6 +5939,23 @@
       ],
       "source_path": "specifications/systems/private-life-runtime.md"
     },
+    "SYSTEM-RELATIONSHIP-REGISTRY": {
+      "dependencies": [
+        "CONSTITUTION",
+        "SYSTEM-SOURCE-ATLAS",
+        "OBJECT-SOURCE-REFERENCE",
+        "GLOBAL-TRUST-INSPECTION",
+        "SYSTEM-PRIVACY-DATA-CLASSIFICATION"
+      ],
+      "dependents": [],
+      "inherits": [
+        "LAW-LOCAL-AUTHORITY-001",
+        "LAW-OFFLINE-NO-ACCOUNT-001",
+        "LAW-R2-PUBLIC-ONLY-001",
+        "CONST-PROOF-EVIDENCE-001"
+      ],
+      "source_path": "specifications/systems/relationship-registry.md"
+    },
     "SYSTEM-SCHEDULING-CAPACITY": {
       "dependencies": [
         "CONSTITUTION",
@@ -5886,7 +5983,9 @@
         "SYSTEM-PRIVACY-DATA-CLASSIFICATION",
         "SYSTEM-PRIVATE-LIFE-RUNTIME"
       ],
-      "dependents": [],
+      "dependents": [
+        "SYSTEM-RELATIONSHIP-REGISTRY"
+      ],
       "inherits": [
         "LAW-R2-PUBLIC-ONLY-001",
         "LAW-LOCAL-AUTHORITY-001",

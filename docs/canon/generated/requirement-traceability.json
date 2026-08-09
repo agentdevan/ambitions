@@ -1,5 +1,5 @@
 {
-  "canon_digest": "8893a948efd392a86f2503236c1a543229d06b83cddc2635ce9da4f5d98ef654",
+  "canon_digest": "6a978c1a910e70b758dbafd4c9172ab7d039385ff67c7488568ee5b6ce26e4b8",
   "canon_revision": 2,
   "executable_resolution_policy": {
     "binding_source": "executed test result manifests",
@@ -5875,6 +5875,30 @@
       ]
     },
     {
+      "blueprint_ids": [],
+      "concept": "object.source-reference.relationship-endpoint",
+      "executable_bindings": [],
+      "executable_resolution": "not_evaluated_by_canon_compiler",
+      "intended_outcome": "A relationship Source Reference MUST retain stable mapping-set, edge, subject, predicate, object, and revision identities; exact endpoint scheme and concept releases; direction and source meaning; publisher, creator, reviewer, dates, method, justification, evidence, QA, confidence when published, source row, coverage, rights, attribution, conflict, and supersession facts. Labels are for inspection and cannot replace source identifiers. Missing metadata remains missing. Source provenance and Ambitions review are separate records, so review may restrict an eligible purpose but cannot rewrite the source predicate, silently retarget an endpoint, or claim external acceptance.",
+      "modality": "MUST",
+      "owner_spec_id": "OBJECT-SOURCE-REFERENCE",
+      "requirement_id": "OBJ-SOURCE-REFERENCE-RELATIONSHIP-ENDPOINT-001",
+      "scope": "Relationship mapping sets, endpoint concepts, source predicates, metadata, rights, and review",
+      "source_owners": [
+        "Native/Ambitions/Core/Domain/",
+        "Native/Ambitions/Core/LocalRuntimeOS/ExternalWrites/",
+        "Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Trust/",
+        "Native/Ambitions/Quality/"
+      ],
+      "source_path": "specifications/objects/source-reference.md",
+      "verification_declarations": [
+        "SCENARIO-SOURCE-REFERENCE-RELATIONSHIP-ENDPOINT-001"
+      ]
+    },
+    {
       "blueprint_ids": [
         "UX-OBJECT-LIFE-AREA",
         "UX-SCREEN-GOALS-LIFE-AREA"
@@ -7791,6 +7815,30 @@
       "source_path": "specifications/global/trust-inspection.md",
       "verification_declarations": [
         "SCENARIO-TRUST-PROPORTIONAL-RECEIPT-001"
+      ]
+    },
+    {
+      "blueprint_ids": [
+        "UX-SCREEN-TRUST-DEEP"
+      ],
+      "concept": "global.trust.relationship-inspection",
+      "executable_bindings": [],
+      "executable_resolution": "not_evaluated_by_canon_compiler",
+      "intended_outcome": "When a public relationship matters to an explanation or downstream result, Trust MUST provide accessible progressive disclosure of both endpoint schemes, concepts, and releases; mapping set and publisher; relationship family, exact predicate, direction, and plain meaning; method, justification, evidence, QA, review, and source-published confidence; eligible purpose and forbidden propagation; conflicts, freshness, rights, coverage, dependencies, and explicit non-claims. Offline inspection retains actual age and unavailable state. Labels, color, confidence, or an aggregate score MUST NOT imply equivalence, qualification, acceptance, recommendation, or authority beyond the stored edge. The inspection is a read-only projection and cannot approve a candidate, mutate an owning object, or issue an external action.",
+      "modality": "MUST",
+      "owner_spec_id": "GLOBAL-TRUST-INSPECTION",
+      "requirement_id": "SPEC-GLOBAL-TRUST-RELATIONSHIP-INSPECTION-001",
+      "scope": "Contextual inspection of public cross-taxonomy relationships and their use",
+      "source_owners": [
+        "Native/Ambitions/Trust/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/PrivacySecurity/",
+        "Native/Ambitions/Language/",
+        "Native/Ambitions/Quality/"
+      ],
+      "source_path": "specifications/global/trust-inspection.md",
+      "verification_declarations": [
+        "SCENARIO-TRUST-RELATIONSHIP-INSPECTION-001"
       ]
     },
     {
@@ -11426,6 +11474,117 @@
       ]
     },
     {
+      "blueprint_ids": [],
+      "concept": "system.privacy.relationship-registry-public-only",
+      "executable_bindings": [],
+      "executable_resolution": "not_evaluated_by_canon_compiler",
+      "intended_outcome": "Relationship acquisition and registry queries MUST use fixed public release IDs and typed public concept references only. User or device identity, Goals, Capabilities, Proof, education history, schedules, locations, recommendations, corrections, selections, rejections, private search text, or values derived from them MUST NOT influence request parameters, artifact selection or partitioning, cache keys, logs, diagnostics, evaluation inputs, refresh behavior, or source feedback. Public dependency records MAY contain opaque public consumer and relationship revision identifiers only; private purpose detail remains with its local owner. Any unknown, mixed, free-form, or private-influenced request shape fails closed and cannot be made public by redaction after the fact.",
+      "modality": "MUST NOT",
+      "owner_spec_id": "SYSTEM-PRIVACY-DATA-CLASSIFICATION",
+      "requirement_id": "SYSTEM-PRIVACY-RELATIONSHIP-REGISTRY-001",
+      "scope": "Relationship source acquisition, requests, keys, artifacts, caches, logs, diagnostics, evaluation, inspection, dependencies, and refresh",
+      "source_owners": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Boundary/",
+        "Native/Ambitions/Core/LocalRuntimeOS/PrivacySecurity/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Surfaces/You/",
+        "Native/Ambitions/Trust/",
+        "Native/Ambitions/Quality/"
+      ],
+      "source_path": "specifications/systems/privacy-and-data-classification.md",
+      "verification_declarations": [
+        "PRIVACY-RELATIONSHIP-REGISTRY-PUBLIC-ONLY-001"
+      ]
+    },
+    {
+      "blueprint_ids": [],
+      "concept": "system.relationship-registry.consumer-boundary",
+      "executable_bindings": [],
+      "executable_resolution": "not_evaluated_by_canon_compiler",
+      "intended_outcome": "Consumers MUST receive immutable purpose-eligible edges, limits, coverage, and dependency bindings from one exact registry snapshot through typed read-only interfaces. Each use MUST bind snapshot, mapping set and edge revision, endpoint concept and release, purpose profile, and direction. Change or withdrawal MUST invalidate only affected dependencies before reuse and MUST NOT rewrite accepted history, mutate an owning object, approve a candidate, recommend an outcome, or perform an external action.",
+      "modality": "MUST",
+      "owner_spec_id": "SYSTEM-RELATIONSHIP-REGISTRY",
+      "requirement_id": "SYSTEM-RELATIONSHIP-REGISTRY-CONSUMER-001",
+      "scope": "Snapshots, dependency invalidation, coverage, inspection projections, and consumer APIs",
+      "source_owners": [
+        "Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Boundary/",
+        "Native/Ambitions/Core/LocalRuntimeOS/PrivacySecurity/",
+        "Native/Ambitions/Quality/"
+      ],
+      "source_path": "specifications/systems/relationship-registry.md",
+      "verification_declarations": [
+        "SCENARIO-RELATIONSHIP-REGISTRY-CONSUMER-001"
+      ]
+    },
+    {
+      "blueprint_ids": [],
+      "concept": "system.relationship-registry.lifecycle",
+      "executable_bindings": [],
+      "executable_resolution": "not_evaluated_by_canon_compiler",
+      "intended_outcome": "Packaging, transformation, display, retention, and derivation MUST satisfy the exact mapping-set and both endpoint-source rights; schema or standard licensing does not authorize source content. Mapping-set and endpoint releases retain independent clocks. A changed endpoint or set produces an explicit diff and makes only affected version-sensitive use stale or ineligible until reviewed; it never floats to a newer release.",
+      "modality": "MUST",
+      "owner_spec_id": "SYSTEM-RELATIONSHIP-REGISTRY",
+      "requirement_id": "SYSTEM-RELATIONSHIP-REGISTRY-LIFECYCLE-001",
+      "scope": "Rights, freshness, validation, promotion, rollback, correction, offline use, reset, and purge",
+      "source_owners": [
+        "Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Boundary/",
+        "Native/Ambitions/Core/LocalRuntimeOS/PrivacySecurity/",
+        "Native/Ambitions/Quality/"
+      ],
+      "source_path": "specifications/systems/relationship-registry.md",
+      "verification_declarations": [
+        "SCENARIO-RELATIONSHIP-REGISTRY-LIFECYCLE-001"
+      ]
+    },
+    {
+      "blueprint_ids": [],
+      "concept": "system.relationship-registry.purpose-boundary",
+      "executable_bindings": [],
+      "executable_resolution": "not_evaluated_by_canon_compiler",
+      "intended_outcome": "Each consumer request MUST name one fixed purpose and receive only stored edges whose exact product-use profile permits that purpose and direction, together with explicit limits and forbidden propagation. Source predicate and product-use profile remain distinct. Ambitions MUST NOT derive a consumer-eligible edge by chain, transitivity, symmetry, inverse, confidence, similarity, or majority; MUST NOT transfer qualification, credit, acceptance, Capability, Proof, recommendation, or another endpoint claim across an edge; and MUST NOT widen an edge approved for search, explanation, or version migration into another use. Multiple source edges MAY be inspected as a path only without a derived conclusion.",
+      "modality": "MUST NOT",
+      "owner_spec_id": "SYSTEM-RELATIONSHIP-REGISTRY",
+      "requirement_id": "SYSTEM-RELATIONSHIP-REGISTRY-PURPOSE-001",
+      "scope": "Product-use profiles, directions, forbidden propagation, and relationship queries",
+      "source_owners": [
+        "Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Boundary/",
+        "Native/Ambitions/Core/LocalRuntimeOS/PrivacySecurity/",
+        "Native/Ambitions/Quality/"
+      ],
+      "source_path": "specifications/systems/relationship-registry.md",
+      "verification_declarations": [
+        "SCENARIO-RELATIONSHIP-REGISTRY-NO-INFERENCE-001"
+      ]
+    },
+    {
+      "blueprint_ids": [],
+      "concept": "system.relationship-registry.release-authority",
+      "executable_bindings": [],
+      "executable_resolution": "not_evaluated_by_canon_compiler",
+      "intended_outcome": "Every mapping set and edge MUST have stable identity and bind an immutable set release to exact subject and object scheme releases, source-native concept IDs, source bytes and hashes, schema, publisher or curator, dates, method, evidence, coverage, QA partition, creator and reviewer, and source-specific rights. A label, shared code, `latest`, or floating endpoint MUST NOT replace an exact identifier or silently retarget a changed, split, merged, deprecated, or deleted concept.",
+      "modality": "MUST",
+      "owner_spec_id": "SYSTEM-RELATIONSHIP-REGISTRY",
+      "requirement_id": "SYSTEM-RELATIONSHIP-REGISTRY-RELEASE-001",
+      "scope": "Mapping-set releases, endpoint concepts, predicates, metadata, and review state",
+      "source_owners": [
+        "Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Boundary/",
+        "Native/Ambitions/Core/LocalRuntimeOS/PrivacySecurity/",
+        "Native/Ambitions/Quality/"
+      ],
+      "source_path": "specifications/systems/relationship-registry.md",
+      "verification_declarations": [
+        "SCENARIO-RELATIONSHIP-REGISTRY-RELEASE-001"
+      ]
+    },
+    {
       "blueprint_ids": [
         "UX-SCREEN-TIME-IMPORT",
         "UX-SCREEN-YOU-DATA"
@@ -11837,6 +11996,29 @@
       "source_path": "specifications/systems/source-atlas.md",
       "verification_declarations": [
         "SCENARIO-PUBLIC-REFERENCE-STATE-001"
+      ]
+    },
+    {
+      "blueprint_ids": [],
+      "concept": "system.source-atlas.relationship-release-delivery",
+      "executable_bindings": [],
+      "executable_resolution": "not_evaluated_by_canon_compiler",
+      "intended_outcome": "Source Atlas MAY acquire only fixed public mapping-set and endpoint release IDs through the finite public artifact namespace. Acquisition, request parameters, keys, artifacts, partitions, caches, logs, diagnostics, refresh, and source feedback MUST be independent of user, device, Goal, Capability, Proof, education, schedule, location, recommendation, correction, selection, or rejection facts. Relationship artifacts MUST pass exact release, byte, hash, signature, schema, size, rights, and manifest checks before atomic promotion; failure quarantines the candidate and preserves verified last-known-good data. Offline, rollback, reset, correction, supersession, withdrawal, and resumable purge preserve the Relationship Registry lifecycle law without changing any private object or widening another public relationship.",
+      "modality": "MUST",
+      "owner_spec_id": "SYSTEM-SOURCE-ATLAS",
+      "requirement_id": "SYSTEM-SOURCE-ATLAS-RELATIONSHIP-DELIVERY-001",
+      "scope": "Relationship mapping-set acquisition, verification, staging, cache, last-known-good, rollback, reset, and purge",
+      "source_owners": [
+        "Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Boundary/",
+        "Native/Ambitions/Core/LocalRuntimeOS/PrivacySecurity/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Planning/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Quality/"
+      ],
+      "source_path": "specifications/systems/source-atlas.md",
+      "verification_declarations": [
+        "SCENARIO-SOURCE-ATLAS-RELATIONSHIP-DELIVERY-001"
       ]
     },
     {

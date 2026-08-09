@@ -1,0 +1,366 @@
+{
+  "schemaVersion": "relationship-registry-use-profiles-v1",
+  "kind": "relationshipRegistryUseProfiles",
+  "version": "1.0.0",
+  "unknownProfilePolicy": "reject",
+  "sourcePredicateGrantsEligibility": false,
+  "profiles": [
+    {
+      "schemaVersion": "relationship-use-profile-v1",
+      "kind": "relationshipUseProfile",
+      "profileId": "cip-edition-migration-v1",
+      "revision": "1.0.0",
+      "mappingSetClasses": [
+        "cip_edition_migration"
+      ],
+      "allowedPurposes": [
+        "inspection",
+        "version_migration"
+      ],
+      "allowedDirections": [
+        "subject_to_object"
+      ],
+      "requiredReviewStates": [
+        "source_published",
+        "approved"
+      ],
+      "requiredEndpointStates": [
+        "current_for_mapping"
+      ],
+      "allowedRightsStates": [
+        "approved",
+        "attribution_required",
+        "transformation_restricted",
+        "inspection_only"
+      ],
+      "forbiddenPropagation": [
+        "chain_inference",
+        "transitive_inference",
+        "inverse_inference",
+        "claim_transfer",
+        "unrelated_claim_families",
+        "generic_identity",
+        "program_availability",
+        "competency",
+        "credit",
+        "qualification",
+        "acceptance",
+        "user_capability",
+        "canonical_mutation",
+        "external_action"
+      ],
+      "nonClaims": [
+        "not generic identity",
+        "not program availability",
+        "not competency",
+        "not credit"
+      ],
+      "inferencePolicy": {
+        "chain": "forbidden",
+        "transitive": "forbidden",
+        "inverse": "stored_edge_only",
+        "symmetric": "stored_edge_only",
+        "claimPropagation": "forbidden"
+      },
+      "expiresAt": null,
+      "inspectionOnlyPurposes": [
+        "inspection"
+      ]
+    },
+    {
+      "schemaVersion": "relationship-use-profile-v1",
+      "kind": "relationshipUseProfile",
+      "profileId": "cip-soc-relevance-v1",
+      "revision": "1.0.0",
+      "mappingSetClasses": [
+        "cip_soc_relevance"
+      ],
+      "allowedPurposes": [
+        "inspection",
+        "search_expansion",
+        "destination_discovery",
+        "explanation"
+      ],
+      "allowedDirections": [
+        "subject_to_object"
+      ],
+      "requiredReviewStates": [
+        "source_published",
+        "approved"
+      ],
+      "requiredEndpointStates": [
+        "current_for_mapping"
+      ],
+      "allowedRightsStates": [
+        "approved",
+        "attribution_required",
+        "transformation_restricted",
+        "inspection_only"
+      ],
+      "forbiddenPropagation": [
+        "chain_inference",
+        "transitive_inference",
+        "inverse_inference",
+        "claim_transfer",
+        "unrelated_claim_families",
+        "degree_requirement",
+        "qualification",
+        "credit",
+        "acceptance",
+        "user_capability",
+        "licensure",
+        "employment",
+        "unique_route",
+        "individual_outcome",
+        "recommendation",
+        "canonical_mutation",
+        "external_action"
+      ],
+      "nonClaims": [
+        "not a degree requirement",
+        "not qualification",
+        "not licensure",
+        "not employment",
+        "not a unique route",
+        "not an individual outcome"
+      ],
+      "inferencePolicy": {
+        "chain": "forbidden",
+        "transitive": "forbidden",
+        "inverse": "stored_edge_only",
+        "symmetric": "stored_edge_only",
+        "claimPropagation": "forbidden"
+      },
+      "expiresAt": null,
+      "inspectionOnlyPurposes": [
+        "inspection"
+      ]
+    },
+    {
+      "schemaVersion": "relationship-use-profile-v1",
+      "kind": "relationshipUseProfile",
+      "profileId": "onet-soc-overlay-v1",
+      "revision": "1.0.0",
+      "mappingSetClasses": [
+        "onet_soc_relationship"
+      ],
+      "allowedPurposes": [
+        "inspection",
+        "search_expansion",
+        "source_overlay_join"
+      ],
+      "allowedDirections": [
+        "subject_to_object"
+      ],
+      "requiredReviewStates": [
+        "source_published",
+        "approved"
+      ],
+      "requiredEndpointStates": [
+        "current_for_mapping"
+      ],
+      "allowedRightsStates": [
+        "approved",
+        "attribution_required",
+        "transformation_restricted",
+        "inspection_only"
+      ],
+      "forbiddenPropagation": [
+        "chain_inference",
+        "transitive_inference",
+        "inverse_inference",
+        "claim_transfer",
+        "unrelated_claim_families",
+        "generic_identity",
+        "sibling_inheritance",
+        "current_job",
+        "qualification",
+        "credit",
+        "acceptance",
+        "user_capability",
+        "recommendation",
+        "canonical_mutation",
+        "external_action"
+      ],
+      "nonClaims": [
+        "not identity across detailed, aggregate, or title-only records",
+        "no sibling inheritance",
+        "not the user's current job"
+      ],
+      "inferencePolicy": {
+        "chain": "forbidden",
+        "transitive": "forbidden",
+        "inverse": "stored_edge_only",
+        "symmetric": "stored_edge_only",
+        "claimPropagation": "forbidden"
+      },
+      "expiresAt": null,
+      "inspectionOnlyPurposes": [
+        "inspection"
+      ]
+    },
+    {
+      "schemaVersion": "relationship-use-profile-v1",
+      "kind": "relationshipUseProfile",
+      "profileId": "onet-esco-blocked-v1",
+      "revision": "1.0.0",
+      "mappingSetClasses": [
+        "onet_esco_mapping"
+      ],
+      "allowedPurposes": [
+        "unavailable"
+      ],
+      "allowedDirections": [],
+      "requiredReviewStates": [
+        "restricted"
+      ],
+      "requiredEndpointStates": [
+        "current_for_mapping"
+      ],
+      "allowedRightsStates": [],
+      "forbiddenPropagation": [
+        "chain_inference",
+        "transitive_inference",
+        "inverse_inference",
+        "claim_transfer",
+        "unrelated_claim_families",
+        "generic_identity",
+        "jurisdictional_identity",
+        "qualification",
+        "credit",
+        "acceptance",
+        "user_capability",
+        "skill_equivalence",
+        "career_equivalence",
+        "user_equivalence",
+        "recommendation",
+        "canonical_mutation",
+        "external_action"
+      ],
+      "nonClaims": [
+        "unavailable until exact endpoint releases and mapping rights pass",
+        "related-match lower-QA rows remain restricted",
+        "not jurisdictional identity",
+        "not qualification",
+        "not skill, career, or user equivalence"
+      ],
+      "inferencePolicy": {
+        "chain": "forbidden",
+        "transitive": "forbidden",
+        "inverse": "stored_edge_only",
+        "symmetric": "stored_edge_only",
+        "claimPropagation": "forbidden"
+      },
+      "expiresAt": null,
+      "inspectionOnlyPurposes": []
+    },
+    {
+      "schemaVersion": "relationship-use-profile-v1",
+      "kind": "relationshipUseProfile",
+      "profileId": "publisher-alignment-blocked-v1",
+      "revision": "1.0.0",
+      "mappingSetClasses": [
+        "publisher_alignment"
+      ],
+      "allowedPurposes": [
+        "unavailable"
+      ],
+      "allowedDirections": [],
+      "requiredReviewStates": [
+        "restricted"
+      ],
+      "requiredEndpointStates": [
+        "current_for_mapping"
+      ],
+      "allowedRightsStates": [],
+      "forbiddenPropagation": [
+        "chain_inference",
+        "transitive_inference",
+        "inverse_inference",
+        "claim_transfer",
+        "unrelated_claim_families",
+        "independent_verification",
+        "mastery",
+        "credit",
+        "acceptance",
+        "user_capability",
+        "qualification",
+        "recommendation",
+        "canonical_mutation",
+        "external_action"
+      ],
+      "nonClaims": [
+        "unavailable until publisher-specific source version and rights pass",
+        "not independent verification",
+        "not mastery",
+        "not credit",
+        "not acceptance",
+        "not Capability"
+      ],
+      "inferencePolicy": {
+        "chain": "forbidden",
+        "transitive": "forbidden",
+        "inverse": "stored_edge_only",
+        "symmetric": "stored_edge_only",
+        "claimPropagation": "forbidden"
+      },
+      "expiresAt": null,
+      "inspectionOnlyPurposes": []
+    },
+    {
+      "schemaVersion": "relationship-use-profile-v1",
+      "kind": "relationshipUseProfile",
+      "profileId": "mapping-candidate-review-v1",
+      "revision": "1.0.0",
+      "mappingSetClasses": [
+        "mapping_candidate"
+      ],
+      "allowedPurposes": [
+        "review_only"
+      ],
+      "allowedDirections": [
+        "subject_to_object"
+      ],
+      "requiredReviewStates": [
+        "restricted"
+      ],
+      "requiredEndpointStates": [
+        "current_for_mapping"
+      ],
+      "allowedRightsStates": [
+        "inspection_only"
+      ],
+      "forbiddenPropagation": [
+        "chain_inference",
+        "transitive_inference",
+        "inverse_inference",
+        "claim_transfer",
+        "unrelated_claim_families",
+        "generic_identity",
+        "qualification",
+        "credit",
+        "acceptance",
+        "user_capability",
+        "recommendation",
+        "canonical_mutation",
+        "external_action"
+      ],
+      "nonClaims": [
+        "not a consumer fact",
+        "not source authority",
+        "not externally accepted"
+      ],
+      "inferencePolicy": {
+        "chain": "forbidden",
+        "transitive": "forbidden",
+        "inverse": "stored_edge_only",
+        "symmetric": "stored_edge_only",
+        "claimPropagation": "forbidden"
+      },
+      "expiresAt": null,
+      "inspectionOnlyPurposes": [
+        "review_only"
+      ]
+    }
+  ]
+}

@@ -1,5 +1,5 @@
 {
-  "canon_digest": "8893a948efd392a86f2503236c1a543229d06b83cddc2635ce9da4f5d98ef654",
+  "canon_digest": "6a978c1a910e70b758dbafd4c9172ab7d039385ff67c7488568ee5b6ce26e4b8",
   "canon_revision": 2,
   "documents": [
     {
@@ -2865,6 +2865,7 @@
         "global.trust.identity",
         "global.trust.layers",
         "global.trust.proportional-receipts",
+        "global.trust.relationship-inspection",
         "global.trust.visual-authority"
       ],
       "path": "specifications/global/trust-inspection.md",
@@ -2872,7 +2873,7 @@
         {
           "concept": "global.trust.identity",
           "id": "SPEC-GLOBAL-TRUST-INSPECTION-001",
-          "line": 1395,
+          "line": 1396,
           "modality": "MUST",
           "scope": "Contextual trust presentation",
           "source_owners": [
@@ -2892,7 +2893,7 @@
         {
           "concept": "global.trust.layers",
           "id": "SPEC-GLOBAL-TRUST-LAYERS-001",
-          "line": 1412,
+          "line": 1413,
           "modality": "MUST",
           "scope": "Inline marker, compact row, deep inspection, and searchable archive",
           "source_owners": [
@@ -2910,9 +2911,29 @@
           ]
         },
         {
+          "concept": "global.trust.relationship-inspection",
+          "id": "SPEC-GLOBAL-TRUST-RELATIONSHIP-INSPECTION-001",
+          "line": 1430,
+          "modality": "MUST",
+          "scope": "Contextual inspection of public cross-taxonomy relationships and their use",
+          "source_owners": [
+            "Native/Ambitions/Trust/",
+            "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+            "Native/Ambitions/Core/LocalRuntimeOS/PrivacySecurity/",
+            "Native/Ambitions/Language/",
+            "Native/Ambitions/Quality/"
+          ],
+          "source_path": "specifications/global/trust-inspection.md",
+          "supersedes": [],
+          "title": "Relationship limits remain inspectable",
+          "verification": [
+            "SCENARIO-TRUST-RELATIONSHIP-INSPECTION-001"
+          ]
+        },
+        {
           "concept": "global.trust.proportional-receipts",
           "id": "SPEC-GLOBAL-TRUST-PROPORTIONAL-RECEIPTS-001",
-          "line": 1429,
+          "line": 1451,
           "modality": "MUST",
           "scope": "Accepted mutations and their immediate confirmation",
           "source_owners": [
@@ -2932,7 +2953,7 @@
         {
           "concept": "global.trust.visual-authority",
           "id": "SPEC-GLOBAL-TRUST-VISUAL-AUTHORITY-001",
-          "line": 1439,
+          "line": 1461,
           "modality": "MUST",
           "scope": "Markers, rows, and deep inspection visual authority",
           "source_owners": [
@@ -2952,7 +2973,7 @@
         {
           "concept": "global.trust.command-contract",
           "id": "SPEC-GLOBAL-TRUST-COMMAND-CONTRACT-001",
-          "line": 1450,
+          "line": 1472,
           "modality": "MUST",
           "scope": "Structured state command contracts for this specification",
           "source_owners": [
@@ -2972,7 +2993,7 @@
         {
           "concept": "global.completed.contextual-placement",
           "id": "SPEC-COMPLETED-CONTEXTUAL-PLACEMENT-001",
-          "line": 1535,
+          "line": 1557,
           "modality": "MUST NOT",
           "scope": "Contextual Completed placement",
           "source_owners": [
@@ -2992,7 +3013,7 @@
         {
           "concept": "global.trust-inspection.cebr-branch",
           "id": "GLOBAL-TRUST-CEBR-BRANCH-001",
-          "line": 1546,
+          "line": 1568,
           "modality": "MUST",
           "scope": "Life Branch and Branch Viability Certificate inspection",
           "source_owners": [
@@ -5824,7 +5845,8 @@
       "owner_domain": "object-source-reference",
       "owns_concepts": [
         "object.source-reference.identity-visibility",
-        "object.source-reference.public-claim-identity"
+        "object.source-reference.public-claim-identity",
+        "object.source-reference.relationship-endpoint"
       ],
       "path": "specifications/objects/source-reference.md",
       "requirements": [
@@ -5851,9 +5873,31 @@
           ]
         },
         {
+          "concept": "object.source-reference.relationship-endpoint",
+          "id": "OBJ-SOURCE-REFERENCE-RELATIONSHIP-ENDPOINT-001",
+          "line": 28,
+          "modality": "MUST",
+          "scope": "Relationship mapping sets, endpoint concepts, source predicates, metadata, rights, and review",
+          "source_owners": [
+            "Native/Ambitions/Core/Domain/",
+            "Native/Ambitions/Core/LocalRuntimeOS/ExternalWrites/",
+            "Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/",
+            "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+            "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+            "Native/Ambitions/Trust/",
+            "Native/Ambitions/Quality/"
+          ],
+          "source_path": "specifications/objects/source-reference.md",
+          "supersedes": [],
+          "title": "Relationship endpoints remain source-native",
+          "verification": [
+            "SCENARIO-SOURCE-REFERENCE-RELATIONSHIP-ENDPOINT-001"
+          ]
+        },
+        {
           "concept": "object.source-reference.identity-visibility",
           "id": "OBJ-SOURCE-REFERENCE-IDENTITY-001",
-          "line": 28,
+          "line": 47,
           "modality": "MUST",
           "scope": "Imported, shared, captured, or public-reference provenance",
           "source_owners": [
@@ -11328,7 +11372,8 @@
         "system.privacy.classification",
         "system.privacy.egress-firewall",
         "system.privacy.external-assistance",
-        "system.privacy.public-reference-boundary"
+        "system.privacy.public-reference-boundary",
+        "system.privacy.relationship-registry-public-only"
       ],
       "path": "specifications/systems/privacy-and-data-classification.md",
       "requirements": [
@@ -11396,9 +11441,30 @@
           ]
         },
         {
+          "concept": "system.privacy.relationship-registry-public-only",
+          "id": "SYSTEM-PRIVACY-RELATIONSHIP-REGISTRY-001",
+          "line": 56,
+          "modality": "MUST NOT",
+          "scope": "Relationship source acquisition, requests, keys, artifacts, caches, logs, diagnostics, evaluation, inspection, dependencies, and refresh",
+          "source_owners": [
+            "Native/Ambitions/Core/LocalRuntimeOS/Boundary/",
+            "Native/Ambitions/Core/LocalRuntimeOS/PrivacySecurity/",
+            "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+            "Native/Ambitions/Surfaces/You/",
+            "Native/Ambitions/Trust/",
+            "Native/Ambitions/Quality/"
+          ],
+          "source_path": "specifications/systems/privacy-and-data-classification.md",
+          "supersedes": [],
+          "title": "Relationship acquisition and queries remain public-only",
+          "verification": [
+            "PRIVACY-RELATIONSHIP-REGISTRY-PUBLIC-ONLY-001"
+          ]
+        },
+        {
           "concept": "system.privacy.external-assistance",
           "id": "SYSTEM-EXTERNAL-ASSISTANCE-BOUNDARY-001",
-          "line": 99,
+          "line": 119,
           "modality": "MUST NOT",
           "scope": "External assistance boundary",
           "source_owners": [
@@ -11616,6 +11682,121 @@
     {
       "depends_on": [
         "CONSTITUTION",
+        "SYSTEM-SOURCE-ATLAS",
+        "OBJECT-SOURCE-REFERENCE",
+        "GLOBAL-TRUST-INSPECTION",
+        "SYSTEM-PRIVACY-DATA-CLASSIFICATION"
+      ],
+      "inherits": [
+        "LAW-LOCAL-AUTHORITY-001",
+        "LAW-OFFLINE-NO-ACCOUNT-001",
+        "LAW-R2-PUBLIC-ONLY-001",
+        "CONST-PROOF-EVIDENCE-001"
+      ],
+      "kind": "system",
+      "owner_domain": "system-relationship-registry",
+      "owns_concepts": [
+        "system.relationship-registry.release-authority",
+        "system.relationship-registry.purpose-boundary",
+        "system.relationship-registry.lifecycle",
+        "system.relationship-registry.consumer-boundary"
+      ],
+      "path": "specifications/systems/relationship-registry.md",
+      "requirements": [
+        {
+          "concept": "system.relationship-registry.release-authority",
+          "id": "SYSTEM-RELATIONSHIP-REGISTRY-RELEASE-001",
+          "line": 20,
+          "modality": "MUST",
+          "scope": "Mapping-set releases, endpoint concepts, predicates, metadata, and review state",
+          "source_owners": [
+            "Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/",
+            "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+            "Native/Ambitions/Core/LocalRuntimeOS/Boundary/",
+            "Native/Ambitions/Core/LocalRuntimeOS/PrivacySecurity/",
+            "Native/Ambitions/Quality/"
+          ],
+          "source_path": "specifications/systems/relationship-registry.md",
+          "supersedes": [],
+          "title": "Releases preserve exact source meaning",
+          "verification": [
+            "SCENARIO-RELATIONSHIP-REGISTRY-RELEASE-001"
+          ]
+        },
+        {
+          "concept": "system.relationship-registry.purpose-boundary",
+          "id": "SYSTEM-RELATIONSHIP-REGISTRY-PURPOSE-001",
+          "line": 43,
+          "modality": "MUST NOT",
+          "scope": "Product-use profiles, directions, forbidden propagation, and relationship queries",
+          "source_owners": [
+            "Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/",
+            "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+            "Native/Ambitions/Core/LocalRuntimeOS/Boundary/",
+            "Native/Ambitions/Core/LocalRuntimeOS/PrivacySecurity/",
+            "Native/Ambitions/Quality/"
+          ],
+          "source_path": "specifications/systems/relationship-registry.md",
+          "supersedes": [],
+          "title": "Purpose never widens a relationship",
+          "verification": [
+            "SCENARIO-RELATIONSHIP-REGISTRY-NO-INFERENCE-001"
+          ]
+        },
+        {
+          "concept": "system.relationship-registry.lifecycle",
+          "id": "SYSTEM-RELATIONSHIP-REGISTRY-LIFECYCLE-001",
+          "line": 63,
+          "modality": "MUST",
+          "scope": "Rights, freshness, validation, promotion, rollback, correction, offline use, reset, and purge",
+          "source_owners": [
+            "Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/",
+            "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+            "Native/Ambitions/Core/LocalRuntimeOS/Boundary/",
+            "Native/Ambitions/Core/LocalRuntimeOS/PrivacySecurity/",
+            "Native/Ambitions/Quality/"
+          ],
+          "source_path": "specifications/systems/relationship-registry.md",
+          "supersedes": [],
+          "title": "Rights and release state fail closed independently",
+          "verification": [
+            "SCENARIO-RELATIONSHIP-REGISTRY-LIFECYCLE-001"
+          ]
+        },
+        {
+          "concept": "system.relationship-registry.consumer-boundary",
+          "id": "SYSTEM-RELATIONSHIP-REGISTRY-CONSUMER-001",
+          "line": 90,
+          "modality": "MUST",
+          "scope": "Snapshots, dependency invalidation, coverage, inspection projections, and consumer APIs",
+          "source_owners": [
+            "Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/",
+            "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+            "Native/Ambitions/Core/LocalRuntimeOS/Boundary/",
+            "Native/Ambitions/Core/LocalRuntimeOS/PrivacySecurity/",
+            "Native/Ambitions/Quality/"
+          ],
+          "source_path": "specifications/systems/relationship-registry.md",
+          "supersedes": [],
+          "title": "Consumers are exact, typed, and read-only",
+          "verification": [
+            "SCENARIO-RELATIONSHIP-REGISTRY-CONSUMER-001"
+          ]
+        }
+      ],
+      "source_owners": [
+        "Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Boundary/",
+        "Native/Ambitions/Core/LocalRuntimeOS/PrivacySecurity/",
+        "Native/Ambitions/Quality/"
+      ],
+      "spec_id": "SYSTEM-RELATIONSHIP-REGISTRY",
+      "title": "Relationship Registry"
+    },
+    {
+      "depends_on": [
+        "CONSTITUTION",
         "SURFACE-TIME",
         "OBJECT-SCHEDULE-PLACEMENT",
         "JOURNEY-SCHEDULE-REFLOW",
@@ -11773,7 +11954,8 @@
       "owns_concepts": [
         "system.source-atlas.public-reference",
         "system.source-atlas.egress-firewall",
-        "system.source-atlas.public-claim-state"
+        "system.source-atlas.public-claim-state",
+        "system.source-atlas.relationship-release-delivery"
       ],
       "path": "specifications/systems/source-atlas.md",
       "requirements": [
@@ -11838,6 +12020,27 @@
           "title": "Claim availability is orthogonal and honest",
           "verification": [
             "SCENARIO-PUBLIC-REFERENCE-STATE-001"
+          ]
+        },
+        {
+          "concept": "system.source-atlas.relationship-release-delivery",
+          "id": "SYSTEM-SOURCE-ATLAS-RELATIONSHIP-DELIVERY-001",
+          "line": 54,
+          "modality": "MUST",
+          "scope": "Relationship mapping-set acquisition, verification, staging, cache, last-known-good, rollback, reset, and purge",
+          "source_owners": [
+            "Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/",
+            "Native/Ambitions/Core/LocalRuntimeOS/Boundary/",
+            "Native/Ambitions/Core/LocalRuntimeOS/PrivacySecurity/",
+            "Native/Ambitions/Core/LocalRuntimeOS/Planning/",
+            "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+            "Native/Ambitions/Quality/"
+          ],
+          "source_path": "specifications/systems/source-atlas.md",
+          "supersedes": [],
+          "title": "Relationship releases use fixed public acquisition",
+          "verification": [
+            "SCENARIO-SOURCE-ATLAS-RELATIONSHIP-DELIVERY-001"
           ]
         }
       ],

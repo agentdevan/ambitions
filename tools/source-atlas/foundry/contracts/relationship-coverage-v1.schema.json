@@ -1,0 +1,314 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ambitions.app/schemas/source-atlas/relationship-coverage-v1.schema.json",
+  "title": "Relationship Coverage v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "kind",
+    "coverageId",
+    "registrySnapshotId",
+    "releaseId",
+    "generatedAt",
+    "mappingSetCounts",
+    "totals",
+    "countsByPredicate",
+    "countsByFamily",
+    "countsByMethod",
+    "countsByQaPartition",
+    "countsByReviewState",
+    "countsByPurpose",
+    "countsByConflictState",
+    "countsByFreshness",
+    "countsByRightsState",
+    "endpointCounts",
+    "evaluationBinding",
+    "hardGateResults"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "relationship-coverage-v1"
+    },
+    "kind": {
+      "const": "relationshipCoverage"
+    },
+    "coverageId": {
+      "$ref": "#/$defs/id"
+    },
+    "registrySnapshotId": {
+      "$ref": "#/$defs/id"
+    },
+    "releaseId": {
+      "$ref": "#/$defs/id"
+    },
+    "generatedAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "mappingSetCounts": {
+      "$ref": "#/$defs/countMap"
+    },
+    "totals": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "mappingSets",
+        "edges",
+        "subjectEndpoints",
+        "objectEndpoints",
+        "reviewedSubjects",
+        "conflicts",
+        "unmapped",
+        "explicitNoMatch",
+        "stale",
+        "rightsBlocked"
+      ],
+      "properties": {
+        "mappingSets": {
+          "$ref": "#/$defs/count"
+        },
+        "edges": {
+          "$ref": "#/$defs/count"
+        },
+        "subjectEndpoints": {
+          "$ref": "#/$defs/count"
+        },
+        "objectEndpoints": {
+          "$ref": "#/$defs/count"
+        },
+        "reviewedSubjects": {
+          "$ref": "#/$defs/count"
+        },
+        "conflicts": {
+          "$ref": "#/$defs/count"
+        },
+        "unmapped": {
+          "$ref": "#/$defs/count"
+        },
+        "explicitNoMatch": {
+          "$ref": "#/$defs/count"
+        },
+        "stale": {
+          "$ref": "#/$defs/count"
+        },
+        "rightsBlocked": {
+          "$ref": "#/$defs/count"
+        }
+      }
+    },
+    "countsByPredicate": {
+      "$ref": "#/$defs/predicateCountMap"
+    },
+    "countsByFamily": {
+      "$ref": "#/$defs/familyCountMap"
+    },
+    "countsByMethod": {
+      "$ref": "#/$defs/methodCountMap"
+    },
+    "countsByQaPartition": {
+      "$ref": "#/$defs/qaCountMap"
+    },
+    "countsByReviewState": {
+      "$ref": "#/$defs/reviewCountMap"
+    },
+    "countsByPurpose": {
+      "$ref": "#/$defs/purposeCountMap"
+    },
+    "countsByConflictState": {
+      "$ref": "#/$defs/conflictCountMap"
+    },
+    "countsByFreshness": {
+      "$ref": "#/$defs/freshnessCountMap"
+    },
+    "countsByRightsState": {
+      "$ref": "#/$defs/rightsCountMap"
+    },
+    "endpointCounts": {
+      "type": "object",
+      "propertyNames": { "$ref": "#/$defs/id" },
+      "additionalProperties": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "schemeId",
+          "schemeVersion",
+          "total",
+          "mapped",
+          "unmapped",
+          "explicitNoMatch",
+          "excluded"
+        ],
+        "properties": {
+          "schemeId": {
+            "$ref": "#/$defs/id"
+          },
+          "schemeVersion": {
+            "type": "string",
+            "minLength": 1
+          },
+          "total": {
+            "$ref": "#/$defs/count"
+          },
+          "mapped": {
+            "$ref": "#/$defs/count"
+          },
+          "unmapped": {
+            "$ref": "#/$defs/count"
+          },
+          "explicitNoMatch": {
+            "$ref": "#/$defs/count"
+          },
+          "excluded": {
+            "$ref": "#/$defs/count"
+          }
+        }
+      }
+    },
+    "evaluationBinding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "evaluationId",
+        "revision",
+        "contentHash"
+      ],
+      "properties": {
+        "evaluationId": {
+          "$ref": "#/$defs/id"
+        },
+        "revision": {
+          "type": "string",
+          "minLength": 1
+        },
+        "contentHash": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        }
+      }
+    },
+    "hardGateResults": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "falseEquivalence",
+        "predicateCorrectness",
+        "chainLeakage",
+        "inverseLeakage",
+        "claimLeakage",
+        "privacy",
+        "biasDignity",
+        "accessibility",
+        "comprehension",
+        "correction",
+        "offline",
+        "regression"
+      ],
+      "properties": {
+        "falseEquivalence": {
+          "$ref": "#/$defs/gate"
+        },
+        "predicateCorrectness": {
+          "$ref": "#/$defs/gate"
+        },
+        "chainLeakage": {
+          "$ref": "#/$defs/gate"
+        },
+        "inverseLeakage": {
+          "$ref": "#/$defs/gate"
+        },
+        "claimLeakage": {
+          "$ref": "#/$defs/gate"
+        },
+        "privacy": {
+          "$ref": "#/$defs/gate"
+        },
+        "biasDignity": {
+          "$ref": "#/$defs/gate"
+        },
+        "accessibility": {
+          "$ref": "#/$defs/gate"
+        },
+        "comprehension": {
+          "$ref": "#/$defs/gate"
+        },
+        "correction": {
+          "$ref": "#/$defs/gate"
+        },
+        "offline": {
+          "$ref": "#/$defs/gate"
+        },
+        "regression": {
+          "$ref": "#/$defs/gate"
+        }
+      }
+    }
+  },
+  "$defs": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9._:-]{2,127}$"
+    },
+    "count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "countMap": {
+      "type": "object",
+      "propertyNames": { "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._:-]{0,127}$" },
+      "additionalProperties": { "$ref": "#/$defs/count" }
+    },
+    "predicateCountMap": {
+      "type": "object",
+      "propertyNames": { "enum": ["cip:unchanged", "cip:textChanged", "cip:new", "cip:deleted", "cip:movedFrom", "cip:movedTo", "cip:reportUnder", "cip:split", "cip:merge", "skos:exactMatch", "skos:closeMatch", "skos:broadMatch", "skos:narrowMatch", "skos:relatedMatch", "ambitions:educationOccupationRelevance", "ambitions:sourceTaxonomyRelationship", "ctdl:alignment", "case:association", "ambitions:preparation", "ambitions:candidateRelationship"] },
+      "additionalProperties": { "$ref": "#/$defs/count" }
+    },
+    "familyCountMap": {
+      "type": "object",
+      "propertyNames": { "enum": ["within_scheme_relation", "scheme_version_migration", "official_cross_scheme_mapping", "publisher_authored_alignment", "current_authority_reference", "unapproved_candidate"] },
+      "additionalProperties": { "$ref": "#/$defs/count" }
+    },
+    "methodCountMap": {
+      "type": "object",
+      "propertyNames": { "enum": ["source_published", "maintainer_curated", "human_reviewed", "lexical", "model_generated", "community_submitted"] },
+      "additionalProperties": { "$ref": "#/$defs/count" }
+    },
+    "qaCountMap": {
+      "type": "object",
+      "propertyNames": { "enum": ["source_published", "human_validated", "lower_qa_related", "candidate", "rejected", "explicit_no_match"] },
+      "additionalProperties": { "$ref": "#/$defs/count" }
+    },
+    "reviewCountMap": {
+      "type": "object",
+      "propertyNames": { "enum": ["unreviewed", "source_published", "approved", "restricted", "rejected", "explicit_no_match", "conflicted"] },
+      "additionalProperties": { "$ref": "#/$defs/count" }
+    },
+    "purposeCountMap": {
+      "type": "object",
+      "propertyNames": { "enum": ["inspection", "search_expansion", "destination_discovery", "explanation", "source_overlay_join", "version_migration", "review_only", "unavailable"] },
+      "additionalProperties": { "$ref": "#/$defs/count" }
+    },
+    "conflictCountMap": {
+      "type": "object",
+      "propertyNames": { "enum": ["none", "unresolved"] },
+      "additionalProperties": { "$ref": "#/$defs/count" }
+    },
+    "freshnessCountMap": {
+      "type": "object",
+      "propertyNames": { "enum": ["current", "aging", "stale_allowed", "stale_blocked", "source_changed", "superseded", "unknown"] },
+      "additionalProperties": { "$ref": "#/$defs/count" }
+    },
+    "rightsCountMap": {
+      "type": "object",
+      "propertyNames": { "enum": ["approved", "attribution_required", "transformation_restricted", "inspection_only", "review_required", "withdrawn"] },
+      "additionalProperties": { "$ref": "#/$defs/count" }
+    },
+    "gate": {
+      "enum": [
+        "pass",
+        "fail",
+        "not_run"
+      ]
+    }
+  }
+}

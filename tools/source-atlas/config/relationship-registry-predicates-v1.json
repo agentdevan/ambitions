@@ -1,0 +1,235 @@
+{
+  "schemaVersion": "relationship-registry-predicates-v1",
+  "kind": "relationshipRegistryPredicates",
+  "version": "1.0.0",
+  "unknownPredicatePolicy": "reject",
+  "productInferenceDefaults": {
+    "chain": "forbidden",
+    "transitive": "forbidden",
+    "inverse": "stored_edge_only",
+    "symmetric": "stored_edge_only",
+    "claimPropagation": "forbidden"
+  },
+  "predicates": [
+    {
+      "predicateId": "cip:unchanged",
+      "vocabularyVersion": "1.0.0",
+      "family": "scheme_version_migration",
+      "sourceCode": "unchanged",
+      "sourceMeaning": "The publisher retained the concept without a version action.",
+      "productExplanation": "The same source concept continues in the named edition.",
+      "sourceSymmetric": false,
+      "sourceTransitive": false,
+      "inversePredicateId": null
+    },
+    {
+      "predicateId": "cip:textChanged",
+      "vocabularyVersion": "1.0.0",
+      "family": "scheme_version_migration",
+      "sourceCode": "text changed",
+      "sourceMeaning": "The publisher changed concept text between editions.",
+      "productExplanation": "The source text changed and meaning must not be assumed unchanged.",
+      "sourceSymmetric": false,
+      "sourceTransitive": false,
+      "inversePredicateId": null
+    },
+    {
+      "predicateId": "cip:new",
+      "vocabularyVersion": "1.0.0",
+      "family": "scheme_version_migration",
+      "sourceCode": "new",
+      "sourceMeaning": "The publisher introduced the concept in the target edition.",
+      "productExplanation": "The concept has no source-declared predecessor.",
+      "sourceSymmetric": false,
+      "sourceTransitive": false,
+      "inversePredicateId": null
+    },
+    {
+      "predicateId": "cip:deleted",
+      "vocabularyVersion": "1.0.0",
+      "family": "scheme_version_migration",
+      "sourceCode": "deleted",
+      "sourceMeaning": "The publisher removed the concept in the target edition.",
+      "productExplanation": "The concept cannot silently retarget to another identifier.",
+      "sourceSymmetric": false,
+      "sourceTransitive": false,
+      "inversePredicateId": null
+    },
+    {
+      "predicateId": "cip:movedFrom",
+      "vocabularyVersion": "1.0.0",
+      "family": "scheme_version_migration",
+      "sourceCode": "moved from",
+      "sourceMeaning": "The publisher moved content from the named prior concept.",
+      "productExplanation": "This is a directional source migration action.",
+      "sourceSymmetric": false,
+      "sourceTransitive": false,
+      "inversePredicateId": "cip:movedTo"
+    },
+    {
+      "predicateId": "cip:movedTo",
+      "vocabularyVersion": "1.0.0",
+      "family": "scheme_version_migration",
+      "sourceCode": "moved to",
+      "sourceMeaning": "The publisher moved content to the named target concept.",
+      "productExplanation": "This is a directional source migration action.",
+      "sourceSymmetric": false,
+      "sourceTransitive": false,
+      "inversePredicateId": "cip:movedFrom"
+    },
+    {
+      "predicateId": "cip:reportUnder",
+      "vocabularyVersion": "1.0.0",
+      "family": "scheme_version_migration",
+      "sourceCode": "report under",
+      "sourceMeaning": "The publisher directs reporting under another concept.",
+      "productExplanation": "This action is not generic concept equivalence.",
+      "sourceSymmetric": false,
+      "sourceTransitive": false,
+      "inversePredicateId": null
+    },
+    {
+      "predicateId": "cip:split",
+      "vocabularyVersion": "1.0.0",
+      "family": "scheme_version_migration",
+      "sourceCode": "split",
+      "sourceMeaning": "One source concept was split into multiple target concepts.",
+      "productExplanation": "Migration is ambiguous and requires review.",
+      "sourceSymmetric": false,
+      "sourceTransitive": false,
+      "inversePredicateId": "cip:merge"
+    },
+    {
+      "predicateId": "cip:merge",
+      "vocabularyVersion": "1.0.0",
+      "family": "scheme_version_migration",
+      "sourceCode": "merge",
+      "sourceMeaning": "Multiple source concepts were merged into one target concept.",
+      "productExplanation": "Migration is many-to-one and not generic equivalence.",
+      "sourceSymmetric": false,
+      "sourceTransitive": false,
+      "inversePredicateId": "cip:split"
+    },
+    {
+      "predicateId": "skos:exactMatch",
+      "vocabularyVersion": "1.0.0",
+      "family": "official_cross_scheme_mapping",
+      "sourceCode": "http://www.w3.org/2004/02/skos/core#exactMatch",
+      "sourceMeaning": "The source publishes a SKOS exact mapping.",
+      "productExplanation": "Ambitions preserves the source predicate but derives no chained product edge.",
+      "sourceSymmetric": true,
+      "sourceTransitive": true,
+      "inversePredicateId": "skos:exactMatch"
+    },
+    {
+      "predicateId": "skos:closeMatch",
+      "vocabularyVersion": "1.0.0",
+      "family": "official_cross_scheme_mapping",
+      "sourceCode": "http://www.w3.org/2004/02/skos/core#closeMatch",
+      "sourceMeaning": "The source publishes a SKOS close mapping.",
+      "productExplanation": "The concepts are close only for an explicitly eligible purpose.",
+      "sourceSymmetric": true,
+      "sourceTransitive": false,
+      "inversePredicateId": "skos:closeMatch"
+    },
+    {
+      "predicateId": "skos:broadMatch",
+      "vocabularyVersion": "1.0.0",
+      "family": "official_cross_scheme_mapping",
+      "sourceCode": "http://www.w3.org/2004/02/skos/core#broadMatch",
+      "sourceMeaning": "The object is broader under the source mapping.",
+      "productExplanation": "This directional mapping cannot be reversed without a stored edge.",
+      "sourceSymmetric": false,
+      "sourceTransitive": false,
+      "inversePredicateId": "skos:narrowMatch"
+    },
+    {
+      "predicateId": "skos:narrowMatch",
+      "vocabularyVersion": "1.0.0",
+      "family": "official_cross_scheme_mapping",
+      "sourceCode": "http://www.w3.org/2004/02/skos/core#narrowMatch",
+      "sourceMeaning": "The object is narrower under the source mapping.",
+      "productExplanation": "This directional mapping cannot be reversed without a stored edge.",
+      "sourceSymmetric": false,
+      "sourceTransitive": false,
+      "inversePredicateId": "skos:broadMatch"
+    },
+    {
+      "predicateId": "skos:relatedMatch",
+      "vocabularyVersion": "1.0.0",
+      "family": "official_cross_scheme_mapping",
+      "sourceCode": "http://www.w3.org/2004/02/skos/core#relatedMatch",
+      "sourceMeaning": "The source publishes an associative SKOS mapping.",
+      "productExplanation": "Association does not transfer claims or imply equivalence.",
+      "sourceSymmetric": true,
+      "sourceTransitive": false,
+      "inversePredicateId": "skos:relatedMatch"
+    },
+    {
+      "predicateId": "ambitions:educationOccupationRelevance",
+      "vocabularyVersion": "1.0.0",
+      "family": "official_cross_scheme_mapping",
+      "sourceCode": "source-declared CIP-SOC relationship",
+      "sourceMeaning": "The publisher relates education codes to occupation codes.",
+      "productExplanation": "The many-to-many relevance is not a degree or qualification requirement.",
+      "sourceSymmetric": false,
+      "sourceTransitive": false,
+      "inversePredicateId": null
+    },
+    {
+      "predicateId": "ambitions:sourceTaxonomyRelationship",
+      "vocabularyVersion": "1.0.0",
+      "family": "official_cross_scheme_mapping",
+      "sourceCode": "source-declared O*NET-SOC relationship",
+      "sourceMeaning": "The publisher relates exact O*NET-SOC and SOC releases.",
+      "productExplanation": "The relation permits no sibling inheritance or current-job claim.",
+      "sourceSymmetric": false,
+      "sourceTransitive": false,
+      "inversePredicateId": null
+    },
+    {
+      "predicateId": "ctdl:alignment",
+      "vocabularyVersion": "1.0.0",
+      "family": "publisher_authored_alignment",
+      "sourceCode": "publisher-declared CTDL alignment",
+      "sourceMeaning": "A publisher asserts an alignment to a CTDL concept.",
+      "productExplanation": "The publisher claim is not independent verification or mastery.",
+      "sourceSymmetric": false,
+      "sourceTransitive": false,
+      "inversePredicateId": null
+    },
+    {
+      "predicateId": "case:association",
+      "vocabularyVersion": "1.0.0",
+      "family": "publisher_authored_alignment",
+      "sourceCode": "publisher-declared CASE association",
+      "sourceMeaning": "A publisher asserts an association to a CASE framework node.",
+      "productExplanation": "The publisher claim does not establish credit or acceptance.",
+      "sourceSymmetric": false,
+      "sourceTransitive": false,
+      "inversePredicateId": null
+    },
+    {
+      "predicateId": "ambitions:preparation",
+      "vocabularyVersion": "1.0.0",
+      "family": "current_authority_reference",
+      "sourceCode": "source-specific preparation",
+      "sourceMeaning": "A current authority publishes a preparation relationship.",
+      "productExplanation": "The relationship is inspectable only within the source's exact authority scope.",
+      "sourceSymmetric": false,
+      "sourceTransitive": false,
+      "inversePredicateId": null
+    },
+    {
+      "predicateId": "ambitions:candidateRelationship",
+      "vocabularyVersion": "1.0.0",
+      "family": "unapproved_candidate",
+      "sourceCode": "method-generated candidate",
+      "sourceMeaning": "A method proposes a relationship for review.",
+      "productExplanation": "The candidate is not a consumer fact or source authority.",
+      "sourceSymmetric": false,
+      "sourceTransitive": false,
+      "inversePredicateId": null
+    }
+  ]
+}

@@ -1,7 +1,7 @@
 {
   "authority_state": "shadow",
   "blueprint_id": "AMB-UX-BLUEPRINT-REBASELINE-001",
-  "canon_content_sha": "8893a948efd392a86f2503236c1a543229d06b83cddc2635ce9da4f5d98ef654",
+  "canon_content_sha": "6a978c1a910e70b758dbafd4c9172ab7d039385ff67c7488568ee5b6ce26e4b8",
   "canon_revision": 2,
   "claim_ceiling": "Visual design input only; no source, runtime, rendered-app, accessibility, device, privacy/legal, distribution, or release claim.",
   "cross_cutting": [
@@ -9340,6 +9340,78 @@
       "rationale": "Public-reference delivery, semantic review, freshness, rights, and conflict states are source-bound domain semantics. This requirement is nonvisual in the blueprint and maps no visual record.",
       "requirement_id": "SYSTEM-SOURCE-ATLAS-PUBLIC-CLAIM-STATE-002",
       "requirement_text_sha256": "f8049811aa33805ed3583bc48fccc8c94490dbe68fb6f6c019409aa9d6b4ba8d",
+      "source_path": "docs/canon/specifications/systems/source-atlas.md",
+      "state_blueprint_ids": []
+    },
+    {
+      "blueprint_ids": ["UX-SCREEN-TRUST-DEEP"],
+      "disposition": "visual_mapping_required",
+      "rationale": "Relationship inspection must expose exact endpoints, mapping authority, predicate, direction, evidence, purpose limits, rights, conflicts, and non-claims through accessible progressive disclosure. Visual mapping records: UX-SCREEN-TRUST-DEEP.",
+      "requirement_id": "SPEC-GLOBAL-TRUST-RELATIONSHIP-INSPECTION-001",
+      "requirement_text_sha256": "75b09407c7f6db4bd2eec5e8df5969224b8a4fbb60d96c6a3fe78d015e36f4dc",
+      "source_path": "docs/canon/specifications/global/trust-inspection.md",
+      "state_blueprint_ids": []
+    },
+    {
+      "blueprint_ids": [],
+      "disposition": "nonvisual_with_rationale",
+      "rationale": "Source-native relationship endpoint identity, metadata, rights, and review separation are domain semantics. This requirement is nonvisual in the blueprint and maps no visual record.",
+      "requirement_id": "OBJ-SOURCE-REFERENCE-RELATIONSHIP-ENDPOINT-001",
+      "requirement_text_sha256": "a02af7af8c821768ef9416490739390b50c006a1b2b67e68b0c3249657d81128",
+      "source_path": "docs/canon/specifications/objects/source-reference.md",
+      "state_blueprint_ids": []
+    },
+    {
+      "blueprint_ids": [],
+      "disposition": "nonvisual_with_rationale",
+      "rationale": "Public-only relationship acquisition, query, diagnostic, and dependency boundaries are privacy infrastructure. This requirement is nonvisual in the blueprint and maps no visual record.",
+      "requirement_id": "SYSTEM-PRIVACY-RELATIONSHIP-REGISTRY-001",
+      "requirement_text_sha256": "9e0b0ca8e5ab1a4f61074333187f25d1bb2afa27f417c6787445ea8fa28cb2a4",
+      "source_path": "docs/canon/specifications/systems/privacy-and-data-classification.md",
+      "state_blueprint_ids": []
+    },
+    {
+      "blueprint_ids": [],
+      "disposition": "nonvisual_with_rationale",
+      "rationale": "Exact mapping-set releases, endpoint bindings, predicates, metadata, rights, and separate review state are registry domain semantics. This requirement is nonvisual in the blueprint and maps no visual record.",
+      "requirement_id": "SYSTEM-RELATIONSHIP-REGISTRY-RELEASE-001",
+      "requirement_text_sha256": "15ee6e05c3b2870973b92dbf04eb68ecc9af78c776514e301fb76d08a89b4513",
+      "source_path": "docs/canon/specifications/systems/relationship-registry.md",
+      "state_blueprint_ids": []
+    },
+    {
+      "blueprint_ids": [],
+      "disposition": "nonvisual_with_rationale",
+      "rationale": "Purpose eligibility, forbidden propagation, and the no-inference law constrain registry behavior independently of presentation. This requirement is nonvisual in the blueprint and maps no visual record.",
+      "requirement_id": "SYSTEM-RELATIONSHIP-REGISTRY-PURPOSE-001",
+      "requirement_text_sha256": "2d53a43c2a4a24aee11f6fbd68746505caa1595263524047cecea58764583882",
+      "source_path": "docs/canon/specifications/systems/relationship-registry.md",
+      "state_blueprint_ids": []
+    },
+    {
+      "blueprint_ids": [],
+      "disposition": "nonvisual_with_rationale",
+      "rationale": "Rights, freshness, promotion, rollback, offline, reset, and purge are registry lifecycle semantics. This requirement is nonvisual in the blueprint and maps no visual record.",
+      "requirement_id": "SYSTEM-RELATIONSHIP-REGISTRY-LIFECYCLE-001",
+      "requirement_text_sha256": "2958011096f2e49702fb19ecf854a824d0bbbc2ccf1ae6a3aaec19a2be3e99c8",
+      "source_path": "docs/canon/specifications/systems/relationship-registry.md",
+      "state_blueprint_ids": []
+    },
+    {
+      "blueprint_ids": [],
+      "disposition": "nonvisual_with_rationale",
+      "rationale": "Exact snapshots, typed read-only consumers, dependency invalidation, and coverage are registry boundary semantics. This requirement is nonvisual in the blueprint and maps no visual record.",
+      "requirement_id": "SYSTEM-RELATIONSHIP-REGISTRY-CONSUMER-001",
+      "requirement_text_sha256": "f00bee9a4b79d5c1bc02b76c0d01ea197ee96cb6f532fc2f61f1d8fabe764d17",
+      "source_path": "docs/canon/specifications/systems/relationship-registry.md",
+      "state_blueprint_ids": []
+    },
+    {
+      "blueprint_ids": [],
+      "disposition": "nonvisual_with_rationale",
+      "rationale": "Fixed public acquisition, verification, quarantine, last-known-good, reset, and purge are Source Atlas delivery semantics. This requirement is nonvisual in the blueprint and maps no visual record.",
+      "requirement_id": "SYSTEM-SOURCE-ATLAS-RELATIONSHIP-DELIVERY-001",
+      "requirement_text_sha256": "24610a55817003dbce9753784aadec2619e00c241f0389a11c76e70d20980fd0",
       "source_path": "docs/canon/specifications/systems/source-atlas.md",
       "state_blueprint_ids": []
     }

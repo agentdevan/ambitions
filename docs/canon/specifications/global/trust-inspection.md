@@ -4,7 +4,7 @@ title = "Trust Inspection"
 kind = "global"
 status = "normative"
 owner_domain = "global-trust-inspection"
-canon_revision = 1
+canon_revision = 2
 profile = "surface-v1"
 owns_concepts = [
   "global.completed.contextual-placement",
@@ -13,6 +13,7 @@ owns_concepts = [
   "global.trust.identity",
   "global.trust.layers",
   "global.trust.proportional-receipts",
+  "global.trust.relationship-inspection",
   "global.trust.visual-authority",
 ]
 inherits = [
@@ -1425,6 +1426,27 @@ Source details SHOULD remain inspection-level, not prominent on every recommenda
 Ambitions SHOULD NOT show when a path used external/reference knowledge by default.
 
 Source Atlas SHOULD be invisible by default.
+
+## SPEC-GLOBAL-TRUST-RELATIONSHIP-INSPECTION-001 — Relationship limits remain inspectable
+
+- **Concept:** `global.trust.relationship-inspection`
+- **Modality:** `MUST`
+- **Scope:** Contextual inspection of public cross-taxonomy relationships and their use
+- **Status:** `normative`
+- **Verification:** `SCENARIO-TRUST-RELATIONSHIP-INSPECTION-001`
+- **Supersedes:** none
+
+When a public relationship matters to an explanation or downstream result,
+Trust MUST provide accessible progressive disclosure of both endpoint schemes,
+concepts, and releases; mapping set and publisher; relationship family, exact
+predicate, direction, and plain meaning; method, justification, evidence, QA,
+review, and source-published confidence; eligible purpose and forbidden
+propagation; conflicts, freshness, rights, coverage, dependencies, and explicit
+non-claims. Offline inspection retains actual age and unavailable state. Labels,
+color, confidence, or an aggregate score MUST NOT imply equivalence,
+qualification, acceptance, recommendation, or authority beyond the stored edge.
+The inspection is a read-only projection and cannot approve a candidate, mutate
+an owning object, or issue an external action.
 
 ## SPEC-GLOBAL-TRUST-PROPORTIONAL-RECEIPTS-001 — Receipt disclosure matches consequence
 - **Concept:** `global.trust.proportional-receipts`
