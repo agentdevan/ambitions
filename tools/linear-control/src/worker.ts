@@ -10,6 +10,7 @@ declare global {
     LINEAR_API_TOKEN: string;
     LINEAR_WEBHOOK_SECRET: string;
     GITHUB_WEBHOOK_SECRET: string;
+    GITHUB_API_TOKEN: string;
     CONTROL_ADMIN_SECRET: string;
   }
 }
@@ -101,6 +102,7 @@ async function currentGithubMainCommit(
     {
       headers: {
         Accept: "application/vnd.github+json",
+        Authorization: `Bearer ${env.GITHUB_API_TOKEN}`,
         "User-Agent": "ambitions-linear-control",
         "X-GitHub-Api-Version": "2022-11-28",
       },
