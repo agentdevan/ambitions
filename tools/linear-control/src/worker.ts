@@ -787,7 +787,7 @@ export function durableMutationCallbacks(
   | "onMutationIntent"
   | "onMutationResult"
   | "onMutationCheckpoint"
-> {
+> & { flushCheckpoints: () => Promise<void> } {
   if (
     repairLimit !== Number.POSITIVE_INFINITY &&
     (!Number.isSafeInteger(repairLimit) || repairLimit < 0)
@@ -795,6 +795,10 @@ export function durableMutationCallbacks(
     throw new Error("INVALID_REPAIR_BUDGET");
   let claimedMutations = 0;
   const activeAttemptIds = new Map<string, string>();
+  const pendingCheckpoints = new Map<
+    string,
+    { desiredHash: string; evidenceJson: string }
+  >();
   const beforeMutation = async (): Promise<void> => {
     await Promise.resolve();
     if (claimedMutations >= repairLimit)
@@ -880,27 +884,38 @@ export function durableMutationCallbacks(
       checkpoint.resultHash !== checkpoint.desiredHash
     )
       return;
-    const now = new Date().toISOString();
     const reconciliationKey = await durableMutationReconciliationKey(
       authorityCommit,
       checkpoint,
     );
-    await env.CONTROL_DB.prepare(
-      "UPDATE mutation_receipts SET result_hash = desired_hash, status = 'verified', verified_at = ?, error = NULL, evidence_json = ? WHERE reconciliation_key = ? AND status = 'pending' AND desired_hash = ?",
-    )
-      .bind(
-        now,
-        stableJson({ reconciled: true }),
-        reconciliationKey,
-        checkpoint.desiredHash,
-      )
-      .run();
+    pendingCheckpoints.set(reconciliationKey, {
+      desiredHash: checkpoint.desiredHash,
+      evidenceJson: stableJson({ reconciled: true }),
+    });
+  };
+  const flushCheckpoints = async (): Promise<void> => {
+    if (pendingCheckpoints.size === 0) return;
+    const now = new Date().toISOString();
+    const statements = [...pendingCheckpoints.entries()].map(
+      ([reconciliationKey, checkpoint]) =>
+        env.CONTROL_DB.prepare(
+          "UPDATE mutation_receipts SET result_hash = desired_hash, status = 'verified', verified_at = ?, error = NULL, evidence_json = ? WHERE reconciliation_key = ? AND status = 'pending' AND desired_hash = ?",
+        ).bind(
+          now,
+          checkpoint.evidenceJson,
+          reconciliationKey,
+          checkpoint.desiredHash,
+        ),
+    );
+    await executeD1Batches(env.CONTROL_DB, statements);
+    pendingCheckpoints.clear();
   };
   return {
     beforeMutation,
     onMutationIntent,
     onMutationResult,
     onMutationCheckpoint,
+    flushCheckpoints,
   };
 }
 
@@ -1133,7 +1148,7 @@ async function processEvent(
     )
       .bind(runId, event.deliveryId, commit, desiredHash, started)
       .run();
-    const mutationCallbacks = durableMutationCallbacks(
+    const { flushCheckpoints, ...mutationCallbacks } = durableMutationCallbacks(
       env,
       runId,
       commit,
@@ -1177,6 +1192,7 @@ async function processEvent(
       }))
     )
       throw new Error("RUNTIME_AUTHORITY_SUPERSEDED");
+    await flushCheckpoints();
     const completed = new Date().toISOString();
     await Promise.all(
       audit.proofReceipts.map((receipt) =>
