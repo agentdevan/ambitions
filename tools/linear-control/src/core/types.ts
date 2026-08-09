@@ -165,6 +165,7 @@ export interface EventEnvelope {
   deliveryId: string;
   source: "linear" | "github" | "scheduled" | "manual";
   authorityCommit?: string;
+  authorityPinnedAt?: string;
   receivedAt: string;
   payload: unknown;
 }
