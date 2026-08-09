@@ -361,6 +361,7 @@ export async function auditLiveWorkspace(
   }`);
   const issues: LiveIssue[] = [];
   let after: string | null = null;
+  const seenIssueCursors = new Set<string>();
   do {
     const issueData: {
       issues: {
@@ -369,7 +370,7 @@ export async function auditLiveWorkspace(
       };
     } = await client.request(
       `query($after: String) {
-        issues(first: 100, after: $after) {
+        issues(first: 25, after: $after) {
           nodes {
             id identifier title description state { id name type }
             project { name }
@@ -384,9 +385,16 @@ export async function auditLiveWorkspace(
       { after },
     );
     issues.push(...issueData.issues.nodes);
-    after = issueData.issues.pageInfo.hasNextPage
-      ? (issueData.issues.pageInfo.endCursor ?? null)
-      : null;
+    if (!issueData.issues.pageInfo.hasNextPage) {
+      after = null;
+      continue;
+    }
+    const nextCursor = issueData.issues.pageInfo.endCursor;
+    if (!nextCursor) throw new Error("LINEAR_ISSUE_PAGE_CURSOR_MISSING");
+    if (seenIssueCursors.has(nextCursor))
+      throw new Error("LINEAR_ISSUE_PAGE_CURSOR_REPEATED");
+    seenIssueCursors.add(nextCursor);
+    after = nextCursor;
   } while (after);
 
   const exceptions: ControlException[] = [];
