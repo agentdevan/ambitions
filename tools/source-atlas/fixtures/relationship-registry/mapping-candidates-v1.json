@@ -1,0 +1,134 @@
+{
+  "schemaVersion": "relationship-registry-mapping-candidates-fixture-v1",
+  "kind": "relationshipRegistryMappingCandidatesFixture",
+  "fixtureClass": "synthetic_contract",
+  "authority": {
+    "mappingSetId": "ambitions.mapping-candidates.synthetic",
+    "mappingSetRevision": "1.0.0",
+    "releaseId": "ambitions.mapping-candidates.synthetic-v1",
+    "subjectSchemeId": "synthetic-source-taxonomy",
+    "subjectSchemeVersion": "fixture-1.0.0",
+    "objectSchemeId": "synthetic-target-taxonomy",
+    "objectSchemeVersion": "fixture-1.0.0",
+    "rightsId": "ambitions.synthetic.relationship-rights",
+    "rightsVersion": "1.0.0",
+    "rightsState": "inspection_only"
+  },
+  "rows": [
+    {
+      "sourceRow": "candidate-wikidata-001",
+      "candidateId": "candidate.wikidata.001",
+      "candidateKind": "wikidata",
+      "sourceState": "candidate",
+      "reviewState": "restricted",
+      "reviewDecision": "pending_review",
+      "proposedPredicateId": "skos:closeMatch",
+      "direction": "subject_to_object",
+      "subjectConcept": {
+        "conceptId": "synthetic-source-001",
+        "label": "Synthetic source concept one",
+        "locator": null
+      },
+      "objectConcept": {
+        "conceptId": "synthetic-target-001",
+        "label": "Synthetic target concept one",
+        "locator": null
+      },
+      "mappingJustification": "Synthetic public Wikidata statement proposed for review.",
+      "evidence": [
+        "synthetic:wikidata:statement:001"
+      ],
+      "confidence": 1.0,
+      "similarity": null,
+      "method": {
+        "methodClass": "community_submitted",
+        "tool": "synthetic-wikidata-export",
+        "toolVersion": "fixture-2026-08-01",
+        "model": null,
+        "configHash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "seed": null
+      },
+      "sourceSpecificFields": [
+        {
+          "name": "wikidataProperty",
+          "value": "synthetic-property"
+        }
+      ]
+    },
+    {
+      "sourceRow": "candidate-lexical-001",
+      "candidateId": "candidate.lexical.001",
+      "candidateKind": "lexical",
+      "sourceState": "candidate",
+      "reviewState": "restricted",
+      "reviewDecision": "pending_review",
+      "proposedPredicateId": "skos:exactMatch",
+      "direction": "subject_to_object",
+      "subjectConcept": {
+        "conceptId": "synthetic-source-002",
+        "label": "Synthetic shared label",
+        "locator": null
+      },
+      "objectConcept": {
+        "conceptId": "synthetic-target-002",
+        "label": "Synthetic shared label",
+        "locator": null
+      },
+      "mappingJustification": "Synthetic lexical overlap proposed for review.",
+      "evidence": [
+        "synthetic:lexical:token-overlap:001"
+      ],
+      "confidence": 0.99,
+      "similarity": 1.0,
+      "method": {
+        "methodClass": "lexical",
+        "tool": "synthetic-token-overlap",
+        "toolVersion": "1.0.0",
+        "model": null,
+        "configHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "seed": null
+      },
+      "sourceSpecificFields": []
+    },
+    {
+      "sourceRow": "candidate-model-001",
+      "candidateId": "candidate.model.001",
+      "candidateKind": "model",
+      "sourceState": "candidate",
+      "reviewState": "restricted",
+      "reviewDecision": "pending_review",
+      "proposedPredicateId": "skos:relatedMatch",
+      "direction": "subject_to_object",
+      "subjectConcept": {
+        "conceptId": "synthetic-source-003",
+        "label": "Synthetic source concept three",
+        "locator": null
+      },
+      "objectConcept": {
+        "conceptId": "synthetic-target-003",
+        "label": "Synthetic target concept three",
+        "locator": null
+      },
+      "mappingJustification": "Synthetic model score proposed for review.",
+      "evidence": [
+        "synthetic:model:evaluation-case:001"
+      ],
+      "confidence": 1.0,
+      "similarity": 1.0,
+      "method": {
+        "methodClass": "model_generated",
+        "tool": "synthetic-embedding-review-tool",
+        "toolVersion": "1.0.0",
+        "model": "synthetic-embedding-model-v1",
+        "configHash": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+        "seed": 7
+      },
+      "sourceSpecificFields": [
+        {
+          "name": "evaluationPartition",
+          "value": "synthetic-holdout"
+        }
+      ]
+    }
+  ]
+}
