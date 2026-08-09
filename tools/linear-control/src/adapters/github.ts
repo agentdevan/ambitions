@@ -26,7 +26,11 @@ interface GitHubCompareEvidence {
 }
 
 export interface GitHubTreeEvidence {
-  paths: readonly string[];
+  blobs: readonly {
+    path: string;
+    oid: string;
+    byteLength: number;
+  }[];
 }
 
 type Fetcher = typeof fetch;
@@ -122,16 +126,32 @@ export class GitHubEvidenceClient {
   ): Promise<GitHubTreeEvidence> {
     const data = await this.request<{
       truncated: boolean;
-      tree: Array<{ path: string; type: string }>;
+      tree: Array<{
+        path: string;
+        type: string;
+        sha?: string;
+        size?: number;
+      }>;
     }>(
       `/repos/${encodeURIComponent(repository).replace("%2F", "/")}/git/trees/${encodeURIComponent(authorityCommit)}?recursive=1`,
     );
     if (data.truncated) throw new Error("GITHUB_TREE_TRUNCATED");
+    const blobEntries = data.tree.filter((entry) => entry.type === "blob");
+    for (const entry of blobEntries)
+      if (
+        !/^[0-9a-f]{40}$/.test(entry.sha ?? "") ||
+        !Number.isSafeInteger(entry.size) ||
+        (entry.size ?? -1) < 0
+      )
+        throw new Error(`GITHUB_TREE_BLOB_INVALID:${entry.path}`);
     return {
-      paths: data.tree
-        .filter((entry) => entry.type === "blob")
-        .map((entry) => entry.path)
-        .sort(),
+      blobs: blobEntries
+        .map((entry) => ({
+          path: entry.path,
+          oid: entry.sha!,
+          byteLength: entry.size!,
+        }))
+        .sort((left, right) => left.path.localeCompare(right.path)),
     };
   }
 }

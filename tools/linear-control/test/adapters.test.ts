@@ -45,6 +45,8 @@ describe("provider adapters", () => {
             {
               path: "docs/product-development/example/research.md",
               type: "blob",
+              sha: "1".repeat(40),
+              size: 123,
             },
             { path: "docs/product-development/example", type: "tree" },
           ],
@@ -76,9 +78,48 @@ describe("provider adapters", () => {
     await expect(
       client.repositoryTree("agentdevan/ambitions", "current-main"),
     ).resolves.toEqual({
-      paths: ["docs/product-development/example/research.md"],
+      blobs: [
+        {
+          path: "docs/product-development/example/research.md",
+          oid: "1".repeat(40),
+          byteLength: 123,
+        },
+      ],
     });
     expect(fetcher).toHaveBeenCalledTimes(4);
+  });
+
+  it.each([
+    {
+      name: "malformed oid",
+      entry: { path: "docs/a.md", type: "blob", sha: "bad", size: 1 },
+    },
+    {
+      name: "malformed size",
+      entry: {
+        path: "docs/a.md",
+        type: "blob",
+        sha: "1".repeat(40),
+        size: -1,
+      },
+    },
+  ])("fails closed on a GitHub tree blob with $name", async ({ entry }) => {
+    const fetcher = vi.fn<typeof fetch>().mockResolvedValue(
+      Response.json({
+        truncated: false,
+        tree: [entry],
+      }),
+    );
+    const client = new GitHubEvidenceClient(
+      "token",
+      "https://example.test",
+      fetcher,
+    );
+
+    await expect(
+      client.repositoryTree("agentdevan/ambitions", "current-main"),
+    ).rejects.toThrow("GITHUB_TREE_BLOB_INVALID:docs/a.md");
+    expect(fetcher).toHaveBeenCalledOnce();
   });
 
   it("retries a transient Linear response without exposing the token", async () => {

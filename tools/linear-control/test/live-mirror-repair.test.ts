@@ -1,3 +1,4 @@
+import { createHash } from "node:crypto";
 import { describe, expect, it, vi } from "vitest";
 import type { LinearClient } from "../src/adapters/linear.js";
 import {
@@ -377,6 +378,10 @@ async function fixture(): Promise<{
       status: "approved",
       sha256: await sha256Text(content),
       byteLength: content.length,
+      gitBlobOid: createHash("sha1")
+        .update(`blob ${Buffer.byteLength(content)}\0`)
+        .update(content)
+        .digest("hex"),
     })),
   );
   const task: TaskContract = {
@@ -480,7 +485,14 @@ function runtimeOptions(
       if (content === undefined) throw new Error(`SOURCE_MISSING:${path}`);
       return content;
     },
-    runtimeLifecyclePaths: [...sourceByPath.keys()],
+    runtimeLifecycleTree: [...sourceByPath].map(([path, content]) => ({
+      path,
+      oid: createHash("sha1")
+        .update(`blob ${Buffer.byteLength(content)}\0`)
+        .update(content)
+        .digest("hex"),
+      byteLength: Buffer.byteLength(content),
+    })),
     ...overrides,
   };
 }
@@ -513,6 +525,40 @@ describe("live authority mirror repair", () => {
     expect(resolveTaskProof).not.toHaveBeenCalled();
     expect(client.projectSummary).toBe("stale summary");
     expect(client.issueState).toBe("Ready For Codex");
+  });
+
+  it("detects a same-length runtime byte change through Git blob identity", async () => {
+    const { client, desired, sourceByPath } = await fixture();
+    desired.compileProvenanceCommit = "old-compile-commit";
+    desired.authorityCommit = "new-runtime-commit";
+    const changedRuntimeSources = new Map(sourceByPath);
+    changedRuntimeSources.set(
+      "docs/product-development/example/research.md",
+      "Research body\n",
+    );
+    expect(
+      Buffer.byteLength(
+        changedRuntimeSources.get(
+          "docs/product-development/example/research.md",
+        )!,
+      ),
+    ).toBe(
+      Buffer.byteLength(
+        sourceByPath.get("docs/product-development/example/research.md")!,
+      ),
+    );
+
+    await expect(
+      auditLiveWorkspace(
+        client as unknown as LinearClient,
+        desired,
+        true,
+        runtimeOptions(changedRuntimeSources),
+      ),
+    ).rejects.toThrow(
+      "RUNTIME_DOCUMENT_CONTRACT_MISMATCH:project:example:docs/product-development/example/research.md",
+    );
+    expect(client.projectQueries).toEqual([]);
   });
 
   it("aborts before Linear when a pending unscheduled Project source changed after compilation", async () => {
@@ -576,9 +622,13 @@ describe("live authority mirror repair", () => {
     desired.compileProvenanceCommit = "old-compile-commit";
     desired.authorityCommit = "new-runtime-commit";
     const resolveTaskProof = vi.fn();
-    const runtimeLifecyclePaths = [
-      ...sourceByPath.keys(),
-      "docs/product-development/new-current-initiative/research.md",
+    const runtimeLifecycleTree = [
+      ...runtimeOptions(sourceByPath).runtimeLifecycleTree!,
+      {
+        path: "docs/product-development/new-current-initiative/research.md",
+        oid: "1".repeat(40),
+        byteLength: 1,
+      },
     ];
 
     await expect(
@@ -587,7 +637,7 @@ describe("live authority mirror repair", () => {
         desired,
         true,
         runtimeOptions(sourceByPath, {
-          runtimeLifecyclePaths,
+          runtimeLifecycleTree,
           resolveTaskProof,
         }),
       ),
@@ -596,6 +646,98 @@ describe("live authority mirror repair", () => {
     expect(client.projectQueries).toEqual([]);
     expect(client.issueQueries).toEqual([]);
     expect(resolveTaskProof).not.toHaveBeenCalled();
+  });
+
+  it("aborts before Linear when a manifest lifecycle path is missing from the event tree", async () => {
+    const { client, desired, sourceByPath } = await fixture();
+    desired.compileProvenanceCommit = "old-compile-commit";
+    desired.authorityCommit = "new-runtime-commit";
+    const options = runtimeOptions(sourceByPath);
+    options.runtimeLifecycleTree = options.runtimeLifecycleTree!.filter(
+      (entry) => !entry.path.endsWith("implementation/verification.md"),
+    );
+
+    await expect(
+      auditLiveWorkspace(
+        client as unknown as LinearClient,
+        desired,
+        true,
+        options,
+      ),
+    ).rejects.toThrow("RUNTIME_LIFECYCLE_INVENTORY_MISMATCH");
+    expect(client.projectQueries).toEqual([]);
+  });
+
+  it("aborts before Linear when the event tree repeats a lifecycle path", async () => {
+    const { client, desired, sourceByPath } = await fixture();
+    desired.compileProvenanceCommit = "old-compile-commit";
+    desired.authorityCommit = "new-runtime-commit";
+    const options = runtimeOptions(sourceByPath);
+    options.runtimeLifecycleTree = [
+      ...options.runtimeLifecycleTree!,
+      { ...options.runtimeLifecycleTree![0]! },
+    ];
+
+    await expect(
+      auditLiveWorkspace(
+        client as unknown as LinearClient,
+        desired,
+        true,
+        options,
+      ),
+    ).rejects.toThrow("RUNTIME_LIFECYCLE_INVENTORY_DUPLICATE_PATH");
+    expect(client.projectQueries).toEqual([]);
+  });
+
+  it.each([
+    {
+      name: "bad blob oid",
+      mutate: (entry: { oid: string; byteLength: number }) => {
+        entry.oid = "f".repeat(40);
+      },
+    },
+    {
+      name: "bad byte length",
+      mutate: (entry: { oid: string; byteLength: number }) => {
+        entry.byteLength += 1;
+      },
+    },
+  ])("fails closed before Linear on $name", async ({ mutate }) => {
+    const { client, desired, sourceByPath } = await fixture();
+    desired.compileProvenanceCommit = "old-compile-commit";
+    desired.authorityCommit = "new-runtime-commit";
+    const options = runtimeOptions(sourceByPath);
+    const entry = options.runtimeLifecycleTree![0]!;
+    mutate(entry);
+
+    await expect(
+      auditLiveWorkspace(
+        client as unknown as LinearClient,
+        desired,
+        true,
+        options,
+      ),
+    ).rejects.toThrow("RUNTIME_DOCUMENT_CONTRACT_MISMATCH");
+    expect(client.projectQueries).toEqual([]);
+    expect(client.issueQueries).toEqual([]);
+  });
+
+  it("uses tree evidence for all-project preflight without raw source subrequests", async () => {
+    const { client, desired, sourceByPath } = await fixture();
+    desired.compileProvenanceCommit = "old-compile-commit";
+    desired.authorityCommit = "new-runtime-commit";
+    const loadRepositoryText = vi.fn(() =>
+      Promise.reject(new Error("RAW_SOURCE_MUST_NOT_BE_USED_FOR_PREFLIGHT")),
+    );
+
+    await auditLiveWorkspace(
+      client as unknown as LinearClient,
+      desired,
+      false,
+      runtimeOptions(sourceByPath, { loadRepositoryText }),
+    );
+
+    expect(loadRepositoryText).not.toHaveBeenCalled();
   });
 
   it("keeps the nested Project audit query below Linear's complexity ceiling", async () => {

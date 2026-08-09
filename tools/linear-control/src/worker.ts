@@ -864,9 +864,9 @@ async function processEvent(
   const commit = manifest.authorityCommit;
   const desiredHash = manifest.contractHash;
   const github = new GitHubEvidenceClient(env.GITHUB_API_TOKEN);
-  const runtimeLifecyclePaths = (
+  const runtimeLifecycleTree = (
     await github.repositoryTree(env.GITHUB_REPOSITORY, commit)
-  ).paths;
+  ).blobs;
   let taskProofResolverPromise: Promise<TaskProofResolver> | undefined;
   const resolveTaskProof: TaskProofResolver = async (input) => {
     taskProofResolverPromise ??= taskProofResolverForEvent(env, commit);
@@ -886,7 +886,7 @@ async function processEvent(
       loadRepositoryText: async (path) => {
         return fetchRepositoryText(env, commit, path);
       },
-      runtimeLifecyclePaths,
+      runtimeLifecycleTree,
       verifyRuntimeAuthority: async () => authorityIsCurrent(env, event),
       resolveTaskProof,
       ...mutationCallbacks,

@@ -4,6 +4,7 @@ import type {
   DesiredWorkspaceManifest,
   IssueState,
   ProjectContract,
+  RepositoryBlobEvidence,
   ScheduleGroup,
   TaskProofEvidence,
   TaskContract,
@@ -136,7 +137,7 @@ export interface LiveObjectMapping {
 
 export interface LiveAuditOptions {
   loadRepositoryText?: (path: string) => Promise<string>;
-  runtimeLifecyclePaths?: readonly string[];
+  runtimeLifecycleTree?: readonly RepositoryBlobEvidence[];
   verifyRuntimeAuthority?: () => Promise<boolean>;
   resolveTaskProof?: (input: {
     issueIdentifier: string;
@@ -388,25 +389,32 @@ async function mirrorSourcesFromCurrentContent(
   return sources;
 }
 
-async function preflightRuntimeDocumentContracts(
+function preflightRuntimeDocumentContracts(
   allProjects: readonly ProjectContract[],
-  loadRepositoryText: LiveAuditOptions["loadRepositoryText"],
-  runtimeLifecyclePaths: LiveAuditOptions["runtimeLifecyclePaths"],
+  runtimeLifecycleTree: LiveAuditOptions["runtimeLifecycleTree"],
   inventoryRequired: boolean,
-): Promise<void> {
+): void {
   const lifecyclePath =
     /^docs\/product-development\/[^/]+\/(?:research\.md|scope\.md|design\.md|implementation\/(?:plan|tasks|verification)\.md)$/;
-  if (inventoryRequired && !runtimeLifecyclePaths)
+  if (inventoryRequired && !runtimeLifecycleTree)
     throw new Error("RUNTIME_LIFECYCLE_INVENTORY_REQUIRED");
-  if (runtimeLifecyclePaths) {
+  if (runtimeLifecycleTree) {
     const expectedPaths = new Set(
       allProjects.flatMap((project) =>
         project.documents.map((contract) => contract.path),
       ),
     );
     const actualPaths = new Set(
-      runtimeLifecyclePaths.filter((path) => lifecyclePath.test(path)),
+      runtimeLifecycleTree
+        .map((entry) => entry.path)
+        .filter((path) => lifecyclePath.test(path)),
     );
+    if (
+      actualPaths.size !==
+      runtimeLifecycleTree.filter((entry) => lifecyclePath.test(entry.path))
+        .length
+    )
+      throw new Error("RUNTIME_LIFECYCLE_INVENTORY_DUPLICATE_PATH");
     const missing = [...expectedPaths].filter((path) => !actualPaths.has(path));
     const extra = [...actualPaths].filter((path) => !expectedPaths.has(path));
     const expectedFolders = new Set(
@@ -430,41 +438,30 @@ async function preflightRuntimeDocumentContracts(
       throw new Error(
         `RUNTIME_LIFECYCLE_INVENTORY_MISMATCH:missing=${missing.sort().join(",") || "none"}:extra=${extra.sort().join(",") || "none"}:missingFolders=${missingFolders.sort().join(",") || "none"}:extraFolders=${extraFolders.sort().join(",") || "none"}`,
       );
-  }
-
-  const contracts = allProjects.flatMap((project) =>
-    project.documents.map((contract) => ({ project, contract })),
-  );
-  if (contracts.length === 0) return;
-  if (!loadRepositoryText)
-    throw new Error("RUNTIME_DOCUMENT_CONTRACT_LOADER_REQUIRED");
-
-  let next = 0;
-  const validate = async (): Promise<void> => {
-    while (next < contracts.length) {
-      const entry = contracts[next++]!;
-      let source: string;
-      try {
-        source = await loadRepositoryText(entry.contract.path);
-      } catch {
-        throw new Error(
-          `RUNTIME_DOCUMENT_CONTRACT_MISSING:${entry.project.canonicalKey}:${entry.contract.path}`,
-        );
+    const actualByPath = new Map(
+      runtimeLifecycleTree.map((entry) => [entry.path, entry]),
+    );
+    for (const project of allProjects) {
+      for (const contract of project.documents) {
+        const actual = actualByPath.get(contract.path);
+        if (!actual)
+          throw new Error(
+            `RUNTIME_DOCUMENT_CONTRACT_MISSING:${project.canonicalKey}:${contract.path}`,
+          );
+        if (
+          !/^[0-9a-f]{40}$/.test(contract.gitBlobOid) ||
+          !/^[0-9a-f]{40}$/.test(actual.oid) ||
+          !Number.isSafeInteger(actual.byteLength) ||
+          actual.byteLength < 0 ||
+          actual.oid !== contract.gitBlobOid ||
+          actual.byteLength !== contract.byteLength
+        )
+          throw new Error(
+            `RUNTIME_DOCUMENT_CONTRACT_MISMATCH:${project.canonicalKey}:${contract.path}`,
+          );
       }
-      const sourceHash = await sha256Text(source);
-      const byteLength = new TextEncoder().encode(source).byteLength;
-      if (
-        sourceHash !== entry.contract.sha256 ||
-        byteLength !== entry.contract.byteLength
-      )
-        throw new Error(
-          `RUNTIME_DOCUMENT_CONTRACT_MISMATCH:${entry.project.canonicalKey}:${entry.contract.path}`,
-        );
     }
-  };
-  await Promise.all(
-    Array.from({ length: Math.min(6, contracts.length) }, () => validate()),
-  );
+  }
 }
 
 export async function auditLiveWorkspace(
@@ -480,10 +477,9 @@ export async function auditLiveWorkspace(
         group.projectSlugs.includes(project.slug),
       ),
   );
-  await preflightRuntimeDocumentContracts(
+  preflightRuntimeDocumentContracts(
     desired.projects,
-    options.loadRepositoryText,
-    options.runtimeLifecyclePaths,
+    options.runtimeLifecycleTree,
     desired.compileProvenanceCommit !== undefined,
   );
   const assertMutationAuthority = async (): Promise<void> => {

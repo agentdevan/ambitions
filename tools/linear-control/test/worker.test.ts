@@ -1014,6 +1014,36 @@ describe("Worker ingress", () => {
     ).rejects.toThrow("REPOSITORY_SOURCE_TIMEOUT");
   });
 
+  it("preserves a raw repository quota error instead of reporting a missing document", async () => {
+    const { env } = environment();
+    const fetcher = vi
+      .fn<typeof fetch>()
+      .mockResolvedValue(new Response(null, { status: 429 }));
+
+    await expect(
+      fetchRepositoryText(
+        env,
+        "8".repeat(40),
+        "docs/product-development/example/research.md",
+        fetcher,
+        {
+          policy: { ...requestTestPolicy, attempts: 1 },
+        },
+      ),
+    ).rejects.toThrow("REPOSITORY_SOURCE_HTTP_429");
+    await expect(
+      fetchRepositoryText(
+        env,
+        "8".repeat(40),
+        "docs/product-development/example/research.md",
+        fetcher,
+        {
+          policy: { ...requestTestPolicy, attempts: 1 },
+        },
+      ),
+    ).rejects.not.toThrow("RUNTIME_DOCUMENT_CONTRACT_MISSING");
+  });
+
   it("replay preserves the original authority pin through persistence and consumption", async () => {
     const { env, queueSend, statement } = environment();
     const authorityCommit = "a".repeat(40);

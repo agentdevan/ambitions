@@ -1,3 +1,4 @@
+import { createHash } from "node:crypto";
 import { mkdtemp, mkdir, readFile, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
@@ -50,6 +51,53 @@ async function repository(task: string, visualGate: string): Promise<string> {
 }
 
 describe("frontend contract compilation", () => {
+  it("matches the exact current verification document identity fixture", async () => {
+    const manifest = await compileRepository(
+      join(process.cwd(), "../.."),
+      "199889e24a1f7aac39493d5a2b74be8da611bd47",
+    );
+    const contract = manifest.projects
+      .find(
+        (project) => project.slug === "cross-taxonomy-relationship-authority",
+      )
+      ?.documents.find((document) => document.kind === "verification");
+
+    expect(contract).toMatchObject({
+      gitBlobOid: "1896ae5793486b7ef47ad01f71e8272d2a6e877f",
+      byteLength: 5866,
+      sha256:
+        "4cec51ecd1c24df65205c0d434324a77d8fb0b7f5e4351b8f7b458ab1903b919",
+    });
+  });
+
+  it("records Git blob identity and preserves SHA-256 content authority", async () => {
+    const root = await repository(
+      "1. Build service. Dependency: none. Frontend: none.",
+      "not-required",
+    );
+    const path = join(
+      root,
+      "docs/product-development/example/implementation/verification.md",
+    );
+    const bytes = await readFile(path);
+    const expectedOid = createHash("sha1")
+      .update(`blob ${bytes.byteLength}\0`)
+      .update(bytes)
+      .digest("hex");
+    const expectedSha256 = createHash("sha256").update(bytes).digest("hex");
+
+    const manifest = await compileRepository(root, "authority");
+    const contract = manifest.projects[0]!.documents.find(
+      (document) => document.kind === "verification",
+    );
+
+    expect(contract).toMatchObject({
+      gitBlobOid: expectedOid,
+      byteLength: bytes.byteLength,
+      sha256: expectedSha256,
+    });
+  });
+
   it("identifies the first frontend task and blocks required visual approval", async () => {
     const root = await repository(
       "1. Build view. Dependency: none. Frontend: affected — REQ-001. Visual gate: required.",
