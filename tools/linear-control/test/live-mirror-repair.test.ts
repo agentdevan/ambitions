@@ -172,7 +172,7 @@ class RepairingLinearClient {
       } as T;
     }
     if (query.includes("issues(")) this.issueQueries.push(query);
-    if (query.includes("issues(first: 25")) {
+    if (query.includes("issues(") && query.includes("first: 25")) {
       const after = (variables.after as string | null | undefined) ?? null;
       this.issuePageCursors.push(after);
       if (this.splitIssueAcrossPages && after === null) {
@@ -398,6 +398,23 @@ describe("live authority mirror repair", () => {
     );
   });
 
+  it("identifies the exact stale Project mirror fields in read-only audits", async () => {
+    const { client, desired } = await fixture();
+
+    const result = await auditLiveWorkspace(
+      client as unknown as LinearClient,
+      desired,
+      false,
+    );
+
+    const projectException = result.exceptions.find(
+      (item) => item.canonicalKey === "project:example",
+    );
+    expect(projectException?.summary).toMatch(
+      /^Lifecycle Project mirror is stale: summary, description\(.+\), status\(Building -> Grooming\)$/,
+    );
+  });
+
   it("collects lifecycle Projects across every bounded Project page", async () => {
     const { client, desired } = await fixture();
     client.splitProjectAcrossPages = true;
@@ -435,7 +452,10 @@ describe("live authority mirror repair", () => {
     await auditLiveWorkspace(client as unknown as LinearClient, desired, false);
 
     expect(client.issueQueries).toHaveLength(1);
-    expect(client.issueQueries[0]).toContain("issues(first: 25");
+    expect(client.issueQueries[0]).toMatch(/issues\(\s*first:\s*25/);
+    expect(client.issueQueries[0]).toMatch(
+      /filter:\s*\{\s*project:\s*\{\s*name:\s*\{\s*startsWith:\s*"Lifecycle — "\s*\}\s*\}\s*\}/,
+    );
   });
 
   it("collects lifecycle Issues across every bounded Issue page", async () => {
@@ -518,6 +538,10 @@ describe("live authority mirror repair", () => {
     expect(client.projectDescription).not.toContain(
       "Repository authority: https://github.com/agentdevan/ambitions/tree/new-commit/docs/product-development/example",
     );
+    expect(client.projectDescription).toContain(
+      "* Repository commit: new-commit",
+    );
+    expect(client.projectDescription).not.toMatch(/^- /m);
     expect(client.projectStatus).toBe("Grooming");
     expect(
       client.milestoneDescriptions.get("M4 — Implementation Complete"),
