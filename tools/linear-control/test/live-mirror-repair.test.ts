@@ -9,6 +9,7 @@ import { sha256Text } from "../src/core/hash.js";
 import {
   auditLiveWorkspace,
   desiredProjectMirrorProgress,
+  RepairBudgetExhausted,
 } from "../src/core/live-audit.js";
 import type { LiveAuditOptions } from "../src/core/live-audit.js";
 import {
@@ -85,6 +86,7 @@ class RepairingLinearClient {
   issueLabelNames = ["work:test"];
   issueState: IssueState = "Ready For Codex";
   issueStateMutationCalls = 0;
+  freshIssueReadCalls = 0;
   freshStateOverrideOnce?: IssueState;
   attachmentUrls: string[] = [];
   attachmentHasNextPage = false;
@@ -332,6 +334,7 @@ class RepairingLinearClient {
       return { issueUpdate: { success: true } } as T;
     }
     if (query.includes("issue(id: $id)")) {
+      this.freshIssueReadCalls += 1;
       if (this.freshStateOverrideOnce) {
         this.issueState = this.freshStateOverrideOnce;
         delete this.freshStateOverrideOnce;
@@ -967,6 +970,7 @@ describe("live authority mirror repair", () => {
       client.milestoneDescriptions.get("M4 — Implementation Complete"),
     ).toContain("0 of 1 canonical Plan Tasks are terminal");
 
+    client.freshIssueReadCalls = 0;
     const idempotent = await auditLiveWorkspace(
       client as unknown as LinearClient,
       desired,
@@ -980,6 +984,47 @@ describe("live authority mirror repair", () => {
     );
     expect(idempotent.exceptions).toEqual([]);
     expect(idempotent.repairs).toBe(0);
+    expect(client.freshIssueReadCalls).toBe(0);
+  });
+
+  it("stops at the repair budget before another authority check or durable intent", async () => {
+    const { client, desired, sourceByPath } = await fixture();
+    desired.compileProvenanceCommit = "old-compile-commit";
+    for (const [title, content] of client.documentContents)
+      client.documentContents.set(
+        title,
+        content.replace(
+          "Repository commit: old-commit",
+          "Repository commit: new-commit",
+        ),
+      );
+    const authorityChecks = vi.fn().mockResolvedValue(true);
+    const persistedIntents: string[] = [];
+    let mutationClaims = 0;
+
+    await expect(
+      auditLiveWorkspace(
+        client as unknown as LinearClient,
+        desired,
+        true,
+        runtimeOptions(sourceByPath, {
+          beforeMutation: async () => {
+            await Promise.resolve();
+            if (mutationClaims >= 3) throw new RepairBudgetExhausted(3);
+            mutationClaims += 1;
+          },
+          verifyRuntimeAuthority: authorityChecks,
+          onMutationIntent: async (intent) => {
+            await Promise.resolve();
+            persistedIntents.push(intent.operation);
+          },
+        }),
+      ),
+    ).rejects.toBeInstanceOf(RepairBudgetExhausted);
+
+    expect(authorityChecks).toHaveBeenCalledTimes(3);
+    expect(persistedIntents).toHaveLength(3);
+    expect(mutationClaims).toBe(3);
   });
 
   it("recovers a pending receipt after a successful write and preserves it across a later audit failure", async () => {
@@ -1145,6 +1190,7 @@ describe("live authority mirror repair", () => {
     expect(client.projectSummary).toContain("0 verified on current main");
     expect(beforeProof.proofReceipts).toEqual([]);
 
+    client.freshIssueReadCalls = 0;
     const afterProof = await auditLiveWorkspace(
       client as unknown as LinearClient,
       desired,
@@ -1165,6 +1211,7 @@ describe("live authority mirror repair", () => {
     );
 
     expect(client.issueState).toBe("Done");
+    expect(client.freshIssueReadCalls).toBe(2);
     expect(client.projectSummary).toContain("1 verified on current main");
     expect(afterProof.proofReceipts).toHaveLength(1);
   });

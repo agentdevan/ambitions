@@ -111,6 +111,16 @@ export interface LiveMutationCheckpoint extends LiveMutationIntent {
   error?: string;
 }
 
+export class RepairBudgetExhausted extends Error {
+  readonly limit: number;
+
+  constructor(limit: number) {
+    super(`REPAIR_BUDGET_EXHAUSTED:${limit}`);
+    this.name = "RepairBudgetExhausted";
+    this.limit = limit;
+  }
+}
+
 interface SkippedMutationWrite {
   skipped: true;
   resultHash: string;
@@ -145,6 +155,7 @@ export interface LiveAuditOptions {
     authorityCommit: string;
     task: TaskContract;
   }) => Promise<TaskProofEvidence>;
+  beforeMutation?: (intent: LiveMutationIntent) => Promise<void>;
   onMutationIntent?: (intent: LiveMutationIntent) => Promise<void>;
   onMutationResult?: (result: LiveMutationCheckpoint) => Promise<void>;
   onMutationCheckpoint?: (checkpoint: LiveMutationCheckpoint) => Promise<void>;
@@ -615,6 +626,7 @@ export async function auditLiveWorkspace(
     write: () => Promise<unknown>,
     readResultHash: () => Promise<string>,
   ): Promise<LiveMutationCheckpoint> => {
+    await options.beforeMutation?.(intent);
     await assertMutationAuthority();
     await options.onMutationIntent?.(intent);
     let resultHash: string;
@@ -924,38 +936,7 @@ export async function auditLiveWorkspace(
         continue;
       }
 
-      const fresh = await readFreshIssueState(issue.id);
-      if (fresh.attachments.pageInfo.hasNextPage)
-        throw new Error(
-          `LINEAR_ATTACHMENT_PAGE_INCOMPLETE:${fresh.identifier}`,
-        );
-      if (preservedTerminalStates.has(fresh.state.name)) {
-        plannedStatesByKey.set(task.canonicalKey, fresh.state.name);
-        continue;
-      }
-      const dependencyBlocked =
-        task.dependencies.some((dependency) => {
-          const state = plannedStatesByKey.get(dependency);
-          return state === undefined || !terminalTaskStates.has(state);
-        }) ||
-        fresh.inverseRelations.nodes.some(
-          (relation) =>
-            relation.type === "blocks" &&
-            !terminalTaskStates.has(relation.issue.state.name),
-        );
-      const freshDesiredState = desiredLiveIssueState(
-        fresh.state.name,
-        dependencyBlocked,
-        project,
-        task,
-        proof,
-      );
-      plannedStatesByKey.set(task.canonicalKey, freshDesiredState);
-      if (
-        freshDesiredState === fresh.state.name ||
-        preservedTerminalStates.has(fresh.state.name)
-      )
-        continue;
+      const freshDesiredState = plannedState;
       const stateId = workflowStateIds.get(freshDesiredState);
       if (!stateId) {
         exceptions.push(
@@ -966,12 +947,8 @@ export async function auditLiveWorkspace(
         );
         continue;
       }
-      const beforeHash = await sha256Text(
-        stableJson({ state: fresh.state.name }),
-      );
-      const desiredHash = await sha256Text(
-        stableJson({ state: freshDesiredState }),
-      );
+      const beforeHash = snapshotBeforeHash;
+      const desiredHash = snapshotDesiredHash;
       let verified: LiveIssue | undefined;
       const result = await performMutation(
         {
@@ -1053,13 +1030,6 @@ export async function auditLiveWorkspace(
           ),
         );
     }
-    if (mutationsEnabled)
-      for (const task of project.tasks) {
-        const issue = issuesByKey.get(task.canonicalKey);
-        if (!issue) continue;
-        const fresh = await readFreshIssueState(issue.id);
-        plannedStatesByKey.set(task.canonicalKey, fresh.state.name);
-      }
     for (const task of project.tasks) {
       const issue = issuesByKey.get(task.canonicalKey);
       const proof = proofByKey.get(task.canonicalKey);

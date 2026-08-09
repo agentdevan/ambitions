@@ -9,11 +9,15 @@ import {
   type RetryPolicy,
   type RetryRuntime,
 } from "./adapters/http.js";
-import { auditLiveWorkspace } from "./core/live-audit.js";
+import {
+  auditLiveWorkspace,
+  RepairBudgetExhausted,
+} from "./core/live-audit.js";
 import type {
   LiveAuditOptions,
   LiveMutationCheckpoint,
   LiveMutationIntent,
+  LiveProofReceipt,
 } from "./core/live-audit.js";
 import type {
   DesiredWorkspaceManifest,
@@ -32,6 +36,10 @@ declare global {
 }
 
 const encoder = new TextEncoder();
+export const EVENT_REPAIR_BUDGET = 3;
+export const EXPECTED_PREFLIGHT_EXTERNAL_REQUESTS = 29;
+export const MAX_EXTERNAL_REQUESTS_PER_REPAIR = 4;
+const CONTINUATION_DELAY_SECONDS = 5;
 const exactCommitSha = /^[0-9a-f]{40}$/;
 const exactContentHash = /^[0-9a-f]{64}$/;
 type Fetcher = typeof fetch;
@@ -510,6 +518,7 @@ export async function taskProofResolverForEvent(
   env: Env,
   authorityCommit: string,
   fresh: TaskProofResolver = taskProofResolver(env, authorityCommit),
+  onFreshReceipt?: (receipt: LiveProofReceipt) => Promise<void>,
 ): Promise<TaskProofResolver> {
   const receipts = await verifiedTaskProofReceipts(env, authorityCommit);
   return async (input) => {
@@ -547,8 +556,86 @@ export async function taskProofResolverForEvent(
           mergeCommitSha: receipt.mergeCommitSha,
         };
     }
-    return fresh(input);
+    const evidence = await fresh(input);
+    const freshReceipt = await taskProofReceipt(
+      env.GITHUB_REPOSITORY,
+      authorityCommit,
+      input,
+      evidence,
+    );
+    if (freshReceipt) await onFreshReceipt?.(freshReceipt);
+    return evidence;
   };
+}
+
+async function taskProofReceipt(
+  repository: string,
+  authorityCommit: string,
+  input: TaskProofInput,
+  evidence: TaskProofEvidence,
+): Promise<LiveProofReceipt | null> {
+  const attachmentNumbers = input.attachmentUrls.flatMap((url) => {
+    const number = pullRequestNumber(repository, url);
+    return number === null ? [] : [number];
+  });
+  const evidenceNumber = evidence.pullRequestUrl
+    ? pullRequestNumber(repository, evidence.pullRequestUrl)
+    : null;
+  if (
+    evidence.source !== "github" ||
+    evidence.authorityCommit !== authorityCommit ||
+    !evidence.mergedToMain ||
+    !evidence.proofPassed ||
+    evidence.requiredProofFailed ||
+    evidence.issueIdentifier !== input.issueIdentifier ||
+    !evidence.pullRequestUrl ||
+    evidenceNumber === null ||
+    attachmentNumbers.length !== 1 ||
+    attachmentNumbers[0] !== evidenceNumber ||
+    !evidence.mergeCommitSha ||
+    !exactCommitSha.test(evidence.mergeCommitSha) ||
+    input.task.proof.validationCommands.length !== 0 ||
+    !input.task.proof.required.every((requirement) => requirement === "audit")
+  )
+    return null;
+  const evidenceJson = stableJson({
+    schemaVersion: 1,
+    authorityCommit,
+    canonicalKey: input.task.canonicalKey,
+    issueIdentifier: input.issueIdentifier,
+    pullRequestUrl: evidence.pullRequestUrl,
+    mergeCommitSha: evidence.mergeCommitSha,
+    proofContractHash: await sha256Text(stableJson(input.task.proof)),
+  });
+  return {
+    canonicalKey: input.task.canonicalKey,
+    evidenceHash: await sha256Text(evidenceJson),
+    evidenceJson,
+  };
+}
+
+async function persistTaskProofReceipt(
+  env: Env,
+  runId: string,
+  receipt: LiveProofReceipt,
+  verifiedAt = new Date().toISOString(),
+): Promise<void> {
+  await env.CONTROL_DB.prepare(
+    "INSERT OR REPLACE INTO mutation_receipts (id, run_id, canonical_key, operation, before_hash, desired_hash, result_hash, status, created_at, verified_at, error, evidence_json) VALUES (?, ?, ?, 'task-proof', NULL, ?, ?, 'verified', ?, ?, NULL, ?)",
+  )
+    .bind(
+      await sha256Text(
+        `${runId}\0${receipt.canonicalKey}\0task-proof\0${receipt.evidenceHash}`,
+      ),
+      runId,
+      receipt.canonicalKey,
+      receipt.evidenceHash,
+      receipt.evidenceHash,
+      verifiedAt,
+      verifiedAt,
+      receipt.evidenceJson,
+    )
+    .run();
 }
 
 export async function fetchRepositoryText(
@@ -596,11 +683,27 @@ export function durableMutationCallbacks(
   env: Env,
   runId: string,
   authorityCommit: string,
+  repairLimit = Number.POSITIVE_INFINITY,
 ): Pick<
   LiveAuditOptions,
-  "onMutationIntent" | "onMutationResult" | "onMutationCheckpoint"
+  | "beforeMutation"
+  | "onMutationIntent"
+  | "onMutationResult"
+  | "onMutationCheckpoint"
 > {
+  if (
+    repairLimit !== Number.POSITIVE_INFINITY &&
+    (!Number.isSafeInteger(repairLimit) || repairLimit < 0)
+  )
+    throw new Error("INVALID_REPAIR_BUDGET");
+  let claimedMutations = 0;
   const activeAttemptIds = new Map<string, string>();
+  const beforeMutation = async (): Promise<void> => {
+    await Promise.resolve();
+    if (claimedMutations >= repairLimit)
+      throw new RepairBudgetExhausted(repairLimit);
+    claimedMutations += 1;
+  };
   const onMutationIntent = async (
     intent: LiveMutationIntent,
   ): Promise<void> => {
@@ -696,7 +799,12 @@ export function durableMutationCallbacks(
       )
       .run();
   };
-  return { onMutationIntent, onMutationResult, onMutationCheckpoint };
+  return {
+    beforeMutation,
+    onMutationIntent,
+    onMutationResult,
+    onMutationCheckpoint,
+  };
 }
 
 function json(value: unknown, status = 200): Response {
@@ -833,6 +941,32 @@ async function enqueue(
   );
 }
 
+export async function continuePinnedEvent(
+  env: Env,
+  event: EventEnvelope,
+  runId: string,
+): Promise<void> {
+  const continuedAt = new Date().toISOString();
+  const receiptCount = await env.CONTROL_DB.prepare(
+    "SELECT COUNT(*) AS count FROM mutation_receipts WHERE run_id = ? AND operation <> 'task-proof' AND status = 'verified' AND COALESCE(json_extract(evidence_json, '$.skipped'), 0) = 0",
+  )
+    .bind(runId)
+    .first<{ count: number }>();
+  const verifiedRepairs = receiptCount?.count ?? 0;
+  await env.CONTROL_DB.batch([
+    env.CONTROL_DB.prepare(
+      "UPDATE runs SET status = 'continuing', mutation_count = ?, completed_at = ?, error = NULL WHERE id = ?",
+    ).bind(verifiedRepairs, continuedAt, runId),
+    env.CONTROL_DB.prepare(
+      "UPDATE deliveries SET status = 'continuing', updated_at = ?, last_error = NULL WHERE id = ?",
+    ).bind(continuedAt, event.deliveryId),
+  ]);
+  await env.CONTROL_QUEUE.send(event, {
+    contentType: "json",
+    delaySeconds: CONTINUATION_DELAY_SECONDS,
+  });
+}
+
 async function processEvent(
   env: Env,
   receivedEvent: EventEnvelope,
@@ -869,7 +1003,12 @@ async function processEvent(
   ).blobs;
   let taskProofResolverPromise: Promise<TaskProofResolver> | undefined;
   const resolveTaskProof: TaskProofResolver = async (input) => {
-    taskProofResolverPromise ??= taskProofResolverForEvent(env, commit);
+    taskProofResolverPromise ??= taskProofResolverForEvent(
+      env,
+      commit,
+      taskProofResolver(env, commit),
+      async (receipt) => persistTaskProofReceipt(env, runId, receipt),
+    );
     return (await taskProofResolverPromise)(input);
   };
   await env.CONTROL_DB.prepare(
@@ -877,43 +1016,43 @@ async function processEvent(
   )
     .bind(runId, event.deliveryId, commit, desiredHash, started)
     .run();
-  const mutationCallbacks = durableMutationCallbacks(env, runId, commit);
-  const audit = await auditLiveWorkspace(
-    new LinearClient(env.LINEAR_API_TOKEN, env.LINEAR_API_URL),
-    manifest,
-    env.MUTATIONS_ENABLED,
-    {
-      loadRepositoryText: async (path) => {
-        return fetchRepositoryText(env, commit, path);
-      },
-      runtimeLifecycleTree,
-      verifyRuntimeAuthority: async () => authorityIsCurrent(env, event),
-      resolveTaskProof,
-      ...mutationCallbacks,
-    },
+  const mutationCallbacks = durableMutationCallbacks(
+    env,
+    runId,
+    commit,
+    EVENT_REPAIR_BUDGET,
   );
+  let audit;
+  try {
+    audit = await auditLiveWorkspace(
+      new LinearClient(env.LINEAR_API_TOKEN, env.LINEAR_API_URL),
+      manifest,
+      env.MUTATIONS_ENABLED,
+      {
+        loadRepositoryText: async (path) => {
+          return fetchRepositoryText(env, commit, path);
+        },
+        runtimeLifecycleTree,
+        verifyRuntimeAuthority: async () => authorityIsCurrent(env, event),
+        resolveTaskProof,
+        ...mutationCallbacks,
+      },
+    );
+  } catch (error) {
+    if (error instanceof RepairBudgetExhausted) {
+      await continuePinnedEvent(env, event, runId);
+      return;
+    }
+    throw error;
+  }
   if (!(await authorityIsCurrent(env, event)))
     throw new Error("RUNTIME_AUTHORITY_SUPERSEDED");
   const completed = new Date().toISOString();
-  const proofReceiptStatements = await Promise.all(
-    audit.proofReceipts.map(async (receipt) =>
-      env.CONTROL_DB.prepare(
-        "INSERT OR REPLACE INTO mutation_receipts (id, run_id, canonical_key, operation, before_hash, desired_hash, result_hash, status, created_at, verified_at, error, evidence_json) VALUES (?, ?, ?, 'task-proof', NULL, ?, ?, 'verified', ?, ?, NULL, ?)",
-      ).bind(
-        await sha256Text(
-          `${runId}\0${receipt.canonicalKey}\0task-proof\0${receipt.evidenceHash}`,
-        ),
-        runId,
-        receipt.canonicalKey,
-        receipt.evidenceHash,
-        receipt.evidenceHash,
-        completed,
-        completed,
-        receipt.evidenceJson,
-      ),
+  await Promise.all(
+    audit.proofReceipts.map((receipt) =>
+      persistTaskProofReceipt(env, runId, receipt, completed),
     ),
   );
-  await executeD1Batches(env.CONTROL_DB, proofReceiptStatements);
   const mappingStatements = audit.mappings.map((mapping) =>
     env.CONTROL_DB.prepare(
       "INSERT INTO object_mappings (canonical_key, linear_id, object_type, authority_commit, desired_hash, verified_at) VALUES (?, ?, ?, ?, ?, ?) ON CONFLICT(canonical_key) DO UPDATE SET linear_id = excluded.linear_id, object_type = excluded.object_type, authority_commit = excluded.authority_commit, desired_hash = excluded.desired_hash, verified_at = excluded.verified_at",
@@ -971,7 +1110,7 @@ async function processEvent(
     ...(status === "converged"
       ? [
           env.CONTROL_DB.prepare(
-            "UPDATE deliveries SET status = 'superseded', updated_at = ?, last_error = 'Superseded by a later converged full audit' WHERE status IN ('queued', 'processing', 'retrying', 'drift') AND received_at < ? AND id <> ?",
+            "UPDATE deliveries SET status = 'superseded', updated_at = ?, last_error = 'Superseded by a later converged full audit' WHERE status IN ('queued', 'processing', 'continuing', 'retrying', 'drift') AND received_at < ? AND id <> ?",
           ).bind(completed, started, event.deliveryId),
         ]
       : []),
