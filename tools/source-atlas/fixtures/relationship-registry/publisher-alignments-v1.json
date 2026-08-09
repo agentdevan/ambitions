@@ -1,0 +1,93 @@
+{
+  "schemaVersion": "relationship-registry-publisher-alignments-fixture-v1",
+  "kind": "relationshipRegistryPublisherAlignmentsFixture",
+  "fixtureClass": "synthetic_contract",
+  "rows": [
+    {
+      "sourceRow": "publisher-ctdl-001",
+      "alignmentStandard": "ctdl",
+      "authority": {
+        "mappingSetId": "synthetic.publisher.ctdl-alignment",
+        "mappingSetRevision": "1.0.0",
+        "releaseId": "synthetic.publisher.ctdl-alignment-v1",
+        "subjectSchemeId": "synthetic-provider-catalog",
+        "subjectSchemeVersion": "fixture-1.0.0",
+        "objectSchemeId": "ctdl-framework",
+        "objectSchemeVersion": "fixture-1.0.0",
+        "rightsId": "ambitions.synthetic.relationship-rights",
+        "rightsVersion": "1.0.0",
+        "rightsState": "review_required"
+      },
+      "publisher": {
+        "publisherId": "synthetic.publisher.provider-alpha",
+        "publisherName": "Synthetic Provider Alpha"
+      },
+      "predicateId": "ctdl:alignment",
+      "sourceState": "publisher_claim",
+      "reviewState": "restricted",
+      "subjectConcept": {
+        "conceptId": "synthetic-learning-opportunity-001",
+        "label": "Synthetic learning opportunity",
+        "locator": null
+      },
+      "objectConcept": {
+        "conceptId": "synthetic-ctdl-node-001",
+        "label": "Synthetic CTDL framework node",
+        "locator": null
+      },
+      "sourceSpecificFields": [
+        {
+          "name": "alignmentType",
+          "value": "synthetic-target-node"
+        },
+        {
+          "name": "alignmentWeight",
+          "value": 0.75
+        }
+      ]
+    },
+    {
+      "sourceRow": "publisher-case-001",
+      "alignmentStandard": "case",
+      "authority": {
+        "mappingSetId": "synthetic.publisher.case-association",
+        "mappingSetRevision": "1.0.0",
+        "releaseId": "synthetic.publisher.case-association-v1",
+        "subjectSchemeId": "case-framework",
+        "subjectSchemeVersion": "fixture-1.1.0",
+        "objectSchemeId": "case-framework",
+        "objectSchemeVersion": "fixture-1.1.0",
+        "rightsId": "ambitions.synthetic.relationship-rights",
+        "rightsVersion": "1.0.0",
+        "rightsState": "review_required"
+      },
+      "publisher": {
+        "publisherId": "synthetic.publisher.framework-beta",
+        "publisherName": "Synthetic Framework Beta"
+      },
+      "predicateId": "case:association",
+      "sourceState": "publisher_claim",
+      "reviewState": "restricted",
+      "subjectConcept": {
+        "conceptId": "synthetic-case-item-001",
+        "label": "Synthetic CASE framework item",
+        "locator": null
+      },
+      "objectConcept": {
+        "conceptId": "synthetic-case-item-002",
+        "label": "Synthetic CASE associated item",
+        "locator": null
+      },
+      "sourceSpecificFields": [
+        {
+          "name": "associationType",
+          "value": "synthetic-is-child-of"
+        },
+        {
+          "name": "sequenceNumber",
+          "value": 1
+        }
+      ]
+    }
+  ]
+}
