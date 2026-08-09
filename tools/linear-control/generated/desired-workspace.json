@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "authorityCommit": "53ce972785a733b5fdba1133968bd11f39c7732a",
+  "authorityCommit": "199889e24a1f7aac39493d5a2b74be8da611bd47",
   "projects": [
     {
       "slug": "adaptive-local-learning-and-replanning",
@@ -14,7 +14,8 @@
           "revision": "1",
           "status": "approved",
           "sha256": "2c59220541388c19dde5946b40ea66d09deae58534cfc64380add53210e4edfc",
-          "byteLength": 13371
+          "byteLength": 13371,
+          "gitBlobOid": "560e532748831a8d8ddfd43cb5bf1ebcce0a9185"
         },
         {
           "kind": "scope",
@@ -22,7 +23,8 @@
           "revision": "1",
           "status": "approved",
           "sha256": "8b9323b802617db84b51e9b19a1c784cb963907da851f704d0d58b7d1fb365e2",
-          "byteLength": 9125
+          "byteLength": 9125,
+          "gitBlobOid": "c4125dccdad4a6ed245ed0480baa7bc0ec3cb317"
         },
         {
           "kind": "design",
@@ -30,7 +32,8 @@
           "revision": "1",
           "status": "approved",
           "sha256": "acf42761e928bc6db271ee83788e7491d57d68ca0ae25b256d1cdd7d63307c8f",
-          "byteLength": 9549
+          "byteLength": 9549,
+          "gitBlobOid": "6a1b1ac9465976ca13e04b9ac73d56d154554137"
         },
         {
           "kind": "plan",
@@ -38,7 +41,8 @@
           "revision": "1",
           "status": "groomed",
           "sha256": "c70c3540d33bfc6a7ed32e436d66cbb22de332d8ae1fc14da852afc93a28f713",
-          "byteLength": 4019
+          "byteLength": 4019,
+          "gitBlobOid": "53c240b5c967f69c4500c9bf3f21f049661edc70"
         },
         {
           "kind": "tasks",
@@ -46,7 +50,8 @@
           "revision": "1",
           "status": "groomed",
           "sha256": "ce87571c7cf779a99120ef55504db966baca71a8a2f32025e59a4aaeac10d8df",
-          "byteLength": 4694
+          "byteLength": 4694,
+          "gitBlobOid": "62bb3e30077b8e7c8e1eb87af00aa31b05d04565"
         },
         {
           "kind": "verification",
@@ -54,7 +59,8 @@
           "revision": "1",
           "status": "groomed",
           "sha256": "d14ed9bbbf0d816f9aed6789da545d3d7dc8f9640246b9b17f583213b75990dd",
-          "byteLength": 2895
+          "byteLength": 2895,
+          "gitBlobOid": "7a72426d49512603134543150d8b4585b1a11849"
         }
       ],
       "tasks": [
@@ -291,7 +297,8 @@
           "revision": "1",
           "status": "approved",
           "sha256": "66d005e985f895a0bca02985eb336aaa3fa1af93821afcbf716826ba4af1f16f",
-          "byteLength": 18549
+          "byteLength": 18549,
+          "gitBlobOid": "78bfc5571dd5dd4a2efe84763a47675fbf2f00d9"
         },
         {
           "kind": "scope",
@@ -299,7 +306,8 @@
           "revision": "1",
           "status": "approved",
           "sha256": "863dd3d8ba524011b93c1d9072a67b47bfe9ef3f1a11528f36514ef4d230680f",
-          "byteLength": 16250
+          "byteLength": 16250,
+          "gitBlobOid": "c267249e40f9f29cc8beb047e84d310479266071"
         },
         {
           "kind": "design",
@@ -307,7 +315,8 @@
           "revision": "1",
           "status": "approved",
           "sha256": "65164fb7b0a4e03788570c967762e68c6cc28257ec09a3da086c9057aac32dba",
-          "byteLength": 31115
+          "byteLength": 31115,
+          "gitBlobOid": "24de3db1defe806b2980e8e5e957f4e0be40f011"
         },
         {
           "kind": "plan",
@@ -315,7 +324,8 @@
           "revision": "1",
           "status": "groomed",
           "sha256": "1ffd49890b077eb93369ee588b30e607364ea833e016d5c821470c3d4f264227",
-          "byteLength": 2563
+          "byteLength": 2563,
+          "gitBlobOid": "6b8e99ad280adf148f24c3e331950214746d4597"
         },
         {
           "kind": "tasks",
@@ -323,7 +333,8 @@
           "revision": "1",
           "status": "groomed",
           "sha256": "07ae2ed989e8fd7dff92accdcc844f0f63adce52a3cede224369b2726011e5db",
-          "byteLength": 4022
+          "byteLength": 4022,
+          "gitBlobOid": "66fddaaad026b58213d39459f6ff90ae69542ff9"
         },
         {
           "kind": "verification",
@@ -331,7 +342,8 @@
           "revision": "1",
           "status": "groomed",
           "sha256": "9ce73a12a6ede7f9b6646c301c3dceb1ba1291cb0d875efeaf38544639aa7ca8",
-          "byteLength": 1839
+          "byteLength": 1839,
+          "gitBlobOid": "ae51e15bff65c7a667388bac578b2ac8cdd270e6"
         }
       ],
       "tasks": [
@@ -527,7 +539,8 @@
           "revision": "1",
           "status": "approved",
           "sha256": "dc4f76e36020e637a108c8f69be6f5fef5cfa30a0ade99fd8da2dfd1e6f5e600",
-          "byteLength": 55202
+          "byteLength": 55202,
+          "gitBlobOid": "202e24dedd706d094820049bf5c03205ec4321ec"
         },
         {
           "kind": "scope",
@@ -535,7 +548,8 @@
           "revision": "1",
           "status": "approved",
           "sha256": "0d9847e4e921d2414ecbe1998c5d98df5b0cd07b5d16db09d96601cf30a2df08",
-          "byteLength": 10356
+          "byteLength": 10356,
+          "gitBlobOid": "20ff44ec8ae09520a25ddaaec828e3fb67a996bf"
         },
         {
           "kind": "design",
@@ -543,7 +557,8 @@
           "revision": "1",
           "status": "approved",
           "sha256": "67690e9da6d02616742caf37e8c9258944828dd0b093dc32080d582e6d45df42",
-          "byteLength": 10545
+          "byteLength": 10545,
+          "gitBlobOid": "a4b46698aac60a07fbb44b77a5a561dcb271d112"
         },
         {
           "kind": "plan",
@@ -551,7 +566,8 @@
           "revision": "1",
           "status": "groomed",
           "sha256": "15c830b5af15d0c8f34236eb5d83c699ec1ae7919c450fbc73aeac0e46dc7385",
-          "byteLength": 3577
+          "byteLength": 3577,
+          "gitBlobOid": "dce573a5cc6072ea7625d4f662ae200f444ff318"
         },
         {
           "kind": "tasks",
@@ -559,7 +575,8 @@
           "revision": "1",
           "status": "groomed",
           "sha256": "6376fa9c3415d7e4e574372163ce0e5c810f194c3219bdff4d916e23e5729e4d",
-          "byteLength": 4609
+          "byteLength": 4609,
+          "gitBlobOid": "b6b9df598529f2bd2d95a272158e0ffbe694886f"
         },
         {
           "kind": "verification",
@@ -567,7 +584,8 @@
           "revision": "1",
           "status": "groomed",
           "sha256": "c04544b120367e3d0f06913c04191d1838dfa23acea038c913865b132a6e72f5",
-          "byteLength": 3024
+          "byteLength": 3024,
+          "gitBlobOid": "3d3abad166ffc38f3b9380d9f26eac9dd7ee29f6"
         }
       ],
       "tasks": [
@@ -769,7 +787,8 @@
           "revision": "1",
           "status": "approved",
           "sha256": "975e95573a25c1a14fc163d51271c769579de256a6ed816047e3c86ac8da0e98",
-          "byteLength": 11397
+          "byteLength": 11397,
+          "gitBlobOid": "3e7c6fa87f1acf8dba87b98b5776216990170e56"
         },
         {
           "kind": "scope",
@@ -777,7 +796,8 @@
           "revision": "1",
           "status": "approved",
           "sha256": "ae5320464e2b043bb8adb86e815ea6c741607180cd4ebc25d192734d7c0418f2",
-          "byteLength": 35347
+          "byteLength": 35347,
+          "gitBlobOid": "621ffb50736ec7ce306b613ac97582cd9eb2f903"
         },
         {
           "kind": "design",
@@ -785,7 +805,8 @@
           "revision": "1",
           "status": "approved",
           "sha256": "ab79263f09d8238558fd3d49ec68b3d8cc8faa09991e871cae61b24a60aab28f",
-          "byteLength": 25876
+          "byteLength": 25876,
+          "gitBlobOid": "390c98fac919d3c586e209676824a380c57d50f6"
         },
         {
           "kind": "plan",
@@ -793,7 +814,8 @@
           "revision": "1",
           "status": "groomed",
           "sha256": "782f0f8df32498bf7f50fa6019bb596c4f6b3f78bafbb7363c85904166a62f20",
-          "byteLength": 3499
+          "byteLength": 3499,
+          "gitBlobOid": "e76a92938f56430b1fd4ab67734000658ff3316c"
         },
         {
           "kind": "tasks",
@@ -801,7 +823,8 @@
           "revision": "1",
           "status": "groomed",
           "sha256": "5af64043df18ffe56589a7ccd18344ba55c37847cc8b6489a8242dec83435444",
-          "byteLength": 4829
+          "byteLength": 4829,
+          "gitBlobOid": "f9c57bd85b349db21a1764ca2cf825c53e07a204"
         },
         {
           "kind": "verification",
@@ -809,7 +832,8 @@
           "revision": "1",
           "status": "groomed",
           "sha256": "deb5823ed4768dcfe2d9f6662ee224ff1da0ffe2529406e9faade41f6db08038",
-          "byteLength": 2216
+          "byteLength": 2216,
+          "gitBlobOid": "20c389e325432c37f2699fb71bd6934b3045841e"
         }
       ],
       "tasks": [
@@ -1013,7 +1037,8 @@
           "revision": "1",
           "status": "approved",
           "sha256": "1b91f19b74b357c681d5230d14972a4b5c584697ce30dae4b4c0ab3ad7bbf1a6",
-          "byteLength": 11032
+          "byteLength": 11032,
+          "gitBlobOid": "6aa368b4c55eae91b783baf2f92738ca202a8d33"
         },
         {
           "kind": "scope",
@@ -1021,7 +1046,8 @@
           "revision": "1",
           "status": "approved",
           "sha256": "04c43ec2e673519a5af2dc38ce952b9684428cd74d0263a1cfd6abab5240e437",
-          "byteLength": 19148
+          "byteLength": 19148,
+          "gitBlobOid": "ff566254f35c74bf92f3179d0eaccf47e63515df"
         },
         {
           "kind": "design",
@@ -1029,7 +1055,8 @@
           "revision": "1",
           "status": "approved",
           "sha256": "122f274c932845ab7e53dcfd00bb64f35d1774706c5a52277677763be7c476cf",
-          "byteLength": 26406
+          "byteLength": 26406,
+          "gitBlobOid": "d8472f0351b67e5ba326c8669735970a7fd45c03"
         },
         {
           "kind": "plan",
@@ -1037,7 +1064,8 @@
           "revision": "1",
           "status": "groomed",
           "sha256": "d74beff41ad9fc0a5156a1c1ef4e6e6557f288a194df42659af7d7e9d60b4db9",
-          "byteLength": 2620
+          "byteLength": 2620,
+          "gitBlobOid": "88504078b60ead390dbead851c9d96fe4fe6e82b"
         },
         {
           "kind": "tasks",
@@ -1045,7 +1073,8 @@
           "revision": "1",
           "status": "groomed",
           "sha256": "a83f68b6d9694ac814c42b24e4e77c21c6919a062ed83620372e60df909c5cd6",
-          "byteLength": 4182
+          "byteLength": 4182,
+          "gitBlobOid": "0f5f8627cab62c6956a916b269a1e624995aa86a"
         },
         {
           "kind": "verification",
@@ -1053,7 +1082,8 @@
           "revision": "1",
           "status": "groomed",
           "sha256": "5d2067579bf02018d4699522d22f6926077b995ee924b59d9c867a986f4e0b7b",
-          "byteLength": 1970
+          "byteLength": 1970,
+          "gitBlobOid": "079323eeb82a0aea616f025b8d9d2e4f30b559f1"
         }
       ],
       "tasks": [
@@ -1253,7 +1283,8 @@
           "revision": "1",
           "status": "approved",
           "sha256": "a7e841710b5926fd32215a635587d6e1eaac7a718ed295d386e5761fb950e58c",
-          "byteLength": 24403
+          "byteLength": 24403,
+          "gitBlobOid": "1f400086d630c550e435b99ab6d39247b621d4f1"
         },
         {
           "kind": "scope",
@@ -1261,7 +1292,8 @@
           "revision": "1",
           "status": "approved",
           "sha256": "8d532bde6c75b2b8f6eab9b44553110b865abd99f894c51389dc51f69274921e",
-          "byteLength": 22428
+          "byteLength": 22428,
+          "gitBlobOid": "40b06ea5ed067cd897bdd1968f9def13c6e568ea"
         },
         {
           "kind": "design",
@@ -1269,7 +1301,8 @@
           "revision": "1",
           "status": "approved",
           "sha256": "5ea3b0db47b93b3a19fe1450865f8d6fe5939c24ea2e559111abc1626f675093",
-          "byteLength": 46492
+          "byteLength": 46492,
+          "gitBlobOid": "f55636054f3f5050407efb273c77b6927887f405"
         },
         {
           "kind": "plan",
@@ -1277,7 +1310,8 @@
           "revision": "1",
           "status": "groomed",
           "sha256": "313c50ab8f72d87fb8a85fb27abeb2e42d0c7382dcf90785790f17ac5c66ad7e",
-          "byteLength": 2754
+          "byteLength": 2754,
+          "gitBlobOid": "2abf89a5410d515521a864e3e4e851ae89452251"
         },
         {
           "kind": "tasks",
@@ -1285,7 +1319,8 @@
           "revision": "1",
           "status": "groomed",
           "sha256": "388999a720ed46a8cc88be0a453091a111d16e8f2afa242e26d34a3ac14b8959",
-          "byteLength": 4207
+          "byteLength": 4207,
+          "gitBlobOid": "c712478fd41e8937d7731987d9d200401c43058d"
         },
         {
           "kind": "verification",
@@ -1293,7 +1328,8 @@
           "revision": "1",
           "status": "groomed",
           "sha256": "b7ce261b5215d2f52bca1ac381c86f551a2db29b723e458214ae9c4be6812d91",
-          "byteLength": 2063
+          "byteLength": 2063,
+          "gitBlobOid": "fa92b4ea2b38dabbe3455daeae36b5c5046a9149"
         }
       ],
       "tasks": [
@@ -1489,7 +1525,8 @@
           "revision": "1",
           "status": "approved",
           "sha256": "6bcac6470cb0645b2b6c7791edf9bee320dc20d9db5c793c8e58223213046a76",
-          "byteLength": 8713
+          "byteLength": 8713,
+          "gitBlobOid": "d5a8b2a5044b66a9089fa13f0373b97f9d1eb800"
         },
         {
           "kind": "scope",
@@ -1497,7 +1534,8 @@
           "revision": "1",
           "status": "approved",
           "sha256": "df66653afde09dfed416005284c3cccf6db3198e0cf3e28c10ecbd9392ef89f4",
-          "byteLength": 16901
+          "byteLength": 16901,
+          "gitBlobOid": "9d1afd12346b99b5d00ede818c93813fe8a5155a"
         },
         {
           "kind": "design",
@@ -1505,7 +1543,8 @@
           "revision": "1",
           "status": "approved",
           "sha256": "c4776781201dee102912adc9c9f9d6c6afb7d655d0b45b159d52be1eda1e0cd4",
-          "byteLength": 32037
+          "byteLength": 32037,
+          "gitBlobOid": "7a74f99aa784544108c100d99f8e9582af323866"
         },
         {
           "kind": "plan",
@@ -1513,7 +1552,8 @@
           "revision": "1",
           "status": "groomed",
           "sha256": "1cb1ec6beddd410db4d6e380135c5529bb6656945fd7f830cfd55079a74794d4",
-          "byteLength": 2888
+          "byteLength": 2888,
+          "gitBlobOid": "1aa63b78e9ebd9bc87b5ffe923ddd6c1190e8b8a"
         },
         {
           "kind": "tasks",
@@ -1521,7 +1561,8 @@
           "revision": "1",
           "status": "groomed",
           "sha256": "4a4a5a4e9e8be58e13764d79c4b084aaf0fad677e2a76577ab754a8f6180b6ca",
-          "byteLength": 3971
+          "byteLength": 3971,
+          "gitBlobOid": "6ee9d8a848ca816bd5c0ed479d325b134e49d173"
         },
         {
           "kind": "verification",
@@ -1529,7 +1570,8 @@
           "revision": "1",
           "status": "groomed",
           "sha256": "42555582a6dffb2c8a19e5c76ffb1beb16acdf699aefad2ef3a3b82fa45257a2",
-          "byteLength": 2092
+          "byteLength": 2092,
+          "gitBlobOid": "aef358af1359c4c10cd023d0d264ed500eb315d9"
         }
       ],
       "tasks": [
@@ -1723,7 +1765,8 @@
           "revision": "1",
           "status": "approved",
           "sha256": "d24b94db24402444c7b165df0d0ee0492c16ef027a97d9172708a559336bca63",
-          "byteLength": 25338
+          "byteLength": 25338,
+          "gitBlobOid": "304f407117e6c8113c69a57890c5b9cb1a44c4fb"
         },
         {
           "kind": "scope",
@@ -1731,7 +1774,8 @@
           "revision": "1",
           "status": "approved",
           "sha256": "baa0ef6bbad47c237da36bd5894cce94fd3eb86c35e6cdc518a65043e2c1ea85",
-          "byteLength": 20506
+          "byteLength": 20506,
+          "gitBlobOid": "3b5eed33f4230516800765beefb9be79a53de17a"
         },
         {
           "kind": "design",
@@ -1739,7 +1783,8 @@
           "revision": "1",
           "status": "approved",
           "sha256": "4a19337491ea718e09d93c3e4c8a5db23b85e91499b0ba7d297db79d38d15450",
-          "byteLength": 27529
+          "byteLength": 27529,
+          "gitBlobOid": "4572d2eb3b311cad6d2acb720cf6c1b2e2f7a927"
         },
         {
           "kind": "plan",
@@ -1747,7 +1792,8 @@
           "revision": "1",
           "status": "groomed",
           "sha256": "ea873c01d629e0ab1b59d67624e0c153f9c8aa7303f89d59a8515e6b854e91a0",
-          "byteLength": 9072
+          "byteLength": 9072,
+          "gitBlobOid": "c357c40a01bf5b5e3da9d86322fbf8fea40f01f9"
         },
         {
           "kind": "tasks",
@@ -1755,7 +1801,8 @@
           "revision": "1",
           "status": "groomed",
           "sha256": "f42d87c86c6ee1d083073417f48f6b47bb3b3e5c5d10a357b1c11506b050d74e",
-          "byteLength": 6200
+          "byteLength": 6200,
+          "gitBlobOid": "163824511d5fc7479af8a16fa72a76b12110942d"
         },
         {
           "kind": "verification",
@@ -1763,7 +1810,8 @@
           "revision": "1",
           "status": "groomed",
           "sha256": "4cec51ecd1c24df65205c0d434324a77d8fb0b7f5e4351b8f7b458ab1903b919",
-          "byteLength": 5866
+          "byteLength": 5866,
+          "gitBlobOid": "1896ae5793486b7ef47ad01f71e8272d2a6e877f"
         }
       ],
       "tasks": [
@@ -2027,7 +2075,8 @@
           "revision": "1",
           "status": "approved",
           "sha256": "a5a5fdeaede53e1cf0ea52c8e41f5257f30c8e7667d78bf20a75d4331ae44402",
-          "byteLength": 13998
+          "byteLength": 13998,
+          "gitBlobOid": "1340907510489c4d32c9f141534fd9b023fafb68"
         },
         {
           "kind": "scope",
@@ -2035,7 +2084,8 @@
           "revision": "1",
           "status": "approved",
           "sha256": "49b19eb37c7c39e629625cf944371f75d5b128f67a28843718091c3e155f7c9d",
-          "byteLength": 11628
+          "byteLength": 11628,
+          "gitBlobOid": "1bbfd0ce85d5d9cd51e4b9a5410a429d99f8e877"
         },
         {
           "kind": "design",
@@ -2043,7 +2093,8 @@
           "revision": "1",
           "status": "approved",
           "sha256": "2e257679f6994bf4c0dbd770431bf6905c754df642b058922f3d625ea799a844",
-          "byteLength": 13916
+          "byteLength": 13916,
+          "gitBlobOid": "89d9ad72008f89adca21a8f35cef321ffe310874"
         },
         {
           "kind": "plan",
@@ -2051,7 +2102,8 @@
           "revision": "1",
           "status": "groomed",
           "sha256": "c4854095dddcff5a698d3eb7fdc08562bc479c653dc6afba5ea2d011e85d29a2",
-          "byteLength": 6371
+          "byteLength": 6371,
+          "gitBlobOid": "a9198e76c6a6532422f7e89991b6c7a80c672af2"
         },
         {
           "kind": "tasks",
@@ -2059,7 +2111,8 @@
           "revision": "1",
           "status": "groomed",
           "sha256": "8330ffab7b24cb195d213f462660b024e92be7cff6382c6c9d38df01f56e106d",
-          "byteLength": 4821
+          "byteLength": 4821,
+          "gitBlobOid": "0063009d9a2b49dc933b8ccfe9dd932192a6a34c"
         },
         {
           "kind": "verification",
@@ -2067,7 +2120,8 @@
           "revision": "1",
           "status": "groomed",
           "sha256": "554970066be930864743f5699390e824c7cc3029be7cdf3deb0e479d16e5d5bb",
-          "byteLength": 4938
+          "byteLength": 4938,
+          "gitBlobOid": "a8bcc35558ca782676cc9ceb0ef3144a14873859"
         }
       ],
       "tasks": [
@@ -2308,7 +2362,8 @@
           "revision": "1",
           "status": "approved",
           "sha256": "b23567912a28780da3288a85ebe628c7f2d8212df2e8d2667f87806da8c11555",
-          "byteLength": 18428
+          "byteLength": 18428,
+          "gitBlobOid": "3a4b5b92d14395c8bffc9a5131420d2c4ce1756e"
         },
         {
           "kind": "scope",
@@ -2316,7 +2371,8 @@
           "revision": "1",
           "status": "approved",
           "sha256": "31017ef139460dbd4f00c9811725c476f958bdd8de41d161b1601cc070c43d02",
-          "byteLength": 17043
+          "byteLength": 17043,
+          "gitBlobOid": "f87186bfc5b153eee0cf1ff59e50542dd6962a8d"
         },
         {
           "kind": "design",
@@ -2324,7 +2380,8 @@
           "revision": "1",
           "status": "approved",
           "sha256": "d7fb614d76b7ff1f93199e3c4c1620d706952311f2923162709a52c1e625718e",
-          "byteLength": 38988
+          "byteLength": 38988,
+          "gitBlobOid": "52c28e7eb2c8f8e0770ffffc4c8ad6db83f55559"
         },
         {
           "kind": "plan",
@@ -2332,7 +2389,8 @@
           "revision": "1",
           "status": "groomed",
           "sha256": "c0e1ea6726514fba28c8c18be29e298cd5abdee246c19eed4df4a503ac663034",
-          "byteLength": 3079
+          "byteLength": 3079,
+          "gitBlobOid": "52d1358083df617da60516e9642078986cc24795"
         },
         {
           "kind": "tasks",
@@ -2340,7 +2398,8 @@
           "revision": "1",
           "status": "groomed",
           "sha256": "e7a6ba707ff88da9109bd573b9d073dc346eba3fbdd328712507a6bfa7b5c893",
-          "byteLength": 4825
+          "byteLength": 4825,
+          "gitBlobOid": "780b11e0d708c67bf546958ac293b79da1dfa6f8"
         },
         {
           "kind": "verification",
@@ -2348,7 +2407,8 @@
           "revision": "1",
           "status": "groomed",
           "sha256": "3a53f613001baaf0acc8351745fbcb781e11e148d1815e9c2b0a6785590a137c",
-          "byteLength": 2117
+          "byteLength": 2117,
+          "gitBlobOid": "913622cbfccf2aa83eb835a56a2cb57b48ad5ce0"
         }
       ],
       "tasks": [
@@ -2570,7 +2630,8 @@
           "revision": "1",
           "status": "approved",
           "sha256": "01841d0677be6fe0b3fc250b58d2aa69b39c6a17889daa8c18a26ec96664d266",
-          "byteLength": 24978
+          "byteLength": 24978,
+          "gitBlobOid": "49b42d6529004bcc82fbccb7f18ffd5febc09b88"
         },
         {
           "kind": "scope",
@@ -2578,7 +2639,8 @@
           "revision": "1",
           "status": "approved",
           "sha256": "fbbe6c86206126adc8f3c327e5fd9061b02e4da9b6e0b9c4490a245c679ca758",
-          "byteLength": 27065
+          "byteLength": 27065,
+          "gitBlobOid": "acd456c856ae3710b70946940ecf3ffe1aabaafa"
         },
         {
           "kind": "design",
@@ -2586,7 +2648,8 @@
           "revision": "1",
           "status": "approved",
           "sha256": "a82ebcfea4aa1c9410201df9f0841af4807ae1fe37f2e8df498e8172d7a5bbb9",
-          "byteLength": 64591
+          "byteLength": 64591,
+          "gitBlobOid": "4fa7a8be6cc5a030587e23803cc5dce994da9295"
         },
         {
           "kind": "plan",
@@ -2594,7 +2657,8 @@
           "revision": "1",
           "status": "groomed",
           "sha256": "b6ea1cdf59f15df35ba5be4345ce3d20a71313af2bc7e7e7d29c94e60b9f3061",
-          "byteLength": 2617
+          "byteLength": 2617,
+          "gitBlobOid": "c2a24d0f0608865f967e4c12b93e611b69686570"
         },
         {
           "kind": "tasks",
@@ -2602,7 +2666,8 @@
           "revision": "1",
           "status": "groomed",
           "sha256": "29c7483f1a7c8f29d8228102aef49e260def1e1da1eb12fe6f30d1ccf7f564fe",
-          "byteLength": 4299
+          "byteLength": 4299,
+          "gitBlobOid": "72f6a99cc9b6e09441db71b9e598a742de9cadd6"
         },
         {
           "kind": "verification",
@@ -2610,7 +2675,8 @@
           "revision": "1",
           "status": "groomed",
           "sha256": "871dda5589efd848d3e6d2e98d49e81863ffb4f237d47bca059884968cc1d960",
-          "byteLength": 2123
+          "byteLength": 2123,
+          "gitBlobOid": "11723208d812fe372921210e91074dca894dc925"
         }
       ],
       "tasks": [
@@ -2806,7 +2872,8 @@
           "revision": "1",
           "status": "approved",
           "sha256": "e0734bd6ab05f338b564b301d06b967eda8c7797f6845b330b9d82262a14ab1f",
-          "byteLength": 12173
+          "byteLength": 12173,
+          "gitBlobOid": "4b0c64a1bce69764c805bc05049e2ed451406a0c"
         },
         {
           "kind": "scope",
@@ -2814,7 +2881,8 @@
           "revision": "1",
           "status": "approved",
           "sha256": "94c3ecce144552ec43d7457e3ba2ad6a7ee231d996d87eaefed5d1c4340b7a3a",
-          "byteLength": 9183
+          "byteLength": 9183,
+          "gitBlobOid": "88fa35307f6009503bcf556cdbbf27dc0a274c72"
         },
         {
           "kind": "design",
@@ -2822,7 +2890,8 @@
           "revision": "1",
           "status": "approved",
           "sha256": "2f10f9d664d327f75c4762ea91959c88354e32e5781f10e1baf8f3d610b89c5d",
-          "byteLength": 9042
+          "byteLength": 9042,
+          "gitBlobOid": "cf302652d75eecf442d7f90f6e092b24892d5ff5"
         },
         {
           "kind": "plan",
@@ -2830,7 +2899,8 @@
           "revision": "1",
           "status": "groomed",
           "sha256": "8210d4650d1f26ef6cc58cdd6f8334da9177c5032b0737c525d8a35c8893e57e",
-          "byteLength": 4224
+          "byteLength": 4224,
+          "gitBlobOid": "19c8e267fc554d2bea6919591de0cc8af71293ef"
         },
         {
           "kind": "tasks",
@@ -2838,7 +2908,8 @@
           "revision": "1",
           "status": "groomed",
           "sha256": "8ee18fb82f55b081804368b8b284ff11e69b10eeb7e73fae37ee08c97514cc0f",
-          "byteLength": 4867
+          "byteLength": 4867,
+          "gitBlobOid": "b2dcbf1253f5265b799d8b97f1ae09564be2d51b"
         },
         {
           "kind": "verification",
@@ -2846,7 +2917,8 @@
           "revision": "1",
           "status": "groomed",
           "sha256": "24506e22a4e9ad8c0f573027d9d5583fa2ee18dd8d6a23213c62712ff121c660",
-          "byteLength": 3094
+          "byteLength": 3094,
+          "gitBlobOid": "3b9c350800d52aa59c1d6c8fed4f3726cb88d807"
         }
       ],
       "tasks": [
@@ -3083,7 +3155,8 @@
           "revision": "1",
           "status": "approved",
           "sha256": "c8dec0ee290d3db1bebc845738cc038400ffae0d99c1a859a03f87866b3b462c",
-          "byteLength": 11556
+          "byteLength": 11556,
+          "gitBlobOid": "67b75c91927d1669197a6d8804e611e8efe00305"
         },
         {
           "kind": "scope",
@@ -3091,7 +3164,8 @@
           "revision": "1",
           "status": "approved",
           "sha256": "08cc9a74b2246847df6799ca30c0f821e14f637fb380e4685aceaf14671ed4d8",
-          "byteLength": 8393
+          "byteLength": 8393,
+          "gitBlobOid": "61eedf2d35983e191bc54482bec95329c963b5bc"
         },
         {
           "kind": "design",
@@ -3099,7 +3173,8 @@
           "revision": "1",
           "status": "approved",
           "sha256": "e058cf7d2cd56756a462b0198aed050fc757bd03b076e724faa92ab4e4a0deba",
-          "byteLength": 8507
+          "byteLength": 8507,
+          "gitBlobOid": "cd445fd8abf5eafa96cee116a33b64508a8ea04e"
         },
         {
           "kind": "plan",
@@ -3107,7 +3182,8 @@
           "revision": "1",
           "status": "groomed",
           "sha256": "0b517eee204bb7f9132460c850874c56514b9646aa1eb97180fdfe635327741c",
-          "byteLength": 4015
+          "byteLength": 4015,
+          "gitBlobOid": "7d61e9fb3b11491747ec11824c6c7546ceb9f09e"
         },
         {
           "kind": "tasks",
@@ -3115,7 +3191,8 @@
           "revision": "1",
           "status": "groomed",
           "sha256": "181914eec3814fbd0f5cc58a3abdc66b63ce4105cd7b07bdb3b787ec9248b09a",
-          "byteLength": 4672
+          "byteLength": 4672,
+          "gitBlobOid": "39cb3b3ba839846273148971039603b3a54a0c6d"
         },
         {
           "kind": "verification",
@@ -3123,7 +3200,8 @@
           "revision": "1",
           "status": "groomed",
           "sha256": "482d564ade4f919cec1d6f430f44c542a049b3ed31b6f0922e68c3889db899b5",
-          "byteLength": 2837
+          "byteLength": 2837,
+          "gitBlobOid": "fbe685e389bc940a650def0704d64fd22cc24c41"
         }
       ],
       "tasks": [
@@ -3360,7 +3438,8 @@
           "revision": "1",
           "status": "approved",
           "sha256": "07b4893076e9120f557ce0993552f58c63488166f9d4644473552453510f6c38",
-          "byteLength": 24730
+          "byteLength": 24730,
+          "gitBlobOid": "9979be8115ae6292c151ea7675cd873405a954b0"
         },
         {
           "kind": "scope",
@@ -3368,7 +3447,8 @@
           "revision": "1",
           "status": "approved",
           "sha256": "e07ebe980deffca337a5b0157a6da920722d89f9802577670bd6d9eb819b22f8",
-          "byteLength": 17943
+          "byteLength": 17943,
+          "gitBlobOid": "fcfe9efa81a77d93d6a2e9b3bbb6adf3f948b8c5"
         },
         {
           "kind": "design",
@@ -3376,7 +3456,8 @@
           "revision": "1",
           "status": "approved",
           "sha256": "ada2beb8fd26fbb8ecf22d4a9810d93527a20e7e60282f7842f6be63936e7222",
-          "byteLength": 32162
+          "byteLength": 32162,
+          "gitBlobOid": "7b4668d90ac5cce032181e339e8d14c67fed5a84"
         },
         {
           "kind": "plan",
@@ -3384,7 +3465,8 @@
           "revision": "1",
           "status": "groomed",
           "sha256": "983814994b9b912e1ec34f6d2b581c9888d37f9c8aee1b04ded091146f143186",
-          "byteLength": 3218
+          "byteLength": 3218,
+          "gitBlobOid": "e6f7da4eead6e2759ab4aa9139ed5171fb1dfcad"
         },
         {
           "kind": "tasks",
@@ -3392,7 +3474,8 @@
           "revision": "1",
           "status": "groomed",
           "sha256": "a63d432686b4a1210120ed39077b92418e52d5d74ece6ed8349a28a22587d56f",
-          "byteLength": 4420
+          "byteLength": 4420,
+          "gitBlobOid": "368eab8fe1de6fba7c215e23480a5d62134127ed"
         },
         {
           "kind": "verification",
@@ -3400,7 +3483,8 @@
           "revision": "1",
           "status": "groomed",
           "sha256": "650f6ef16ef29b173bcbd5336e3aeb88213a7766d3d3ce5576ee27fb0ec9cd7c",
-          "byteLength": 1973
+          "byteLength": 1973,
+          "gitBlobOid": "85f768f10ec88710de2428d5ee9bcf31e6f79fd7"
         }
       ],
       "tasks": [
@@ -3598,7 +3682,8 @@
           "revision": "1",
           "status": "approved",
           "sha256": "5b5ad70e359aad925affe04dccacf67362830802b93cbe00bd757c9634ba4d51",
-          "byteLength": 11915
+          "byteLength": 11915,
+          "gitBlobOid": "cbd67a194b53a115a3360c3b2f9c8a59346638bd"
         },
         {
           "kind": "scope",
@@ -3606,7 +3691,8 @@
           "revision": "1",
           "status": "approved",
           "sha256": "b204bfefe946f741d8788173e781388f6fcb9a67ac5a5f03bc452955debb7cde",
-          "byteLength": 8690
+          "byteLength": 8690,
+          "gitBlobOid": "6b8c6531976250056a06d1dd44c6f4a44b959683"
         },
         {
           "kind": "design",
@@ -3614,7 +3700,8 @@
           "revision": "1",
           "status": "approved",
           "sha256": "699db04db19e588da364f4d1ca260abc6c7917aaac3c87983c069f53cdd4226c",
-          "byteLength": 10024
+          "byteLength": 10024,
+          "gitBlobOid": "3d552059775dafdaffe89cf1efb8f2e223e144f8"
         },
         {
           "kind": "plan",
@@ -3622,7 +3709,8 @@
           "revision": "1",
           "status": "groomed",
           "sha256": "8e32c0a167f92b75b204428b84466c65e324846b10cbe4c776e052ae5042fc3c",
-          "byteLength": 3788
+          "byteLength": 3788,
+          "gitBlobOid": "e197f412062257f63b9690d0340f60195d4ad1e2"
         },
         {
           "kind": "tasks",
@@ -3630,7 +3718,8 @@
           "revision": "1",
           "status": "groomed",
           "sha256": "b8daa2d62df1af99ed2063016914c62858be13be2f6303a071db0f4e483a7976",
-          "byteLength": 5129
+          "byteLength": 5129,
+          "gitBlobOid": "b12defe904727e9e0a5d170d8aeae165494b7a2d"
         },
         {
           "kind": "verification",
@@ -3638,7 +3727,8 @@
           "revision": "1",
           "status": "groomed",
           "sha256": "90c7a3be4ad331da5cc56beab564b6fb4241f239ac6382412508ed690a2b1e15",
-          "byteLength": 3233
+          "byteLength": 3233,
+          "gitBlobOid": "ec3121cdb6ae50d79f166b266110cd7dcb570cc1"
         }
       ],
       "tasks": [
@@ -3879,7 +3969,8 @@
           "revision": "1",
           "status": "approved",
           "sha256": "4c060386ed21f2f07283cc33639745f3e6dba13fbe34de4616417bebebccb17a",
-          "byteLength": 12192
+          "byteLength": 12192,
+          "gitBlobOid": "e290608c528fc80374b407d4acf31ba19f666f57"
         },
         {
           "kind": "scope",
@@ -3887,7 +3978,8 @@
           "revision": "1",
           "status": "approved",
           "sha256": "564b804b9015d7e2b264a39b75cf486fab7711f53a190fe5751547969ca6976c",
-          "byteLength": 9207
+          "byteLength": 9207,
+          "gitBlobOid": "ab5c6e652c721733a43953a9ad147166066ad057"
         },
         {
           "kind": "design",
@@ -3895,7 +3987,8 @@
           "revision": "1",
           "status": "approved",
           "sha256": "79392f13678db982b2551ff430ec07eb9c74af18f2951cbd74fc7ab6e3987759",
-          "byteLength": 10499
+          "byteLength": 10499,
+          "gitBlobOid": "44b73a99540b010dbebab1796c1854d01f8b1c76"
         },
         {
           "kind": "plan",
@@ -3903,7 +3996,8 @@
           "revision": "1",
           "status": "groomed",
           "sha256": "f42ff57c5702a646dee03bbb1efdd9a399ce26986ce9c4424680e16ff5a30296",
-          "byteLength": 3462
+          "byteLength": 3462,
+          "gitBlobOid": "4012e7042939853a604a27ae1283c43b0d942c9d"
         },
         {
           "kind": "tasks",
@@ -3911,7 +4005,8 @@
           "revision": "1",
           "status": "groomed",
           "sha256": "0836019c7dcbe9899c90a4a8140085f4acc3ffd06767d3e94bc9e600473a797e",
-          "byteLength": 4786
+          "byteLength": 4786,
+          "gitBlobOid": "f0ff7b075a2e5c553ee00cb29824f06698e8ea2a"
         },
         {
           "kind": "verification",
@@ -3919,7 +4014,8 @@
           "revision": "1",
           "status": "groomed",
           "sha256": "3c4379bd06bdeea066f28d30c0881afa43f8ea90aba1f448bb812ccdae1b3e4f",
-          "byteLength": 3343
+          "byteLength": 3343,
+          "gitBlobOid": "4bc928a2e99dacddb6ecacd4804d5ee672d68a69"
         }
       ],
       "tasks": [
@@ -4156,7 +4252,8 @@
           "revision": "1",
           "status": "approved",
           "sha256": "0af53a706fb03eb99c24be299a987793b5425927cc048a37b1a9301856799f44",
-          "byteLength": 24376
+          "byteLength": 24376,
+          "gitBlobOid": "5c159c42c7b0046c4da8734ab158ace5d04f55c9"
         },
         {
           "kind": "scope",
@@ -4164,7 +4261,8 @@
           "revision": "1",
           "status": "approved",
           "sha256": "86230ccba63989c802a83716924201d7c6712c9ec91f1888a3ccfd5128146d2c",
-          "byteLength": 23662
+          "byteLength": 23662,
+          "gitBlobOid": "087665130559a621b2a7cb63aa3c3db4433bde56"
         },
         {
           "kind": "design",
@@ -4172,7 +4270,8 @@
           "revision": "1",
           "status": "approved",
           "sha256": "9ceae173bb99fc9b3b77432b3bd1228ce0b793d11312b9737d6b3511c5a95942",
-          "byteLength": 25285
+          "byteLength": 25285,
+          "gitBlobOid": "551da98d8e98eddfe28304a0ba90023bc94a810f"
         },
         {
           "kind": "plan",
@@ -4180,7 +4279,8 @@
           "revision": "1",
           "status": "groomed",
           "sha256": "c062d148b6d4060f1eff903f5b40e650b60f4fc60af2f9a016bb02b6fc8d087e",
-          "byteLength": 2205
+          "byteLength": 2205,
+          "gitBlobOid": "392a5688cf7535bad5ce252f1093b6266462de5a"
         },
         {
           "kind": "tasks",
@@ -4188,7 +4288,8 @@
           "revision": "1",
           "status": "groomed",
           "sha256": "f1d996144a81959b5a7ed3349a5eaf33408cef71e7771ffc0cfdd8dc3ff606d6",
-          "byteLength": 3992
+          "byteLength": 3992,
+          "gitBlobOid": "39dea209248c3906f7dfd522afb071aee2b303d0"
         },
         {
           "kind": "verification",
@@ -4196,7 +4297,8 @@
           "revision": "1",
           "status": "groomed",
           "sha256": "b86e9f265967d178dabaaa676a694ecbabde4949c89a82cde95f059f2f963ef0",
-          "byteLength": 2125
+          "byteLength": 2125,
+          "gitBlobOid": "c7ac1f6f84c082e974e05ab45e4b92936d9b5b29"
         }
       ],
       "tasks": [
@@ -4390,7 +4492,8 @@
           "revision": "1",
           "status": "approved",
           "sha256": "38fa7cb3a2cd8874ca52e37bed2a74f478e37f287fec64efd39838fd35f4f5af",
-          "byteLength": 13432
+          "byteLength": 13432,
+          "gitBlobOid": "e22f81d99d283b7716e11321316c9c209fe7feba"
         },
         {
           "kind": "scope",
@@ -4398,7 +4501,8 @@
           "revision": "1",
           "status": "approved",
           "sha256": "6708647b791456e01e3d458d5dde13d551adf48b90a67a306ed3e3147c20cc73",
-          "byteLength": 9408
+          "byteLength": 9408,
+          "gitBlobOid": "e895449b2a7286aa5d70fb84e3c80b45eb9f69b2"
         },
         {
           "kind": "design",
@@ -4406,7 +4510,8 @@
           "revision": "1",
           "status": "approved",
           "sha256": "69192aca201a39d971025c676e8ca99c5cea06eb53f88c7a8e3424faa3485a34",
-          "byteLength": 10057
+          "byteLength": 10057,
+          "gitBlobOid": "6493cf2f1a695b9c20f00b97cbd13f8bca0757fa"
         },
         {
           "kind": "plan",
@@ -4414,7 +4519,8 @@
           "revision": "1",
           "status": "groomed",
           "sha256": "fc4efe1649de58dba4bd3255c0097db521cd2c8546493dfb7e7ba6d78d83bc82",
-          "byteLength": 4543
+          "byteLength": 4543,
+          "gitBlobOid": "0a20acfbe26f874701e520c77497b88e1a1b42f7"
         },
         {
           "kind": "tasks",
@@ -4422,7 +4528,8 @@
           "revision": "1",
           "status": "groomed",
           "sha256": "4963081c1196695fe884a1ff50285aff1eb49a7bd94a5b3cf2d7fb7dc8b90fe1",
-          "byteLength": 5033
+          "byteLength": 5033,
+          "gitBlobOid": "06c00600b1d40fc64323c23894b40e68409fbfc0"
         },
         {
           "kind": "verification",
@@ -4430,7 +4537,8 @@
           "revision": "1",
           "status": "groomed",
           "sha256": "e6a11bad195c5649696eba85d36a1cc96e14d988479936edf08d0130a0db9991",
-          "byteLength": 3518
+          "byteLength": 3518,
+          "gitBlobOid": "5253863921da0b265555a75b37ba02cd429fc0d3"
         }
       ],
       "tasks": [
@@ -4671,7 +4779,8 @@
           "revision": "1",
           "status": "approved",
           "sha256": "b0953788f5e98e9e9ee6924f6f4b5dda7146216fd5f0e5f7d94cfc0f784c2de8",
-          "byteLength": 38951
+          "byteLength": 38951,
+          "gitBlobOid": "5ab9fc7d0f692fd1135f5cf41adf14c120abe981"
         },
         {
           "kind": "scope",
@@ -4679,7 +4788,8 @@
           "revision": "1",
           "status": "approved",
           "sha256": "971d71a52b9aa1550e84f0e06993c80c5963b98b418a43798efabe1b7b0125a0",
-          "byteLength": 26496
+          "byteLength": 26496,
+          "gitBlobOid": "31d277d8854227bb855e9c1f254d91a2fc4d7107"
         },
         {
           "kind": "design",
@@ -4687,7 +4797,8 @@
           "revision": "1",
           "status": "approved",
           "sha256": "6134a0748cd277114f937b05fd1259382033d8f0037d963618c5acfcca720b3c",
-          "byteLength": 38017
+          "byteLength": 38017,
+          "gitBlobOid": "a1b5aaf44938584f6b4d76e32b1216d1834a3c8d"
         },
         {
           "kind": "plan",
@@ -4695,7 +4806,8 @@
           "revision": "1",
           "status": "groomed",
           "sha256": "56a38eda8d5f2dd83d1a3f12004fb9d9ac7f5c93451b88f605208663d1c992bf",
-          "byteLength": 9306
+          "byteLength": 9306,
+          "gitBlobOid": "7f0a5bf27182a099cb3b82917c195f008c23ecaf"
         },
         {
           "kind": "tasks",
@@ -4703,7 +4815,8 @@
           "revision": "1",
           "status": "groomed",
           "sha256": "69ca28a3590058ced9c321d5a67e5d490766dfddaac084a391019bd78e873ca2",
-          "byteLength": 8796
+          "byteLength": 8796,
+          "gitBlobOid": "453774a43a6ef5a9551a6ae42c05ef20ea86f64d"
         },
         {
           "kind": "verification",
@@ -4711,7 +4824,8 @@
           "revision": "1",
           "status": "groomed",
           "sha256": "c001ce3f4f079e6f563ff31b41a911cd6eab1f6e922e21077e05a9e0ba7a9f13",
-          "byteLength": 8390
+          "byteLength": 8390,
+          "gitBlobOid": "b2d2b351ca3cb430296fe700b6b72b982f18ca1b"
         }
       ],
       "tasks": [
@@ -4990,7 +5104,8 @@
           "revision": "1",
           "status": "approved",
           "sha256": "237258bc8e2647a1b9e5070b34f739bd220563d7590e6b7f6a9cfcbcaaeb9277",
-          "byteLength": 21171
+          "byteLength": 21171,
+          "gitBlobOid": "5f8359ecd81ce219c9644f53c7a3ee8bc2d343c2"
         },
         {
           "kind": "scope",
@@ -4998,7 +5113,8 @@
           "revision": "1",
           "status": "approved",
           "sha256": "01aefbdcee7a3188f1b97219a47c43d5a856f5f5b1e1d49438eb10a4cc1ce2c5",
-          "byteLength": 18039
+          "byteLength": 18039,
+          "gitBlobOid": "7d3e9581ed455783338f2439b0d00cd6775fd9cb"
         },
         {
           "kind": "design",
@@ -5006,7 +5122,8 @@
           "revision": "1",
           "status": "approved",
           "sha256": "bdd20e2e9128cf14a066b675d8c1e1164926bd312ddb3176f9a5b04fedd14d16",
-          "byteLength": 45376
+          "byteLength": 45376,
+          "gitBlobOid": "b04d72be9bb7f66c0b0165d3421f22cd8a584331"
         },
         {
           "kind": "plan",
@@ -5014,7 +5131,8 @@
           "revision": "1",
           "status": "groomed",
           "sha256": "a2ccf506ab0a5d171e6fc0430f3eda74b826cd9a632bafe1bf90fedf2295b065",
-          "byteLength": 3296
+          "byteLength": 3296,
+          "gitBlobOid": "6aa3800987ad5706b7d49796086f21dc2765b04b"
         },
         {
           "kind": "tasks",
@@ -5022,7 +5140,8 @@
           "revision": "1",
           "status": "groomed",
           "sha256": "aac77e4c6ba992fcfc3c7403780d5fc58fa0ead8fa68aff88fb38d4782567aeb",
-          "byteLength": 5612
+          "byteLength": 5612,
+          "gitBlobOid": "4d2831cb2f07d546cc6791b4ec19c815f981016c"
         },
         {
           "kind": "verification",
@@ -5030,7 +5149,8 @@
           "revision": "1",
           "status": "groomed",
           "sha256": "8dd29e569ab44ea2387649243aa0dab2690eb28b5f315cf2f4d5b352e07a3b99",
-          "byteLength": 2519
+          "byteLength": 2519,
+          "gitBlobOid": "478b18ca92e612611242fe3de722f37942cc7ca9"
         }
       ],
       "tasks": [
@@ -5284,7 +5404,8 @@
           "revision": "1",
           "status": "approved",
           "sha256": "031bdcc8cd84094a1292b33a942750a8291b49b19c30e432a991923278ca73ab",
-          "byteLength": 1577
+          "byteLength": 1577,
+          "gitBlobOid": "c22d37b6657b50b6e8186a595dfd47d01d3d1af0"
         },
         {
           "kind": "scope",
@@ -5292,7 +5413,8 @@
           "revision": "1",
           "status": "approved",
           "sha256": "a2d945385b0d737e7ecfec0f3d419579fcdfb7a37427d4e558d11535c5e20f8e",
-          "byteLength": 2006
+          "byteLength": 2006,
+          "gitBlobOid": "24dcf75eeac3a00dcf08cafdf499d90d4260c1b3"
         },
         {
           "kind": "design",
@@ -5300,7 +5422,8 @@
           "revision": "1",
           "status": "approved",
           "sha256": "e0f10bae9c0544f32583238cc48341a36470cbe9f921bb15ea0454c0aa1d91cc",
-          "byteLength": 2739
+          "byteLength": 2739,
+          "gitBlobOid": "c698e300660b3a640e5dd605e7709407409680d5"
         },
         {
           "kind": "plan",
@@ -5308,7 +5431,8 @@
           "revision": "1",
           "status": "groomed",
           "sha256": "a4ccc2fa80fb531ecfffaaccc7825b0bacad1a668f44f7b1e711802fc619b79f",
-          "byteLength": 883
+          "byteLength": 883,
+          "gitBlobOid": "c09fd707c74a93720fa49bb60f90ecdd11b1c1ca"
         },
         {
           "kind": "tasks",
@@ -5316,7 +5440,8 @@
           "revision": "1",
           "status": "groomed",
           "sha256": "9c20fc21e3bdf52f5bdd194e57eb11d6ad3a07fd4d331c4ccc734e1cb2e385f9",
-          "byteLength": 1199
+          "byteLength": 1199,
+          "gitBlobOid": "375deee1c7cbea6cc97978b55bf0bf3200f965cb"
         },
         {
           "kind": "verification",
@@ -5324,7 +5449,8 @@
           "revision": "1",
           "status": "groomed",
           "sha256": "a9bed97cf158d9a97c3db1784e6ca6a0d81ec42cd0da26c6b0d05df577c38bc7",
-          "byteLength": 1019
+          "byteLength": 1019,
+          "gitBlobOid": "be88d628cfa725ef4335071d849ef73297dfe1f5"
         }
       ],
       "tasks": [
@@ -5403,7 +5529,8 @@
           "revision": "1",
           "status": "approved",
           "sha256": "200fc77960c737fad00521d3bcd406e8b585397645bf51c66f9c275a625c6149",
-          "byteLength": 6487
+          "byteLength": 6487,
+          "gitBlobOid": "3a0e6b5fbf53e81566d76deee4441c13fc2b436d"
         },
         {
           "kind": "scope",
@@ -5411,7 +5538,8 @@
           "revision": "1",
           "status": "approved",
           "sha256": "3eb3eb2f508ea634b038e4ff6b8f5ef7e2851f39a46b4bfaf3af6414ef84a9f2",
-          "byteLength": 8797
+          "byteLength": 8797,
+          "gitBlobOid": "015ac1ee39f3dce6ecab4376a2f2771a222e810e"
         },
         {
           "kind": "design",
@@ -5419,7 +5547,8 @@
           "revision": "1",
           "status": "approved",
           "sha256": "e6a3cd4c301f241fbab47bba33323de344d7e8f5b27aaf1ed87c8c5dda7e3f32",
-          "byteLength": 8699
+          "byteLength": 8699,
+          "gitBlobOid": "55b18ecf0a73f4a444630cd9eee23ded570aea04"
         },
         {
           "kind": "plan",
@@ -5427,7 +5556,8 @@
           "revision": "1",
           "status": "groomed",
           "sha256": "0365706250954de1186ac2216f5d932b2768a5c873e5b628165f56a09efa0fe4",
-          "byteLength": 2448
+          "byteLength": 2448,
+          "gitBlobOid": "77ab47e1e2225126ee06bd6c0fea39db0a2fd019"
         },
         {
           "kind": "tasks",
@@ -5435,7 +5565,8 @@
           "revision": "1",
           "status": "groomed",
           "sha256": "977d89bb37893c724f5ebaaccf0d7803727b557dcd00d91860621ac77ca63f24",
-          "byteLength": 7276
+          "byteLength": 7276,
+          "gitBlobOid": "e0f66e4d53835bc73b1b150db8523f2e42db2f9a"
         },
         {
           "kind": "verification",
@@ -5443,7 +5574,8 @@
           "revision": "1",
           "status": "groomed",
           "sha256": "21bdbe48643e4c6ccb5d6f4091ec351c7e531a36db3c9c808e61fc74cae5822a",
-          "byteLength": 2616
+          "byteLength": 2616,
+          "gitBlobOid": "eae77e3cdbabaa6f3ab460d55ae2414a42b52f0d"
         }
       ],
       "tasks": [
@@ -5742,7 +5874,8 @@
           "revision": "1",
           "status": "approved",
           "sha256": "e97a5b96413bde2457c76c0fdd599bb006cc10ef32d681afb22e409e518a804d",
-          "byteLength": 10736
+          "byteLength": 10736,
+          "gitBlobOid": "70b1f274fd663335553d40df45cfc06ac560058c"
         },
         {
           "kind": "scope",
@@ -5750,7 +5883,8 @@
           "revision": "1",
           "status": "approved",
           "sha256": "10aa6c41d26c7dfe9a0c0fc40687a642469a8b6d31c4c544d765e0ca790575e1",
-          "byteLength": 7849
+          "byteLength": 7849,
+          "gitBlobOid": "a1709a36b5937152bc1dd8279b203edea0637899"
         },
         {
           "kind": "design",
@@ -5758,7 +5892,8 @@
           "revision": "1",
           "status": "approved",
           "sha256": "fc70894944883436a7eb207f3a39d16e44aef3c5a61600574290550c199439b5",
-          "byteLength": 8404
+          "byteLength": 8404,
+          "gitBlobOid": "87410343ddc4641bb91bc6d82f2babc2ab3f8638"
         },
         {
           "kind": "plan",
@@ -5766,7 +5901,8 @@
           "revision": "1",
           "status": "groomed",
           "sha256": "4bc7727a25db746f032b69d7124c458ab88717962cbf6e90d950ae5ea2f057eb",
-          "byteLength": 3648
+          "byteLength": 3648,
+          "gitBlobOid": "8c9c3b5f6097d8b38e9a716d1c96a0ab57eef037"
         },
         {
           "kind": "tasks",
@@ -5774,7 +5910,8 @@
           "revision": "1",
           "status": "groomed",
           "sha256": "a66a0251b62f57630a166d95acba59a2e1c21310a6a922d5c7031c9a082d406e",
-          "byteLength": 4649
+          "byteLength": 4649,
+          "gitBlobOid": "3ef17d75b6a990f2f759f0ee1b6fb520f250982b"
         },
         {
           "kind": "verification",
@@ -5782,7 +5919,8 @@
           "revision": "1",
           "status": "groomed",
           "sha256": "1808508e3ecf42763b474e1841ccd498d89ceb956d82aa83551fd54174e78541",
-          "byteLength": 2857
+          "byteLength": 2857,
+          "gitBlobOid": "da0d73176db1c23c93d568097e6162293245502e"
         }
       ],
       "tasks": [
@@ -6019,7 +6157,8 @@
           "revision": "1",
           "status": "approved",
           "sha256": "11992f29615c11a3c241739efb58cbf173dfae9213243df822d301ead8d7b9a5",
-          "byteLength": 1247
+          "byteLength": 1247,
+          "gitBlobOid": "8bdc07853e2f93b02c03449661078d16418cd898"
         },
         {
           "kind": "scope",
@@ -6027,7 +6166,8 @@
           "revision": "1",
           "status": "approved",
           "sha256": "5b66b6e4bbd21a344846d9f19be784b039b6ef6df306d072df6df9b4f8fb6e71",
-          "byteLength": 1176
+          "byteLength": 1176,
+          "gitBlobOid": "b80909c617a94e6828baaa63d338e78ed719706b"
         },
         {
           "kind": "design",
@@ -6035,7 +6175,8 @@
           "revision": "1",
           "status": "approved",
           "sha256": "e653961918483235378064d4afb2189f39351719857921c966d8c36cc79ff0e9",
-          "byteLength": 1727
+          "byteLength": 1727,
+          "gitBlobOid": "a5ebd6228b210088674b5e7abae9e567bc4646cd"
         },
         {
           "kind": "plan",
@@ -6043,7 +6184,8 @@
           "revision": "1",
           "status": "groomed",
           "sha256": "b0d6933e3d9863a36e70c9fb24b232cbe7adf8714baa63a39618279dc2b7ac58",
-          "byteLength": 939
+          "byteLength": 939,
+          "gitBlobOid": "54a531d2e8ff9171cbd244185e0ff30dfe3b42b4"
         },
         {
           "kind": "tasks",
@@ -6051,7 +6193,8 @@
           "revision": "1",
           "status": "groomed",
           "sha256": "a74b7719994429913517bce85184bdb5bce8378d132a5417dccbaf80db6af814",
-          "byteLength": 1324
+          "byteLength": 1324,
+          "gitBlobOid": "f1b7a7b9f70854e80b26394803cdcd38dca2345f"
         },
         {
           "kind": "verification",
@@ -6059,7 +6202,8 @@
           "revision": "1",
           "status": "groomed",
           "sha256": "da8a11b5323e44bf71b2ca30e1134a640a6ae6a4c3f575721ac49aedcf7eae6a",
-          "byteLength": 869
+          "byteLength": 869,
+          "gitBlobOid": "28935d8b93db0aade94fac025ebb53c0d89636b5"
         }
       ],
       "tasks": [
@@ -6245,7 +6389,8 @@
           "revision": "1",
           "status": "approved",
           "sha256": "8c5ee822cc37288cbf49834886af6aafeeab3aef1a8eb1f151d4df29af866b06",
-          "byteLength": 13017
+          "byteLength": 13017,
+          "gitBlobOid": "1546ecd7e21a537535e7efced75fc7d9c281a45a"
         },
         {
           "kind": "scope",
@@ -6253,7 +6398,8 @@
           "revision": "1",
           "status": "approved",
           "sha256": "5f1707dc100b70cbd283463a260990bbf9a48c84425b07999b15a54a23c6918f",
-          "byteLength": 8851
+          "byteLength": 8851,
+          "gitBlobOid": "f6a19f0c9a07f3767ecdfa153fe71e59d87e7ac7"
         },
         {
           "kind": "design",
@@ -6261,7 +6407,8 @@
           "revision": "1",
           "status": "approved",
           "sha256": "1ff59b121486c5541201dde9e5062120f301c14a689bf8b9356cb9836ec0b025",
-          "byteLength": 9510
+          "byteLength": 9510,
+          "gitBlobOid": "2e33606e807d31bb558f484d0639c148215124de"
         },
         {
           "kind": "plan",
@@ -6269,7 +6416,8 @@
           "revision": "1",
           "status": "groomed",
           "sha256": "d47394b806ade9b87d4a3bcd899be4029843bb31aec5dbb39a6be1267406b882",
-          "byteLength": 3385
+          "byteLength": 3385,
+          "gitBlobOid": "5fc30dfe3e8aedc2f674fda1b2dc34db29704665"
         },
         {
           "kind": "tasks",
@@ -6277,7 +6425,8 @@
           "revision": "1",
           "status": "groomed",
           "sha256": "0b83e2e1c6a10c7f11901cb03a3d59b1e1f503fc40b2a934ad054cc7663c4057",
-          "byteLength": 4730
+          "byteLength": 4730,
+          "gitBlobOid": "4312eb0129cbcb7e0e09fde377c5e7f161868072"
         },
         {
           "kind": "verification",
@@ -6285,7 +6434,8 @@
           "revision": "1",
           "status": "groomed",
           "sha256": "161de533d0333bbfc76b0e26927b5d2bee64825ce762ddd6cf385955291c7ba7",
-          "byteLength": 2971
+          "byteLength": 2971,
+          "gitBlobOid": "6a0d50d6911d55bfcbdfbbbf44936e2c82f3dfe5"
         }
       ],
       "tasks": [
@@ -6522,7 +6672,8 @@
           "revision": "1",
           "status": "approved",
           "sha256": "fa2d9324a8ee68b2b7f8b77ada75bcc4001881e947762e1ca637dc778558cbdd",
-          "byteLength": 15326
+          "byteLength": 15326,
+          "gitBlobOid": "394a1a1e47f822c13907736fafc7e3ee0c83dd34"
         },
         {
           "kind": "scope",
@@ -6530,7 +6681,8 @@
           "revision": "1",
           "status": "approved",
           "sha256": "182aa2cdea6202b74b09b0f8a8927f964f8632026c2e20ea8dc8d54ae2598fe1",
-          "byteLength": 10935
+          "byteLength": 10935,
+          "gitBlobOid": "86eed947ee630986bd0ca0916713f0024d0fef22"
         },
         {
           "kind": "design",
@@ -6538,7 +6690,8 @@
           "revision": "1",
           "status": "approved",
           "sha256": "d91c9f21e13b9c4f4206659bfe052334e09b4a5d0ae53d07c72d0bf954240798",
-          "byteLength": 12310
+          "byteLength": 12310,
+          "gitBlobOid": "b4db5a5582a5c1642d2c5d77bd3bc8e58d2671a9"
         },
         {
           "kind": "plan",
@@ -6546,7 +6699,8 @@
           "revision": "1",
           "status": "groomed",
           "sha256": "b54326faee9cf68f64547c77dae0ea85be6d97cc1930976942df5fcb4a3abcc4",
-          "byteLength": 6012
+          "byteLength": 6012,
+          "gitBlobOid": "6d99972cceda58c42df3b232db1f6789fdbb1419"
         },
         {
           "kind": "tasks",
@@ -6554,7 +6708,8 @@
           "revision": "1",
           "status": "groomed",
           "sha256": "c16460c7aa512c3147669cf2ef288152818b67eac416168a3ab5dceceebc884a",
-          "byteLength": 6293
+          "byteLength": 6293,
+          "gitBlobOid": "bcd7f2d0cdcd6a44b8f47984b93348bf1ef2dc63"
         },
         {
           "kind": "verification",
@@ -6562,7 +6717,8 @@
           "revision": "1",
           "status": "groomed",
           "sha256": "06e712b9ec0cc0fdf348377ed1a807a82dce43e2985b1ff4b739b89dfc3742f5",
-          "byteLength": 4416
+          "byteLength": 4416,
+          "gitBlobOid": "9c9d319e933c5f8d39abc0e9bca6c80dc06413d5"
         }
       ],
       "tasks": [
@@ -6824,7 +6980,8 @@
           "revision": "1",
           "status": "approved",
           "sha256": "999056f7c246f0bf7b5c5dd8bd1ff90be184ebcb667e2806e937c9557123c85f",
-          "byteLength": 30069
+          "byteLength": 30069,
+          "gitBlobOid": "4904c7f5d2095fc50d275262e39c439269c59ccf"
         },
         {
           "kind": "scope",
@@ -6832,7 +6989,8 @@
           "revision": "1",
           "status": "approved",
           "sha256": "f8d3d047f155efe45771a3c73d0ffe503c5fb0409337622b25531008860586fb",
-          "byteLength": 27128
+          "byteLength": 27128,
+          "gitBlobOid": "4ead06e10a3914357914e3c1fbca9c45075b2901"
         },
         {
           "kind": "design",
@@ -6840,7 +6998,8 @@
           "revision": "1",
           "status": "approved",
           "sha256": "fad8c0e9db263e2335b063577ca5f542ddf1103f4eec03fcef785258002e1be5",
-          "byteLength": 34576
+          "byteLength": 34576,
+          "gitBlobOid": "eaa1c96b75aef1af6b35a32db258629516713159"
         },
         {
           "kind": "plan",
@@ -6848,7 +7007,8 @@
           "revision": "1",
           "status": "groomed",
           "sha256": "0496bb1e6e01b3ccbbeedf1cc4e3a4bc256d21519e69d46331635698988f9724",
-          "byteLength": 10463
+          "byteLength": 10463,
+          "gitBlobOid": "7782ef17f9ddbe6b12fee6ee6ef8dde85fd18eb3"
         },
         {
           "kind": "tasks",
@@ -6856,7 +7016,8 @@
           "revision": "1",
           "status": "groomed",
           "sha256": "390c8b3f9997a751614d1b9589573fb170fc2a25c107aafc9447eec3073c6989",
-          "byteLength": 8598
+          "byteLength": 8598,
+          "gitBlobOid": "8e4562590f1913df0c4c61399ce2d7308f62cf3c"
         },
         {
           "kind": "verification",
@@ -6864,7 +7025,8 @@
           "revision": "1",
           "status": "groomed",
           "sha256": "600be19a793aee35183d018a068ea012039d3141fd1529a5cf2567184aee9c42",
-          "byteLength": 9093
+          "byteLength": 9093,
+          "gitBlobOid": "bd114d534b6a5bdd592e89c6d10b920d620303a2"
         }
       ],
       "tasks": [
@@ -7144,7 +7306,8 @@
           "revision": "1",
           "status": "approved",
           "sha256": "5d26ade414fb45e5718fa3375801a014649aa91a2e03e5d72ee30bf3e91bbdba",
-          "byteLength": 34222
+          "byteLength": 34222,
+          "gitBlobOid": "7a8c252482ce8780ba0ac2e6f4f5d9f8eaae3914"
         },
         {
           "kind": "scope",
@@ -7152,7 +7315,8 @@
           "revision": "1",
           "status": "approved",
           "sha256": "0ffd668ec035ebb27f6d2533dc613c7c1da236c62462700f2b09411fb6b945b1",
-          "byteLength": 26190
+          "byteLength": 26190,
+          "gitBlobOid": "eb3cc2c889cc32dc80f32e50c3732738819945ca"
         },
         {
           "kind": "design",
@@ -7160,7 +7324,8 @@
           "revision": "1",
           "status": "approved",
           "sha256": "66c0ffaf41503729ea6214dfb68be0666be778bb6ab9393093d4d335833cb293",
-          "byteLength": 35235
+          "byteLength": 35235,
+          "gitBlobOid": "29363e5b5b5ef79927b19415ae68ee01b25efc36"
         },
         {
           "kind": "plan",
@@ -7168,7 +7333,8 @@
           "revision": "1",
           "status": "groomed",
           "sha256": "155d58eb64cdf9408eed83d8990299066797a298193edb7dce8a4bb30c9cf29a",
-          "byteLength": 11682
+          "byteLength": 11682,
+          "gitBlobOid": "3a007e896431ebb2f05a0273ffa4f767cd71440e"
         },
         {
           "kind": "tasks",
@@ -7176,7 +7342,8 @@
           "revision": "1",
           "status": "groomed",
           "sha256": "d595c0918ff7add953ec26cb653cb52b55e7c11aba5863985343bc78041b8e3e",
-          "byteLength": 9611
+          "byteLength": 9611,
+          "gitBlobOid": "70b9906a274dae5d94b48ebdf78f6c67084e39ec"
         },
         {
           "kind": "verification",
@@ -7184,7 +7351,8 @@
           "revision": "1",
           "status": "groomed",
           "sha256": "b7dae37a996ab401f409e9080072039807f8bae62787b1fd75ae818b5a7e6ed6",
-          "byteLength": 10666
+          "byteLength": 10666,
+          "gitBlobOid": "d5a36367a04fa0f08f137753e124dc21ddae304a"
         }
       ],
       "tasks": [
@@ -7514,7 +7682,8 @@
           "revision": "1",
           "status": "approved",
           "sha256": "3e1a5db09c06a560bf99fae00a139d6ad1f19a4a5312af8ea7fca5065b343ab2",
-          "byteLength": 29385
+          "byteLength": 29385,
+          "gitBlobOid": "2ef112eba1175c41c19af474971fdd5e82a8fa35"
         },
         {
           "kind": "scope",
@@ -7522,7 +7691,8 @@
           "revision": "1",
           "status": "approved",
           "sha256": "9669575565c9fae60351279c1c93f878cc11f3433e37ca5f456b0e82083019db",
-          "byteLength": 22839
+          "byteLength": 22839,
+          "gitBlobOid": "cf1c92d66ea831721a21caa529477992caccd553"
         },
         {
           "kind": "design",
@@ -7530,7 +7700,8 @@
           "revision": "1",
           "status": "approved",
           "sha256": "8f06b733f47b890481e129a7cefd354efceb262c29a6f2d842615cd4287661af",
-          "byteLength": 31292
+          "byteLength": 31292,
+          "gitBlobOid": "4e0fcef2ab816b184c88b1f6c6bd342e6fec59f9"
         },
         {
           "kind": "plan",
@@ -7538,7 +7709,8 @@
           "revision": "1",
           "status": "groomed",
           "sha256": "6d48104e1841fec80eca748befbe27d0f315ff5abff0fbccea4fd0f3c8882d36",
-          "byteLength": 11004
+          "byteLength": 11004,
+          "gitBlobOid": "938c1dbe8e8925ed57279299c315f299526e3506"
         },
         {
           "kind": "tasks",
@@ -7546,7 +7718,8 @@
           "revision": "1",
           "status": "groomed",
           "sha256": "e12acbbc7447bd4030c88d16698c43bc9c75a32cf9942e2becd148e16a57b221",
-          "byteLength": 9032
+          "byteLength": 9032,
+          "gitBlobOid": "af53f1ff51453c2d1ed1ff8bf2d5847367b304f0"
         },
         {
           "kind": "verification",
@@ -7554,7 +7727,8 @@
           "revision": "1",
           "status": "groomed",
           "sha256": "4fc0c4f71d9d4cf6e0aadd67b625c703ad050cfc917d24f0db16d282da6482f0",
-          "byteLength": 8570
+          "byteLength": 8570,
+          "gitBlobOid": "e9d1516f9e256f115edd998670db086fcd7847e1"
         }
       ],
       "tasks": [
@@ -7908,7 +8082,8 @@
           "revision": "1",
           "status": "approved",
           "sha256": "199a94e3419bd6dff2230e84329eff22d2a2f21d19d75aeb53d31f6b2174a1b5",
-          "byteLength": 25908
+          "byteLength": 25908,
+          "gitBlobOid": "cfb639493fbea06e82e0cf13528b994aed48e603"
         },
         {
           "kind": "scope",
@@ -7916,7 +8091,8 @@
           "revision": "1",
           "status": "approved",
           "sha256": "f5158e3a306e11db183421a2995e423860b78be62f673083a14c78d56bd5b136",
-          "byteLength": 14579
+          "byteLength": 14579,
+          "gitBlobOid": "648467b25e1fd2ebad0d12d828b334d296fd549f"
         },
         {
           "kind": "design",
@@ -7924,7 +8100,8 @@
           "revision": "1",
           "status": "approved",
           "sha256": "51a933b2c19efe47026550f814d2440c7b5a36fb05a42343307afe49fa5bbbac",
-          "byteLength": 21027
+          "byteLength": 21027,
+          "gitBlobOid": "823a4c19d23cadcf205996abb0a37587237e0776"
         },
         {
           "kind": "plan",
@@ -7932,7 +8109,8 @@
           "revision": "1",
           "status": "groomed",
           "sha256": "2279d9fdc8689fb12d18728eacbbb46c38fd15ad0979f5e6cc61766c3c6babe9",
-          "byteLength": 3396
+          "byteLength": 3396,
+          "gitBlobOid": "e9bbf9fb4b69b8041754277a83f7ad408fa07702"
         },
         {
           "kind": "tasks",
@@ -7940,7 +8118,8 @@
           "revision": "1",
           "status": "groomed",
           "sha256": "9cd62c351e379c00a8b1d41680af6e62e50578d959d5d7102bc0be0bcc36f32f",
-          "byteLength": 4417
+          "byteLength": 4417,
+          "gitBlobOid": "25c637c6e9c33c38c4e6d5bbc10e1a485e002d7b"
         },
         {
           "kind": "verification",
@@ -7948,7 +8127,8 @@
           "revision": "1",
           "status": "groomed",
           "sha256": "d2cb9913a55da6e0f4eaf144c586074d5f48b42f926b67f3b39816e9d5e20558",
-          "byteLength": 2167
+          "byteLength": 2167,
+          "gitBlobOid": "aa67f88a8bb1d7f7aa705e64a7bf6d32d6b0fa89"
         }
       ],
       "tasks": [
@@ -8146,7 +8326,8 @@
           "revision": "1",
           "status": "approved",
           "sha256": "d2bf8414c1aa9342be98c12b6c7899ce86e03c27003d250ad84a298360543bed",
-          "byteLength": 14044
+          "byteLength": 14044,
+          "gitBlobOid": "185a48fb394c42173c2a3f4999c74962967d9791"
         },
         {
           "kind": "scope",
@@ -8154,7 +8335,8 @@
           "revision": "1",
           "status": "approved",
           "sha256": "980187f9947cb0170c9e755fcc0bd46e82be3a71736320e69f0ff8df025b8848",
-          "byteLength": 18257
+          "byteLength": 18257,
+          "gitBlobOid": "02656b8ae2b08503033848f298fccc454670185e"
         },
         {
           "kind": "design",
@@ -8162,7 +8344,8 @@
           "revision": "1",
           "status": "approved",
           "sha256": "49446c66b457a2a150ac600747aec3353eda2bd38fffc0b903a2b467ef6a082b",
-          "byteLength": 21088
+          "byteLength": 21088,
+          "gitBlobOid": "df91e57692f8201d6e778a697045b6ace3cf2f9e"
         },
         {
           "kind": "plan",
@@ -8170,7 +8353,8 @@
           "revision": "1",
           "status": "groomed",
           "sha256": "56b112adc2daf5c327f624df797b36f9588ba04f72294f34abe6478589f37dbe",
-          "byteLength": 5491
+          "byteLength": 5491,
+          "gitBlobOid": "838e228c4338a64f1feed5265a41a6eb36185c8c"
         },
         {
           "kind": "tasks",
@@ -8178,7 +8362,8 @@
           "revision": "1",
           "status": "groomed",
           "sha256": "e48ed4b5d5f7d65252b8b9f0c1ca8be3dffcb400c595d847b31b2ca46ab07077",
-          "byteLength": 12358
+          "byteLength": 12358,
+          "gitBlobOid": "7b48b4992fc1e620326d881d663292dc924d7fa3"
         },
         {
           "kind": "verification",
@@ -8186,7 +8371,8 @@
           "revision": "1",
           "status": "groomed",
           "sha256": "343909c55e525c6da6b7cbf3d566cef6d35b62f709096d89229b345ee6e1fee6",
-          "byteLength": 3470
+          "byteLength": 3470,
+          "gitBlobOid": "ccdb7d8a9f11b98212d7f5df375be9833039ce74"
         }
       ],
       "tasks": [
@@ -8540,7 +8726,8 @@
           "revision": "1",
           "status": "approved",
           "sha256": "083f4f9f1617ca21aef8a062bedda249e66ea398da5a834d1acf56b8ad4ec9dc",
-          "byteLength": 15138
+          "byteLength": 15138,
+          "gitBlobOid": "0daaa2272b81acc531b721d25628cd63982e4b51"
         },
         {
           "kind": "scope",
@@ -8548,7 +8735,8 @@
           "revision": "1",
           "status": "approved",
           "sha256": "e020cace685fe12ff5e0e2cadfa6f3131c3646601f322142a856d98af7d98724",
-          "byteLength": 30874
+          "byteLength": 30874,
+          "gitBlobOid": "3c3d3d9e28f5938bac9a6f801c7ed0f587403e3a"
         },
         {
           "kind": "design",
@@ -8556,7 +8744,8 @@
           "revision": "1",
           "status": "approved",
           "sha256": "02fc840ef5e1fe4e508267ff7f7db136495079ee02c22ce396691de30adf0d46",
-          "byteLength": 30966
+          "byteLength": 30966,
+          "gitBlobOid": "6192176fd93e29bd1763cd89aafc09906cfd02bb"
         },
         {
           "kind": "plan",
@@ -8564,7 +8753,8 @@
           "revision": "1",
           "status": "groomed",
           "sha256": "51995c7db362cde22a2fd24a91039de5d22163b9e2909a3472d9109aed9eb2e4",
-          "byteLength": 5866
+          "byteLength": 5866,
+          "gitBlobOid": "992c6154bc60595b74b4323f4ee574349a95deda"
         },
         {
           "kind": "tasks",
@@ -8572,7 +8762,8 @@
           "revision": "1",
           "status": "groomed",
           "sha256": "e72fd9b51e04511cde0d027fb0b0d17cb0aef461139e0c44133ac0f865e62b84",
-          "byteLength": 16790
+          "byteLength": 16790,
+          "gitBlobOid": "3b7219831436fbb3cf5b5f675968fed23e37727b"
         },
         {
           "kind": "verification",
@@ -8580,7 +8771,8 @@
           "revision": "1",
           "status": "groomed",
           "sha256": "e0a53a086c08e06095e5c4ab17b5e7e962f402e509f968923829ea74c20f1155",
-          "byteLength": 4727
+          "byteLength": 4727,
+          "gitBlobOid": "77bab3aa1d9d3064a39d6c3a1113ead9cf0e5914"
         }
       ],
       "tasks": [
@@ -9024,7 +9216,8 @@
           "revision": "1",
           "status": "approved",
           "sha256": "5ff7cbb86c8d44d40e04573672c29802c3f3e127ae21885ce4f0ecdf2b4b1ca7",
-          "byteLength": 13118
+          "byteLength": 13118,
+          "gitBlobOid": "8118fda47e6256d3cbf086af9e072c48c1b280a4"
         },
         {
           "kind": "scope",
@@ -9032,7 +9225,8 @@
           "revision": "1",
           "status": "approved",
           "sha256": "7b187541fc4be9c3fdba300f7af3c44216cf5972d2991e8815b381bccd39d3e2",
-          "byteLength": 17930
+          "byteLength": 17930,
+          "gitBlobOid": "248d40ee4955ac9168bda5e9977efbdfff215224"
         },
         {
           "kind": "design",
@@ -9040,7 +9234,8 @@
           "revision": "1",
           "status": "approved",
           "sha256": "77805cb66106af061b059bea7ffc5449c2a05dfe84582b49fcd5c93965ed57be",
-          "byteLength": 23673
+          "byteLength": 23673,
+          "gitBlobOid": "ae1ae47d46c9290ad87e6ba19a607d26818241c7"
         },
         {
           "kind": "plan",
@@ -9048,7 +9243,8 @@
           "revision": "1",
           "status": "groomed",
           "sha256": "aebc3020c1a0c80758983cc15aaaed115a2d4a3d1c4ce5d0ac820e2f510b9bf9",
-          "byteLength": 2541
+          "byteLength": 2541,
+          "gitBlobOid": "de636062381c84d28b485ca0c9874432c3eb8acf"
         },
         {
           "kind": "tasks",
@@ -9056,7 +9252,8 @@
           "revision": "1",
           "status": "groomed",
           "sha256": "fe48528ba3b01f159cffa7d8625a3e86677ef725f1803c681e9ed493faf94b5e",
-          "byteLength": 4090
+          "byteLength": 4090,
+          "gitBlobOid": "b9bd64139d602948ce9c9f0fabecb8529b65cf10"
         },
         {
           "kind": "verification",
@@ -9064,7 +9261,8 @@
           "revision": "1",
           "status": "groomed",
           "sha256": "7e9a196beb1126bd92a1c671fb03a76cc77778c930ad8f1bdb8f05c23a276c4c",
-          "byteLength": 2116
+          "byteLength": 2116,
+          "gitBlobOid": "5c60834348395d0bc2ca2639096901e2ada15a88"
         }
       ],
       "tasks": [
@@ -9260,7 +9458,8 @@
           "revision": "1",
           "status": "approved",
           "sha256": "56ba9578f186d7ee007b6015d7e71dd4210b78a295d000fcbd01b07b75ed6e68",
-          "byteLength": 14006
+          "byteLength": 14006,
+          "gitBlobOid": "5a3fb7eba3b26ac5e9bfa77337b5cd275ac49c41"
         },
         {
           "kind": "scope",
@@ -9268,7 +9467,8 @@
           "revision": "1",
           "status": "approved",
           "sha256": "1d8fa10932a21a43487ef88c1f7370c2855148935f06b20ce8c6cbd1ca6c1ead",
-          "byteLength": 18735
+          "byteLength": 18735,
+          "gitBlobOid": "3f41a37ec6de2ab4eed965c813db09be51204ac9"
         },
         {
           "kind": "design",
@@ -9276,7 +9476,8 @@
           "revision": "1",
           "status": "approved",
           "sha256": "792a02156551834e582e4bdc2389d264558d0360341e4ca4d5f261bb8a88c8e1",
-          "byteLength": 26454
+          "byteLength": 26454,
+          "gitBlobOid": "372f6e8994ba1f562f04b7510c1093a526cff64b"
         },
         {
           "kind": "plan",
@@ -9284,7 +9485,8 @@
           "revision": "1",
           "status": "groomed",
           "sha256": "79b65aadccfd0f5533e580192a76f97f039cabb6a654449a63cb72f24af5cc79",
-          "byteLength": 4135
+          "byteLength": 4135,
+          "gitBlobOid": "cd9a53028c966ffbbf34a2a47315dc270d5e326d"
         },
         {
           "kind": "tasks",
@@ -9292,7 +9494,8 @@
           "revision": "1",
           "status": "groomed",
           "sha256": "253d62fb0232549d3344b15a89846c1530331809f97c3c6ae72a9e2ac02a6347",
-          "byteLength": 5256
+          "byteLength": 5256,
+          "gitBlobOid": "72fbe8588de7ae0458e6fa662525506fe4c83101"
         },
         {
           "kind": "verification",
@@ -9300,7 +9503,8 @@
           "revision": "1",
           "status": "groomed",
           "sha256": "dfc13e7ffc77ef4a57320eb1f37efd8c2933cbc3680ae6cde19bc5c3cf4f9b8a",
-          "byteLength": 2345
+          "byteLength": 2345,
+          "gitBlobOid": "2c43730bfdf4ccac432abc3c51b42cb11197b3b9"
         }
       ],
       "tasks": [
@@ -9964,5 +10168,5 @@
       ]
     }
   ],
-  "contractHash": "343f2a8318e98e829d816de7b69d01a164d58929c2e3e17b952f101a2baea595"
+  "contractHash": "5d26504784f50286bb13a09cc44eb88aa8a1fcb27b51499831591fcb56c664c6"
 }

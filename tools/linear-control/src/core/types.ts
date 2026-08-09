@@ -30,6 +30,13 @@ export interface DocumentContract {
   status: string;
   sha256: string;
   byteLength: number;
+  gitBlobOid: string;
+}
+
+export interface RepositoryBlobEvidence {
+  path: string;
+  oid: string;
+  byteLength: number;
 }
 
 export interface ProofContract {

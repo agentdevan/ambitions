@@ -1,6 +1,7 @@
 import { readFile, readdir } from "node:fs/promises";
 import { basename, join, relative } from "node:path";
 import { execFileSync } from "node:child_process";
+import { createHash } from "node:crypto";
 import {
   MANIFEST_SCHEMA_VERSION,
   type DesiredWorkspaceManifest,
@@ -35,6 +36,13 @@ const FRONTEND_MATRIX_FIELDS = [
   "Visual proof",
 ] as const;
 const FRONTEND_MATCH_FIELDS = FRONTEND_MATRIX_FIELDS.slice(0, 5);
+
+function gitBlobOid(bytes: Uint8Array): string {
+  return createHash("sha1")
+    .update(`blob ${bytes.byteLength}\0`)
+    .update(bytes)
+    .digest("hex");
+}
 
 function frontmatter(text: string): Record<string, string> {
   const match = /^\+\+\+\r?\n([\s\S]*?)\r?\n\+\+\+/.exec(text);
@@ -217,6 +225,7 @@ export async function compileRepository(
           status,
           sha256: await sha256Bytes(bytes),
           byteLength: bytes.byteLength,
+          gitBlobOid: gitBlobOid(bytes),
         });
         if (path === "implementation/tasks.md")
           tasks = taskContracts(slug, text);

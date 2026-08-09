@@ -63,6 +63,7 @@ describe("Linear authority mirrors", () => {
             status: "approved",
             sha256: "abc",
             byteLength: source.length,
+            gitBlobOid: "1".repeat(40),
           },
           content: source,
         },
