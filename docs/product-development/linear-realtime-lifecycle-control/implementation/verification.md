@@ -3,7 +3,7 @@
 ## Exact automated and build checks
 
 ```bash
-python3 .agents/skills/ambitions-product-development-lifecycle/scripts/ambitions_product_docs.py check linear-realtime-lifecycle-control
+python3 .agents/skills/ambitions-product-development-lifecycle/scripts/ambitions_product_docs.py check docs/product-development/linear-realtime-lifecycle-control
 npm --prefix tools/linear-control ci
 npm --prefix tools/linear-control run format:check
 npm --prefix tools/linear-control run lint
