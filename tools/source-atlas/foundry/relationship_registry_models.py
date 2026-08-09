@@ -81,6 +81,7 @@ PROFILE_PREDICATES = {
         }
     ),
     "cip-soc-relevance-v1": frozenset({"ambitions:educationOccupationRelevance"}),
+    "onet-soc-overlay-v1": frozenset({"ambitions:sourceTaxonomyRelationship"}),
 }
 PROFILE_PREDICATE_ENDPOINT_STATES = {
     ("cip-edition-migration-v1", "cip:unchanged"): (
@@ -112,6 +113,10 @@ PROFILE_PREDICATE_ENDPOINT_STATES = {
         frozenset({"current_for_mapping"}),
     ),
     ("cip-soc-relevance-v1", "ambitions:educationOccupationRelevance"): (
+        frozenset({"current_for_mapping"}),
+        frozenset({"current_for_mapping"}),
+    ),
+    ("onet-soc-overlay-v1", "ambitions:sourceTaxonomyRelationship"): (
         frozenset({"current_for_mapping"}),
         frozenset({"current_for_mapping"}),
     ),
