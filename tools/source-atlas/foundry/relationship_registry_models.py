@@ -66,6 +66,42 @@ AUTHORITY_FIELDS = frozenset(
 )
 CONCEPT_FIELDS = frozenset({"conceptId", "label", "locator"})
 SOURCE_FIELD_FIELDS = frozenset({"name", "value"})
+RELATIONSHIP_PRIVATE_SOURCE_FIELD_CANARIES = frozenset(
+    {
+        "userid",
+        "deviceid",
+        "ambition",
+        "goal",
+        "goalid",
+        "capability",
+        "proof",
+        "educationhistory",
+        "schedule",
+        "location",
+        "recommendation",
+        "correction",
+        "selection",
+        "rejection",
+    }
+)
+RELATIONSHIP_PRIVATE_SOURCE_FIELD_ID_BASES = frozenset(
+    {
+        "ambition",
+        "goal",
+        "capability",
+        "proof",
+        "educationhistory",
+        "schedule",
+        "location",
+        "recommendation",
+        "correction",
+        "selection",
+        "rejection",
+    }
+)
+RELATIONSHIP_PUBLIC_SOURCE_FIELD_QUALIFIERS = frozenset(
+    {"source", "mapping", "publisher", "standard"}
+)
 PROFILE_PREDICATES = {
     "cip-edition-migration-v1": frozenset(
         {
@@ -309,6 +345,38 @@ def source_specific_fields(
         field_value = field["value"]
         if not isinstance(name, str) or not name or name in names:
             raise error_type(f"SOURCE_FIELD_NAME_INVALID:{location}[{index}]")
+        separated_name = re.sub(r"([a-z0-9])([A-Z])", r"\1_\2", name)
+        name_tokens = tuple(
+            token.casefold()
+            for token in re.split(r"[^A-Za-z0-9]+", separated_name)
+            if token
+        )
+        normalized_name = "".join(name_tokens)
+        private_reason: str | None = None
+        if normalized_name in RELATIONSHIP_PRIVATE_SOURCE_FIELD_CANARIES:
+            private_reason = "named_private_canary"
+        elif "private" in name_tokens:
+            private_reason = "private_qualified_field"
+        elif "user" in name_tokens:
+            private_reason = "user_qualified_field"
+        elif "device" in name_tokens:
+            private_reason = "device_qualified_field"
+        elif (
+            name_tokens[-1:] == ("id",)
+            and not RELATIONSHIP_PUBLIC_SOURCE_FIELD_QUALIFIERS.intersection(
+                name_tokens
+            )
+            and any(
+                base in "".join(name_tokens[:-1])
+                for base in RELATIONSHIP_PRIVATE_SOURCE_FIELD_ID_BASES
+            )
+        ):
+            private_reason = "private_category_id_field"
+        if private_reason is not None:
+            raise error_type(
+                f"PRIVATE_BOUNDARY:{location}[{index}].name:"
+                f"relationship_private_field:{private_reason}"
+            )
         if field_value is not None and not isinstance(
             field_value,
             (str, int, float, bool),

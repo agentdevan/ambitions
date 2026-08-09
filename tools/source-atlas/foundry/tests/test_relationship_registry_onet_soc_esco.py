@@ -27,6 +27,54 @@ ONET_ESCO_FIXTURE = FIXTURES / "onet-esco-gated-v1.json"
 EDGE_SCHEMA = (
     ROOT / "tools/source-atlas/foundry/contracts/relationship-edge-v1.schema.json"
 )
+REQ_011_PRIVATE_SOURCE_FIELD_CANARIES = (
+    "userId",
+    "deviceId",
+    "ambition",
+    "goal",
+    "goalId",
+    "capability",
+    "proof",
+    "educationHistory",
+    "schedule",
+    "location",
+    "recommendation",
+    "correction",
+    "selection",
+    "rejection",
+)
+REQ_011_PRIVATE_SOURCE_FIELD_VARIANTS = (
+    "privateCapabilityId",
+    "userEducationHistory",
+    "deviceLocation",
+    "ambitionId",
+    "capabilityId",
+    "proofId",
+    "educationHistoryId",
+    "scheduleId",
+    "locationId",
+    "recommendationId",
+    "correctionId",
+    "selectionId",
+    "rejectionId",
+    "sourcePrivateCorrectionId",
+    "mappingUserSelectionId",
+    "publisherDeviceLocationId",
+)
+REQ_011_REJECTED_SOURCE_FIELDS = (
+    REQ_011_PRIVATE_SOURCE_FIELD_CANARIES + REQ_011_PRIVATE_SOURCE_FIELD_VARIANTS
+)
+LEGITIMATE_PUBLIC_SOURCE_FIELDS = (
+    "correctionDate",
+    "sourceCorrectionNotice",
+    "selectionMethod",
+    "sourceLocationCode",
+    "sourceCorrectionId",
+    "sourceLocationId",
+    "mappingCorrectionId",
+    "publisherSelectionId",
+    "standardLocationId",
+)
 
 
 def _load(path: Path) -> dict:
@@ -89,6 +137,17 @@ def test_onet_soc_edges_are_schema_valid_overlay_only_and_preserve_non_claims() 
             "not the user's current job",
         ]
         assert "sibling_inheritance" in edge["forbiddenPropagation"]
+    exact_granularity = next(
+        edge
+        for edge in _onet_soc_result()["edges"]
+        if edge["sourceMetadata"]["sourceRow"] == "onetsoc-001"
+    )
+    assert exact_granularity["sourceMetadata"]["sourceSpecificFields"] == [
+        {
+            "name": "relationshipGranularity",
+            "value": "exact O*NET-SOC occupation to SOC detailed occupation",
+        }
+    ]
 
 
 @pytest.mark.parametrize(
@@ -144,6 +203,39 @@ def test_onet_soc_fails_closed_for_unknown_fields_releases_rights_and_private_da
         adapt_onet_soc_document(private_canary)
 
 
+@pytest.mark.parametrize("canary", REQ_011_REJECTED_SOURCE_FIELDS)
+def test_onet_soc_rejects_every_req_011_private_source_field_canary(
+    canary: str,
+) -> None:
+    document = _load(ONET_SOC_FIXTURE)
+    document["rows"][0]["sourceSpecificFields"].append(
+        {"name": canary, "value": "private-canary"}
+    )
+
+    with pytest.raises(ONETSOCAdapterError, match="PRIVATE_BOUNDARY"):
+        adapt_onet_soc_document(document)
+
+
+@pytest.mark.parametrize("field_name", LEGITIMATE_PUBLIC_SOURCE_FIELDS)
+def test_onet_soc_preserves_source_qualified_public_metadata(
+    field_name: str,
+) -> None:
+    document = _load(ONET_SOC_FIXTURE)
+    document["rows"][0]["sourceSpecificFields"].append(
+        {"name": field_name, "value": "synthetic public source metadata"}
+    )
+
+    edge = next(
+        edge
+        for edge in _onet_soc_result(document)["edges"]
+        if edge["sourceMetadata"]["sourceRow"] == "onetsoc-001"
+    )
+    assert {
+        "name": field_name,
+        "value": "synthetic public source metadata",
+    } in edge["sourceMetadata"]["sourceSpecificFields"]
+
+
 def test_onet_soc_output_is_deterministic_and_inspection_rights_do_not_enable_overlay() -> (
     None
 ):
@@ -193,6 +285,12 @@ def test_onet_esco_preserves_predicates_and_qa_but_emits_no_consumer_edges() -> 
     )
     assert all(item["reviewState"] == "restricted" for item in mappings.values())
     assert mappings["skos:relatedMatch"]["qaPartition"] == "lower_qa_related"
+    assert mappings["skos:relatedMatch"]["sourceSpecificFields"] == [
+        {
+            "name": "qaNotice",
+            "value": "Synthetic related row is outside the higher-QA partition",
+        }
+    ]
     assert all(
         item["qaPartition"] == "human_validated"
         for predicate, item in mappings.items()
@@ -247,6 +345,39 @@ def test_onet_esco_rights_release_unknown_and_private_mismatches_fail_closed() -
     )
     with pytest.raises(ONETESCOAdapterError, match="PRIVATE_BOUNDARY"):
         adapt_onet_esco_document(private_canary)
+
+
+@pytest.mark.parametrize("canary", REQ_011_REJECTED_SOURCE_FIELDS)
+def test_onet_esco_rejects_every_req_011_private_source_field_canary(
+    canary: str,
+) -> None:
+    document = _load(ONET_ESCO_FIXTURE)
+    document["rows"][0]["sourceSpecificFields"].append(
+        {"name": canary, "value": "private-canary"}
+    )
+
+    with pytest.raises(ONETESCOAdapterError, match="PRIVATE_BOUNDARY"):
+        adapt_onet_esco_document(document)
+
+
+@pytest.mark.parametrize("field_name", LEGITIMATE_PUBLIC_SOURCE_FIELDS)
+def test_onet_esco_preserves_source_qualified_public_metadata(
+    field_name: str,
+) -> None:
+    document = _load(ONET_ESCO_FIXTURE)
+    document["rows"][0]["sourceSpecificFields"].append(
+        {"name": field_name, "value": "synthetic public source metadata"}
+    )
+
+    mapping = next(
+        item
+        for item in _onet_esco_result(document)["mappings"]
+        if item["sourceRow"] == "onetesco-exact"
+    )
+    assert {
+        "name": field_name,
+        "value": "synthetic public source metadata",
+    } in mapping["sourceSpecificFields"]
 
 
 def test_onet_esco_output_is_deterministic_synthetic_and_production_blocked() -> None:
