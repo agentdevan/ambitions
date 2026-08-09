@@ -199,6 +199,35 @@ describe("Worker ingress", () => {
     expect(queueSend).toHaveBeenCalledOnce();
   });
 
+  it("authenticates a duplicate direct reconciliation without using Queues", async () => {
+    const { env, queueSend } = environment(0);
+    const body = JSON.stringify({ kind: "full-check" });
+    const signature = createHmac("sha256", env.CONTROL_ADMIN_SECRET)
+      .update(body)
+      .digest("hex");
+    const response = await worker.fetch(
+      new Request("https://control.example/reconcile-direct", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "x-control-signature": signature,
+          "x-delivery-id": "direct-duplicate",
+        },
+        body,
+      }),
+      env,
+    );
+
+    expect(response.status).toBe(200);
+    await expect(response.json()).resolves.toEqual({
+      accepted: true,
+      direct: true,
+      duplicate: true,
+      deliveryId: "direct-duplicate",
+    });
+    expect(queueSend).not.toHaveBeenCalled();
+  });
+
   it("rejects an invalid signature without queueing", async () => {
     const { env, queueSend } = environment();
     const response = await worker.fetch(
