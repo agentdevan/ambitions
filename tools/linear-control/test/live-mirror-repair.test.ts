@@ -543,6 +543,25 @@ function runtimeOptions(
 }
 
 describe("live authority mirror repair", () => {
+  it("emits initiative-index lists in Linear's canonical Markdown form", async () => {
+    const { desired } = await fixture();
+    const project = desired.projects[0]!;
+    const group = desired.schedule[0]!;
+    const content = initiativeIndexMirror(
+      project,
+      group,
+      desired.authorityCommit,
+      desired.contractHash,
+      "Grooming",
+      "2026-08-09T00:00:00Z",
+      new Map([[project.tasks[0]!.canonicalKey, "AMB-1"]]),
+    );
+
+    expect(content).toContain("* Execution group: G01");
+    expect(content).toContain("* T1: AMB-1");
+    expect(content).not.toMatch(/^- /m);
+  });
+
   it("aborts before Linear when any runtime lifecycle contract changed after compilation", async () => {
     const { client, desired, sourceByPath } = await fixture();
     desired.compileProvenanceCommit = "old-compile-commit";
