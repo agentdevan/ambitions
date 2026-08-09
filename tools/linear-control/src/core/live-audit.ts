@@ -5,6 +5,7 @@ import type {
   IssueState,
   ProjectContract,
   ScheduleGroup,
+  TaskProofEvidence,
   TaskContract,
 } from "./types.js";
 import { CONTROLLED_TEMPLATES, OPERATIONAL_VIEWS } from "./definitions.js";
@@ -45,6 +46,10 @@ interface LiveIssue {
   state: { id: string; name: IssueState; type: string };
   project?: { name: string } | null;
   parent?: { id: string } | null;
+  attachments: {
+    nodes: Array<{ url: string }>;
+    pageInfo: { hasNextPage: boolean; endCursor?: string | null };
+  };
   labels: { nodes: Array<{ id: string; name: string }> };
   relations: {
     nodes: Array<{
@@ -65,7 +70,14 @@ export interface LiveAuditResult {
   metrics: Readonly<Record<string, number>>;
   repairs: number;
   repairReceipts: LiveRepairReceipt[];
+  proofReceipts: LiveProofReceipt[];
   mappings: LiveObjectMapping[];
+}
+
+export interface LiveProofReceipt {
+  canonicalKey: string;
+  evidenceHash: string;
+  evidenceJson: string;
 }
 
 export interface LiveRepairReceipt {
@@ -83,6 +95,38 @@ export interface LiveRepairReceipt {
   verified: boolean;
 }
 
+export interface LiveMutationIntent {
+  canonicalKey: string;
+  operation: LiveRepairReceipt["operation"];
+  beforeHash: string;
+  desiredHash: string;
+}
+
+export interface LiveMutationCheckpoint extends LiveMutationIntent {
+  resultHash: string;
+  verified: boolean;
+  reconciled?: boolean;
+  skipped?: boolean;
+  error?: string;
+}
+
+interface SkippedMutationWrite {
+  skipped: true;
+  resultHash: string;
+  reconciled?: boolean;
+  error: string;
+}
+
+function isSkippedMutationWrite(value: unknown): value is SkippedMutationWrite {
+  return (
+    typeof value === "object" &&
+    value !== null &&
+    Reflect.get(value, "skipped") === true &&
+    typeof Reflect.get(value, "resultHash") === "string" &&
+    typeof Reflect.get(value, "error") === "string"
+  );
+}
+
 export interface LiveObjectMapping {
   canonicalKey: string;
   linearId: string;
@@ -92,6 +136,17 @@ export interface LiveObjectMapping {
 
 export interface LiveAuditOptions {
   loadRepositoryText?: (path: string) => Promise<string>;
+  runtimeLifecyclePaths?: readonly string[];
+  verifyRuntimeAuthority?: () => Promise<boolean>;
+  resolveTaskProof?: (input: {
+    issueIdentifier: string;
+    attachmentUrls: readonly string[];
+    authorityCommit: string;
+    task: TaskContract;
+  }) => Promise<TaskProofEvidence>;
+  onMutationIntent?: (intent: LiveMutationIntent) => Promise<void>;
+  onMutationResult?: (result: LiveMutationCheckpoint) => Promise<void>;
+  onMutationCheckpoint?: (checkpoint: LiveMutationCheckpoint) => Promise<void>;
 }
 
 const milestones = [
@@ -198,7 +253,14 @@ export function desiredLiveIssueState(
   dependencyBlocked: boolean,
   project: ProjectContract,
   task: TaskContract,
+  proof: TaskProofEvidence = {
+    authorityCommit: "",
+    mergedToMain: false,
+    proofPassed: false,
+    requiredProofFailed: false,
+  },
 ): IssueState {
+  if (["Canceled", "Duplicate", "Won’t Do"].includes(current)) return current;
   const frontendBlocked = requiredFrontendGateLabels(project, task).length > 0;
   if (frontendBlocked)
     return ["In Progress", "In Review", "Needs Repair", "Done"].includes(
@@ -206,34 +268,13 @@ export function desiredLiveIssueState(
     )
       ? "Needs Repair"
       : "Blocked";
-  if (
-    [
-      "In Progress",
-      "In Review",
-      "Needs Repair",
-      "Done",
-      "Canceled",
-      "Duplicate",
-      "Won’t Do",
-    ].includes(current)
-  )
+  if (proof.requiredProofFailed) return "Needs Repair";
+  if (proof.mergedToMain && proof.proofPassed) return "Done";
+  if (proof.mergedToMain) return "In Review";
+  if (current === "Done") return "In Review";
+  if (["In Progress", "In Review", "Needs Repair"].includes(current))
     return current;
   return dependencyBlocked ? "Blocked" : "Ready For Codex";
-}
-
-function expectedState(
-  issue: LiveIssue,
-  project: ProjectContract,
-  task: TaskContract,
-): IssueState {
-  const blocked = issue.inverseRelations.nodes.some(
-    (relation) =>
-      relation.type === "blocks" &&
-      !["Done", "Canceled", "Duplicate", "Won’t Do"].includes(
-        relation.issue.state.name,
-      ),
-  );
-  return desiredLiveIssueState(issue.state.name, blocked, project, task);
 }
 
 function exception(
@@ -244,18 +285,58 @@ function exception(
   return { canonicalKey, category: "drift", severity, summary };
 }
 
-const terminalTaskStates = new Set<IssueState>([
-  "Done",
+const preservedTerminalStates = new Set<IssueState>([
   "Canceled",
   "Duplicate",
   "Won’t Do",
 ]);
+const terminalTaskStates = new Set<IssueState>([
+  "Done",
+  ...preservedTerminalStates,
+]);
+
+export function desiredLiveStatesByDependency(
+  projects: readonly ProjectContract[],
+  currentStates: ReadonlyMap<string, IssueState>,
+  proofByKey: ReadonlyMap<string, TaskProofEvidence>,
+): Map<string, IssueState> {
+  const entries = projects.flatMap((project) =>
+    project.tasks.map((task) => ({ project, task })),
+  );
+  const desiredStates = new Map(currentStates);
+  for (let pass = 0; pass <= entries.length; pass += 1) {
+    let changed = false;
+    for (const { project, task } of entries) {
+      const current = currentStates.get(task.canonicalKey);
+      if (!current) continue;
+      const dependencyBlocked = task.dependencies.some((dependency) => {
+        const state = desiredStates.get(dependency);
+        return state === undefined || !terminalTaskStates.has(state);
+      });
+      const desired = desiredLiveIssueState(
+        current,
+        dependencyBlocked,
+        project,
+        task,
+        proofByKey.get(task.canonicalKey),
+      );
+      if (desiredStates.get(task.canonicalKey) !== desired) {
+        desiredStates.set(task.canonicalKey, desired);
+        changed = true;
+      }
+    }
+    if (!changed) return desiredStates;
+  }
+  throw new Error("ISSUE_STATE_DEPENDENCY_PLAN_DID_NOT_CONVERGE");
+}
 
 export function desiredProjectMirrorProgress(
   project: ProjectContract,
   group: ScheduleGroup,
   schedule: readonly ScheduleGroup[],
   statesByKey: ReadonlyMap<string, IssueState>,
+  proofByKey: ReadonlyMap<string, TaskProofEvidence> = new Map(),
+  authorityCommit = "",
 ): ProjectMirrorProgress {
   const canonicalStates = project.tasks.map(
     (task) => statesByKey.get(task.canonicalKey) ?? "Backlog",
@@ -272,7 +353,16 @@ export function desiredProjectMirrorProgress(
     terminalTasks: canonicalStates.filter((state) =>
       terminalTaskStates.has(state),
     ).length,
-    verifiedTasks: canonicalStates.filter((state) => state === "Done").length,
+    verifiedTasks: project.tasks.filter((task) => {
+      const proof = proofByKey.get(task.canonicalKey);
+      return (
+        statesByKey.get(task.canonicalKey) === "Done" &&
+        proof?.authorityCommit === authorityCommit &&
+        proof.mergedToMain &&
+        proof.proofPassed &&
+        !proof.requiredProofFailed
+      );
+    }).length,
     totalTasks: project.tasks.length,
     ...(nextTask ? { nextTask } : {}),
     groupOrdinal: schedule.indexOf(group) + 1,
@@ -298,12 +388,114 @@ async function mirrorSourcesFromCurrentContent(
   return sources;
 }
 
+async function preflightRuntimeDocumentContracts(
+  allProjects: readonly ProjectContract[],
+  loadRepositoryText: LiveAuditOptions["loadRepositoryText"],
+  runtimeLifecyclePaths: LiveAuditOptions["runtimeLifecyclePaths"],
+  inventoryRequired: boolean,
+): Promise<void> {
+  const lifecyclePath =
+    /^docs\/product-development\/[^/]+\/(?:research\.md|scope\.md|design\.md|implementation\/(?:plan|tasks|verification)\.md)$/;
+  if (inventoryRequired && !runtimeLifecyclePaths)
+    throw new Error("RUNTIME_LIFECYCLE_INVENTORY_REQUIRED");
+  if (runtimeLifecyclePaths) {
+    const expectedPaths = new Set(
+      allProjects.flatMap((project) =>
+        project.documents.map((contract) => contract.path),
+      ),
+    );
+    const actualPaths = new Set(
+      runtimeLifecyclePaths.filter((path) => lifecyclePath.test(path)),
+    );
+    const missing = [...expectedPaths].filter((path) => !actualPaths.has(path));
+    const extra = [...actualPaths].filter((path) => !expectedPaths.has(path));
+    const expectedFolders = new Set(
+      allProjects.map((project) => project.folder),
+    );
+    const actualFolders = new Set(
+      [...actualPaths].map((path) => path.split("/").slice(0, 3).join("/")),
+    );
+    const missingFolders = [...expectedFolders].filter(
+      (folder) => !actualFolders.has(folder),
+    );
+    const extraFolders = [...actualFolders].filter(
+      (folder) => !expectedFolders.has(folder),
+    );
+    if (
+      missing.length > 0 ||
+      extra.length > 0 ||
+      missingFolders.length > 0 ||
+      extraFolders.length > 0
+    )
+      throw new Error(
+        `RUNTIME_LIFECYCLE_INVENTORY_MISMATCH:missing=${missing.sort().join(",") || "none"}:extra=${extra.sort().join(",") || "none"}:missingFolders=${missingFolders.sort().join(",") || "none"}:extraFolders=${extraFolders.sort().join(",") || "none"}`,
+      );
+  }
+
+  const contracts = allProjects.flatMap((project) =>
+    project.documents.map((contract) => ({ project, contract })),
+  );
+  if (contracts.length === 0) return;
+  if (!loadRepositoryText)
+    throw new Error("RUNTIME_DOCUMENT_CONTRACT_LOADER_REQUIRED");
+
+  let next = 0;
+  const validate = async (): Promise<void> => {
+    while (next < contracts.length) {
+      const entry = contracts[next++]!;
+      let source: string;
+      try {
+        source = await loadRepositoryText(entry.contract.path);
+      } catch {
+        throw new Error(
+          `RUNTIME_DOCUMENT_CONTRACT_MISSING:${entry.project.canonicalKey}:${entry.contract.path}`,
+        );
+      }
+      const sourceHash = await sha256Text(source);
+      const byteLength = new TextEncoder().encode(source).byteLength;
+      if (
+        sourceHash !== entry.contract.sha256 ||
+        byteLength !== entry.contract.byteLength
+      )
+        throw new Error(
+          `RUNTIME_DOCUMENT_CONTRACT_MISMATCH:${entry.project.canonicalKey}:${entry.contract.path}`,
+        );
+    }
+  };
+  await Promise.all(
+    Array.from({ length: Math.min(6, contracts.length) }, () => validate()),
+  );
+}
+
 export async function auditLiveWorkspace(
   client: LinearClient,
   desired: DesiredWorkspaceManifest,
   mutationsEnabled: boolean,
   options: LiveAuditOptions = {},
 ): Promise<LiveAuditResult> {
+  const admitted = desired.projects.filter(
+    (project) =>
+      project.admission === "ready" &&
+      desired.schedule.some((group) =>
+        group.projectSlugs.includes(project.slug),
+      ),
+  );
+  await preflightRuntimeDocumentContracts(
+    desired.projects,
+    options.loadRepositoryText,
+    options.runtimeLifecyclePaths,
+    desired.compileProvenanceCommit !== undefined,
+  );
+  const assertMutationAuthority = async (): Promise<void> => {
+    if (!mutationsEnabled) return;
+    if (!options.verifyRuntimeAuthority) {
+      if (desired.compileProvenanceCommit)
+        throw new Error("RUNTIME_AUTHORITY_VERIFIER_REQUIRED");
+      return;
+    }
+    if (!(await options.verifyRuntimeAuthority()))
+      throw new Error("RUNTIME_AUTHORITY_SUPERSEDED");
+  };
   const projects: LiveProject[] = [];
   let projectAfter: string | null = null;
   const seenProjectCursors = new Set<string>();
@@ -379,6 +571,7 @@ export async function auditLiveWorkspace(
             id identifier title description state { id name type }
             project { name }
             parent { id }
+            attachments(first: 50) { nodes { url } pageInfo { hasNextPage endCursor } }
             labels { nodes { id name } }
             relations { nodes { type relatedIssue { id state { name } } } }
             inverseRelations { nodes { type issue { id state { name } } } }
@@ -400,11 +593,79 @@ export async function auditLiveWorkspace(
     seenIssueCursors.add(nextCursor);
     after = nextCursor;
   } while (after);
+  for (const issue of issues)
+    if (issue.attachments.pageInfo.hasNextPage)
+      throw new Error(`LINEAR_ATTACHMENT_PAGE_INCOMPLETE:${issue.identifier}`);
 
   const exceptions: ControlException[] = [];
   let repairs = 0;
   const repairReceipts: LiveRepairReceipt[] = [];
+  const proofReceipts: LiveProofReceipt[] = [];
   const mappings: LiveObjectMapping[] = [];
+  const reconcilePendingMutation = async (
+    intent: LiveMutationIntent,
+    resultHash: string,
+  ): Promise<void> => {
+    if (resultHash !== intent.desiredHash) return;
+    await options.onMutationCheckpoint?.({
+      ...intent,
+      resultHash,
+      verified: true,
+      reconciled: true,
+    });
+  };
+  const performMutation = async (
+    intent: LiveMutationIntent,
+    write: () => Promise<unknown>,
+    readResultHash: () => Promise<string>,
+  ): Promise<LiveMutationCheckpoint> => {
+    await assertMutationAuthority();
+    await options.onMutationIntent?.(intent);
+    let resultHash: string;
+    try {
+      const writeResult = await write();
+      if (isSkippedMutationWrite(writeResult)) {
+        const result: LiveMutationCheckpoint = {
+          ...intent,
+          resultHash: writeResult.resultHash,
+          verified:
+            writeResult.reconciled === true &&
+            writeResult.resultHash === intent.desiredHash,
+          ...(writeResult.reconciled === undefined
+            ? {}
+            : { reconciled: writeResult.reconciled }),
+          skipped: true,
+          error: writeResult.error,
+        };
+        await options.onMutationResult?.(result);
+        return result;
+      }
+      resultHash = await readResultHash();
+    } catch (error) {
+      const result: LiveMutationCheckpoint = {
+        ...intent,
+        resultHash: "",
+        verified: false,
+        error: error instanceof Error ? error.message : "UNKNOWN_ERROR",
+      };
+      try {
+        await options.onMutationResult?.(result);
+      } catch {
+        // Preserve the original write/read failure; a pending receipt remains
+        // recoverable when the durable result callback itself is unavailable.
+      }
+      throw error;
+    }
+    const result: LiveMutationCheckpoint = {
+      ...intent,
+      resultHash,
+      verified: resultHash === intent.desiredHash,
+    };
+    await options.onMutationResult?.(result);
+    repairReceipts.push(result);
+    repairs += 1;
+    return result;
+  };
   const projectsBySlug = new Map(
     projects
       .filter((project) => project.name.startsWith("Lifecycle — "))
@@ -474,13 +735,6 @@ export async function auditLiveWorkspace(
   if (!controlData.cycles.nodes.some((cycle) => cycle.isNext))
     exceptions.push(exception("workspace:cycles", "Next cycle is missing"));
 
-  const admitted = desired.projects.filter(
-    (project) =>
-      project.admission === "ready" &&
-      desired.schedule.some((group) =>
-        group.projectSlugs.includes(project.slug),
-      ),
-  );
   const workflowStateIds = new Map(
     controlData.workflowStates.nodes.map((state) => [state.name, state.id]),
   );
@@ -490,6 +744,90 @@ export async function auditLiveWorkspace(
   const projectStatusIds = new Map(
     controlData.projectStatuses.nodes.map((status) => [status.name, status.id]),
   );
+  const currentStatesByKey = new Map<string, IssueState>();
+  const proofByKey = new Map<string, TaskProofEvidence>();
+  for (const project of admitted)
+    for (const task of project.tasks) {
+      const issue = issuesByKey.get(task.canonicalKey);
+      if (!issue) continue;
+      currentStatesByKey.set(task.canonicalKey, issue.state.name);
+      const proof = preservedTerminalStates.has(issue.state.name)
+        ? {
+            authorityCommit: desired.authorityCommit,
+            mergedToMain: false,
+            proofPassed: false,
+            requiredProofFailed: false,
+          }
+        : options.resolveTaskProof
+          ? await options.resolveTaskProof({
+              issueIdentifier: issue.identifier,
+              attachmentUrls: issue.attachments.nodes.map((item) => item.url),
+              authorityCommit: desired.authorityCommit,
+              task,
+            })
+          : {
+              authorityCommit: desired.authorityCommit,
+              mergedToMain: false,
+              proofPassed: false,
+              requiredProofFailed: false,
+            };
+      proofByKey.set(task.canonicalKey, proof);
+    }
+  const plannedStatesByKey = desiredLiveStatesByDependency(
+    admitted,
+    currentStatesByKey,
+    proofByKey,
+  );
+  const readFreshIssueState = async (id: string): Promise<LiveIssue> =>
+    (
+      await client.request<{ issue: LiveIssue }>(
+        `query($id: String!) {
+          issue(id: $id) {
+            id identifier title description state { id name type }
+            project { name }
+            parent { id }
+            attachments(first: 50) { nodes { url } pageInfo { hasNextPage endCursor } }
+            labels { nodes { id name } }
+            relations { nodes { type relatedIssue { id state { name } } } }
+            inverseRelations { nodes { type issue { id state { name } } } }
+          }
+        }`,
+        { id },
+      )
+    ).issue;
+  const readFreshProjectMirror = async (
+    id: string,
+  ): Promise<Pick<LiveProject, "summary" | "description" | "status">> =>
+    (
+      await client.request<{
+        project: Pick<LiveProject, "summary" | "description" | "status">;
+      }>(
+        `query($id: String!) {
+          project(id: $id) {
+            summary: description description: content status { id name }
+          }
+        }`,
+        { id },
+      )
+    ).project;
+  const readFreshMilestoneDescription = async (id: string): Promise<string> =>
+    (
+      await client.request<{
+        projectMilestone: { description?: string | null };
+      }>(
+        `query($id: String!) {
+          projectMilestone(id: $id) { description }
+        }`,
+        { id },
+      )
+    ).projectMilestone.description ?? "";
+  const readFreshDocumentContent = async (id: string): Promise<string> =>
+    (
+      await client.request<{ document: { content?: string | null } }>(
+        `query($id: String!) { document(id: $id) { content } }`,
+        { id },
+      )
+    ).document.content ?? "";
   for (const project of admitted) {
     const live = projectsBySlug.get(project.slug);
     if (!live) {
@@ -555,17 +893,216 @@ export async function auditLiveWorkspace(
       );
       continue;
     }
-    const statesByKey = new Map(
-      project.tasks.flatMap((task) => {
-        const state = issuesByKey.get(task.canonicalKey)?.state.name;
-        return state ? [[task.canonicalKey, state] as const] : [];
-      }),
-    );
+    for (const task of project.tasks) {
+      const issue = issuesByKey.get(task.canonicalKey);
+      const plannedState = plannedStatesByKey.get(task.canonicalKey);
+      const proof = proofByKey.get(task.canonicalKey);
+      if (!issue || !plannedState || !proof) continue;
+      const snapshotBeforeHash = await sha256Text(
+        stableJson({ state: issue.state.name }),
+      );
+      const snapshotDesiredHash = await sha256Text(
+        stableJson({ state: plannedState }),
+      );
+      if (plannedState === issue.state.name) {
+        if (mutationsEnabled)
+          await reconcilePendingMutation(
+            {
+              canonicalKey: task.canonicalKey,
+              operation: "issue-state-update",
+              beforeHash: snapshotBeforeHash,
+              desiredHash: snapshotDesiredHash,
+            },
+            snapshotBeforeHash,
+          );
+        continue;
+      }
+      if (!mutationsEnabled) {
+        exceptions.push(
+          exception(
+            task.canonicalKey,
+            `Issue state ${issue.state.name} should be ${plannedState}`,
+            "warning",
+          ),
+        );
+        continue;
+      }
+
+      const fresh = await readFreshIssueState(issue.id);
+      if (fresh.attachments.pageInfo.hasNextPage)
+        throw new Error(
+          `LINEAR_ATTACHMENT_PAGE_INCOMPLETE:${fresh.identifier}`,
+        );
+      if (preservedTerminalStates.has(fresh.state.name)) {
+        plannedStatesByKey.set(task.canonicalKey, fresh.state.name);
+        continue;
+      }
+      const dependencyBlocked =
+        task.dependencies.some((dependency) => {
+          const state = plannedStatesByKey.get(dependency);
+          return state === undefined || !terminalTaskStates.has(state);
+        }) ||
+        fresh.inverseRelations.nodes.some(
+          (relation) =>
+            relation.type === "blocks" &&
+            !terminalTaskStates.has(relation.issue.state.name),
+        );
+      const freshDesiredState = desiredLiveIssueState(
+        fresh.state.name,
+        dependencyBlocked,
+        project,
+        task,
+        proof,
+      );
+      plannedStatesByKey.set(task.canonicalKey, freshDesiredState);
+      if (
+        freshDesiredState === fresh.state.name ||
+        preservedTerminalStates.has(fresh.state.name)
+      )
+        continue;
+      const stateId = workflowStateIds.get(freshDesiredState);
+      if (!stateId) {
+        exceptions.push(
+          exception(
+            task.canonicalKey,
+            `Controlled issue state is missing: ${freshDesiredState}`,
+          ),
+        );
+        continue;
+      }
+      const beforeHash = await sha256Text(
+        stableJson({ state: fresh.state.name }),
+      );
+      const desiredHash = await sha256Text(
+        stableJson({ state: freshDesiredState }),
+      );
+      let verified: LiveIssue | undefined;
+      const result = await performMutation(
+        {
+          canonicalKey: task.canonicalKey,
+          operation: "issue-state-update",
+          beforeHash,
+          desiredHash,
+        },
+        async () => {
+          // Linear's issueUpdate mutation has no compare-and-set/version
+          // predicate. Re-read at the last possible boundary after the durable
+          // pending intent, then fail closed if the state contract changed.
+          const beforeWrite = await readFreshIssueState(issue.id);
+          verified = beforeWrite;
+          if (beforeWrite.attachments.pageInfo.hasNextPage)
+            throw new Error(
+              `LINEAR_ATTACHMENT_PAGE_INCOMPLETE:${beforeWrite.identifier}`,
+            );
+          const beforeWriteHash = await sha256Text(
+            stableJson({ state: beforeWrite.state.name }),
+          );
+          if (preservedTerminalStates.has(beforeWrite.state.name)) {
+            plannedStatesByKey.set(task.canonicalKey, beforeWrite.state.name);
+            return {
+              skipped: true,
+              resultHash: beforeWriteHash,
+              error: `ISSUE_STATE_TERMINAL_BEFORE_WRITE:${beforeWrite.state.name}`,
+            };
+          }
+          const beforeWriteDependencyBlocked =
+            task.dependencies.some((dependency) => {
+              const state = plannedStatesByKey.get(dependency);
+              return state === undefined || !terminalTaskStates.has(state);
+            }) ||
+            beforeWrite.inverseRelations.nodes.some(
+              (relation) =>
+                relation.type === "blocks" &&
+                !terminalTaskStates.has(relation.issue.state.name),
+            );
+          const beforeWriteDesired = desiredLiveIssueState(
+            beforeWrite.state.name,
+            beforeWriteDependencyBlocked,
+            project,
+            task,
+            proof,
+          );
+          plannedStatesByKey.set(task.canonicalKey, beforeWriteDesired);
+          if (beforeWriteDesired !== freshDesiredState)
+            return {
+              skipped: true,
+              resultHash: beforeWriteHash,
+              error: `ISSUE_STATE_CONTRACT_CHANGED_BEFORE_WRITE:${beforeWrite.state.name}->${beforeWriteDesired}`,
+            };
+          if (beforeWrite.state.name === beforeWriteDesired)
+            return {
+              skipped: true,
+              resultHash: beforeWriteHash,
+              reconciled: true,
+              error: "ISSUE_STATE_ALREADY_DESIRED_BEFORE_WRITE",
+            };
+          await client.request(
+            `mutation($id: String!, $state: String!) {
+              issueUpdate(id: $id, input: { stateId: $state }) { success }
+            }`,
+            { id: issue.id, state: stateId },
+          );
+        },
+        async () => {
+          verified = await readFreshIssueState(issue.id);
+          return sha256Text(stableJson({ state: verified.state.name }));
+        },
+      );
+      plannedStatesByKey.set(task.canonicalKey, verified!.state.name);
+      if (!result.verified && !result.skipped)
+        exceptions.push(
+          exception(
+            task.canonicalKey,
+            `Issue state repair did not verify: expected ${freshDesiredState}, observed ${verified!.state.name}`,
+          ),
+        );
+    }
+    if (mutationsEnabled)
+      for (const task of project.tasks) {
+        const issue = issuesByKey.get(task.canonicalKey);
+        if (!issue) continue;
+        const fresh = await readFreshIssueState(issue.id);
+        plannedStatesByKey.set(task.canonicalKey, fresh.state.name);
+      }
+    for (const task of project.tasks) {
+      const issue = issuesByKey.get(task.canonicalKey);
+      const proof = proofByKey.get(task.canonicalKey);
+      if (
+        !issue ||
+        !proof ||
+        plannedStatesByKey.get(task.canonicalKey) !== "Done" ||
+        proof.authorityCommit !== desired.authorityCommit ||
+        !proof.mergedToMain ||
+        !proof.proofPassed ||
+        proof.requiredProofFailed ||
+        proof.source === "receipt" ||
+        !proof.pullRequestUrl ||
+        !proof.mergeCommitSha
+      )
+        continue;
+      const evidenceJson = stableJson({
+        schemaVersion: 1,
+        authorityCommit: desired.authorityCommit,
+        canonicalKey: task.canonicalKey,
+        issueIdentifier: issue.identifier,
+        pullRequestUrl: proof.pullRequestUrl,
+        mergeCommitSha: proof.mergeCommitSha,
+        proofContractHash: await sha256Text(stableJson(task.proof)),
+      });
+      const evidenceHash = await sha256Text(evidenceJson);
+      proofReceipts.push({
+        canonicalKey: task.canonicalKey,
+        evidenceHash,
+        evidenceJson,
+      });
+    }
     const progress = desiredProjectMirrorProgress(
       project,
       group,
       desired.schedule,
-      statesByKey,
+      plannedStatesByKey,
+      proofByKey,
+      desired.authorityCommit,
     );
     const phase = progress.phase;
     const liveInitiatives = live.initiatives.nodes.map((item) => item.name);
@@ -599,6 +1136,20 @@ export async function auditLiveWorkspace(
         ? [`status(${live.status.name} -> ${phase})`]
         : []),
     ];
+    const projectBeforeHash = await sha256Text(
+      stableJson({
+        summary: live.summary ?? "",
+        description: live.description ?? "",
+        status: live.status.name,
+      }),
+    );
+    const projectDesiredHash = await sha256Text(
+      stableJson({
+        summary: desiredSummary,
+        description: desiredProjectDescription,
+        status: phase,
+      }),
+    );
     if (staleProjectFields.length > 0) {
       if (!mutationsEnabled) {
         exceptions.push(
@@ -617,65 +1168,40 @@ export async function auditLiveWorkspace(
             ),
           );
         } else {
-          const beforeHash = await sha256Text(
-            stableJson({
-              summary: live.summary ?? "",
-              description: live.description ?? "",
-              status: live.status.name,
-            }),
-          );
-          const desiredHash = await sha256Text(
-            stableJson({
-              summary: desiredSummary,
-              description: desiredProjectDescription,
-              status: phase,
-            }),
-          );
-          const updated = await client.request<{
-            projectUpdate: {
-              success: boolean;
-              project?: {
-                summary?: string | null;
-                description?: string | null;
-                status: { name: string };
-              } | null;
-            };
-          }>(
-            `mutation($id: String!, $input: ProjectUpdateInput!) {
-              projectUpdate(id: $id, input: $input) {
-                success
-                project { summary: description description: content status { name } }
-              }
-            }`,
+          const result = await performMutation(
             {
-              id: live.id,
-              input: {
-                description: desiredSummary,
-                content: desiredProjectDescription,
-                statusId,
-              },
+              canonicalKey: project.canonicalKey,
+              operation: "project-authority-update",
+              beforeHash: projectBeforeHash,
+              desiredHash: projectDesiredHash,
+            },
+            async () => {
+              await client.request(
+                `mutation($id: String!, $input: ProjectUpdateInput!) {
+                  projectUpdate(id: $id, input: $input) { success }
+                }`,
+                {
+                  id: live.id,
+                  input: {
+                    description: desiredSummary,
+                    content: desiredProjectDescription,
+                    statusId,
+                  },
+                },
+              );
+            },
+            async () => {
+              const fresh = await readFreshProjectMirror(live.id);
+              return sha256Text(
+                stableJson({
+                  summary: fresh.summary ?? "",
+                  description: fresh.description ?? "",
+                  status: fresh.status.name,
+                }),
+              );
             },
           );
-          const result = updated.projectUpdate.project;
-          const resultHash = await sha256Text(
-            stableJson({
-              summary: result?.summary ?? "",
-              description: result?.description ?? "",
-              status: result?.status.name ?? "",
-            }),
-          );
-          const matches =
-            updated.projectUpdate.success && resultHash === desiredHash;
-          repairReceipts.push({
-            canonicalKey: project.canonicalKey,
-            operation: "project-authority-update",
-            beforeHash,
-            desiredHash,
-            resultHash,
-            verified: matches,
-          });
-          repairs += 1;
-          if (!matches)
+          if (!result.verified)
             exceptions.push(
               exception(
                 project.canonicalKey,
@@ -684,6 +1210,16 @@ export async function auditLiveWorkspace(
             );
         }
       }
+    } else if (mutationsEnabled) {
+      await reconcilePendingMutation(
+        {
+          canonicalKey: project.canonicalKey,
+          operation: "project-authority-update",
+          beforeHash: projectBeforeHash,
+          desiredHash: projectDesiredHash,
+        },
+        projectBeforeHash,
+      );
     }
     for (const milestone of live.projectMilestones.nodes) {
       if (!milestones.includes(milestone.name)) continue;
@@ -694,7 +1230,21 @@ export async function auditLiveWorkspace(
         progress,
       );
       const currentDescription = milestone.description ?? "";
-      if (currentDescription === desiredDescription) continue;
+      const beforeHash = await sha256Text(currentDescription);
+      const desiredHash = await sha256Text(desiredDescription);
+      if (currentDescription === desiredDescription) {
+        if (mutationsEnabled)
+          await reconcilePendingMutation(
+            {
+              canonicalKey: `${project.canonicalKey}:${milestone.name}`,
+              operation: "project-milestone-update",
+              beforeHash,
+              desiredHash,
+            },
+            beforeHash,
+          );
+        continue;
+      }
       if (!mutationsEnabled) {
         exceptions.push(
           exception(
@@ -704,37 +1254,25 @@ export async function auditLiveWorkspace(
         );
         continue;
       }
-      const beforeHash = await sha256Text(currentDescription);
-      const desiredHash = await sha256Text(desiredDescription);
-      const updated = await client.request<{
-        projectMilestoneUpdate: {
-          success: boolean;
-          projectMilestone?: { description?: string | null } | null;
-        };
-      }>(
-        `mutation($id: String!, $input: ProjectMilestoneUpdateInput!) {
-          projectMilestoneUpdate(id: $id, input: $input) {
-            success
-            projectMilestone { description }
-          }
-        }`,
-        { id: milestone.id, input: { description: desiredDescription } },
+      const result = await performMutation(
+        {
+          canonicalKey: `${project.canonicalKey}:${milestone.name}`,
+          operation: "project-milestone-update",
+          beforeHash,
+          desiredHash,
+        },
+        async () => {
+          await client.request(
+            `mutation($id: String!, $input: ProjectMilestoneUpdateInput!) {
+              projectMilestoneUpdate(id: $id, input: $input) { success }
+            }`,
+            { id: milestone.id, input: { description: desiredDescription } },
+          );
+        },
+        async () =>
+          sha256Text(await readFreshMilestoneDescription(milestone.id)),
       );
-      const resultHash = await sha256Text(
-        updated.projectMilestoneUpdate.projectMilestone?.description ?? "",
-      );
-      const matches =
-        updated.projectMilestoneUpdate.success && resultHash === desiredHash;
-      repairReceipts.push({
-        canonicalKey: `${project.canonicalKey}:${milestone.name}`,
-        operation: "project-milestone-update",
-        beforeHash,
-        desiredHash,
-        resultHash,
-        verified: matches,
-      });
-      repairs += 1;
-      if (!matches)
+      if (!result.verified)
         exceptions.push(
           exception(
             project.canonicalKey,
@@ -813,6 +1351,21 @@ export async function auditLiveWorkspace(
         if (sourceInvalid) continue;
         desiredSources = loaded;
       }
+      if (!authorityIsStale && !bodyHasDrifted) {
+        if (mutationsEnabled) {
+          const currentHash = await sha256Text(content);
+          await reconcilePendingMutation(
+            {
+              canonicalKey: `${project.canonicalKey}:${document.title}`,
+              operation: "document-authority-update",
+              beforeHash: currentHash,
+              desiredHash: currentHash,
+            },
+            currentHash,
+          );
+        }
+        continue;
+      }
       if (authorityIsStale || bodyHasDrifted) {
         if (!mutationsEnabled) {
           exceptions.push(
@@ -844,35 +1397,24 @@ export async function auditLiveWorkspace(
               );
         const beforeHash = await sha256Text(content);
         const desiredHash = await sha256Text(desiredContent);
-        const updated = await client.request<{
-          documentUpdate: {
-            success: boolean;
-            document?: { content?: string | null } | null;
-          };
-        }>(
-          `mutation($id: String!, $input: DocumentUpdateInput!) {
-            documentUpdate(id: $id, input: $input) {
-              success
-              document { content }
-            }
-          }`,
-          { id: document.id, input: { content: desiredContent } },
+        const result = await performMutation(
+          {
+            canonicalKey: `${project.canonicalKey}:${document.title}`,
+            operation: "document-authority-update",
+            beforeHash,
+            desiredHash,
+          },
+          async () => {
+            await client.request(
+              `mutation($id: String!, $input: DocumentUpdateInput!) {
+                documentUpdate(id: $id, input: $input) { success }
+              }`,
+              { id: document.id, input: { content: desiredContent } },
+            );
+          },
+          async () => sha256Text(await readFreshDocumentContent(document.id)),
         );
-        const resultHash = await sha256Text(
-          updated.documentUpdate.document?.content ?? "",
-        );
-        const matches =
-          updated.documentUpdate.success && resultHash === desiredHash;
-        repairReceipts.push({
-          canonicalKey: project.canonicalKey,
-          operation: "document-authority-update",
-          beforeHash,
-          desiredHash,
-          resultHash,
-          verified: matches,
-        });
-        repairs += 1;
-        if (!matches)
+        if (!result.verified)
           exceptions.push(
             exception(
               project.canonicalKey,
@@ -901,67 +1443,6 @@ export async function auditLiveWorkspace(
           }),
         ),
       });
-      const state = expectedState(liveIssue, project, task);
-      if (state !== liveIssue.state.name) {
-        if (mutationsEnabled) {
-          const beforeHash = await sha256Text(
-            stableJson({ state: liveIssue.state.name }),
-          );
-          const desiredHash = await sha256Text(stableJson({ state }));
-          const stateId = workflowStateIds.get(state);
-          if (!stateId) {
-            exceptions.push(
-              exception(
-                task.canonicalKey,
-                `Controlled issue state is missing: ${state}`,
-              ),
-            );
-            continue;
-          }
-          await client.request(
-            `mutation($id: String!, $state: String!) {
-              issueUpdate(id: $id, input: { stateId: $state }) { success }
-            }`,
-            {
-              id: liveIssue.id,
-              state: stateId,
-            },
-          );
-          const verified = await client.request<{
-            issue: { state: { name: IssueState } };
-          }>(`query($id: String!) { issue(id: $id) { state { name } } }`, {
-            id: liveIssue.id,
-          });
-          const resultHash = await sha256Text(
-            stableJson({ state: verified.issue.state.name }),
-          );
-          const matches = verified.issue.state.name === state;
-          repairReceipts.push({
-            canonicalKey: task.canonicalKey,
-            operation: "issue-state-update",
-            beforeHash,
-            desiredHash,
-            resultHash,
-            verified: matches,
-          });
-          repairs += 1;
-          if (!matches)
-            exceptions.push(
-              exception(
-                task.canonicalKey,
-                `Issue state repair did not verify: expected ${state}, observed ${verified.issue.state.name}`,
-              ),
-            );
-        } else {
-          exceptions.push(
-            exception(
-              task.canonicalKey,
-              `Issue state ${liveIssue.state.name} should be ${state}`,
-              "warning",
-            ),
-          );
-        }
-      }
       const requiredGates = requiredFrontendGateLabels(project, task);
       const currentLabelNames = liveIssue.labels.nodes.map(
         (label) => label.name,
@@ -974,6 +1455,10 @@ export async function auditLiveWorkspace(
         ),
         ...requiredGates,
       ].sort();
+      const labelBeforeHash = await sha256Text(
+        stableJson([...currentLabelNames].sort()),
+      );
+      const labelDesiredHash = await sha256Text(stableJson(desiredLabelNames));
       if (
         stableJson([...currentLabelNames].sort()) !==
         stableJson(desiredLabelNames)
@@ -989,25 +1474,37 @@ export async function auditLiveWorkspace(
             ),
           );
         } else if (mutationsEnabled) {
-          const beforeHash = await sha256Text(
-            stableJson([...currentLabelNames].sort()),
+          const result = await performMutation(
+            {
+              canonicalKey: task.canonicalKey,
+              operation: "issue-label-update",
+              beforeHash: labelBeforeHash,
+              desiredHash: labelDesiredHash,
+            },
+            async () => {
+              await client.request(
+                `mutation($id: String!, $labels: [String!]!) {
+                  issueUpdate(id: $id, input: { labelIds: $labels }) { success }
+                }`,
+                { id: liveIssue.id, labels: desiredLabelIds },
+              );
+            },
+            async () => {
+              const fresh = await readFreshIssueState(liveIssue.id);
+              return sha256Text(
+                stableJson(
+                  fresh.labels.nodes.map((label) => label.name).sort(),
+                ),
+              );
+            },
           );
-          const desiredHash = await sha256Text(stableJson(desiredLabelNames));
-          await client.request(
-            `mutation($id: String!, $labels: [String!]!) {
-              issueUpdate(id: $id, input: { labelIds: $labels }) { success }
-            }`,
-            { id: liveIssue.id, labels: desiredLabelIds },
-          );
-          repairReceipts.push({
-            canonicalKey: task.canonicalKey,
-            operation: "issue-label-update",
-            beforeHash,
-            desiredHash,
-            resultHash: desiredHash,
-            verified: true,
-          });
-          repairs += 1;
+          if (!result.verified)
+            exceptions.push(
+              exception(
+                task.canonicalKey,
+                "Frontend gate label repair did not verify",
+              ),
+            );
         } else {
           exceptions.push(
             exception(
@@ -1017,6 +1514,16 @@ export async function auditLiveWorkspace(
             ),
           );
         }
+      } else if (mutationsEnabled) {
+        await reconcilePendingMutation(
+          {
+            canonicalKey: task.canonicalKey,
+            operation: "issue-label-update",
+            beforeHash: labelBeforeHash,
+            desiredHash: labelDesiredHash,
+          },
+          labelBeforeHash,
+        );
       }
       const desiredDescription = issueAuthorityEnvelope(
         task,
@@ -1026,6 +1533,8 @@ export async function auditLiveWorkspace(
         desired.contractHash,
       );
       const currentDescription = liveIssue.description ?? "";
+      const descriptionBeforeHash = await sha256Text(currentDescription);
+      const descriptionDesiredHash = await sha256Text(desiredDescription);
       if (currentDescription !== desiredDescription) {
         if (!mutationsEnabled) {
           exceptions.push(
@@ -1036,44 +1545,46 @@ export async function auditLiveWorkspace(
           );
           continue;
         }
-        const beforeHash = await sha256Text(currentDescription);
-        const desiredHash = await sha256Text(desiredDescription);
-        const updated = await client.request<{
-          issueUpdate: {
-            success: boolean;
-            issue?: { description?: string | null } | null;
-          };
-        }>(
-          `mutation($id: String!, $input: IssueUpdateInput!) {
-            issueUpdate(id: $id, input: $input) {
-              success
-              issue { description }
-            }
-          }`,
-          { id: liveIssue.id, input: { description: desiredDescription } },
+        const result = await performMutation(
+          {
+            canonicalKey: task.canonicalKey,
+            operation: "issue-authority-update",
+            beforeHash: descriptionBeforeHash,
+            desiredHash: descriptionDesiredHash,
+          },
+          async () => {
+            await client.request(
+              `mutation($id: String!, $input: IssueUpdateInput!) {
+                issueUpdate(id: $id, input: $input) { success }
+              }`,
+              {
+                id: liveIssue.id,
+                input: { description: desiredDescription },
+              },
+            );
+          },
+          async () => {
+            const fresh = await readFreshIssueState(liveIssue.id);
+            return sha256Text(fresh.description ?? "");
+          },
         );
-        const resultHash = await sha256Text(
-          updated.issueUpdate.issue?.description ?? "",
-        );
-        const matches =
-          updated.issueUpdate.success && resultHash === desiredHash;
-        repairReceipts.push({
-          canonicalKey: task.canonicalKey,
-          operation: "issue-authority-update",
-          beforeHash,
-          desiredHash,
-          resultHash,
-          verified: matches,
-        });
-        repairs += 1;
-        if (!matches)
+        if (!result.verified)
           exceptions.push(
             exception(
               task.canonicalKey,
               "Plan-task authority repair did not verify",
             ),
           );
-      }
+      } else if (mutationsEnabled)
+        await reconcilePendingMutation(
+          {
+            canonicalKey: task.canonicalKey,
+            operation: "issue-authority-update",
+            beforeHash: descriptionBeforeHash,
+            desiredHash: descriptionDesiredHash,
+          },
+          descriptionBeforeHash,
+        );
     }
   }
 
@@ -1111,6 +1622,7 @@ export async function auditLiveWorkspace(
     exceptions,
     repairs,
     repairReceipts,
+    proofReceipts,
     mappings,
     metrics: {
       admittedProjects: admitted.length,

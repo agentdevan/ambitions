@@ -76,9 +76,21 @@ export interface ProjectContract {
 export interface DesiredWorkspaceManifest {
   schemaVersion: typeof MANIFEST_SCHEMA_VERSION;
   authorityCommit: string;
+  compileProvenanceCommit?: string;
   contractHash: string;
   projects: readonly ProjectContract[];
   schedule: readonly ScheduleGroup[];
+}
+
+export interface TaskProofEvidence {
+  source?: "github" | "receipt";
+  authorityCommit: string;
+  mergedToMain: boolean;
+  proofPassed: boolean;
+  requiredProofFailed: boolean;
+  issueIdentifier?: string;
+  pullRequestUrl?: string;
+  mergeCommitSha?: string;
 }
 
 export interface ScheduleGroup {

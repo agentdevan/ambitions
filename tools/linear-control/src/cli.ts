@@ -12,6 +12,13 @@ const here = dirname(fileURLToPath(import.meta.url));
 const repositoryRoot = resolve(here, "../../..");
 const generatedPath = resolve(here, "../generated/desired-workspace.json");
 
+async function loadLocalRepositoryText(path: string): Promise<string> {
+  const absolutePath = resolve(repositoryRoot, path);
+  if (!absolutePath.startsWith(`${repositoryRoot}/`))
+    throw new Error(`INVALID_REPOSITORY_PATH:${path}`);
+  return readFile(absolutePath, "utf8");
+}
+
 async function main(): Promise<void> {
   const command = process.argv[2] ?? "check";
   if (command === "compile") {
@@ -86,6 +93,7 @@ async function main(): Promise<void> {
       new LinearClient(token, process.env.LINEAR_API_URL),
       manifest,
       false,
+      { loadRepositoryText: loadLocalRepositoryText },
     );
     console.log(
       JSON.stringify(
@@ -108,6 +116,7 @@ async function main(): Promise<void> {
       new LinearClient(token, process.env.LINEAR_API_URL),
       manifest,
       true,
+      { loadRepositoryText: loadLocalRepositoryText },
     );
     console.log(
       JSON.stringify(

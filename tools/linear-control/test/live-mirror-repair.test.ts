@@ -1,4 +1,4 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 import type { LinearClient } from "../src/adapters/linear.js";
 import {
   CONTROLLED_TEMPLATES,
@@ -9,6 +9,7 @@ import {
   auditLiveWorkspace,
   desiredProjectMirrorProgress,
 } from "../src/core/live-audit.js";
+import type { LiveAuditOptions } from "../src/core/live-audit.js";
 import {
   initiativeIndexMirror,
   issueAuthorityEnvelope,
@@ -80,17 +81,61 @@ class RepairingLinearClient {
   omitNextIssueCursor = false;
   documentContents = new Map<string, string>();
   issueDescription = "";
+  issueLabelNames = ["work:test"];
+  issueState: IssueState = "Ready For Codex";
+  issueStateMutationCalls = 0;
+  freshStateOverrideOnce?: IssueState;
+  attachmentUrls: string[] = [];
+  attachmentHasNextPage = false;
   projectSummary = "stale summary";
   projectDescription = "stale description";
   projectStatus = "Building";
   initiativeNames = ["Test Initiative"];
   failProjectVerification = false;
+  failProjectReadOnce = false;
   failMilestoneVerification = false;
   milestoneDescriptions = new Map(
     milestones.map((name) => [name, `stale ${name}`]),
   );
 
   constructor(private readonly project: ProjectContract) {}
+
+  private issueNode(): Record<string, unknown> {
+    return {
+      id: "issue-id",
+      identifier: "AMB-1",
+      title: "Plan Task 01 — Build the contract",
+      description: this.issueDescription,
+      state: {
+        id: `state:${this.issueState}`,
+        name: this.issueState,
+        type: ["Done", "Canceled", "Duplicate", "Won’t Do"].includes(
+          this.issueState,
+        )
+          ? "completed"
+          : this.issueState === "In Progress"
+            ? "started"
+            : "unstarted",
+      },
+      project: { name: `Lifecycle — ${this.project.slug}` },
+      parent: null,
+      attachments: {
+        nodes: this.attachmentUrls.map((url) => ({ url })),
+        pageInfo: {
+          hasNextPage: this.attachmentHasNextPage,
+          endCursor: this.attachmentHasNextPage ? "attachment-page-2" : null,
+        },
+      },
+      labels: {
+        nodes: this.issueLabelNames.map((name) => ({
+          id: `label:${name}`,
+          name,
+        })),
+      },
+      relations: { nodes: [] },
+      inverseRelations: { nodes: [] },
+    };
+  }
 
   async request<T>(
     query: string,
@@ -188,24 +233,7 @@ class RepairingLinearClient {
       }
       return {
         issues: {
-          nodes: [
-            {
-              id: "issue-id",
-              identifier: "AMB-1",
-              title: "Plan Task 01 — Build the contract",
-              description: this.issueDescription,
-              state: {
-                id: "state:Ready For Codex",
-                name: "Ready For Codex",
-                type: "unstarted",
-              },
-              project: { name: `Lifecycle — ${this.project.slug}` },
-              parent: null,
-              labels: { nodes: [{ id: "label:work:test", name: "work:test" }] },
-              relations: { nodes: [] },
-              inverseRelations: { nodes: [] },
-            },
-          ],
+          nodes: [this.issueNode()],
           pageInfo: { hasNextPage: false, endCursor: null },
         },
       } as T;
@@ -222,6 +250,12 @@ class RepairingLinearClient {
         },
       } as T;
     }
+    if (query.includes("document(id: $id)")) {
+      const title = (variables.id as string).replace(/^document:/, "");
+      return {
+        document: { content: this.documentContents.get(title) ?? "" },
+      } as T;
+    }
     if (query.includes("projectMilestoneUpdate")) {
       const id = variables.id as string;
       const input = variables.input as { description: string };
@@ -234,6 +268,14 @@ class RepairingLinearClient {
           projectMilestone: {
             description: this.milestoneDescriptions.get(name),
           },
+        },
+      } as T;
+    }
+    if (query.includes("projectMilestone(id: $id)")) {
+      const name = (variables.id as string).replace(/^milestone:/, "");
+      return {
+        projectMilestone: {
+          description: this.milestoneDescriptions.get(name) ?? "",
         },
       } as T;
     }
@@ -258,6 +300,42 @@ class RepairingLinearClient {
           },
         },
       } as T;
+    }
+    if (query.includes("project(id: $id)")) {
+      if (this.failProjectReadOnce) {
+        this.failProjectReadOnce = false;
+        throw new Error("SIMULATED_PROJECT_READ_TIMEOUT");
+      }
+      return {
+        project: {
+          summary: this.projectSummary,
+          description: this.projectDescription,
+          status: {
+            id: `project-status:${this.projectStatus}`,
+            name: this.projectStatus,
+          },
+        },
+      } as T;
+    }
+    if (query.includes("issueUpdate") && variables.state) {
+      this.issueStateMutationCalls += 1;
+      this.issueState = (variables.state as string).replace(
+        /^state:/,
+        "",
+      ) as IssueState;
+      return { issueUpdate: { success: true } } as T;
+    }
+    if (query.includes("issueUpdate") && variables.labels) {
+      const labels = variables.labels as string[];
+      this.issueLabelNames = labels.map((id) => id.replace(/^label:/, ""));
+      return { issueUpdate: { success: true } } as T;
+    }
+    if (query.includes("issue(id: $id)")) {
+      if (this.freshStateOverrideOnce) {
+        this.issueState = this.freshStateOverrideOnce;
+        delete this.freshStateOverrideOnce;
+      }
+      return { issue: this.issueNode() } as T;
     }
     if (query.includes("issueUpdate") && variables.input) {
       const input = variables.input as { description?: string };
@@ -284,11 +362,17 @@ async function fixture(): Promise<{
     ["scope", "scope body\n"],
     ["design", "design body\n"],
     ["plan", "plan body\n"],
+    ["tasks", "tasks body\n"],
+    ["verification", "verification body\n"],
   ]);
   const documents: DocumentContract[] = await Promise.all(
     [...sourceByKind].map(async ([kind, content]) => ({
       kind: kind as DocumentContract["kind"],
-      path: `docs/product-development/example/${kind}.md`,
+      path: `docs/product-development/example/${
+        ["plan", "tasks", "verification"].includes(kind)
+          ? `implementation/${kind}.md`
+          : `${kind}.md`
+      }`,
       revision: "1",
       status: "approved",
       sha256: await sha256Text(content),
@@ -385,11 +469,144 @@ async function fixture(): Promise<{
   return { client, desired, sourceByPath };
 }
 
-describe("live authority mirror repair", () => {
-  it("keeps the nested Project audit query below Linear's complexity ceiling", async () => {
-    const { client, desired } = await fixture();
+function runtimeOptions(
+  sourceByPath: ReadonlyMap<string, string>,
+  overrides: LiveAuditOptions = {},
+): LiveAuditOptions {
+  return {
+    loadRepositoryText: async (path) => {
+      await Promise.resolve();
+      const content = sourceByPath.get(path);
+      if (content === undefined) throw new Error(`SOURCE_MISSING:${path}`);
+      return content;
+    },
+    runtimeLifecyclePaths: [...sourceByPath.keys()],
+    ...overrides,
+  };
+}
 
-    await auditLiveWorkspace(client as unknown as LinearClient, desired, false);
+describe("live authority mirror repair", () => {
+  it("aborts before Linear when any runtime lifecycle contract changed after compilation", async () => {
+    const { client, desired, sourceByPath } = await fixture();
+    desired.compileProvenanceCommit = "old-compile-commit";
+    desired.authorityCommit = "new-runtime-commit";
+    const changedRuntimeSources = new Map(sourceByPath);
+    const resolveTaskProof = vi.fn();
+    changedRuntimeSources.set(
+      "docs/product-development/example/implementation/tasks.md",
+      "changed tasks body\n",
+    );
+
+    await expect(
+      auditLiveWorkspace(
+        client as unknown as LinearClient,
+        desired,
+        true,
+        runtimeOptions(changedRuntimeSources, { resolveTaskProof }),
+      ),
+    ).rejects.toThrow(
+      "RUNTIME_DOCUMENT_CONTRACT_MISMATCH:project:example:docs/product-development/example/implementation/tasks.md",
+    );
+
+    expect(client.projectQueries).toEqual([]);
+    expect(client.issueQueries).toEqual([]);
+    expect(resolveTaskProof).not.toHaveBeenCalled();
+    expect(client.projectSummary).toBe("stale summary");
+    expect(client.issueState).toBe("Ready For Codex");
+  });
+
+  it("aborts before Linear when a pending unscheduled Project source changed after compilation", async () => {
+    const { client, desired, sourceByPath } = await fixture();
+    const admitted = desired.projects[0]!;
+    const pendingDocuments = admitted.documents.map((document) => ({
+      ...document,
+      path: document.path.replace(
+        "docs/product-development/example/",
+        "docs/product-development/pending-example/",
+      ),
+    }));
+    desired.projects = [
+      ...desired.projects,
+      {
+        ...admitted,
+        slug: "pending-example",
+        canonicalKey: "project:pending-example",
+        name: "Lifecycle — pending-example",
+        folder: "docs/product-development/pending-example",
+        documents: pendingDocuments,
+        tasks: [],
+        admission: "pending",
+        admissionBlockers: ["Documentation review pending"],
+      },
+    ];
+    desired.compileProvenanceCommit = "old-compile-commit";
+    desired.authorityCommit = "new-runtime-commit";
+    const pendingSources = new Map(sourceByPath);
+    for (const document of pendingDocuments) {
+      const admittedPath = document.path.replace(
+        "docs/product-development/pending-example/",
+        "docs/product-development/example/",
+      );
+      pendingSources.set(document.path, sourceByPath.get(admittedPath)!);
+    }
+    pendingSources.set(
+      "docs/product-development/pending-example/implementation/tasks.md",
+      "stale pending tasks body\n",
+    );
+    const resolveTaskProof = vi.fn();
+
+    await expect(
+      auditLiveWorkspace(
+        client as unknown as LinearClient,
+        desired,
+        true,
+        runtimeOptions(pendingSources, { resolveTaskProof }),
+      ),
+    ).rejects.toThrow(
+      "RUNTIME_DOCUMENT_CONTRACT_MISMATCH:project:pending-example:docs/product-development/pending-example/implementation/tasks.md",
+    );
+
+    expect(client.projectQueries).toEqual([]);
+    expect(client.issueQueries).toEqual([]);
+    expect(resolveTaskProof).not.toHaveBeenCalled();
+  });
+
+  it("aborts before Linear when the event SHA contains a lifecycle folder absent from the manifest", async () => {
+    const { client, desired, sourceByPath } = await fixture();
+    desired.compileProvenanceCommit = "old-compile-commit";
+    desired.authorityCommit = "new-runtime-commit";
+    const resolveTaskProof = vi.fn();
+    const runtimeLifecyclePaths = [
+      ...sourceByPath.keys(),
+      "docs/product-development/new-current-initiative/research.md",
+    ];
+
+    await expect(
+      auditLiveWorkspace(
+        client as unknown as LinearClient,
+        desired,
+        true,
+        runtimeOptions(sourceByPath, {
+          runtimeLifecyclePaths,
+          resolveTaskProof,
+        }),
+      ),
+    ).rejects.toThrow("RUNTIME_LIFECYCLE_INVENTORY_MISMATCH");
+
+    expect(client.projectQueries).toEqual([]);
+    expect(client.issueQueries).toEqual([]);
+    expect(resolveTaskProof).not.toHaveBeenCalled();
+  });
+
+  it("keeps the nested Project audit query below Linear's complexity ceiling", async () => {
+    const { client, desired, sourceByPath } = await fixture();
+
+    await auditLiveWorkspace(
+      client as unknown as LinearClient,
+      desired,
+      false,
+      runtimeOptions(sourceByPath),
+    );
 
     expect(client.projectQueries).toHaveLength(1);
     expect(client.projectQueries[0]).toContain("projects(first: 10");
@@ -399,12 +616,13 @@ describe("live authority mirror repair", () => {
   });
 
   it("identifies the exact stale Project mirror fields in read-only audits", async () => {
-    const { client, desired } = await fixture();
+    const { client, desired, sourceByPath } = await fixture();
 
     const result = await auditLiveWorkspace(
       client as unknown as LinearClient,
       desired,
       false,
+      runtimeOptions(sourceByPath),
     );
 
     const projectException = result.exceptions.find(
@@ -416,13 +634,14 @@ describe("live authority mirror repair", () => {
   });
 
   it("collects lifecycle Projects across every bounded Project page", async () => {
-    const { client, desired } = await fixture();
+    const { client, desired, sourceByPath } = await fixture();
     client.splitProjectAcrossPages = true;
 
     const result = await auditLiveWorkspace(
       client as unknown as LinearClient,
       desired,
       false,
+      runtimeOptions(sourceByPath),
     );
 
     expect(client.projectPageCursors).toEqual([null, "project-page-2"]);
@@ -437,19 +656,29 @@ describe("live authority mirror repair", () => {
   });
 
   it("fails closed when Linear advertises another Project page without a cursor", async () => {
-    const { client, desired } = await fixture();
+    const { client, desired, sourceByPath } = await fixture();
     client.splitProjectAcrossPages = true;
     client.omitNextProjectCursor = true;
 
     await expect(
-      auditLiveWorkspace(client as unknown as LinearClient, desired, false),
+      auditLiveWorkspace(
+        client as unknown as LinearClient,
+        desired,
+        false,
+        runtimeOptions(sourceByPath),
+      ),
     ).rejects.toThrow("LINEAR_PROJECT_PAGE_CURSOR_MISSING");
   });
 
   it("keeps the nested Issue audit query below Linear's complexity ceiling", async () => {
-    const { client, desired } = await fixture();
+    const { client, desired, sourceByPath } = await fixture();
 
-    await auditLiveWorkspace(client as unknown as LinearClient, desired, false);
+    await auditLiveWorkspace(
+      client as unknown as LinearClient,
+      desired,
+      false,
+      runtimeOptions(sourceByPath),
+    );
 
     expect(client.issueQueries).toHaveLength(1);
     expect(client.issueQueries[0]).toMatch(/issues\(\s*first:\s*25/);
@@ -459,13 +688,14 @@ describe("live authority mirror repair", () => {
   });
 
   it("collects lifecycle Issues across every bounded Issue page", async () => {
-    const { client, desired } = await fixture();
+    const { client, desired, sourceByPath } = await fixture();
     client.splitIssueAcrossPages = true;
 
     const result = await auditLiveWorkspace(
       client as unknown as LinearClient,
       desired,
       false,
+      runtimeOptions(sourceByPath),
     );
 
     expect(client.issuePageCursors).toEqual([null, "issue-page-2"]);
@@ -480,17 +710,59 @@ describe("live authority mirror repair", () => {
   });
 
   it("fails closed when Linear advertises another Issue page without a cursor", async () => {
-    const { client, desired } = await fixture();
+    const { client, desired, sourceByPath } = await fixture();
     client.splitIssueAcrossPages = true;
     client.omitNextIssueCursor = true;
 
     await expect(
-      auditLiveWorkspace(client as unknown as LinearClient, desired, false),
+      auditLiveWorkspace(
+        client as unknown as LinearClient,
+        desired,
+        false,
+        runtimeOptions(sourceByPath),
+      ),
     ).rejects.toThrow("LINEAR_ISSUE_PAGE_CURSOR_MISSING");
   });
 
-  it("repairs stale Project, milestone, Document, and Issue mirrors once", async () => {
-    const { client, desired } = await fixture();
+  it("fails closed when an Issue attachment connection is incomplete", async () => {
+    const { client, desired, sourceByPath } = await fixture();
+    client.attachmentHasNextPage = true;
+
+    await expect(
+      auditLiveWorkspace(
+        client as unknown as LinearClient,
+        desired,
+        false,
+        runtimeOptions(sourceByPath),
+      ),
+    ).rejects.toThrow("LINEAR_ATTACHMENT_PAGE_INCOMPLETE:AMB-1");
+  });
+
+  it("aborts before the first live mutation when runtime main advances", async () => {
+    const { client, desired, sourceByPath } = await fixture();
+    desired.compileProvenanceCommit = "old-compile-commit";
+    const verifyRuntimeAuthority = async () => {
+      await Promise.resolve();
+      return false;
+    };
+
+    await expect(
+      auditLiveWorkspace(
+        client as unknown as LinearClient,
+        desired,
+        true,
+        runtimeOptions(sourceByPath, { verifyRuntimeAuthority }),
+      ),
+    ).rejects.toThrow("RUNTIME_AUTHORITY_SUPERSEDED");
+
+    expect(client.projectSummary).toBe("stale summary");
+    expect(client.projectStatus).toBe("Building");
+    expect(client.issueState).toBe("Ready For Codex");
+  });
+
+  it("safely rebinds stale provenance when every runtime contract is unchanged", async () => {
+    const { client, desired, sourceByPath } = await fixture();
+    desired.compileProvenanceCommit = "old-compile-commit";
     for (const [title, content] of client.documentContents)
       client.documentContents.set(
         title,
@@ -504,6 +776,12 @@ describe("live authority mirror repair", () => {
       client as unknown as LinearClient,
       desired,
       true,
+      runtimeOptions(sourceByPath, {
+        verifyRuntimeAuthority: async () => {
+          await Promise.resolve();
+          return true;
+        },
+      }),
     );
 
     expect(repaired.exceptions).toEqual([]);
@@ -551,9 +829,95 @@ describe("live authority mirror repair", () => {
       client as unknown as LinearClient,
       desired,
       true,
+      runtimeOptions(sourceByPath, {
+        verifyRuntimeAuthority: async () => {
+          await Promise.resolve();
+          return true;
+        },
+      }),
     );
     expect(idempotent.exceptions).toEqual([]);
     expect(idempotent.repairs).toBe(0);
+  });
+
+  it("recovers a pending receipt after a successful write and preserves it across a later audit failure", async () => {
+    const { client, desired, sourceByPath } = await fixture();
+    const durable = new Map<
+      string,
+      { status: "pending" | "verified" | "failed"; reconciled: boolean }
+    >();
+    const keyFor = (value: {
+      canonicalKey: string;
+      operation: string;
+      desiredHash: string;
+    }) => `${value.canonicalKey}:${value.operation}:${value.desiredHash}`;
+    client.failProjectReadOnce = true;
+
+    await expect(
+      auditLiveWorkspace(
+        client as unknown as LinearClient,
+        desired,
+        true,
+        runtimeOptions(sourceByPath, {
+          onMutationIntent: async (intent) => {
+            await Promise.resolve();
+            durable.set(keyFor(intent), {
+              status: "pending",
+              reconciled: false,
+            });
+          },
+          onMutationResult: async (result) => {
+            await Promise.resolve();
+            if (result.resultHash)
+              durable.set(keyFor(result), {
+                status: result.verified ? "verified" : "failed",
+                reconciled: false,
+              });
+          },
+        }),
+      ),
+    ).rejects.toThrow("SIMULATED_PROJECT_READ_TIMEOUT");
+
+    expect(client.projectSummary).toContain("G01 • Grooming");
+    expect([...durable.values()]).toEqual([
+      { status: "pending", reconciled: false },
+    ]);
+
+    let failedLaterMutation = false;
+    await expect(
+      auditLiveWorkspace(
+        client as unknown as LinearClient,
+        desired,
+        true,
+        runtimeOptions(sourceByPath, {
+          onMutationCheckpoint: async (checkpoint) => {
+            await Promise.resolve();
+            const key = keyFor(checkpoint);
+            const existing = durable.get(key);
+            if (existing?.status === "pending")
+              durable.set(key, { status: "verified", reconciled: true });
+          },
+          onMutationIntent: async (intent) => {
+            await Promise.resolve();
+            if (intent.operation === "project-milestone-update") {
+              failedLaterMutation = true;
+              throw new Error("SIMULATED_LATER_AUDIT_FAILURE");
+            }
+            durable.set(keyFor(intent), {
+              status: "pending",
+              reconciled: false,
+            });
+          },
+        }),
+      ),
+    ).rejects.toThrow("SIMULATED_LATER_AUDIT_FAILURE");
+
+    expect(failedLaterMutation).toBe(true);
+    expect(
+      [...durable.values()].some(
+        (receipt) => receipt.status === "verified" && receipt.reconciled,
+      ),
+    ).toBe(true);
   });
 
   it("reloads verified repository bytes when a Document body has drifted", async () => {
@@ -569,14 +933,7 @@ describe("live authority mirror repair", () => {
       client as unknown as LinearClient,
       desired,
       true,
-      {
-        loadRepositoryText: async (path) => {
-          await Promise.resolve();
-          const content = sourceByPath.get(path);
-          if (content === undefined) throw new Error(`SOURCE_MISSING:${path}`);
-          return content;
-        },
-      },
+      runtimeOptions(sourceByPath),
     );
 
     expect(repaired.exceptions).toEqual([]);
@@ -588,7 +945,7 @@ describe("live authority mirror repair", () => {
   });
 
   it("reports failed Project and milestone post-write verification", async () => {
-    const { client, desired } = await fixture();
+    const { client, desired, sourceByPath } = await fixture();
     client.failProjectVerification = true;
     client.failMilestoneVerification = true;
 
@@ -596,6 +953,7 @@ describe("live authority mirror repair", () => {
       client as unknown as LinearClient,
       desired,
       true,
+      runtimeOptions(sourceByPath),
     );
 
     expect(
@@ -619,14 +977,164 @@ describe("live authority mirror repair", () => {
     ).toBe(true);
   });
 
+  it("repairs premature Done before exact proof, then completes on green-main evidence", async () => {
+    const { client, desired, sourceByPath } = await fixture();
+    client.issueState = "Done";
+    client.attachmentUrls = ["https://github.com/agentdevan/ambitions/pull/81"];
+
+    const beforeProof = await auditLiveWorkspace(
+      client as unknown as LinearClient,
+      desired,
+      true,
+      runtimeOptions(sourceByPath, {
+        resolveTaskProof: async () => {
+          await Promise.resolve();
+          return {
+            authorityCommit: desired.authorityCommit,
+            mergedToMain: true,
+            proofPassed: false,
+            requiredProofFailed: false,
+          };
+        },
+      }),
+    );
+
+    expect(client.issueState).toBe("In Review");
+    expect(client.projectSummary).toContain("0 verified on current main");
+    expect(beforeProof.proofReceipts).toEqual([]);
+
+    const afterProof = await auditLiveWorkspace(
+      client as unknown as LinearClient,
+      desired,
+      true,
+      runtimeOptions(sourceByPath, {
+        resolveTaskProof: async () => {
+          await Promise.resolve();
+          return {
+            authorityCommit: desired.authorityCommit,
+            mergedToMain: true,
+            proofPassed: true,
+            requiredProofFailed: false,
+            pullRequestUrl: "https://github.com/agentdevan/ambitions/pull/81",
+            mergeCommitSha: desired.authorityCommit,
+          };
+        },
+      }),
+    );
+
+    expect(client.issueState).toBe("Done");
+    expect(client.projectSummary).toContain("1 verified on current main");
+    expect(afterProof.proofReceipts).toHaveLength(1);
+  });
+
+  it("preserves a terminal disposition that arrives immediately before state mutation and refreshes progress", async () => {
+    const { client, desired, sourceByPath } = await fixture();
+    client.issueState = "Ready For Codex";
+    client.freshStateOverrideOnce = "Canceled";
+    client.attachmentUrls = ["https://github.com/agentdevan/ambitions/pull/81"];
+
+    const result = await auditLiveWorkspace(
+      client as unknown as LinearClient,
+      desired,
+      true,
+      runtimeOptions(sourceByPath, {
+        resolveTaskProof: async () => {
+          await Promise.resolve();
+          return {
+            source: "github",
+            authorityCommit: desired.authorityCommit,
+            mergedToMain: true,
+            proofPassed: true,
+            requiredProofFailed: false,
+            issueIdentifier: "AMB-1",
+            pullRequestUrl: "https://github.com/agentdevan/ambitions/pull/81",
+            mergeCommitSha: desired.authorityCommit,
+          };
+        },
+      }),
+    );
+
+    expect(client.issueState).toBe("Canceled");
+    expect(client.projectSummary).toContain("0 verified on current main");
+    expect(result.proofReceipts).toEqual([]);
+    expect(
+      result.repairReceipts.some(
+        (receipt) => receipt.operation === "issue-state-update",
+      ),
+    ).toBe(false);
+  });
+
+  it("re-reads terminal state after pending receipt persistence and refuses the state write", async () => {
+    const { client, desired, sourceByPath } = await fixture();
+    client.issueState = "Ready For Codex";
+
+    const result = await auditLiveWorkspace(
+      client as unknown as LinearClient,
+      desired,
+      true,
+      runtimeOptions(sourceByPath, {
+        resolveTaskProof: async () => {
+          await Promise.resolve();
+          return {
+            source: "github",
+            authorityCommit: desired.authorityCommit,
+            mergedToMain: true,
+            proofPassed: true,
+            requiredProofFailed: false,
+            issueIdentifier: "AMB-1",
+            pullRequestUrl: "https://github.com/agentdevan/ambitions/pull/81",
+            mergeCommitSha: desired.authorityCommit,
+          };
+        },
+        onMutationIntent: async (intent) => {
+          await Promise.resolve();
+          if (intent.operation === "issue-state-update")
+            client.issueState = "Canceled";
+        },
+      }),
+    );
+
+    expect(client.issueState).toBe("Canceled");
+    expect(client.issueStateMutationCalls).toBe(0);
+    expect(client.projectSummary).toContain("0 verified on current main");
+    expect(result.proofReceipts).toEqual([]);
+  });
+
+  it.each(["Canceled", "Duplicate", "Won’t Do"] as const)(
+    "does not count or receipt terminal %s work as verified completion",
+    async (terminalState) => {
+      const { client, desired, sourceByPath } = await fixture();
+      client.issueState = terminalState;
+      client.attachmentUrls = [
+        "https://github.com/agentdevan/ambitions/pull/81",
+      ];
+
+      const resolveTaskProof = vi.fn();
+      const result = await auditLiveWorkspace(
+        client as unknown as LinearClient,
+        desired,
+        true,
+        runtimeOptions(sourceByPath, {
+          resolveTaskProof,
+        }),
+      );
+
+      expect(client.issueState).toBe(terminalState);
+      expect(client.projectSummary).toContain("0 verified on current main");
+      expect(result.proofReceipts).toEqual([]);
+      expect(resolveTaskProof).not.toHaveBeenCalled();
+    },
+  );
+
   it("does not let stale Linear Initiative ordering rewrite repository authority", async () => {
-    const { client, desired } = await fixture();
+    const { client, desired, sourceByPath } = await fixture();
     client.initiativeNames = ["Stale Initiative", "Other Initiative"];
 
     const repaired = await auditLiveWorkspace(
       client as unknown as LinearClient,
       desired,
       true,
+      runtimeOptions(sourceByPath),
     );
 
     expect(repaired.exceptions).toEqual([]);
@@ -637,7 +1145,7 @@ describe("live authority mirror repair", () => {
   });
 
   it("audits a manifest-declared primary Initiative independently", async () => {
-    const { client, desired } = await fixture();
+    const { client, desired, sourceByPath } = await fixture();
     const project = desired.projects[0]!;
     project.primaryInitiative = "Canonical Initiative";
     client.initiativeNames = ["Stale Initiative", "Canonical Initiative"];
@@ -646,6 +1154,7 @@ describe("live authority mirror repair", () => {
       client as unknown as LinearClient,
       desired,
       true,
+      runtimeOptions(sourceByPath),
     );
 
     expect(repaired.exceptions).toEqual(
@@ -795,5 +1304,46 @@ describe("canonical Project mirror policy", () => {
     expect(progress.terminalTasks).toBe(2);
     expect(progress.verifiedTasks).toBe(0);
     expect(progress.nextTask).toBeUndefined();
+  });
+
+  it("counts verified work from exact-authority proof rather than Done state", () => {
+    const { project, group } = twoTaskFixture();
+    const authorityCommit = "a".repeat(40);
+    const states = new Map<string, IssueState>([
+      ["example:T1", "Done"],
+      ["example:T2", "Done"],
+    ]);
+    const evidence = new Map([
+      [
+        "example:T1",
+        {
+          authorityCommit,
+          mergedToMain: true,
+          proofPassed: true,
+          requiredProofFailed: false,
+        },
+      ],
+      [
+        "example:T2",
+        {
+          authorityCommit: "b".repeat(40),
+          mergedToMain: true,
+          proofPassed: true,
+          requiredProofFailed: false,
+        },
+      ],
+    ]);
+
+    const progress = desiredProjectMirrorProgress(
+      project,
+      group,
+      [group],
+      states,
+      evidence,
+      authorityCommit,
+    );
+
+    expect(progress.terminalTasks).toBe(2);
+    expect(progress.verifiedTasks).toBe(1);
   });
 });
