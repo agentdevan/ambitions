@@ -9,6 +9,36 @@ export interface RetryPolicy {
 export interface RetryRuntime {
   now?: () => number;
   sleep?: (milliseconds: number) => Promise<void>;
+  beforeAttempt?: () => void | Promise<void>;
+}
+
+export class ExternalRequestBudgetExhausted extends Error {
+  readonly limit: number;
+
+  constructor(limit: number) {
+    super(`EXTERNAL_REQUEST_BUDGET_EXHAUSTED:${limit}`);
+    this.name = "ExternalRequestBudgetExhausted";
+    this.limit = limit;
+  }
+}
+
+export class ExternalRequestBudget {
+  #attempts = 0;
+
+  constructor(readonly limit: number) {
+    if (!Number.isSafeInteger(limit) || limit < 1)
+      throw new Error("INVALID_EXTERNAL_REQUEST_BUDGET");
+  }
+
+  get attempts(): number {
+    return this.#attempts;
+  }
+
+  beforeAttempt(): void {
+    if (this.#attempts >= this.limit)
+      throw new ExternalRequestBudgetExhausted(this.limit);
+    this.#attempts += 1;
+  }
 }
 
 export const DEFAULT_RETRY_POLICY: RetryPolicy = {
@@ -67,6 +97,10 @@ export async function fetchWithRetry(
     const remaining = policy.totalBudgetMs - elapsed;
     if (remaining <= 0)
       throw new Error(`${errorPrefix}_RETRY_BUDGET_EXHAUSTED`);
+    // This hook deliberately sits outside the provider catch/relabeling block:
+    // exhausting the shared Worker budget is a normal queue continuation, not
+    // a GitHub or Linear network failure.
+    await runtime.beforeAttempt?.();
     const controller = new AbortController();
     const timeout = setTimeout(
       () => controller.abort(),

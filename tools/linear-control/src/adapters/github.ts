@@ -18,7 +18,19 @@ export interface GitHubPullRequestEvidence {
   state: string;
   merged: boolean;
   headBranch: string;
+  headSha: string;
   mergeCommitSha?: string;
+}
+
+export interface GitHubCheckRunEvidence {
+  id: number;
+  name: string;
+  headSha: string;
+  status: string;
+  conclusion?: string;
+  appId: number;
+  appSlug: string;
+  url?: string;
 }
 
 interface GitHubCompareEvidence {
@@ -92,7 +104,7 @@ export class GitHubEvidenceClient {
       state: string;
       merged: boolean;
       merge_commit_sha: string | null;
-      head: { ref: string };
+      head: { ref: string; sha: string };
     }>(
       `/repos/${encodeURIComponent(repository).replace("%2F", "/")}/pulls/${number}`,
     );
@@ -102,9 +114,80 @@ export class GitHubEvidenceClient {
       state: data.state,
       merged: data.merged,
       headBranch: data.head.ref,
+      headSha: data.head.sha,
       ...(data.merge_commit_sha
         ? { mergeCommitSha: data.merge_commit_sha }
         : {}),
+    };
+  }
+
+  async exactHeadCodeQuality(
+    repository: string,
+    headSha: string,
+  ): Promise<GitHubCheckRunEvidence | null> {
+    if (!/^[0-9a-f]{40}$/.test(headSha))
+      throw new Error("GITHUB_CHECK_HEAD_INVALID");
+    const checkRuns: Array<{
+      id: number;
+      name: string;
+      head_sha: string;
+      status: string;
+      conclusion: string | null;
+      app?: { id: number; slug: string } | null;
+      html_url?: string | null;
+    }> = [];
+    let expectedTotal: number | undefined;
+    for (let page = 1; page <= 100; page += 1) {
+      const data = await this.request<{
+        total_count: number;
+        check_runs: Array<{
+          id: number;
+          name: string;
+          head_sha: string;
+          status: string;
+          conclusion: string | null;
+          app?: { id: number; slug: string } | null;
+          html_url?: string | null;
+        }>;
+      }>(
+        `/repos/${encodeURIComponent(repository).replace("%2F", "/")}/commits/${encodeURIComponent(headSha)}/check-runs?check_name=${encodeURIComponent("Code Quality")}&filter=all&per_page=100&page=${page}`,
+      );
+      if (
+        !Number.isSafeInteger(data.total_count) ||
+        data.total_count < 0 ||
+        !Array.isArray(data.check_runs) ||
+        (expectedTotal !== undefined && expectedTotal !== data.total_count)
+      )
+        return null;
+      expectedTotal ??= data.total_count;
+      checkRuns.push(...data.check_runs);
+      if (checkRuns.length >= expectedTotal) break;
+      if (data.check_runs.length === 0) return null;
+    }
+    if (expectedTotal === undefined || checkRuns.length !== expectedTotal)
+      return null;
+    const exact = checkRuns.filter(
+      (run) => run.name === "Code Quality" && run.head_sha === headSha,
+    );
+    if (exact.length !== 1 || checkRuns.length !== 1) return null;
+    const run = exact[0]!;
+    if (
+      !Number.isSafeInteger(run.id) ||
+      run.id < 1 ||
+      !Number.isSafeInteger(run.app?.id) ||
+      (run.app?.id ?? 0) < 1 ||
+      run.app?.slug !== "github-actions"
+    )
+      return null;
+    return {
+      id: run.id,
+      name: run.name,
+      headSha: run.head_sha,
+      status: run.status,
+      ...(run.conclusion ? { conclusion: run.conclusion } : {}),
+      appId: run.app.id,
+      appSlug: "github-actions",
+      ...(run.html_url ? { url: run.html_url } : {}),
     };
   }
 

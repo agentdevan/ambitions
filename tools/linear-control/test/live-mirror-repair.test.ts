@@ -86,8 +86,17 @@ class RepairingLinearClient {
   issueLabelNames = ["work:test"];
   issueState: IssueState = "Ready For Codex";
   issueStateMutationCalls = 0;
+  issueStateMutationIds: string[] = [];
   freshIssueReadCalls = 0;
+  freshIssueReadIds: string[] = [];
   freshStateOverrideOnce?: IssueState;
+  additionalIssues: Array<{
+    id: string;
+    identifier: string;
+    title: string;
+    description: string;
+    state: IssueState;
+  }> = [];
   attachmentUrls: string[] = [];
   attachmentHasNextPage = false;
   projectSummary = "stale summary";
@@ -103,20 +112,34 @@ class RepairingLinearClient {
 
   constructor(private readonly project: ProjectContract) {}
 
-  private issueNode(): Record<string, unknown> {
-    return {
+  private issueNode(
+    record: {
+      id: string;
+      identifier: string;
+      title: string;
+      description: string;
+      state: IssueState;
+    } = {
       id: "issue-id",
       identifier: "AMB-1",
       title: "Plan Task 01 — Build the contract",
       description: this.issueDescription,
+      state: this.issueState,
+    },
+  ): Record<string, unknown> {
+    return {
+      id: record.id,
+      identifier: record.identifier,
+      title: record.title,
+      description: record.description,
       state: {
-        id: `state:${this.issueState}`,
-        name: this.issueState,
+        id: `state:${record.state}`,
+        name: record.state,
         type: ["Done", "Canceled", "Duplicate", "Won’t Do"].includes(
-          this.issueState,
+          record.state,
         )
           ? "completed"
-          : this.issueState === "In Progress"
+          : record.state === "In Progress"
             ? "started"
             : "unstarted",
       },
@@ -236,7 +259,10 @@ class RepairingLinearClient {
       }
       return {
         issues: {
-          nodes: [this.issueNode()],
+          nodes: [
+            this.issueNode(),
+            ...this.additionalIssues.map((issue) => this.issueNode(issue)),
+          ],
           pageInfo: { hasNextPage: false, endCursor: null },
         },
       } as T;
@@ -322,10 +348,16 @@ class RepairingLinearClient {
     }
     if (query.includes("issueUpdate") && variables.state) {
       this.issueStateMutationCalls += 1;
-      this.issueState = (variables.state as string).replace(
+      this.issueStateMutationIds.push(variables.id as string);
+      const nextState = (variables.state as string).replace(
         /^state:/,
         "",
       ) as IssueState;
+      const additional = this.additionalIssues.find(
+        (issue) => issue.id === variables.id,
+      );
+      if (additional) additional.state = nextState;
+      else this.issueState = nextState;
       return { issueUpdate: { success: true } } as T;
     }
     if (query.includes("issueUpdate") && variables.labels) {
@@ -335,6 +367,10 @@ class RepairingLinearClient {
     }
     if (query.includes("issue(id: $id)")) {
       this.freshIssueReadCalls += 1;
+      const id = variables.id as string;
+      this.freshIssueReadIds.push(id);
+      const additional = this.additionalIssues.find((issue) => issue.id === id);
+      if (additional) return { issue: this.issueNode(additional) } as T;
       if (this.freshStateOverrideOnce) {
         this.issueState = this.freshStateOverrideOnce;
         delete this.freshStateOverrideOnce;
@@ -1205,6 +1241,12 @@ describe("live authority mirror repair", () => {
             requiredProofFailed: false,
             pullRequestUrl: "https://github.com/agentdevan/ambitions/pull/81",
             mergeCommitSha: desired.authorityCommit,
+            pullRequestHeadSha: desired.authorityCommit,
+            codeQualityCheckId: 81,
+            codeQualityCheckName: "Code Quality",
+            codeQualityCheckConclusion: "success",
+            codeQualityCheckAppId: 15368,
+            codeQualityCheckAppSlug: "github-actions",
           };
         },
       }),
@@ -1287,6 +1329,141 @@ describe("live authority mirror repair", () => {
     expect(client.issueStateMutationCalls).toBe(0);
     expect(client.projectSummary).toContain("0 verified on current main");
     expect(result.proofReceipts).toEqual([]);
+  });
+
+  it("re-reads every canonical dependency after inventory and refuses an executable target when one regresses", async () => {
+    const { client, desired, sourceByPath } = await fixture();
+    const project = desired.projects[0]!;
+    const target = project.tasks[0]!;
+    const dependency: TaskContract = {
+      ...target,
+      id: "T0",
+      canonicalKey: "example:T0",
+      title: "Complete the prerequisite",
+      body: "0. Complete the prerequisite.",
+      order: 0,
+      dependencies: [],
+      globalRank: 0,
+    };
+    project.tasks = [
+      { ...dependency },
+      { ...target, dependencies: [dependency.canonicalKey] },
+    ];
+    desired.schedule[0]!.taskKeys = project.tasks.map(
+      (task) => task.canonicalKey,
+    );
+    client.additionalIssues = [
+      {
+        id: "dependency-issue-id",
+        identifier: "AMB-0",
+        title: "Plan Task 00 — Complete the prerequisite",
+        description: issueAuthorityEnvelope(
+          dependency,
+          desired.schedule[0]!,
+          project,
+          desired.authorityCommit,
+          desired.contractHash,
+        ),
+        state: "Done",
+      },
+    ];
+    client.issueState = "Backlog";
+
+    await auditLiveWorkspace(
+      client as unknown as LinearClient,
+      desired,
+      true,
+      runtimeOptions(sourceByPath, {
+        resolveTaskProof: async ({ issueIdentifier }) => {
+          await Promise.resolve();
+          return issueIdentifier === "AMB-0"
+            ? {
+                authorityCommit: desired.authorityCommit,
+                mergedToMain: true,
+                proofPassed: true,
+                requiredProofFailed: false,
+              }
+            : {
+                authorityCommit: desired.authorityCommit,
+                mergedToMain: false,
+                proofPassed: false,
+                requiredProofFailed: false,
+              };
+        },
+        onMutationIntent: async (intent) => {
+          await Promise.resolve();
+          if (
+            intent.operation === "issue-state-update" &&
+            intent.canonicalKey === target.canonicalKey
+          )
+            client.additionalIssues[0]!.state = "In Progress";
+        },
+      }),
+    );
+
+    expect(client.issueState).toBe("Backlog");
+    expect(client.issueStateMutationCalls).toBe(0);
+    expect(client.issueStateMutationIds).not.toContain("issue-id");
+    expect(client.freshIssueReadIds).toContain("dependency-issue-id");
+  });
+
+  it("keeps a target blocked when its dependency is raw Done without valid proof", async () => {
+    const { client, desired, sourceByPath } = await fixture();
+    const project = desired.projects[0]!;
+    const target = project.tasks[0]!;
+    const dependency: TaskContract = {
+      ...target,
+      id: "T0",
+      canonicalKey: "example:T0",
+      title: "Complete the prerequisite",
+      body: "0. Complete the prerequisite.",
+      order: 0,
+      dependencies: [],
+      globalRank: 0,
+    };
+    project.tasks = [
+      dependency,
+      { ...target, dependencies: [dependency.canonicalKey] },
+    ];
+    desired.schedule[0]!.taskKeys = project.tasks.map(
+      (task) => task.canonicalKey,
+    );
+    client.additionalIssues = [
+      {
+        id: "dependency-issue-id",
+        identifier: "AMB-0",
+        title: "Plan Task 00 — Complete the prerequisite",
+        description: issueAuthorityEnvelope(
+          dependency,
+          desired.schedule[0]!,
+          project,
+          desired.authorityCommit,
+          desired.contractHash,
+        ),
+        state: "Done",
+      },
+    ];
+    client.issueState = "Ready For Codex";
+
+    await auditLiveWorkspace(
+      client as unknown as LinearClient,
+      desired,
+      true,
+      runtimeOptions(sourceByPath, {
+        resolveTaskProof: async () => {
+          await Promise.resolve();
+          return {
+            authorityCommit: desired.authorityCommit,
+            mergedToMain: false,
+            proofPassed: false,
+            requiredProofFailed: false,
+          };
+        },
+      }),
+    );
+
+    expect(client.issueState).toBe("Blocked");
+    expect(client.issueStateMutationIds).toContain("issue-id");
   });
 
   it.each(["Canceled", "Duplicate", "Won’t Do"] as const)(

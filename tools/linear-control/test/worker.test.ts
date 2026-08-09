@@ -7,13 +7,11 @@ import worker, {
   authorityCommitFromPayload,
   continuePinnedEvent,
   durableMutationCallbacks,
-  EVENT_REPAIR_BUDGET,
-  EXPECTED_PREFLIGHT_EXTERNAL_REQUESTS,
+  EXTERNAL_REQUEST_ATTEMPT_LIMIT,
   fetchRepositoryText,
   loadManifestForEvent,
   pinEventAuthority,
   repositoryRawUrl,
-  MAX_EXTERNAL_REQUESTS_PER_REPAIR,
   taskProofResolver,
   taskProofResolverForEvent,
 } from "../src/worker.js";
@@ -145,12 +143,18 @@ async function proofReceiptRow(
 ) {
   const task = proofTask();
   const evidence = {
-    schemaVersion: 1,
+    schemaVersion: 2,
     authorityCommit,
     canonicalKey: task.canonicalKey,
     issueIdentifier: "AMB-1870",
     pullRequestUrl: "https://github.com/agentdevan/ambitions/pull/81",
     mergeCommitSha: "3".repeat(40),
+    pullRequestHeadSha: "2".repeat(40),
+    codeQualityCheckId: 81,
+    codeQualityCheckName: "Code Quality",
+    codeQualityCheckConclusion: "success",
+    codeQualityCheckAppId: 15368,
+    codeQualityCheckAppSlug: "github-actions",
     proofContractHash: await sha256Text(stableJson(task.proof)),
     ...overrides,
   };
@@ -628,10 +632,8 @@ describe("Worker ingress", () => {
   });
 
   it("keeps the conservative continuation ceiling below the Worker limit", () => {
-    expect(
-      EXPECTED_PREFLIGHT_EXTERNAL_REQUESTS +
-        EVENT_REPAIR_BUDGET * MAX_EXTERNAL_REQUESTS_PER_REPAIR,
-    ).toBeLessThan(50);
+    expect(EXTERNAL_REQUEST_ATTEMPT_LIMIT).toBe(44);
+    expect(EXTERNAL_REQUEST_ATTEMPT_LIMIT).toBeLessThan(50);
   });
 
   it("retries provider failures instead of acknowledging them as continuation", async () => {
@@ -729,6 +731,16 @@ describe("Worker ingress", () => {
         merged: true,
         mergeCommitSha: "3".repeat(40),
         headBranch: "codex/amb-1870-onet-soc-esco",
+        headSha: "2".repeat(40),
+      }),
+      exactHeadCodeQuality: vi.fn().mockResolvedValue({
+        id: 81,
+        name: "Code Quality",
+        headSha: "2".repeat(40),
+        status: "completed",
+        conclusion: "success",
+        appId: 15368,
+        appSlug: "github-actions",
       }),
       commitIncludes: vi.fn().mockResolvedValue(true),
     };
@@ -749,18 +761,155 @@ describe("Worker ingress", () => {
       issueIdentifier: "AMB-1870",
       pullRequestUrl: "https://github.com/agentdevan/ambitions/pull/81",
       mergeCommitSha: "3".repeat(40),
+      pullRequestHeadSha: "2".repeat(40),
+      codeQualityCheckId: 81,
+      codeQualityCheckName: "Code Quality",
+      codeQualityCheckConclusion: "success",
+      codeQualityCheckAppId: 15368,
+      codeQualityCheckAppSlug: "github-actions",
     });
     expect(github.commitIncludes).toHaveBeenCalledWith(
       "agentdevan/ambitions",
       "3".repeat(40),
       authorityCommit,
     );
+    expect(github.exactHeadCodeQuality).toHaveBeenCalledWith(
+      "agentdevan/ambitions",
+      "2".repeat(40),
+    );
+  });
+
+  it.each([
+    ["absent", null],
+    [
+      "pending",
+      {
+        id: 81,
+        name: "Code Quality",
+        headSha: "2".repeat(40),
+        status: "in_progress",
+      },
+    ],
+    [
+      "failed",
+      {
+        id: 81,
+        name: "Code Quality",
+        headSha: "2".repeat(40),
+        status: "completed",
+        conclusion: "failure",
+      },
+    ],
+  ])(
+    "fails task proof closed when exact-head Code Quality is %s",
+    async (_name, check) => {
+      const { env } = environment();
+      const authorityCommit = "4".repeat(40);
+      const github = {
+        pullRequest: vi.fn().mockResolvedValue({
+          number: 81,
+          title: "AMB-1870: Implement O*NET-SOC and gated O*NET-ESCO",
+          state: "closed",
+          merged: true,
+          mergeCommitSha: "3".repeat(40),
+          headBranch: "codex/amb-1870-onet-soc-esco",
+          headSha: "2".repeat(40),
+        }),
+        exactHeadCodeQuality: vi.fn().mockResolvedValue(check),
+        commitIncludes: vi.fn().mockResolvedValue(true),
+      };
+
+      await expect(
+        taskProofResolver(
+          env,
+          authorityCommit,
+          github,
+        )({
+          issueIdentifier: "AMB-1870",
+          attachmentUrls: ["https://github.com/agentdevan/ambitions/pull/81"],
+          task: proofTask(),
+        }),
+      ).resolves.toMatchObject({
+        mergedToMain: true,
+        proofPassed: false,
+      });
+    },
+  );
+
+  it("does not spend a check-run request when the merge commit is absent from authority", async () => {
+    const { env } = environment();
+    const authorityCommit = "4".repeat(40);
+    const github = {
+      pullRequest: vi.fn().mockResolvedValue({
+        number: 81,
+        title: "AMB-1870: Implement O*NET-SOC and gated O*NET-ESCO",
+        state: "closed",
+        merged: true,
+        mergeCommitSha: "3".repeat(40),
+        headBranch: "codex/amb-1870-onet-soc-esco",
+        headSha: "2".repeat(40),
+      }),
+      exactHeadCodeQuality: vi.fn(),
+      commitIncludes: vi.fn().mockResolvedValue(false),
+    };
+
+    await expect(
+      taskProofResolver(
+        env,
+        authorityCommit,
+        github,
+      )({
+        issueIdentifier: "AMB-1870",
+        attachmentUrls: ["https://github.com/agentdevan/ambitions/pull/81"],
+        task: proofTask(),
+      }),
+    ).resolves.toMatchObject({ mergedToMain: false, proofPassed: false });
+    expect(github.exactHeadCodeQuality).not.toHaveBeenCalled();
+  });
+
+  it("rejects a successful exact-head Code Quality check from a non-GitHub-Actions app", async () => {
+    const { env } = environment();
+    const authorityCommit = "4".repeat(40);
+    const github = {
+      pullRequest: vi.fn().mockResolvedValue({
+        number: 81,
+        title: "AMB-1870: Implement O*NET-SOC and gated O*NET-ESCO",
+        state: "closed",
+        merged: true,
+        mergeCommitSha: "3".repeat(40),
+        headBranch: "codex/amb-1870-onet-soc-esco",
+        headSha: "2".repeat(40),
+      }),
+      exactHeadCodeQuality: vi.fn().mockResolvedValue({
+        id: 81,
+        name: "Code Quality",
+        headSha: "2".repeat(40),
+        status: "completed",
+        conclusion: "success",
+        appId: 999,
+        appSlug: "third-party-ci",
+      }),
+      commitIncludes: vi.fn().mockResolvedValue(true),
+    };
+
+    await expect(
+      taskProofResolver(
+        env,
+        authorityCommit,
+        github,
+      )({
+        issueIdentifier: "AMB-1870",
+        attachmentUrls: ["https://github.com/agentdevan/ambitions/pull/81"],
+        task: proofTask(),
+      }),
+    ).resolves.toMatchObject({ mergedToMain: true, proofPassed: false });
   });
 
   it("fails task proof closed when PR mapping is ambiguous", async () => {
     const { env } = environment();
     const github = {
       pullRequest: vi.fn(),
+      exactHeadCodeQuality: vi.fn(),
       commitIncludes: vi.fn(),
     };
     const authorityCommit = "4".repeat(40);
@@ -802,6 +951,7 @@ describe("Worker ingress", () => {
     const { env } = environment();
     const github = {
       pullRequest: vi.fn(),
+      exactHeadCodeQuality: vi.fn(),
       commitIncludes: vi.fn(),
     };
     const authorityCommit = "4".repeat(40);
@@ -843,7 +993,9 @@ describe("Worker ingress", () => {
         merged: true,
         mergeCommitSha: "3".repeat(40),
         headBranch: identity.headBranch,
+        headSha: "2".repeat(40),
       }),
+      exactHeadCodeQuality: vi.fn(),
       commitIncludes: vi.fn(),
     };
     const authorityCommit = "4".repeat(40);
@@ -874,6 +1026,16 @@ describe("Worker ingress", () => {
         merged: true,
         mergeCommitSha: "3".repeat(40),
         headBranch: "codex/amb-1870-onet-soc",
+        headSha: "2".repeat(40),
+      }),
+      exactHeadCodeQuality: vi.fn().mockResolvedValue({
+        id: 81,
+        name: "Code Quality",
+        headSha: "2".repeat(40),
+        status: "completed",
+        conclusion: "success",
+        appId: 15368,
+        appSlug: "github-actions",
       }),
       commitIncludes: vi.fn().mockResolvedValue(true),
     };
@@ -939,6 +1101,12 @@ describe("Worker ingress", () => {
       issueIdentifier: "AMB-1870",
       pullRequestUrl: "https://github.com/agentdevan/ambitions/pull/81",
       mergeCommitSha: "3".repeat(40),
+      pullRequestHeadSha: "2".repeat(40),
+      codeQualityCheckId: 81,
+      codeQualityCheckName: "Code Quality",
+      codeQualityCheckConclusion: "success",
+      codeQualityCheckAppId: 15368,
+      codeQualityCheckAppSlug: "github-actions",
     });
     const persist = vi.fn().mockResolvedValue(undefined);
     const input = {
@@ -1015,6 +1183,12 @@ describe("Worker ingress", () => {
       issueIdentifier: "AMB-1870",
       pullRequestUrl: "https://github.com/agentdevan/ambitions/pull/81",
       mergeCommitSha: "3".repeat(40),
+      pullRequestHeadSha: "2".repeat(40),
+      codeQualityCheckId: 81,
+      codeQualityCheckName: "Code Quality",
+      codeQualityCheckConclusion: "success",
+      codeQualityCheckAppId: 15368,
+      codeQualityCheckAppSlug: "github-actions",
     });
     const resolve = await taskProofResolverForEvent(env, newAuthority, fresh);
     const input = {
@@ -1044,6 +1218,18 @@ describe("Worker ingress", () => {
       row: async () =>
         proofReceiptRow("4".repeat(40), {
           issueIdentifier: ["AMB-1870", "AMB-1871"],
+        }),
+    },
+    {
+      name: "legacy schema-v1",
+      row: async () => proofReceiptRow("4".repeat(40), { schemaVersion: 1 }),
+    },
+    {
+      name: "third-party Code Quality app",
+      row: async () =>
+        proofReceiptRow("4".repeat(40), {
+          codeQualityCheckAppId: 999,
+          codeQualityCheckAppSlug: "third-party-ci",
         }),
     },
   ])("never authorizes a $name task-proof receipt", async ({ row }) => {

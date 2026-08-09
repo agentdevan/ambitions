@@ -967,6 +967,31 @@ export async function auditLiveWorkspace(
             throw new Error(
               `LINEAR_ATTACHMENT_PAGE_INCOMPLETE:${beforeWrite.identifier}`,
             );
+          let canonicalDependencyBlocked = false;
+          for (const dependency of task.dependencies) {
+            const dependencyIssue = issuesByKey.get(dependency);
+            if (!dependencyIssue) {
+              plannedStatesByKey.delete(dependency);
+              canonicalDependencyBlocked = true;
+              continue;
+            }
+            const freshDependency = await readFreshIssueState(
+              dependencyIssue.id,
+            );
+            const proofAwarePlannedState = plannedStatesByKey.get(dependency);
+            const freshIsTerminal = terminalTaskStates.has(
+              freshDependency.state.name,
+            );
+            const plannedIsTerminal =
+              proofAwarePlannedState !== undefined &&
+              terminalTaskStates.has(proofAwarePlannedState);
+            if (!freshIsTerminal)
+              plannedStatesByKey.set(dependency, freshDependency.state.name);
+            else if (plannedIsTerminal)
+              plannedStatesByKey.set(dependency, freshDependency.state.name);
+            if (!freshIsTerminal || !plannedIsTerminal)
+              canonicalDependencyBlocked = true;
+          }
           const beforeWriteHash = await sha256Text(
             stableJson({ state: beforeWrite.state.name }),
           );
@@ -979,10 +1004,7 @@ export async function auditLiveWorkspace(
             };
           }
           const beforeWriteDependencyBlocked =
-            task.dependencies.some((dependency) => {
-              const state = plannedStatesByKey.get(dependency);
-              return state === undefined || !terminalTaskStates.has(state);
-            }) ||
+            canonicalDependencyBlocked ||
             beforeWrite.inverseRelations.nodes.some(
               (relation) =>
                 relation.type === "blocks" &&
@@ -1043,16 +1065,28 @@ export async function auditLiveWorkspace(
         proof.requiredProofFailed ||
         proof.source === "receipt" ||
         !proof.pullRequestUrl ||
-        !proof.mergeCommitSha
+        !proof.mergeCommitSha ||
+        !proof.pullRequestHeadSha ||
+        !proof.codeQualityCheckId ||
+        proof.codeQualityCheckName !== "Code Quality" ||
+        proof.codeQualityCheckConclusion !== "success" ||
+        !proof.codeQualityCheckAppId ||
+        proof.codeQualityCheckAppSlug !== "github-actions"
       )
         continue;
       const evidenceJson = stableJson({
-        schemaVersion: 1,
+        schemaVersion: 2,
         authorityCommit: desired.authorityCommit,
         canonicalKey: task.canonicalKey,
         issueIdentifier: issue.identifier,
         pullRequestUrl: proof.pullRequestUrl,
         mergeCommitSha: proof.mergeCommitSha,
+        pullRequestHeadSha: proof.pullRequestHeadSha,
+        codeQualityCheckId: proof.codeQualityCheckId,
+        codeQualityCheckName: proof.codeQualityCheckName,
+        codeQualityCheckConclusion: proof.codeQualityCheckConclusion,
+        codeQualityCheckAppId: proof.codeQualityCheckAppId,
+        codeQualityCheckAppSlug: proof.codeQualityCheckAppSlug,
         proofContractHash: await sha256Text(stableJson(task.proof)),
       });
       const evidenceHash = await sha256Text(evidenceJson);

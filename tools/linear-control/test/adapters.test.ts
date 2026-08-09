@@ -1,6 +1,11 @@
 import { describe, expect, it, vi } from "vitest";
 import { GitHubEvidenceClient } from "../src/adapters/github.js";
-import type { RetryPolicy } from "../src/adapters/http.js";
+import {
+  ExternalRequestBudget,
+  ExternalRequestBudgetExhausted,
+  fetchWithRetry,
+  type RetryPolicy,
+} from "../src/adapters/http.js";
 import { LinearClient } from "../src/adapters/linear.js";
 
 const testPolicy: RetryPolicy = {
@@ -12,6 +17,69 @@ const testPolicy: RetryPolicy = {
 };
 
 describe("provider adapters", () => {
+  it("counts every actual retry attempt against one shared external budget", async () => {
+    const budget = new ExternalRequestBudget(2);
+    const fetcher = vi
+      .fn<typeof fetch>()
+      .mockResolvedValue(new Response(null, { status: 500 }));
+
+    await expect(
+      fetchWithRetry(
+        fetcher,
+        "https://example.test/retrying",
+        {},
+        "TEST",
+        { ...testPolicy, attempts: 5 },
+        { beforeAttempt: () => budget.beforeAttempt() },
+      ),
+    ).rejects.toBeInstanceOf(ExternalRequestBudgetExhausted);
+    expect(fetcher).toHaveBeenCalledTimes(2);
+    expect(budget.attempts).toBe(2);
+  });
+
+  it("shares one hard cap across GitHub and Linear clients without a 45th fetch", async () => {
+    const budget = new ExternalRequestBudget(44);
+    const fetcher = vi.fn<typeof fetch>((input) =>
+      Promise.resolve(
+        Response.json(
+          (input instanceof Request
+            ? input.url
+            : input instanceof URL
+              ? input.href
+              : input
+          ).endsWith("/graphql")
+            ? { data: { viewer: { id: "1" } } }
+            : { commit: { sha: "abc", commit: {} } },
+        ),
+      ),
+    );
+    const runtime = { beforeAttempt: () => budget.beforeAttempt() };
+    const github = new GitHubEvidenceClient(
+      "token",
+      "https://example.test",
+      fetcher,
+      testPolicy,
+      runtime,
+    );
+    const linear = new LinearClient(
+      "token",
+      "https://example.test/graphql",
+      fetcher,
+      testPolicy,
+      runtime,
+    );
+
+    for (let index = 0; index < 22; index += 1) {
+      await github.branchHead("agentdevan/ambitions");
+      await linear.request("query { viewer { id } }");
+    }
+    await expect(
+      github.branchHead("agentdevan/ambitions"),
+    ).rejects.toBeInstanceOf(ExternalRequestBudgetExhausted);
+    expect(fetcher).toHaveBeenCalledTimes(44);
+    expect(budget.attempts).toBe(44);
+  });
+
   it("normalizes GitHub branch and pull-request evidence", async () => {
     const fetcher = vi
       .fn<typeof fetch>()
@@ -30,7 +98,7 @@ describe("provider adapters", () => {
           state: "closed",
           merged: true,
           merge_commit_sha: "def456",
-          head: { ref: "codex/amb-2094-proof-gates" },
+          head: { ref: "codex/amb-2094-proof-gates", sha: "head456" },
         }),
       )
       .mockResolvedValueOnce(
@@ -71,6 +139,7 @@ describe("provider adapters", () => {
       merged: true,
       mergeCommitSha: "def456",
       headBranch: "codex/amb-2094-proof-gates",
+      headSha: "head456",
     });
     await expect(
       client.commitIncludes("agentdevan/ambitions", "def456", "current-main"),
@@ -87,6 +156,131 @@ describe("provider adapters", () => {
       ],
     });
     expect(fetcher).toHaveBeenCalledTimes(4);
+  });
+
+  it("retrieves one completed successful Code Quality check for the exact PR head", async () => {
+    const headSha = "a".repeat(40);
+    const fetcher = vi.fn<typeof fetch>().mockResolvedValue(
+      Response.json({
+        total_count: 1,
+        check_runs: [
+          {
+            id: 42,
+            name: "Code Quality",
+            head_sha: headSha,
+            status: "completed",
+            conclusion: "success",
+            app: { id: 15368, slug: "github-actions" },
+            html_url: "https://github.com/agentdevan/ambitions/actions/runs/42",
+          },
+        ],
+      }),
+    );
+    const client = new GitHubEvidenceClient(
+      "token",
+      "https://example.test",
+      fetcher,
+    );
+
+    await expect(
+      client.exactHeadCodeQuality("agentdevan/ambitions", headSha),
+    ).resolves.toEqual({
+      id: 42,
+      name: "Code Quality",
+      headSha,
+      status: "completed",
+      conclusion: "success",
+      appId: 15368,
+      appSlug: "github-actions",
+      url: "https://github.com/agentdevan/ambitions/actions/runs/42",
+    });
+    expect(fetcher).toHaveBeenCalledWith(
+      expect.stringContaining(`/commits/${headSha}/check-runs`),
+      expect.anything(),
+    );
+  });
+
+  it("rejects a third-party check named Code Quality", async () => {
+    const headSha = "a".repeat(40);
+    const fetcher = vi.fn<typeof fetch>().mockResolvedValue(
+      Response.json({
+        total_count: 1,
+        check_runs: [
+          {
+            id: 42,
+            name: "Code Quality",
+            head_sha: headSha,
+            status: "completed",
+            conclusion: "success",
+            app: { id: 999, slug: "third-party-ci" },
+          },
+        ],
+      }),
+    );
+    const client = new GitHubEvidenceClient(
+      "token",
+      "https://example.test",
+      fetcher,
+    );
+
+    await expect(
+      client.exactHeadCodeQuality("agentdevan/ambitions", headSha),
+    ).resolves.toBeNull();
+  });
+
+  it.each([
+    ["absent", { total_count: 0, check_runs: [] }],
+    [
+      "duplicate",
+      {
+        total_count: 2,
+        check_runs: [
+          {
+            id: 1,
+            name: "Code Quality",
+            head_sha: "a".repeat(40),
+            status: "completed",
+            conclusion: "success",
+          },
+          {
+            id: 2,
+            name: "Code Quality",
+            head_sha: "a".repeat(40),
+            status: "completed",
+            conclusion: "success",
+          },
+        ],
+      },
+    ],
+    [
+      "wrong head",
+      {
+        total_count: 1,
+        check_runs: [
+          {
+            id: 1,
+            name: "Code Quality",
+            head_sha: "b".repeat(40),
+            status: "completed",
+            conclusion: "success",
+          },
+        ],
+      },
+    ],
+    ["incomplete page", { total_count: 2, check_runs: [] }],
+  ])("fails exact-head check evidence closed when %s", async (_name, body) => {
+    const fetcher = vi
+      .fn<typeof fetch>()
+      .mockResolvedValue(Response.json(body));
+    const client = new GitHubEvidenceClient(
+      "token",
+      "https://example.test",
+      fetcher,
+    );
+
+    await expect(
+      client.exactHeadCodeQuality("agentdevan/ambitions", "a".repeat(40)),
+    ).resolves.toBeNull();
   });
 
   it.each([
