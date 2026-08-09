@@ -304,19 +304,42 @@ export async function auditLiveWorkspace(
   mutationsEnabled: boolean,
   options: LiveAuditOptions = {},
 ): Promise<LiveAuditResult> {
-  const projectData = await client.request<{
-    projects: { nodes: LiveProject[] };
-  }>(`query {
-    projects(first: 50) {
-      nodes {
-        id name summary: description description: content status { id name }
-        initiatives { nodes { name } }
-        labels { nodes { id name } }
-        projectMilestones { nodes { id name description } }
-        documents { nodes { id title content } }
-      }
+  const projects: LiveProject[] = [];
+  let projectAfter: string | null = null;
+  const seenProjectCursors = new Set<string>();
+  do {
+    const projectData: {
+      projects: {
+        nodes: LiveProject[];
+        pageInfo: { hasNextPage: boolean; endCursor?: string | null };
+      };
+    } = await client.request(
+      `query($after: String) {
+        projects(first: 10, after: $after) {
+          nodes {
+            id name summary: description description: content status { id name }
+            initiatives { nodes { name } }
+            labels { nodes { id name } }
+            projectMilestones { nodes { id name description } }
+            documents { nodes { id title content } }
+          }
+          pageInfo { hasNextPage endCursor }
+        }
+      }`,
+      { after: projectAfter },
+    );
+    projects.push(...projectData.projects.nodes);
+    if (!projectData.projects.pageInfo.hasNextPage) {
+      projectAfter = null;
+      continue;
     }
-  }`);
+    const nextCursor = projectData.projects.pageInfo.endCursor;
+    if (!nextCursor) throw new Error("LINEAR_PROJECT_PAGE_CURSOR_MISSING");
+    if (seenProjectCursors.has(nextCursor))
+      throw new Error("LINEAR_PROJECT_PAGE_CURSOR_REPEATED");
+    seenProjectCursors.add(nextCursor);
+    projectAfter = nextCursor;
+  } while (projectAfter);
   const controlData = await client.request<{
     workflowStates: { nodes: Array<{ id: string; name: string }> };
     issueLabels: { nodes: Array<{ id: string; name: string }> };
@@ -371,7 +394,7 @@ export async function auditLiveWorkspace(
   const repairReceipts: LiveRepairReceipt[] = [];
   const mappings: LiveObjectMapping[] = [];
   const projectsBySlug = new Map(
-    projectData.projects.nodes
+    projects
       .filter((project) => project.name.startsWith("Lifecycle — "))
       .map((project) => [project.name.replace(/^Lifecycle — /, ""), project]),
   );

@@ -70,6 +70,10 @@ const milestones = [
 ];
 
 class RepairingLinearClient {
+  projectQueries: string[] = [];
+  projectPageCursors: Array<string | null> = [];
+  splitProjectAcrossPages = false;
+  omitNextProjectCursor = false;
   documentContents = new Map<string, string>();
   issueDescription = "";
   projectSummary = "stale summary";
@@ -89,7 +93,21 @@ class RepairingLinearClient {
     variables: Readonly<Record<string, unknown>> = {},
   ): Promise<T> {
     await Promise.resolve();
-    if (query.includes("projects(first: 50)")) {
+    if (query.includes("projects(")) this.projectQueries.push(query);
+    if (query.includes("projects(first: 10")) {
+      const after = (variables.after as string | null | undefined) ?? null;
+      this.projectPageCursors.push(after);
+      if (this.splitProjectAcrossPages && after === null) {
+        return {
+          projects: {
+            nodes: [],
+            pageInfo: {
+              hasNextPage: true,
+              endCursor: this.omitNextProjectCursor ? null : "project-page-2",
+            },
+          },
+        } as T;
+      }
       return {
         projects: {
           nodes: [
@@ -122,6 +140,7 @@ class RepairingLinearClient {
               },
             },
           ],
+          pageInfo: { hasNextPage: false, endCursor: null },
         },
       } as T;
     }
@@ -349,6 +368,49 @@ async function fixture(): Promise<{
 }
 
 describe("live authority mirror repair", () => {
+  it("keeps the nested Project audit query below Linear's complexity ceiling", async () => {
+    const { client, desired } = await fixture();
+
+    await auditLiveWorkspace(client as unknown as LinearClient, desired, false);
+
+    expect(client.projectQueries).toHaveLength(1);
+    expect(client.projectQueries[0]).toContain("projects(first: 10");
+    expect(client.projectQueries[0]).toContain(
+      "pageInfo { hasNextPage endCursor }",
+    );
+  });
+
+  it("collects lifecycle Projects across every bounded Project page", async () => {
+    const { client, desired } = await fixture();
+    client.splitProjectAcrossPages = true;
+
+    const result = await auditLiveWorkspace(
+      client as unknown as LinearClient,
+      desired,
+      false,
+    );
+
+    expect(client.projectPageCursors).toEqual([null, "project-page-2"]);
+    expect(result.mappings).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          canonicalKey: "project:example",
+          linearId: "project-id",
+        }),
+      ]),
+    );
+  });
+
+  it("fails closed when Linear advertises another Project page without a cursor", async () => {
+    const { client, desired } = await fixture();
+    client.splitProjectAcrossPages = true;
+    client.omitNextProjectCursor = true;
+
+    await expect(
+      auditLiveWorkspace(client as unknown as LinearClient, desired, false),
+    ).rejects.toThrow("LINEAR_PROJECT_PAGE_CURSOR_MISSING");
+  });
+
   it("repairs stale Project, milestone, Document, and Issue mirrors once", async () => {
     const { client, desired } = await fixture();
     for (const [title, content] of client.documentContents)
