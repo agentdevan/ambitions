@@ -35,6 +35,7 @@ function environment(changeCount = 1): {
   const env = {
     CONTROL_ADMIN_SECRET: "admin-secret",
     GITHUB_WEBHOOK_SECRET: "github-secret",
+    GITHUB_API_TOKEN: "github-api-token",
     GITHUB_REPOSITORY: "agentdevan/ambitions",
     MANIFEST_PATH: "tools/linear-control/generated/desired-workspace.json",
     CONTROL_DB: {
@@ -321,6 +322,7 @@ describe("Worker ingress", () => {
       {
         headers: {
           Accept: "application/vnd.github+json",
+          Authorization: "Bearer github-api-token",
           "User-Agent": "ambitions-linear-control",
           "X-GitHub-Api-Version": "2022-11-28",
         },
