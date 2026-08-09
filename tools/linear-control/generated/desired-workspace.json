@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "authorityCommit": "626bffd6e8b295f68573366ca8544b1de9d3b3e7",
+  "authorityCommit": "4e1917b34c006db90cd7ec9264c7f301ba96d1fb",
   "projects": [
     {
       "slug": "adaptive-local-learning-and-replanning",
@@ -5564,18 +5564,18 @@
           "path": "docs/product-development/linear-realtime-lifecycle-control/implementation/tasks.md",
           "revision": "1",
           "status": "groomed",
-          "sha256": "977d89bb37893c724f5ebaaccf0d7803727b557dcd00d91860621ac77ca63f24",
-          "byteLength": 7276,
-          "gitBlobOid": "e0f66e4d53835bc73b1b150db8523f2e42db2f9a"
+          "sha256": "0a59056a56b175443cbe3c88612d9af4b74b4b0d4082f6f7f27f18efd9b02076",
+          "byteLength": 7310,
+          "gitBlobOid": "bfe1dfc279c2f38601c1c788c2d2670d9c5dff41"
         },
         {
           "kind": "verification",
           "path": "docs/product-development/linear-realtime-lifecycle-control/implementation/verification.md",
           "revision": "1",
           "status": "groomed",
-          "sha256": "21bdbe48643e4c6ccb5d6f4091ec351c7e531a36db3c9c808e61fc74cae5822a",
-          "byteLength": 2616,
-          "gitBlobOid": "eae77e3cdbabaa6f3ab460d55ae2414a42b52f0d"
+          "sha256": "6a8904aae719751062fc7d37548af185bf75db39f988aaba7edd0e74a224fca6",
+          "byteLength": 2641,
+          "gitBlobOid": "047ef41e30d8ad4140bb43aa2991d21d962c1577"
         }
       ],
       "tasks": [
@@ -5583,7 +5583,7 @@
           "id": "T1",
           "canonicalKey": "linear-realtime-lifecycle-control:T1",
           "title": "Add the approved lifecycle package under `docs/product-development/linear-realtime-lifecycle-control/`",
-          "body": "1. Add the approved lifecycle package under `docs/product-development/linear-realtime-lifecycle-control/`. Dependency: none. Trace: REQ-001–REQ-018. Acceptance: lifecycle checker passes with no draft markers and complete Research/Scope/Design/Plan/Tasks/Verification. Proof: structural check and semantic review. Rollback/stop: remove the new isolated folder if review finds a product hard fork. Tests: lifecycle checker and `git diff --check`.\n   Frontend: none — this task is limited to canon, domain, data, runtime, tooling, integration, or verification foundations and does not create or modify a user interface.",
+          "body": "1. Add the approved lifecycle package under `docs/product-development/linear-realtime-lifecycle-control/`. Dependency: none. Trace: REQ-001–REQ-018. Acceptance: lifecycle checker passes with no draft markers and complete Research/Scope/Design/Plan/Tasks/Verification. Proof: structural check and semantic review. Rollback/stop: remove the new isolated folder if review finds a product hard fork. Tests: lifecycle checker against the canonical folder path and `git diff --check`.\n   Frontend: none — this task is limited to canon, domain, data, runtime, tooling, integration, or verification foundations and does not create or modify a user interface.",
           "projectSlug": "linear-realtime-lifecycle-control",
           "order": 1,
           "dependencies": [],
@@ -5595,9 +5595,9 @@
               "audit"
             ],
             "validationCommands": [
-              "lifecycle checker and `git diff --check`."
+              "lifecycle checker against the canonical folder path and `git diff --check`."
             ],
-            "rollback": "remove the new isolated folder if review finds a product hard fork. Tests: lifecycle checker and `git diff --check`."
+            "rollback": "remove the new isolated folder if review finds a product hard fork. Tests: lifecycle checker against the canonical folder path and `git diff --check`."
           },
           "frontendImpact": "none",
           "visualGate": "not-required",
@@ -10168,5 +10168,5 @@
       ]
     }
   ],
-  "contractHash": "8e785824d22c54e1fff98c1d8d74cab6379e51ac3cea6ae7899fd3c023e8d50d"
+  "contractHash": "2dab4fc020d2c981dac13d5f89fd7cd2e2a017ca5ab42bf5c7a29fd4e02c0688"
 }
