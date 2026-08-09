@@ -60,4 +60,28 @@ describe("provider adapters", () => {
       globalThis.fetch = originalFetch;
     }
   });
+
+  it("reports bounded Linear HTTP error detail without exposing the token", async () => {
+    const originalFetch = globalThis.fetch;
+    const fetcher = vi.fn<typeof fetch>().mockResolvedValue(
+      new Response(
+        JSON.stringify({
+          errors: [{ message: "Unknown field summary for token secret" }],
+        }),
+        { status: 400 },
+      ),
+    );
+    globalThis.fetch = fetcher;
+    try {
+      const client = new LinearClient("secret", "https://example.test");
+      await expect(client.request("query { invalid }")).rejects.toThrow(
+        'LINEAR_HTTP_400:{"errors":[{"message":"Unknown field summary for token [REDACTED]"}]}',
+      );
+      await expect(client.request("query { invalid }")).rejects.not.toThrow(
+        "secret",
+      );
+    } finally {
+      globalThis.fetch = originalFetch;
+    }
+  });
 });

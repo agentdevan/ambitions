@@ -202,13 +202,13 @@ class RepairingLinearClient {
     }
     if (query.includes("projectUpdate")) {
       const input = variables.input as {
-        summary: string;
         description: string;
+        content: string;
         statusId: string;
       };
       if (!this.failProjectVerification) {
-        this.projectSummary = input.summary;
-        this.projectDescription = input.description;
+        this.projectSummary = input.description;
+        this.projectDescription = input.content;
         this.projectStatus = input.statusId.replace(/^project-status:/, "");
       }
       return {
