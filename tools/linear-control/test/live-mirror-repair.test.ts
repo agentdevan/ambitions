@@ -512,6 +512,12 @@ describe("live authority mirror repair", () => {
     expect(client.projectDescription).toContain(
       "Repository commit: new-commit",
     );
+    expect(client.projectDescription).toContain(
+      "Repository authority: [https://github.com/agentdevan/ambitions/tree/new-commit/docs/product-development/example](<https://github.com/agentdevan/ambitions/tree/new-commit/docs/product-development/example>)",
+    );
+    expect(client.projectDescription).not.toContain(
+      "Repository authority: https://github.com/agentdevan/ambitions/tree/new-commit/docs/product-development/example",
+    );
     expect(client.projectStatus).toBe("Grooming");
     expect(
       client.milestoneDescriptions.get("M4 — Implementation Complete"),

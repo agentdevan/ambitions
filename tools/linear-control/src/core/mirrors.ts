@@ -39,10 +39,11 @@ export function projectAuthorityMirror(
   const peers = group.projectSlugs.filter((slug) => slug !== project.slug);
   const fullyVerified = progress.verifiedTasks === progress.totalTasks;
   const terminallyClosed = progress.phase === "Completed";
+  const repositoryUrl = `https://github.com/agentdevan/ambitions/tree/${authorityCommit}/${project.folder}`;
   return [
     "# Lifecycle Project",
     "",
-    `Repository authority: https://github.com/agentdevan/ambitions/tree/${authorityCommit}/${project.folder}`,
+    `Repository authority: [${repositoryUrl}](<${repositoryUrl}>)`,
     "",
     `- Canonical folder: ${project.folder}/`,
     `- Repository commit: ${authorityCommit}`,
