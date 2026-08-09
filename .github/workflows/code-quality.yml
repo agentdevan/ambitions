@@ -42,7 +42,7 @@ jobs:
           paths="$RUNNER_TEMP/changed-paths"
           git diff --name-only "$base" HEAD > "$paths"
           cat "$paths"
-          has() { rg -q "$1" "$paths"; }
+          has() { grep -Eq "$1" "$paths"; }
           has '^(Native/|Packages/|project\.yml$|Package\.swift$|Package\.resolved$|scripts/ambitions-xcode)' && native=true || native=false
           has '^(tools/source-atlas/|requirements-ci\.txt$)' && source_atlas=true || source_atlas=false
           has '^(tools/linear-control/|docs/product-development/linear-realtime-lifecycle-control/)' && linear_control=true || linear_control=false
