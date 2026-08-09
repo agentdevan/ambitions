@@ -4,9 +4,9 @@ title = "Privacy and Data Classification"
 kind = "system"
 status = "normative"
 owner_domain = "system-privacy-data-classification"
-canon_revision = 1
+canon_revision = 2
 profile = "system-v1"
-owns_concepts = ["system.privacy.classification", "system.privacy.egress-firewall", "system.privacy.external-assistance", "system.privacy.public-reference-boundary"]
+owns_concepts = ["system.privacy.classification", "system.privacy.egress-firewall", "system.privacy.external-assistance", "system.privacy.public-reference-boundary", "system.privacy.relationship-registry-public-only"]
 inherits = ["LAW-LOCAL-AUTHORITY-001", "LAW-OFFLINE-NO-ACCOUNT-001", "LAW-ACCOUNT-BOUNDARY-001", "LAW-R2-PUBLIC-ONLY-001", "PRIVACY-CLOUDKIT-CONTINUITY-001", "PRIVACY-VISIBILITY-001"]
 depends_on = ["CONSTITUTION", "SURFACE-YOU", "APP-PERMISSIONS", "GLOBAL-TRUST-INSPECTION", "SYSTEM-PRIVATE-LIFE-RUNTIME"]
 source_owners = ["Native/Ambitions/Core/LocalRuntimeOS/Boundary/", "Native/Ambitions/Core/LocalRuntimeOS/PrivacySecurity/", "Native/Ambitions/Core/LocalRuntimeOS/Inspection/", "Native/Ambitions/Surfaces/You/", "Native/Ambitions/Trust/", "Native/Ambitions/Quality/"]
@@ -52,6 +52,26 @@ Ambitions Account MUST NOT store the private life graph unless a future canon ex
 - **Supersedes:** none
 
 Public-reference identity, source-native facts, authority, jurisdiction, release, freshness, rights, attribution, risk, review, conflict, and supersession may use the public-reference handling class. Combining one of those facts with a Goal, Capability, Proof, schedule, location, private identifier, rejection, rationale, or derived private key creates private graph data and MUST remain under local Planning; it cannot enter a Source Atlas request, cache key, public pack, diagnostic, telemetry, or R2 object.
+
+## SYSTEM-PRIVACY-RELATIONSHIP-REGISTRY-001 — Relationship acquisition and queries remain public-only
+
+- **Concept:** `system.privacy.relationship-registry-public-only`
+- **Modality:** `MUST NOT`
+- **Scope:** Relationship source acquisition, requests, keys, artifacts, caches, logs, diagnostics, evaluation, inspection, dependencies, and refresh
+- **Status:** `normative`
+- **Verification:** `PRIVACY-RELATIONSHIP-REGISTRY-PUBLIC-ONLY-001`
+- **Supersedes:** none
+
+Relationship acquisition and registry queries MUST use fixed public release IDs
+and typed public concept references only. User or device identity, Goals,
+Capabilities, Proof, education history, schedules, locations, recommendations,
+corrections, selections, rejections, private search text, or values derived from
+them MUST NOT influence request parameters, artifact selection or partitioning,
+cache keys, logs, diagnostics, evaluation inputs, refresh behavior, or source
+feedback. Public dependency records MAY contain opaque public consumer and
+relationship revision identifiers only; private purpose detail remains with its
+local owner. Any unknown, mixed, free-form, or private-influenced request shape
+fails closed and cannot be made public by redaction after the fact.
 
 ## Completeness contract
 

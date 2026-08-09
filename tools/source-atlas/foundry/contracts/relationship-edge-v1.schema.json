@@ -1,0 +1,1289 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ambitions.app/schemas/source-atlas/relationship-edge-v1.schema.json",
+  "title": "Relationship Edge v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "kind",
+    "edgeId",
+    "revision",
+    "mappingSet",
+    "subject",
+    "predicate",
+    "direction",
+    "object",
+    "sourceMetadata",
+    "review",
+    "useProfileBinding",
+    "eligiblePurposes",
+    "forbiddenPropagation",
+    "nonClaims",
+    "rightsBinding",
+    "freshness",
+    "conflictState"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "relationship-edge-v1"
+    },
+    "kind": {
+      "const": "relationshipEdge"
+    },
+    "edgeId": {
+      "$ref": "#/$defs/stableId"
+    },
+    "revision": {
+      "$ref": "#/$defs/version"
+    },
+    "mappingSet": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "mappingSetId",
+        "revision",
+        "releaseId"
+      ],
+      "properties": {
+        "mappingSetId": {
+          "$ref": "#/$defs/stableId"
+        },
+        "revision": {
+          "$ref": "#/$defs/version"
+        },
+        "releaseId": {
+          "$ref": "#/$defs/stableId"
+        }
+      }
+    },
+    "subject": {
+      "$ref": "#/$defs/conceptRef"
+    },
+    "predicate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "predicateId",
+        "vocabularyVersion",
+        "vocabularyHash"
+      ],
+      "properties": {
+        "predicateId": {
+          "$ref": "#/$defs/predicate"
+        },
+        "vocabularyVersion": {
+          "const": "1.0.0"
+        },
+        "vocabularyHash": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        }
+      }
+    },
+    "direction": {
+      "enum": [
+        "subject_to_object",
+        "object_to_subject"
+      ]
+    },
+    "object": {
+      "$ref": "#/$defs/conceptRef"
+    },
+    "sourceMetadata": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "sourceRow"
+      ],
+      "properties": {
+        "sourceRow": {
+          "type": "string",
+          "minLength": 1
+        },
+        "mappingJustification": {
+          "type": "string",
+          "minLength": 1
+        },
+        "evidence": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "method": {
+          "enum": [
+            "source_published",
+            "maintainer_curated",
+            "human_reviewed",
+            "lexical",
+            "model_generated",
+            "community_submitted"
+          ]
+        },
+        "creatorIds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "reviewerIds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "mappingDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "reviewDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "confidence": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "similarity": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "mappingTool": {
+          "type": "string",
+          "minLength": 1
+        },
+        "mappingToolVersion": {
+          "type": "string",
+          "minLength": 1
+        },
+        "mappingModel": {
+          "type": "string",
+          "minLength": 1
+        },
+        "qaPartition": {
+          "enum": [
+            "source_published",
+            "human_validated",
+            "lower_qa_related",
+            "candidate",
+            "rejected",
+            "explicit_no_match"
+          ]
+        },
+        "comments": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "sourceSpecificFields": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "name",
+              "value"
+            ],
+            "properties": {
+              "name": {
+                "type": "string",
+                "minLength": 1
+              },
+              "value": {
+                "type": [
+                  "string",
+                  "number",
+                  "integer",
+                  "boolean",
+                  "null"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "review": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "provenanceClass",
+        "state",
+        "decisionBy",
+        "decisionAt",
+        "decisionReason"
+      ],
+      "properties": {
+        "provenanceClass": {
+          "enum": [
+            "official",
+            "publisher",
+            "maintainer_curated",
+            "human_reviewed",
+            "lexical_model",
+            "community",
+            "rejected",
+            "no_match"
+          ]
+        },
+        "state": {
+          "enum": [
+            "unreviewed",
+            "source_published",
+            "approved",
+            "restricted",
+            "rejected",
+            "explicit_no_match",
+            "conflicted"
+          ]
+        },
+        "decisionBy": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "decisionAt": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "decisionReason": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "useProfileBinding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "profileId",
+        "revision"
+      ],
+      "properties": {
+        "profileId": {
+          "enum": [
+            "cip-edition-migration-v1",
+            "cip-soc-relevance-v1",
+            "onet-soc-overlay-v1",
+            "onet-esco-blocked-v1",
+            "publisher-alignment-blocked-v1",
+            "mapping-candidate-review-v1"
+          ]
+        },
+        "revision": {
+          "const": "1.0.0"
+        }
+      }
+    },
+    "eligiblePurposes": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/purpose"
+      },
+      "uniqueItems": true
+    },
+    "forbiddenPropagation": {
+      "type": "array",
+      "minItems": 8,
+      "items": {
+        "$ref": "#/$defs/forbidden"
+      },
+      "uniqueItems": true,
+      "allOf": [
+        {
+          "contains": {
+            "const": "chain_inference"
+          }
+        },
+        {
+          "contains": {
+            "const": "inverse_inference"
+          }
+        },
+        {
+          "contains": {
+            "const": "claim_transfer"
+          }
+        },
+        {
+          "contains": {
+            "const": "unrelated_claim_families"
+          }
+        },
+        {
+          "contains": {
+            "const": "qualification"
+          }
+        },
+        {
+          "contains": {
+            "const": "credit"
+          }
+        },
+        {
+          "contains": {
+            "const": "acceptance"
+          }
+        },
+        {
+          "contains": {
+            "const": "user_capability"
+          }
+        }
+      ]
+    },
+    "nonClaims": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "rightsBinding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "rightsId",
+        "version",
+        "state"
+      ],
+      "properties": {
+        "rightsId": {
+          "$ref": "#/$defs/stableId"
+        },
+        "version": {
+          "$ref": "#/$defs/version"
+        },
+        "state": {
+          "$ref": "#/$defs/rightsState"
+        }
+      }
+    },
+    "freshness": {
+      "enum": [
+        "current",
+        "aging",
+        "stale_allowed",
+        "stale_blocked",
+        "source_changed",
+        "superseded",
+        "unknown"
+      ]
+    },
+    "conflictState": {
+      "enum": [
+        "none",
+        "unresolved"
+      ]
+    }
+  },
+  "$defs": {
+    "stableId": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9._:-]{2,127}$"
+    },
+    "version": {
+      "type": "string",
+      "minLength": 1,
+      "not": {
+        "enum": [
+          "latest",
+          "current",
+          "unknown",
+          "unresolved",
+          "*"
+        ]
+      }
+    },
+    "conceptRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schemeId",
+        "schemeVersion",
+        "conceptId",
+        "label",
+        "locator",
+        "lifecycleState"
+      ],
+      "properties": {
+        "schemeId": {
+          "$ref": "#/$defs/stableId"
+        },
+        "schemeVersion": {
+          "$ref": "#/$defs/version"
+        },
+        "conceptId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "label": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "locator": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "uri"
+        },
+        "lifecycleState": {
+          "enum": [
+            "current_for_mapping",
+            "newer_than_mapping",
+            "changed",
+            "split",
+            "merged",
+            "deprecated",
+            "deleted",
+            "unavailable"
+          ]
+        }
+      }
+    },
+    "family": {
+      "enum": [
+        "within_scheme_relation",
+        "scheme_version_migration",
+        "official_cross_scheme_mapping",
+        "publisher_authored_alignment",
+        "current_authority_reference",
+        "unapproved_candidate"
+      ]
+    },
+    "predicate": {
+      "enum": [
+        "cip:unchanged",
+        "cip:textChanged",
+        "cip:new",
+        "cip:deleted",
+        "cip:movedFrom",
+        "cip:movedTo",
+        "cip:reportUnder",
+        "cip:split",
+        "cip:merge",
+        "skos:exactMatch",
+        "skos:closeMatch",
+        "skos:broadMatch",
+        "skos:narrowMatch",
+        "skos:relatedMatch",
+        "ambitions:educationOccupationRelevance",
+        "ambitions:sourceTaxonomyRelationship",
+        "ctdl:alignment",
+        "case:association",
+        "ambitions:preparation",
+        "ambitions:candidateRelationship"
+      ]
+    },
+    "purpose": {
+      "enum": [
+        "inspection",
+        "search_expansion",
+        "destination_discovery",
+        "explanation",
+        "source_overlay_join",
+        "version_migration",
+        "review_only",
+        "unavailable"
+      ]
+    },
+    "forbidden": {
+      "enum": [
+        "chain_inference",
+        "transitive_inference",
+        "inverse_inference",
+        "claim_transfer",
+        "unrelated_claim_families",
+        "generic_identity",
+        "program_availability",
+        "competency",
+        "credit",
+        "degree_requirement",
+        "qualification",
+        "licensure",
+        "employment",
+        "unique_route",
+        "individual_outcome",
+        "jurisdictional_identity",
+        "skill_equivalence",
+        "career_equivalence",
+        "user_equivalence",
+        "sibling_inheritance",
+        "current_job",
+        "independent_verification",
+        "mastery",
+        "acceptance",
+        "user_capability",
+        "recommendation",
+        "canonical_mutation",
+        "external_action"
+      ]
+    },
+    "rightsState": {
+      "enum": [
+        "approved",
+        "attribution_required",
+        "transformation_restricted",
+        "inspection_only",
+        "review_required",
+        "withdrawn"
+      ]
+    },
+    "predicateVocabularyDocument": {
+      "const": {
+        "schemaVersion": "relationship-registry-predicates-v1",
+        "kind": "relationshipRegistryPredicates",
+        "version": "1.0.0",
+        "unknownPredicatePolicy": "reject",
+        "productInferenceDefaults": {
+          "chain": "forbidden",
+          "transitive": "forbidden",
+          "inverse": "stored_edge_only",
+          "symmetric": "stored_edge_only",
+          "claimPropagation": "forbidden"
+        },
+        "predicates": [
+          {
+            "predicateId": "cip:unchanged",
+            "vocabularyVersion": "1.0.0",
+            "family": "scheme_version_migration",
+            "sourceCode": "unchanged",
+            "sourceMeaning": "The publisher retained the concept without a version action.",
+            "productExplanation": "The same source concept continues in the named edition.",
+            "sourceSymmetric": false,
+            "sourceTransitive": false,
+            "inversePredicateId": null
+          },
+          {
+            "predicateId": "cip:textChanged",
+            "vocabularyVersion": "1.0.0",
+            "family": "scheme_version_migration",
+            "sourceCode": "text changed",
+            "sourceMeaning": "The publisher changed concept text between editions.",
+            "productExplanation": "The source text changed and meaning must not be assumed unchanged.",
+            "sourceSymmetric": false,
+            "sourceTransitive": false,
+            "inversePredicateId": null
+          },
+          {
+            "predicateId": "cip:new",
+            "vocabularyVersion": "1.0.0",
+            "family": "scheme_version_migration",
+            "sourceCode": "new",
+            "sourceMeaning": "The publisher introduced the concept in the target edition.",
+            "productExplanation": "The concept has no source-declared predecessor.",
+            "sourceSymmetric": false,
+            "sourceTransitive": false,
+            "inversePredicateId": null
+          },
+          {
+            "predicateId": "cip:deleted",
+            "vocabularyVersion": "1.0.0",
+            "family": "scheme_version_migration",
+            "sourceCode": "deleted",
+            "sourceMeaning": "The publisher removed the concept in the target edition.",
+            "productExplanation": "The concept cannot silently retarget to another identifier.",
+            "sourceSymmetric": false,
+            "sourceTransitive": false,
+            "inversePredicateId": null
+          },
+          {
+            "predicateId": "cip:movedFrom",
+            "vocabularyVersion": "1.0.0",
+            "family": "scheme_version_migration",
+            "sourceCode": "moved from",
+            "sourceMeaning": "The publisher moved content from the named prior concept.",
+            "productExplanation": "This is a directional source migration action.",
+            "sourceSymmetric": false,
+            "sourceTransitive": false,
+            "inversePredicateId": "cip:movedTo"
+          },
+          {
+            "predicateId": "cip:movedTo",
+            "vocabularyVersion": "1.0.0",
+            "family": "scheme_version_migration",
+            "sourceCode": "moved to",
+            "sourceMeaning": "The publisher moved content to the named target concept.",
+            "productExplanation": "This is a directional source migration action.",
+            "sourceSymmetric": false,
+            "sourceTransitive": false,
+            "inversePredicateId": "cip:movedFrom"
+          },
+          {
+            "predicateId": "cip:reportUnder",
+            "vocabularyVersion": "1.0.0",
+            "family": "scheme_version_migration",
+            "sourceCode": "report under",
+            "sourceMeaning": "The publisher directs reporting under another concept.",
+            "productExplanation": "This action is not generic concept equivalence.",
+            "sourceSymmetric": false,
+            "sourceTransitive": false,
+            "inversePredicateId": null
+          },
+          {
+            "predicateId": "cip:split",
+            "vocabularyVersion": "1.0.0",
+            "family": "scheme_version_migration",
+            "sourceCode": "split",
+            "sourceMeaning": "One source concept was split into multiple target concepts.",
+            "productExplanation": "Migration is ambiguous and requires review.",
+            "sourceSymmetric": false,
+            "sourceTransitive": false,
+            "inversePredicateId": "cip:merge"
+          },
+          {
+            "predicateId": "cip:merge",
+            "vocabularyVersion": "1.0.0",
+            "family": "scheme_version_migration",
+            "sourceCode": "merge",
+            "sourceMeaning": "Multiple source concepts were merged into one target concept.",
+            "productExplanation": "Migration is many-to-one and not generic equivalence.",
+            "sourceSymmetric": false,
+            "sourceTransitive": false,
+            "inversePredicateId": "cip:split"
+          },
+          {
+            "predicateId": "skos:exactMatch",
+            "vocabularyVersion": "1.0.0",
+            "family": "official_cross_scheme_mapping",
+            "sourceCode": "http://www.w3.org/2004/02/skos/core#exactMatch",
+            "sourceMeaning": "The source publishes a SKOS exact mapping.",
+            "productExplanation": "Ambitions preserves the source predicate but derives no chained product edge.",
+            "sourceSymmetric": true,
+            "sourceTransitive": true,
+            "inversePredicateId": "skos:exactMatch"
+          },
+          {
+            "predicateId": "skos:closeMatch",
+            "vocabularyVersion": "1.0.0",
+            "family": "official_cross_scheme_mapping",
+            "sourceCode": "http://www.w3.org/2004/02/skos/core#closeMatch",
+            "sourceMeaning": "The source publishes a SKOS close mapping.",
+            "productExplanation": "The concepts are close only for an explicitly eligible purpose.",
+            "sourceSymmetric": true,
+            "sourceTransitive": false,
+            "inversePredicateId": "skos:closeMatch"
+          },
+          {
+            "predicateId": "skos:broadMatch",
+            "vocabularyVersion": "1.0.0",
+            "family": "official_cross_scheme_mapping",
+            "sourceCode": "http://www.w3.org/2004/02/skos/core#broadMatch",
+            "sourceMeaning": "The object is broader under the source mapping.",
+            "productExplanation": "This directional mapping cannot be reversed without a stored edge.",
+            "sourceSymmetric": false,
+            "sourceTransitive": false,
+            "inversePredicateId": "skos:narrowMatch"
+          },
+          {
+            "predicateId": "skos:narrowMatch",
+            "vocabularyVersion": "1.0.0",
+            "family": "official_cross_scheme_mapping",
+            "sourceCode": "http://www.w3.org/2004/02/skos/core#narrowMatch",
+            "sourceMeaning": "The object is narrower under the source mapping.",
+            "productExplanation": "This directional mapping cannot be reversed without a stored edge.",
+            "sourceSymmetric": false,
+            "sourceTransitive": false,
+            "inversePredicateId": "skos:broadMatch"
+          },
+          {
+            "predicateId": "skos:relatedMatch",
+            "vocabularyVersion": "1.0.0",
+            "family": "official_cross_scheme_mapping",
+            "sourceCode": "http://www.w3.org/2004/02/skos/core#relatedMatch",
+            "sourceMeaning": "The source publishes an associative SKOS mapping.",
+            "productExplanation": "Association does not transfer claims or imply equivalence.",
+            "sourceSymmetric": true,
+            "sourceTransitive": false,
+            "inversePredicateId": "skos:relatedMatch"
+          },
+          {
+            "predicateId": "ambitions:educationOccupationRelevance",
+            "vocabularyVersion": "1.0.0",
+            "family": "official_cross_scheme_mapping",
+            "sourceCode": "source-declared CIP-SOC relationship",
+            "sourceMeaning": "The publisher relates education codes to occupation codes.",
+            "productExplanation": "The many-to-many relevance is not a degree or qualification requirement.",
+            "sourceSymmetric": false,
+            "sourceTransitive": false,
+            "inversePredicateId": null
+          },
+          {
+            "predicateId": "ambitions:sourceTaxonomyRelationship",
+            "vocabularyVersion": "1.0.0",
+            "family": "official_cross_scheme_mapping",
+            "sourceCode": "source-declared O*NET-SOC relationship",
+            "sourceMeaning": "The publisher relates exact O*NET-SOC and SOC releases.",
+            "productExplanation": "The relation permits no sibling inheritance or current-job claim.",
+            "sourceSymmetric": false,
+            "sourceTransitive": false,
+            "inversePredicateId": null
+          },
+          {
+            "predicateId": "ctdl:alignment",
+            "vocabularyVersion": "1.0.0",
+            "family": "publisher_authored_alignment",
+            "sourceCode": "publisher-declared CTDL alignment",
+            "sourceMeaning": "A publisher asserts an alignment to a CTDL concept.",
+            "productExplanation": "The publisher claim is not independent verification or mastery.",
+            "sourceSymmetric": false,
+            "sourceTransitive": false,
+            "inversePredicateId": null
+          },
+          {
+            "predicateId": "case:association",
+            "vocabularyVersion": "1.0.0",
+            "family": "publisher_authored_alignment",
+            "sourceCode": "publisher-declared CASE association",
+            "sourceMeaning": "A publisher asserts an association to a CASE framework node.",
+            "productExplanation": "The publisher claim does not establish credit or acceptance.",
+            "sourceSymmetric": false,
+            "sourceTransitive": false,
+            "inversePredicateId": null
+          },
+          {
+            "predicateId": "ambitions:preparation",
+            "vocabularyVersion": "1.0.0",
+            "family": "current_authority_reference",
+            "sourceCode": "source-specific preparation",
+            "sourceMeaning": "A current authority publishes a preparation relationship.",
+            "productExplanation": "The relationship is inspectable only within the source's exact authority scope.",
+            "sourceSymmetric": false,
+            "sourceTransitive": false,
+            "inversePredicateId": null
+          },
+          {
+            "predicateId": "ambitions:candidateRelationship",
+            "vocabularyVersion": "1.0.0",
+            "family": "unapproved_candidate",
+            "sourceCode": "method-generated candidate",
+            "sourceMeaning": "A method proposes a relationship for review.",
+            "productExplanation": "The candidate is not a consumer fact or source authority.",
+            "sourceSymmetric": false,
+            "sourceTransitive": false,
+            "inversePredicateId": null
+          }
+        ]
+      }
+    },
+    "edgeProfileAuthority": {
+      "oneOf": [
+        {
+          "properties": {
+            "useProfileBinding": {
+              "properties": {
+                "profileId": {
+                  "const": "cip-edition-migration-v1"
+                }
+              }
+            },
+            "direction": {
+              "enum": [
+                "subject_to_object"
+              ]
+            },
+            "subject": {
+              "properties": {
+                "lifecycleState": {
+                  "enum": [
+                    "current_for_mapping"
+                  ]
+                }
+              }
+            },
+            "object": {
+              "properties": {
+                "lifecycleState": {
+                  "enum": [
+                    "current_for_mapping"
+                  ]
+                }
+              }
+            },
+            "eligiblePurposes": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "enum": [
+                  "inspection",
+                  "version_migration"
+                ]
+              },
+              "uniqueItems": true
+            },
+            "review": {
+              "properties": {
+                "state": {
+                  "enum": [
+                    "source_published",
+                    "approved"
+                  ]
+                }
+              }
+            },
+            "rightsBinding": {
+              "properties": {
+                "state": {
+                  "enum": [
+                    "approved",
+                    "attribution_required",
+                    "transformation_restricted",
+                    "inspection_only"
+                  ]
+                }
+              }
+            },
+            "forbiddenPropagation": {
+              "const": [
+                "chain_inference",
+                "transitive_inference",
+                "inverse_inference",
+                "claim_transfer",
+                "unrelated_claim_families",
+                "generic_identity",
+                "program_availability",
+                "competency",
+                "credit",
+                "qualification",
+                "acceptance",
+                "user_capability",
+                "canonical_mutation",
+                "external_action"
+              ]
+            },
+            "nonClaims": {
+              "const": [
+                "not generic identity",
+                "not program availability",
+                "not competency",
+                "not credit"
+              ]
+            }
+          },
+          "allOf": [
+            {
+              "if": {
+                "properties": {
+                  "rightsBinding": {
+                    "properties": {
+                      "state": {
+                        "const": "inspection_only"
+                      }
+                    }
+                  }
+                }
+              },
+              "then": {
+                "properties": {
+                  "eligiblePurposes": {
+                    "type": "array",
+                    "minItems": 1,
+                    "items": {
+                      "enum": [
+                        "inspection"
+                      ]
+                    },
+                    "uniqueItems": true
+                  }
+                }
+              }
+            }
+          ]
+        },
+        {
+          "properties": {
+            "useProfileBinding": {
+              "properties": {
+                "profileId": {
+                  "const": "cip-soc-relevance-v1"
+                }
+              }
+            },
+            "direction": {
+              "enum": [
+                "subject_to_object"
+              ]
+            },
+            "subject": {
+              "properties": {
+                "lifecycleState": {
+                  "enum": [
+                    "current_for_mapping"
+                  ]
+                }
+              }
+            },
+            "object": {
+              "properties": {
+                "lifecycleState": {
+                  "enum": [
+                    "current_for_mapping"
+                  ]
+                }
+              }
+            },
+            "eligiblePurposes": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "enum": [
+                  "inspection",
+                  "search_expansion",
+                  "destination_discovery",
+                  "explanation"
+                ]
+              },
+              "uniqueItems": true
+            },
+            "review": {
+              "properties": {
+                "state": {
+                  "enum": [
+                    "source_published",
+                    "approved"
+                  ]
+                }
+              }
+            },
+            "rightsBinding": {
+              "properties": {
+                "state": {
+                  "enum": [
+                    "approved",
+                    "attribution_required",
+                    "transformation_restricted",
+                    "inspection_only"
+                  ]
+                }
+              }
+            },
+            "forbiddenPropagation": {
+              "const": [
+                "chain_inference",
+                "transitive_inference",
+                "inverse_inference",
+                "claim_transfer",
+                "unrelated_claim_families",
+                "degree_requirement",
+                "qualification",
+                "credit",
+                "acceptance",
+                "user_capability",
+                "licensure",
+                "employment",
+                "unique_route",
+                "individual_outcome",
+                "recommendation",
+                "canonical_mutation",
+                "external_action"
+              ]
+            },
+            "nonClaims": {
+              "const": [
+                "not a degree requirement",
+                "not qualification",
+                "not licensure",
+                "not employment",
+                "not a unique route",
+                "not an individual outcome"
+              ]
+            }
+          },
+          "allOf": [
+            {
+              "if": {
+                "properties": {
+                  "rightsBinding": {
+                    "properties": {
+                      "state": {
+                        "const": "inspection_only"
+                      }
+                    }
+                  }
+                }
+              },
+              "then": {
+                "properties": {
+                  "eligiblePurposes": {
+                    "type": "array",
+                    "minItems": 1,
+                    "items": {
+                      "enum": [
+                        "inspection"
+                      ]
+                    },
+                    "uniqueItems": true
+                  }
+                }
+              }
+            }
+          ]
+        },
+        {
+          "properties": {
+            "useProfileBinding": {
+              "properties": {
+                "profileId": {
+                  "const": "onet-soc-overlay-v1"
+                }
+              }
+            },
+            "direction": {
+              "enum": [
+                "subject_to_object"
+              ]
+            },
+            "subject": {
+              "properties": {
+                "lifecycleState": {
+                  "enum": [
+                    "current_for_mapping"
+                  ]
+                }
+              }
+            },
+            "object": {
+              "properties": {
+                "lifecycleState": {
+                  "enum": [
+                    "current_for_mapping"
+                  ]
+                }
+              }
+            },
+            "eligiblePurposes": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "enum": [
+                  "inspection",
+                  "search_expansion",
+                  "source_overlay_join"
+                ]
+              },
+              "uniqueItems": true
+            },
+            "review": {
+              "properties": {
+                "state": {
+                  "enum": [
+                    "source_published",
+                    "approved"
+                  ]
+                }
+              }
+            },
+            "rightsBinding": {
+              "properties": {
+                "state": {
+                  "enum": [
+                    "approved",
+                    "attribution_required",
+                    "transformation_restricted",
+                    "inspection_only"
+                  ]
+                }
+              }
+            },
+            "forbiddenPropagation": {
+              "const": [
+                "chain_inference",
+                "transitive_inference",
+                "inverse_inference",
+                "claim_transfer",
+                "unrelated_claim_families",
+                "generic_identity",
+                "sibling_inheritance",
+                "current_job",
+                "qualification",
+                "credit",
+                "acceptance",
+                "user_capability",
+                "recommendation",
+                "canonical_mutation",
+                "external_action"
+              ]
+            },
+            "nonClaims": {
+              "const": [
+                "not identity across detailed, aggregate, or title-only records",
+                "no sibling inheritance",
+                "not the user's current job"
+              ]
+            }
+          },
+          "allOf": [
+            {
+              "if": {
+                "properties": {
+                  "rightsBinding": {
+                    "properties": {
+                      "state": {
+                        "const": "inspection_only"
+                      }
+                    }
+                  }
+                }
+              },
+              "then": {
+                "properties": {
+                  "eligiblePurposes": {
+                    "type": "array",
+                    "minItems": 1,
+                    "items": {
+                      "enum": [
+                        "inspection"
+                      ]
+                    },
+                    "uniqueItems": true
+                  }
+                }
+              }
+            }
+          ]
+        },
+        {
+          "properties": {
+            "useProfileBinding": {
+              "properties": {
+                "profileId": {
+                  "const": "mapping-candidate-review-v1"
+                }
+              }
+            },
+            "direction": {
+              "enum": [
+                "subject_to_object"
+              ]
+            },
+            "subject": {
+              "properties": {
+                "lifecycleState": {
+                  "enum": [
+                    "current_for_mapping"
+                  ]
+                }
+              }
+            },
+            "object": {
+              "properties": {
+                "lifecycleState": {
+                  "enum": [
+                    "current_for_mapping"
+                  ]
+                }
+              }
+            },
+            "eligiblePurposes": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "enum": [
+                  "review_only"
+                ]
+              },
+              "uniqueItems": true
+            },
+            "review": {
+              "properties": {
+                "state": {
+                  "enum": [
+                    "restricted"
+                  ]
+                }
+              }
+            },
+            "rightsBinding": {
+              "properties": {
+                "state": {
+                  "enum": [
+                    "inspection_only"
+                  ]
+                }
+              }
+            },
+            "forbiddenPropagation": {
+              "const": [
+                "chain_inference",
+                "transitive_inference",
+                "inverse_inference",
+                "claim_transfer",
+                "unrelated_claim_families",
+                "generic_identity",
+                "qualification",
+                "credit",
+                "acceptance",
+                "user_capability",
+                "recommendation",
+                "canonical_mutation",
+                "external_action"
+              ]
+            },
+            "nonClaims": {
+              "const": [
+                "not a consumer fact",
+                "not source authority",
+                "not externally accepted"
+              ]
+            }
+          },
+          "allOf": [
+            {
+              "if": {
+                "properties": {
+                  "rightsBinding": {
+                    "properties": {
+                      "state": {
+                        "const": "inspection_only"
+                      }
+                    }
+                  }
+                }
+              },
+              "then": {
+                "properties": {
+                  "eligiblePurposes": {
+                    "type": "array",
+                    "minItems": 1,
+                    "items": {
+                      "enum": [
+                        "review_only"
+                      ]
+                    },
+                    "uniqueItems": true
+                  }
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "allOf": [
+    {
+      "$ref": "#/$defs/edgeProfileAuthority"
+    }
+  ]
+}

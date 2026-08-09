@@ -4,9 +4,9 @@ title = "Source Reference"
 kind = "object"
 status = "normative"
 owner_domain = "object-source-reference"
-canon_revision = 1
+canon_revision = 2
 profile = "object-v1"
-owns_concepts = ["object.source-reference.identity-visibility", "object.source-reference.public-claim-identity"]
+owns_concepts = ["object.source-reference.identity-visibility", "object.source-reference.public-claim-identity", "object.source-reference.relationship-endpoint"]
 inherits = ["TIME-EXTERNAL-VISIBILITY-001", "LAW-R2-PUBLIC-ONLY-001", "CONST-RUNTIME-MUTATION-001"]
 depends_on = ["CONSTITUTION", "OBJECT-EVENT", "GLOBAL-TRUST-INSPECTION", "SURFACE-YOU"]
 source_owners = ["Native/Ambitions/Core/Domain/", "Native/Ambitions/Core/LocalRuntimeOS/ExternalWrites/", "Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/", "Native/Ambitions/Core/LocalRuntimeOS/Commands/", "Native/Ambitions/Core/LocalRuntimeOS/Inspection/", "Native/Ambitions/Trust/", "Native/Ambitions/Quality/"]
@@ -24,6 +24,25 @@ source_owners = ["Native/Ambitions/Core/Domain/", "Native/Ambitions/Core/LocalRu
 - **Supersedes:** none
 
 An approved public-reference claim MUST retain a stable Ambitions public claim ID, source-native subject and record IDs, predicate, authority for that predicate, jurisdiction, release/effective period, retrieval and checked dates, freshness, rights/attribution, risk/review, conflict, and supersession facts. A source-level official label, public delivery, or inspection availability MUST NOT imply personal qualification, user acceptance, recommendation fitness, or authority outside the declared predicate lane. Missing required claim meaning is unavailable rather than inferred.
+
+## OBJ-SOURCE-REFERENCE-RELATIONSHIP-ENDPOINT-001 — Relationship endpoints remain source-native
+
+- **Concept:** `object.source-reference.relationship-endpoint`
+- **Modality:** `MUST`
+- **Scope:** Relationship mapping sets, endpoint concepts, source predicates, metadata, rights, and review
+- **Status:** `normative`
+- **Verification:** `SCENARIO-SOURCE-REFERENCE-RELATIONSHIP-ENDPOINT-001`
+- **Supersedes:** none
+
+A relationship Source Reference MUST retain stable mapping-set, edge, subject,
+predicate, object, and revision identities; exact endpoint scheme and concept
+releases; direction and source meaning; publisher, creator, reviewer, dates,
+method, justification, evidence, QA, confidence when published, source row,
+coverage, rights, attribution, conflict, and supersession facts. Labels are for
+inspection and cannot replace source identifiers. Missing metadata remains
+missing. Source provenance and Ambitions review are separate records, so review
+may restrict an eligible purpose but cannot rewrite the source predicate,
+silently retarget an endpoint, or claim external acceptance.
 
 ## OBJ-SOURCE-REFERENCE-IDENTITY-001 — Inspectable provenance after native import
 

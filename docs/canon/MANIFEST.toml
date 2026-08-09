@@ -56,6 +56,7 @@ normative_files = [
   "specifications/systems/persistence-and-replay.md",
   "specifications/systems/privacy-and-data-classification.md",
   "specifications/systems/private-life-runtime.md",
+  "specifications/systems/relationship-registry.md",
   "specifications/systems/scheduling-and-capacity.md",
   "specifications/systems/source-atlas.md",
   "specifications/systems/sync-and-continuity.md",

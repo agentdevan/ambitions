@@ -1,0 +1,661 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ambitions.app/schemas/source-atlas/relationship-mapping-set-v1.schema.json",
+  "title": "Relationship Mapping Set v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "kind",
+    "mappingSetId",
+    "revision",
+    "relationshipFamily",
+    "publisher",
+    "curator",
+    "release",
+    "source",
+    "schemaBinding",
+    "rightsBinding",
+    "creator",
+    "reviewer",
+    "generatedAt",
+    "reviewedAt",
+    "method",
+    "coverageDeclaration",
+    "qaPartitions",
+    "supersession",
+    "endpointSchemes",
+    "releaseState"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "relationship-mapping-set-v1"
+    },
+    "kind": {
+      "const": "relationshipMappingSet"
+    },
+    "mappingSetId": {
+      "$ref": "#/$defs/stableId"
+    },
+    "revision": {
+      "$ref": "#/$defs/nonFloatingVersion"
+    },
+    "relationshipFamily": {
+      "enum": [
+        "within_scheme_relation",
+        "scheme_version_migration",
+        "official_cross_scheme_mapping",
+        "publisher_authored_alignment",
+        "current_authority_reference",
+        "unapproved_candidate"
+      ]
+    },
+    "publisher": {
+      "$ref": "#/$defs/party"
+    },
+    "curator": {
+      "$ref": "#/$defs/party"
+    },
+    "release": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "releaseId",
+        "version",
+        "releasedAt"
+      ],
+      "properties": {
+        "releaseId": {
+          "$ref": "#/$defs/stableId"
+        },
+        "version": {
+          "$ref": "#/$defs/nonFloatingVersion"
+        },
+        "releasedAt": {
+          "$ref": "#/$defs/dateTime"
+        }
+      }
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "sourceId",
+        "locator",
+        "mediaType",
+        "byteCount",
+        "sha256"
+      ],
+      "properties": {
+        "sourceId": {
+          "$ref": "#/$defs/stableId"
+        },
+        "locator": {
+          "type": "string",
+          "format": "uri",
+          "pattern": "^https://"
+        },
+        "mediaType": {
+          "enum": [
+            "application/json",
+            "application/ld+json",
+            "text/csv",
+            "text/tab-separated-values",
+            "application/zip"
+          ]
+        },
+        "byteCount": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "sha256": {
+          "$ref": "#/$defs/sha256"
+        }
+      }
+    },
+    "schemaBinding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schemaId",
+        "schemaVersion",
+        "contentHash"
+      ],
+      "properties": {
+        "schemaId": {
+          "$ref": "#/$defs/stableId"
+        },
+        "schemaVersion": {
+          "$ref": "#/$defs/nonFloatingVersion"
+        },
+        "contentHash": {
+          "$ref": "#/$defs/sha256"
+        }
+      }
+    },
+    "rightsBinding": {
+      "$ref": "#/$defs/versionBinding"
+    },
+    "creator": {
+      "$ref": "#/$defs/party"
+    },
+    "reviewer": {
+      "$ref": "#/$defs/party"
+    },
+    "generatedAt": {
+      "$ref": "#/$defs/dateTime"
+    },
+    "reviewedAt": {
+      "$ref": "#/$defs/dateTime"
+    },
+    "method": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "methodClass",
+        "description",
+        "tool",
+        "model"
+      ],
+      "properties": {
+        "methodClass": {
+          "enum": [
+            "source_published",
+            "maintainer_curated",
+            "human_reviewed",
+            "lexical",
+            "model_generated",
+            "community_submitted"
+          ]
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1
+        },
+        "tool": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "model": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "coverageDeclaration": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "subjectPopulation",
+        "objectPopulation",
+        "reviewedSubjectCount",
+        "edgeCount",
+        "unmappedCount",
+        "explicitNoMatchCount",
+        "exclusions"
+      ],
+      "properties": {
+        "subjectPopulation": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "objectPopulation": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "reviewedSubjectCount": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "edgeCount": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "unmappedCount": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "explicitNoMatchCount": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "exclusions": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        }
+      }
+    },
+    "qaPartitions": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "partitionId",
+          "reviewClass",
+          "consumerEligible"
+        ],
+        "properties": {
+          "partitionId": {
+            "$ref": "#/$defs/stableId"
+          },
+          "reviewClass": {
+            "enum": [
+              "source_published",
+              "human_validated",
+              "lower_qa_related",
+              "candidate",
+              "rejected",
+              "explicit_no_match"
+            ]
+          },
+          "consumerEligible": {
+            "type": "boolean"
+          }
+        }
+      }
+    },
+    "supersession": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "state",
+        "supersedesRevision",
+        "supersededByRevision"
+      ],
+      "properties": {
+        "state": {
+          "enum": [
+            "none",
+            "supersedes",
+            "superseded"
+          ]
+        },
+        "supersedesRevision": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/nonFloatingVersion"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "supersededByRevision": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/nonFloatingVersion"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      }
+    },
+    "endpointSchemes": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "subject",
+        "object"
+      ],
+      "properties": {
+        "subject": {
+          "$ref": "#/$defs/endpointScheme"
+        },
+        "object": {
+          "$ref": "#/$defs/endpointScheme"
+        }
+      }
+    },
+    "releaseState": {
+      "enum": [
+        "candidate",
+        "current",
+        "last_known_good",
+        "superseded",
+        "invalidated",
+        "withdrawn",
+        "unavailable"
+      ]
+    }
+  },
+  "$defs": {
+    "stableId": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9._:-]{2,127}$"
+    },
+    "nonFloatingVersion": {
+      "type": "string",
+      "minLength": 1,
+      "not": {
+        "enum": [
+          "latest",
+          "current",
+          "unknown",
+          "unresolved",
+          "*"
+        ]
+      }
+    },
+    "sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "dateTime": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "party": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "name"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/stableId"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "versionBinding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "version"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/stableId"
+        },
+        "version": {
+          "$ref": "#/$defs/nonFloatingVersion"
+        }
+      }
+    },
+    "endpointScheme": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schemeId",
+        "releaseId",
+        "version",
+        "manifestHash",
+        "contentHash",
+        "rightsBinding"
+      ],
+      "properties": {
+        "schemeId": {
+          "$ref": "#/$defs/stableId"
+        },
+        "releaseId": {
+          "$ref": "#/$defs/stableId"
+        },
+        "version": {
+          "$ref": "#/$defs/nonFloatingVersion"
+        },
+        "manifestHash": {
+          "$ref": "#/$defs/sha256"
+        },
+        "contentHash": {
+          "$ref": "#/$defs/sha256"
+        },
+        "rightsBinding": {
+          "$ref": "#/$defs/versionBinding"
+        }
+      }
+    },
+    "sourceLockDocument": {
+      "const": {
+        "schemaVersion": "relationship-registry-sources-v1",
+        "kind": "relationshipRegistrySources",
+        "version": "1.0.0",
+        "publicOnly": true,
+        "requestPolicy": {
+          "fixedReleaseIdsOnly": true,
+          "allowUserContext": false,
+          "allowArbitraryLocator": false,
+          "allowQueryDerivedAcquisition": false
+        },
+        "sources": [
+          {
+            "sourceId": "nces-cip-2010-2020-crosswalk",
+            "mappingSetClass": "cip_edition_migration",
+            "publisher": "National Center for Education Statistics",
+            "publicLandingPage": "https://nces.ed.gov/ipeds/cipcode/crosswalk.aspx?y=56",
+            "requiredEndpointSchemes": [
+              {
+                "role": "subject",
+                "schemeId": "cip",
+                "requiredVersion": "2010"
+              },
+              {
+                "role": "object",
+                "schemeId": "cip",
+                "requiredVersion": "2020"
+              }
+            ],
+            "releaseAdmission": "blocked_pending_exact_bytes_hash_schema_and_rights",
+            "admissionState": "unavailable"
+          },
+          {
+            "sourceId": "nces-bls-cip-2020-soc-2018-crosswalk",
+            "mappingSetClass": "cip_soc_relevance",
+            "publisher": "National Center for Education Statistics and Bureau of Labor Statistics",
+            "publicLandingPage": "https://nces.ed.gov/ipeds/cipcode/FAQ.aspx?y=56",
+            "requiredEndpointSchemes": [
+              {
+                "role": "subject",
+                "schemeId": "cip",
+                "requiredVersion": "2020"
+              },
+              {
+                "role": "object",
+                "schemeId": "soc",
+                "requiredVersion": "2018"
+              }
+            ],
+            "releaseAdmission": "blocked_pending_exact_bytes_hash_schema_and_rights",
+            "admissionState": "unavailable"
+          },
+          {
+            "sourceId": "onet-soc-2019-soc-2018-crosswalk",
+            "mappingSetClass": "onet_soc_relationship",
+            "publisher": "O*NET Resource Center",
+            "publicLandingPage": "https://www.onetcenter.org/crosswalks.html",
+            "requiredEndpointSchemes": [
+              {
+                "role": "subject",
+                "schemeId": "onet-soc",
+                "requiredVersion": "2019"
+              },
+              {
+                "role": "object",
+                "schemeId": "soc",
+                "requiredVersion": "2018"
+              }
+            ],
+            "releaseAdmission": "blocked_pending_exact_bytes_hash_schema_and_rights",
+            "admissionState": "unavailable"
+          },
+          {
+            "sourceId": "official-onet-esco-crosswalk",
+            "mappingSetClass": "onet_esco_mapping",
+            "publisher": "European Commission and U.S. Department of Labor",
+            "publicLandingPage": "https://esco.ec.europa.eu/en/use-esco/other-crosswalks",
+            "requiredEndpointSchemes": [
+              {
+                "role": "subject",
+                "schemeId": "onet-soc",
+                "requiredVersion": null
+              },
+              {
+                "role": "object",
+                "schemeId": "esco",
+                "requiredVersion": null
+              }
+            ],
+            "releaseAdmission": "blocked_pending_exact_endpoint_releases_mapping_bytes_hash_qa_and_rights",
+            "admissionState": "unavailable"
+          },
+          {
+            "sourceId": "publisher-ctdl-case-alignments",
+            "mappingSetClass": "publisher_alignment",
+            "publisher": null,
+            "publicLandingPage": "https://credreg.net/ctdl/handbook",
+            "requiredEndpointSchemes": [
+              {
+                "role": "subject",
+                "schemeId": null,
+                "requiredVersion": null
+              },
+              {
+                "role": "object",
+                "schemeId": null,
+                "requiredVersion": null
+              }
+            ],
+            "releaseAdmission": "blocked_pending_publisher_specific_source_version_and_rights",
+            "admissionState": "unavailable"
+          },
+          {
+            "sourceId": "relationship-mapping-candidates",
+            "mappingSetClass": "mapping_candidate",
+            "publisher": "Ambitions review candidate pipeline",
+            "publicLandingPage": "https://github.com/agentdevan/ambitions",
+            "requiredEndpointSchemes": [
+              {
+                "role": "subject",
+                "schemeId": null,
+                "requiredVersion": null
+              },
+              {
+                "role": "object",
+                "schemeId": null,
+                "requiredVersion": null
+              }
+            ],
+            "releaseAdmission": "review_artifact_only_exact_public_inputs_and_rights_required",
+            "admissionState": "unavailable"
+          }
+        ]
+      }
+    },
+    "rightsPolicyDocument": {
+      "const": {
+        "schemaVersion": "relationship-registry-rights-v1",
+        "kind": "relationshipRegistryRights",
+        "version": "1.0.0",
+        "unknownRightsPolicy": "deny_all_and_quarantine",
+        "schemaLicenseNeverAuthorizesSourceContent": true,
+        "operationVocabulary": [
+          "package",
+          "transform",
+          "display",
+          "retain",
+          "derive"
+        ],
+        "withdrawalPolicy": {
+          "blockReadsImmediately": true,
+          "purgeRaw": true,
+          "purgeDerived": true,
+          "purgeIndexes": true,
+          "purgeRenderedCaches": true,
+          "purgeExports": true,
+          "resumeAfterInterruption": true
+        },
+        "rights": [
+          {
+            "rightsId": "nces-cip-2010-2020-rights",
+            "version": "1.0.0",
+            "sourceId": "nces-cip-2010-2020-crosswalk",
+            "state": "review_required",
+            "allowedOperations": [],
+            "attribution": null,
+            "changeNoticeRequired": false,
+            "trademarkLimits": [],
+            "reviewEvidence": [],
+            "admissionState": "unavailable"
+          },
+          {
+            "rightsId": "nces-bls-cip-soc-rights",
+            "version": "1.0.0",
+            "sourceId": "nces-bls-cip-2020-soc-2018-crosswalk",
+            "state": "review_required",
+            "allowedOperations": [],
+            "attribution": null,
+            "changeNoticeRequired": false,
+            "trademarkLimits": [],
+            "reviewEvidence": [],
+            "admissionState": "unavailable"
+          },
+          {
+            "rightsId": "onet-soc-crosswalk-rights",
+            "version": "1.0.0",
+            "sourceId": "onet-soc-2019-soc-2018-crosswalk",
+            "state": "review_required",
+            "allowedOperations": [],
+            "attribution": null,
+            "changeNoticeRequired": false,
+            "trademarkLimits": [],
+            "reviewEvidence": [],
+            "admissionState": "unavailable"
+          },
+          {
+            "rightsId": "official-onet-esco-crosswalk-rights",
+            "version": "1.0.0",
+            "sourceId": "official-onet-esco-crosswalk",
+            "state": "review_required",
+            "allowedOperations": [],
+            "attribution": null,
+            "changeNoticeRequired": false,
+            "trademarkLimits": [],
+            "reviewEvidence": [],
+            "admissionState": "unavailable"
+          },
+          {
+            "rightsId": "publisher-ctdl-case-alignment-rights",
+            "version": "1.0.0",
+            "sourceId": "publisher-ctdl-case-alignments",
+            "state": "review_required",
+            "allowedOperations": [],
+            "attribution": null,
+            "changeNoticeRequired": false,
+            "trademarkLimits": [],
+            "reviewEvidence": [],
+            "admissionState": "unavailable"
+          },
+          {
+            "rightsId": "relationship-mapping-candidate-rights",
+            "version": "1.0.0",
+            "sourceId": "relationship-mapping-candidates",
+            "state": "review_required",
+            "allowedOperations": [],
+            "attribution": null,
+            "changeNoticeRequired": false,
+            "trademarkLimits": [],
+            "reviewEvidence": [],
+            "admissionState": "unavailable"
+          }
+        ]
+      }
+    }
+  }
+}

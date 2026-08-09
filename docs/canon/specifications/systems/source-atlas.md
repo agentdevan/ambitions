@@ -4,9 +4,9 @@ title = "Source Atlas"
 kind = "system"
 status = "normative"
 owner_domain = "system-source-atlas"
-canon_revision = 1
+canon_revision = 2
 profile = "system-v1"
-owns_concepts = ["system.source-atlas.public-reference", "system.source-atlas.egress-firewall", "system.source-atlas.public-claim-state"]
+owns_concepts = ["system.source-atlas.public-reference", "system.source-atlas.egress-firewall", "system.source-atlas.public-claim-state", "system.source-atlas.relationship-release-delivery"]
 inherits = ["LAW-R2-PUBLIC-ONLY-001", "LAW-LOCAL-AUTHORITY-001", "LAW-OFFLINE-NO-ACCOUNT-001", "CONST-PROOF-EVIDENCE-001"]
 depends_on = ["CONSTITUTION", "OBJECT-SOURCE-REFERENCE", "SYSTEM-PRIVACY-DATA-CLASSIFICATION", "SYSTEM-PRIVATE-LIFE-RUNTIME"]
 source_owners = ["Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/", "Native/Ambitions/Core/LocalRuntimeOS/Boundary/", "Native/Ambitions/Core/LocalRuntimeOS/PrivacySecurity/", "Native/Ambitions/Core/LocalRuntimeOS/Planning/", "Native/Ambitions/Core/LocalRuntimeOS/Inspection/", "Native/Ambitions/Quality/"]
@@ -50,6 +50,27 @@ Source Atlas/R2 MUST NOT receive, store, infer from, personalize from, or transm
 - **Supersedes:** none
 
 Source Atlas MUST model public claim delivery, semantic review, freshness, rights, and conflict as independent axes. A claim may be authoritative, contextual, conflicting, last-known-good, or unavailable only from its retained source-bound facts. Bundled/cached verified and last-known-good public claims remain inspectable offline with their actual state; invalid, quarantined, rights-blocked, authority-incomplete, stale-blocked, revoked, or unknown claims are unavailable. Claim availability never asserts user fit, acceptance, qualification, or recommendation readiness.
+
+## SYSTEM-SOURCE-ATLAS-RELATIONSHIP-DELIVERY-001 — Relationship releases use fixed public acquisition
+
+- **Concept:** `system.source-atlas.relationship-release-delivery`
+- **Modality:** `MUST`
+- **Scope:** Relationship mapping-set acquisition, verification, staging, cache, last-known-good, rollback, reset, and purge
+- **Status:** `normative`
+- **Verification:** `SCENARIO-SOURCE-ATLAS-RELATIONSHIP-DELIVERY-001`
+- **Supersedes:** none
+
+Source Atlas MAY acquire only fixed public mapping-set and endpoint release IDs
+through the finite public artifact namespace. Acquisition, request parameters,
+keys, artifacts, partitions, caches, logs, diagnostics, refresh, and source
+feedback MUST be independent of user, device, Goal, Capability, Proof,
+education, schedule, location, recommendation, correction, selection, or
+rejection facts. Relationship artifacts MUST pass exact release, byte, hash,
+signature, schema, size, rights, and manifest checks before atomic promotion;
+failure quarantines the candidate and preserves verified last-known-good data.
+Offline, rollback, reset, correction, supersession, withdrawal, and resumable
+purge preserve the Relationship Registry lifecycle law without changing any
+private object or widening another public relationship.
 
 ## Completeness contract
 

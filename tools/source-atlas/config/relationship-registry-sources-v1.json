@@ -1,0 +1,134 @@
+{
+  "schemaVersion": "relationship-registry-sources-v1",
+  "kind": "relationshipRegistrySources",
+  "version": "1.0.0",
+  "publicOnly": true,
+  "requestPolicy": {
+    "fixedReleaseIdsOnly": true,
+    "allowUserContext": false,
+    "allowArbitraryLocator": false,
+    "allowQueryDerivedAcquisition": false
+  },
+  "sources": [
+    {
+      "sourceId": "nces-cip-2010-2020-crosswalk",
+      "mappingSetClass": "cip_edition_migration",
+      "publisher": "National Center for Education Statistics",
+      "publicLandingPage": "https://nces.ed.gov/ipeds/cipcode/crosswalk.aspx?y=56",
+      "requiredEndpointSchemes": [
+        {
+          "role": "subject",
+          "schemeId": "cip",
+          "requiredVersion": "2010"
+        },
+        {
+          "role": "object",
+          "schemeId": "cip",
+          "requiredVersion": "2020"
+        }
+      ],
+      "releaseAdmission": "blocked_pending_exact_bytes_hash_schema_and_rights",
+      "admissionState": "unavailable"
+    },
+    {
+      "sourceId": "nces-bls-cip-2020-soc-2018-crosswalk",
+      "mappingSetClass": "cip_soc_relevance",
+      "publisher": "National Center for Education Statistics and Bureau of Labor Statistics",
+      "publicLandingPage": "https://nces.ed.gov/ipeds/cipcode/FAQ.aspx?y=56",
+      "requiredEndpointSchemes": [
+        {
+          "role": "subject",
+          "schemeId": "cip",
+          "requiredVersion": "2020"
+        },
+        {
+          "role": "object",
+          "schemeId": "soc",
+          "requiredVersion": "2018"
+        }
+      ],
+      "releaseAdmission": "blocked_pending_exact_bytes_hash_schema_and_rights",
+      "admissionState": "unavailable"
+    },
+    {
+      "sourceId": "onet-soc-2019-soc-2018-crosswalk",
+      "mappingSetClass": "onet_soc_relationship",
+      "publisher": "O*NET Resource Center",
+      "publicLandingPage": "https://www.onetcenter.org/crosswalks.html",
+      "requiredEndpointSchemes": [
+        {
+          "role": "subject",
+          "schemeId": "onet-soc",
+          "requiredVersion": "2019"
+        },
+        {
+          "role": "object",
+          "schemeId": "soc",
+          "requiredVersion": "2018"
+        }
+      ],
+      "releaseAdmission": "blocked_pending_exact_bytes_hash_schema_and_rights",
+      "admissionState": "unavailable"
+    },
+    {
+      "sourceId": "official-onet-esco-crosswalk",
+      "mappingSetClass": "onet_esco_mapping",
+      "publisher": "European Commission and U.S. Department of Labor",
+      "publicLandingPage": "https://esco.ec.europa.eu/en/use-esco/other-crosswalks",
+      "requiredEndpointSchemes": [
+        {
+          "role": "subject",
+          "schemeId": "onet-soc",
+          "requiredVersion": null
+        },
+        {
+          "role": "object",
+          "schemeId": "esco",
+          "requiredVersion": null
+        }
+      ],
+      "releaseAdmission": "blocked_pending_exact_endpoint_releases_mapping_bytes_hash_qa_and_rights",
+      "admissionState": "unavailable"
+    },
+    {
+      "sourceId": "publisher-ctdl-case-alignments",
+      "mappingSetClass": "publisher_alignment",
+      "publisher": null,
+      "publicLandingPage": "https://credreg.net/ctdl/handbook",
+      "requiredEndpointSchemes": [
+        {
+          "role": "subject",
+          "schemeId": null,
+          "requiredVersion": null
+        },
+        {
+          "role": "object",
+          "schemeId": null,
+          "requiredVersion": null
+        }
+      ],
+      "releaseAdmission": "blocked_pending_publisher_specific_source_version_and_rights",
+      "admissionState": "unavailable"
+    },
+    {
+      "sourceId": "relationship-mapping-candidates",
+      "mappingSetClass": "mapping_candidate",
+      "publisher": "Ambitions review candidate pipeline",
+      "publicLandingPage": "https://github.com/agentdevan/ambitions",
+      "requiredEndpointSchemes": [
+        {
+          "role": "subject",
+          "schemeId": null,
+          "requiredVersion": null
+        },
+        {
+          "role": "object",
+          "schemeId": null,
+          "requiredVersion": null
+        }
+      ],
+      "releaseAdmission": "review_artifact_only_exact_public_inputs_and_rights_required",
+      "admissionState": "unavailable"
+    }
+  ]
+}

@@ -1,0 +1,194 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ambitions.app/schemas/source-atlas/relationship-registry-release-v1.schema.json",
+  "title": "Relationship Registry Release v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "kind",
+    "registryId",
+    "releaseId",
+    "revision",
+    "createdAt",
+    "registrySchema",
+    "profileVocabulary",
+    "predicateVocabulary",
+    "sssomCompatibilityProfile",
+    "forbiddenPropagationPolicy",
+    "rightsPolicy",
+    "mappingSets",
+    "shards",
+    "coverageBinding",
+    "evaluationBinding",
+    "dependencyIndexBinding",
+    "lifecycleState",
+    "pointerGeneration"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "relationship-registry-release-v1"
+    },
+    "kind": {
+      "const": "relationshipRegistryRelease"
+    },
+    "registryId": {
+      "$ref": "#/$defs/id"
+    },
+    "releaseId": {
+      "$ref": "#/$defs/id"
+    },
+    "revision": {
+      "$ref": "#/$defs/version"
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "registrySchema": {
+      "$ref": "#/$defs/versionedHash"
+    },
+    "profileVocabulary": {
+      "$ref": "#/$defs/versionedHash"
+    },
+    "predicateVocabulary": {
+      "$ref": "#/$defs/versionedHash"
+    },
+    "sssomCompatibilityProfile": {
+      "$ref": "#/$defs/versionedHash"
+    },
+    "forbiddenPropagationPolicy": {
+      "$ref": "#/$defs/versionedHash"
+    },
+    "rightsPolicy": {
+      "$ref": "#/$defs/versionedHash"
+    },
+    "mappingSets": {
+      "type": "object",
+      "minProperties": 1,
+      "propertyNames": { "$ref": "#/$defs/id" },
+      "additionalProperties": { "$ref": "#/$defs/mappingSetReleaseBinding" }
+    },
+    "shards": {
+      "type": "object",
+      "propertyNames": { "$ref": "#/$defs/id" },
+      "additionalProperties": { "$ref": "#/$defs/shardBinding" }
+    },
+    "coverageBinding": {
+      "$ref": "#/$defs/versionedHash"
+    },
+    "evaluationBinding": {
+      "$ref": "#/$defs/versionedHash"
+    },
+    "dependencyIndexBinding": {
+      "$ref": "#/$defs/versionedHash"
+    },
+    "lifecycleState": {
+      "enum": [
+        "bundled",
+        "staged",
+        "verified",
+        "quarantined",
+        "current",
+        "last_known_good",
+        "superseded",
+        "invalidated",
+        "purging",
+        "purged",
+        "unavailable"
+      ]
+    },
+    "pointerGeneration": {
+      "type": "integer",
+      "minimum": 0
+    }
+  },
+  "$defs": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9._:-]{2,127}$"
+    },
+    "version": {
+      "type": "string",
+      "minLength": 1,
+      "not": {
+        "enum": [
+          "latest",
+          "current",
+          "unknown",
+          "unresolved",
+          "*"
+        ]
+      }
+    },
+    "sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "versionedHash": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "version",
+        "contentHash"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "version": {
+          "$ref": "#/$defs/version"
+        },
+        "contentHash": {
+          "$ref": "#/$defs/sha256"
+        }
+      }
+    },
+    "mappingSetReleaseBinding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["revision", "releaseId", "manifestHash", "endpointSchemeBindings", "releaseState"],
+      "properties": {
+        "revision": { "$ref": "#/$defs/version" },
+        "releaseId": { "$ref": "#/$defs/id" },
+        "manifestHash": { "$ref": "#/$defs/sha256" },
+        "endpointSchemeBindings": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["subject", "object"],
+          "properties": {
+            "subject": { "$ref": "#/$defs/versionedHash" },
+            "object": { "$ref": "#/$defs/versionedHash" }
+          }
+        },
+        "releaseState": {
+          "enum": ["candidate", "current", "last_known_good", "superseded", "invalidated", "withdrawn", "unavailable"]
+        }
+      }
+    },
+    "shardBinding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["mappingSetId", "partition", "dependencies", "byteCount", "recordCount", "contentHash", "signature"],
+      "properties": {
+        "mappingSetId": { "$ref": "#/$defs/id" },
+        "partition": { "type": "string", "pattern": "^[a-f0-9]{2}$" },
+        "dependencies": { "type": "array", "items": { "$ref": "#/$defs/id" }, "uniqueItems": true },
+        "byteCount": { "type": "integer", "minimum": 1 },
+        "recordCount": { "type": "integer", "minimum": 0 },
+        "contentHash": { "$ref": "#/$defs/sha256" },
+        "signature": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["algorithm", "keyId", "value"],
+          "properties": {
+            "algorithm": { "const": "ed25519" },
+            "keyId": { "$ref": "#/$defs/id" },
+            "value": { "type": "string", "minLength": 1 }
+          }
+        }
+      }
+    }
+  }
+}

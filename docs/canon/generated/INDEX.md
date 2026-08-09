@@ -3,9 +3,9 @@
 > Generated from normative product canon. Do not edit by hand.
 
 - Canon revision: `2`
-- Canon digest: `8893a948efd392a86f2503236c1a543229d06b83cddc2635ce9da4f5d98ef654`
-- Documents: `66`
-- Requirements: `464`
+- Canon digest: `6a978c1a910e70b758dbafd4c9172ab7d039385ff67c7488568ee5b6ce26e4b8`
+- Documents: `67`
+- Requirements: `472`
 
 ## Constitution
 
@@ -40,7 +40,7 @@
 | `GLOBAL-CAPTURE` | Capture | 10 | 10 | [specifications/global/capture.md](../specifications/global/capture.md) |
 | `GLOBAL-MOTION` | Motion | 3 | 3 | [specifications/global/motion.md](../specifications/global/motion.md) |
 | `GLOBAL-SEARCH` | Search | 13 | 13 | [specifications/global/search.md](../specifications/global/search.md) |
-| `GLOBAL-TRUST-INSPECTION` | Trust Inspection | 7 | 7 | [specifications/global/trust-inspection.md](../specifications/global/trust-inspection.md) |
+| `GLOBAL-TRUST-INSPECTION` | Trust Inspection | 8 | 8 | [specifications/global/trust-inspection.md](../specifications/global/trust-inspection.md) |
 
 ## Object
 
@@ -65,7 +65,7 @@
 | `OBJECT-REMINDER` | Reminder | 2 | 2 | [specifications/objects/reminder.md](../specifications/objects/reminder.md) |
 | `OBJECT-SAVED-FOR-LATER-DRAFT` | Saved-for-Later Draft | 1 | 1 | [specifications/objects/saved-for-later-draft.md](../specifications/objects/saved-for-later-draft.md) |
 | `OBJECT-SCHEDULE-PLACEMENT` | Schedule Placement | 6 | 6 | [specifications/objects/schedule-placement.md](../specifications/objects/schedule-placement.md) |
-| `OBJECT-SOURCE-REFERENCE` | Source Reference | 2 | 2 | [specifications/objects/source-reference.md](../specifications/objects/source-reference.md) |
+| `OBJECT-SOURCE-REFERENCE` | Source Reference | 3 | 3 | [specifications/objects/source-reference.md](../specifications/objects/source-reference.md) |
 | `OBJECT-STEP` | Step | 13 | 13 | [specifications/objects/step.md](../specifications/objects/step.md) |
 
 ## System
@@ -79,10 +79,11 @@
 | `SYSTEM-LOCAL-LEARNING` | Local Learning | 4 | 4 | [specifications/systems/local-learning.md](../specifications/systems/local-learning.md) |
 | `SYSTEM-NOTIFICATIONS` | Notifications | 3 | 3 | [specifications/systems/notifications.md](../specifications/systems/notifications.md) |
 | `SYSTEM-PERSISTENCE-REPLAY` | Persistence and Replay | 5 | 5 | [specifications/systems/persistence-and-replay.md](../specifications/systems/persistence-and-replay.md) |
-| `SYSTEM-PRIVACY-DATA-CLASSIFICATION` | Privacy and Data Classification | 4 | 4 | [specifications/systems/privacy-and-data-classification.md](../specifications/systems/privacy-and-data-classification.md) |
+| `SYSTEM-PRIVACY-DATA-CLASSIFICATION` | Privacy and Data Classification | 5 | 5 | [specifications/systems/privacy-and-data-classification.md](../specifications/systems/privacy-and-data-classification.md) |
 | `SYSTEM-PRIVATE-LIFE-RUNTIME` | Private Life Runtime | 6 | 6 | [specifications/systems/private-life-runtime.md](../specifications/systems/private-life-runtime.md) |
+| `SYSTEM-RELATIONSHIP-REGISTRY` | Relationship Registry | 4 | 4 | [specifications/systems/relationship-registry.md](../specifications/systems/relationship-registry.md) |
 | `SYSTEM-SCHEDULING-CAPACITY` | Scheduling and Capacity | 5 | 5 | [specifications/systems/scheduling-and-capacity.md](../specifications/systems/scheduling-and-capacity.md) |
-| `SYSTEM-SOURCE-ATLAS` | Source Atlas | 3 | 3 | [specifications/systems/source-atlas.md](../specifications/systems/source-atlas.md) |
+| `SYSTEM-SOURCE-ATLAS` | Source Atlas | 4 | 4 | [specifications/systems/source-atlas.md](../specifications/systems/source-atlas.md) |
 | `SYSTEM-SYNC-CONTINUITY` | Sync and Continuity | 9 | 9 | [specifications/systems/sync-and-continuity.md](../specifications/systems/sync-and-continuity.md) |
 
 ## Journey
