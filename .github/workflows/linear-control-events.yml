@@ -4,7 +4,6 @@ on:
   workflow_run:
     workflows: [Code Quality]
     types: [completed]
-  workflow_dispatch:
 
 permissions:
   contents: read
@@ -16,11 +15,10 @@ concurrency:
 jobs:
   deliver:
     if: >-
-      (github.event_name == 'workflow_run' &&
+      github.event_name == 'workflow_run' &&
       github.event.workflow_run.conclusion == 'success' &&
       github.event.workflow_run.event == 'push' &&
-      github.event.workflow_run.head_branch == 'main') ||
-      (github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main')
+      github.event.workflow_run.head_branch == 'main'
     runs-on: ubuntu-latest
     environment: Ambitions Linear Control
     env:
@@ -30,10 +28,10 @@ jobs:
       - name: Deliver signed repository evidence
         shell: bash
         env:
-          AUTHORITY_COMMIT: ${{ github.event.workflow_run.head_sha || github.sha }}
-          CONCLUSION: ${{ github.event.workflow_run.conclusion || 'manual' }}
-          WORKFLOW_EVENT: ${{ github.event.workflow_run.event || 'workflow_dispatch' }}
-          HEAD_BRANCH: ${{ github.event.workflow_run.head_branch || github.ref_name }}
+          AUTHORITY_COMMIT: ${{ github.event.workflow_run.head_sha }}
+          CONCLUSION: ${{ github.event.workflow_run.conclusion }}
+          WORKFLOW_EVENT: ${{ github.event.workflow_run.event }}
+          HEAD_BRANCH: ${{ github.event.workflow_run.head_branch }}
           DELIVERY_ID: ${{ github.run_id }}-${{ github.run_attempt }}
         run: |
           set -euo pipefail

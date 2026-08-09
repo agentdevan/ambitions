@@ -1,6 +1,8 @@
 import { describe, expect, it } from "vitest";
 import {
   issueAuthorityEnvelope,
+  milestoneAuthorityMirror,
+  projectSummaryMirror,
   repositoryMirror,
 } from "../src/core/mirrors.js";
 import { fencedTextBodies } from "../src/core/live-audit.js";
@@ -86,5 +88,29 @@ describe("Linear authority mirrors", () => {
     expect(content).toContain("Frontend impact: affected");
     expect(content).toContain("Visual gate: required");
     expect(content).toContain("Parallel-safe peer Projects: peer");
+  });
+
+  it("does not claim current-main completion when terminal state lacks proof", () => {
+    const progress = {
+      phase: "Validating",
+      terminalTasks: 1,
+      verifiedTasks: 0,
+      totalTasks: 1,
+      groupOrdinal: 1,
+      totalGroups: 1,
+      projectOrdinal: 1,
+    };
+
+    expect(projectSummaryMirror(group, progress)).toContain(
+      "1/1 terminal • 0 verified on current main",
+    );
+    expect(
+      milestoneAuthorityMirror(
+        "M4 — Implementation Complete",
+        project,
+        "a".repeat(40),
+        progress,
+      ),
+    ).not.toContain("PASS");
   });
 });
