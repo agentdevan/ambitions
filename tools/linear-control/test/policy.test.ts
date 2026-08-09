@@ -91,6 +91,7 @@ describe("lifecycle policy", () => {
     expect(desiredProjectPhase(["In Progress"], true)).toBe("Building");
     expect(desiredProjectPhase(["In Review"], true)).toBe("Validating");
     expect(desiredProjectPhase(["Done"], true)).toBe("Completed");
+    expect(desiredProjectPhase(["Duplicate"], true)).toBe("Completed");
   });
 
   it("forms dependency-safe pairs and serializes shared paths", () => {

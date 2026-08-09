@@ -5,7 +5,10 @@ import {
   OPERATIONAL_VIEWS,
 } from "../src/core/definitions.js";
 import { sha256Text } from "../src/core/hash.js";
-import { auditLiveWorkspace } from "../src/core/live-audit.js";
+import {
+  auditLiveWorkspace,
+  desiredProjectMirrorProgress,
+} from "../src/core/live-audit.js";
 import {
   initiativeIndexMirror,
   issueAuthorityEnvelope,
@@ -14,6 +17,7 @@ import {
 import type {
   DesiredWorkspaceManifest,
   DocumentContract,
+  IssueState,
   ProjectContract,
   ScheduleGroup,
   TaskContract,
@@ -68,6 +72,15 @@ const milestones = [
 class RepairingLinearClient {
   documentContents = new Map<string, string>();
   issueDescription = "";
+  projectSummary = "stale summary";
+  projectDescription = "stale description";
+  projectStatus = "Building";
+  initiativeNames = ["Test Initiative"];
+  failProjectVerification = false;
+  failMilestoneVerification = false;
+  milestoneDescriptions = new Map(
+    milestones.map((name) => [name, `stale ${name}`]),
+  );
 
   constructor(private readonly project: ProjectContract) {}
 
@@ -83,11 +96,22 @@ class RepairingLinearClient {
             {
               id: "project-id",
               name: `Lifecycle — ${this.project.slug}`,
-              description: null,
-              status: { id: "status-id", name: "Building" },
+              summary: this.projectSummary,
+              description: this.projectDescription,
+              status: {
+                id: `project-status:${this.projectStatus}`,
+                name: this.projectStatus,
+              },
+              initiatives: {
+                nodes: this.initiativeNames.map((name) => ({ name })),
+              },
               labels: { nodes: [] },
               projectMilestones: {
-                nodes: milestones.map((name) => ({ name })),
+                nodes: milestones.map((name) => ({
+                  id: `milestone:${name}`,
+                  name,
+                  description: this.milestoneDescriptions.get(name),
+                })),
               },
               documents: {
                 nodes: [...this.documentContents].map(([title, content]) => ({
@@ -108,6 +132,11 @@ class RepairingLinearClient {
         },
         issueLabels: { nodes: [{ id: "label:work:test", name: "work:test" }] },
         projectLabels: { nodes: [] },
+        projectStatuses: {
+          nodes: ["Grooming", "Building", "Validating", "Completed"].map(
+            (name) => ({ id: `project-status:${name}`, name }),
+          ),
+        },
         customViews: { nodes: OPERATIONAL_VIEWS.map(({ name }) => ({ name })) },
         templates: CONTROLLED_TEMPLATES.map((name) => ({ name })),
         initiatives: { nodes: initiatives.map((name) => ({ name })) },
@@ -153,6 +182,43 @@ class RepairingLinearClient {
         documentUpdate: {
           success: true,
           document: { content: input.content },
+        },
+      } as T;
+    }
+    if (query.includes("projectMilestoneUpdate")) {
+      const id = variables.id as string;
+      const input = variables.input as { description: string };
+      const name = id.replace(/^milestone:/, "");
+      if (!this.failMilestoneVerification)
+        this.milestoneDescriptions.set(name, input.description);
+      return {
+        projectMilestoneUpdate: {
+          success: true,
+          projectMilestone: {
+            description: this.milestoneDescriptions.get(name),
+          },
+        },
+      } as T;
+    }
+    if (query.includes("projectUpdate")) {
+      const input = variables.input as {
+        summary: string;
+        description: string;
+        statusId: string;
+      };
+      if (!this.failProjectVerification) {
+        this.projectSummary = input.summary;
+        this.projectDescription = input.description;
+        this.projectStatus = input.statusId.replace(/^project-status:/, "");
+      }
+      return {
+        projectUpdate: {
+          success: true,
+          project: {
+            summary: this.projectSummary,
+            description: this.projectDescription,
+            status: { name: this.projectStatus },
+          },
         },
       } as T;
     }
@@ -283,7 +349,7 @@ async function fixture(): Promise<{
 }
 
 describe("live authority mirror repair", () => {
-  it("repairs stale Document metadata and Issue envelopes once", async () => {
+  it("repairs stale Project, milestone, Document, and Issue mirrors once", async () => {
     const { client, desired } = await fixture();
     for (const [title, content] of client.documentContents)
       client.documentContents.set(
@@ -301,7 +367,7 @@ describe("live authority mirror repair", () => {
     );
 
     expect(repaired.exceptions).toEqual([]);
-    expect(repaired.repairs).toBe(6);
+    expect(repaired.repairs).toBe(14);
     expect(
       repaired.repairReceipts.map((item) => item.operation).sort(),
     ).toEqual([
@@ -311,7 +377,25 @@ describe("live authority mirror repair", () => {
       "document-authority-update",
       "document-authority-update",
       "issue-authority-update",
+      "project-authority-update",
+      "project-milestone-update",
+      "project-milestone-update",
+      "project-milestone-update",
+      "project-milestone-update",
+      "project-milestone-update",
+      "project-milestone-update",
+      "project-milestone-update",
     ]);
+    expect(client.projectSummary).toBe(
+      "G01 • Grooming • 0/1 terminal • 0 verified on current main • next T1",
+    );
+    expect(client.projectDescription).toContain(
+      "Repository commit: new-commit",
+    );
+    expect(client.projectStatus).toBe("Grooming");
+    expect(
+      client.milestoneDescriptions.get("M4 — Implementation Complete"),
+    ).toContain("0 of 1 canonical Plan Tasks are terminal");
 
     const idempotent = await auditLiveWorkspace(
       client as unknown as LinearClient,
@@ -346,10 +430,220 @@ describe("live authority mirror repair", () => {
     );
 
     expect(repaired.exceptions).toEqual([]);
-    expect(repaired.repairs).toBe(6);
+    expect(repaired.repairs).toBe(14);
     expect(client.documentContents.get("30 — Design")).toContain("design body");
     expect(client.documentContents.get("30 — Design")).not.toContain(
       "stale design body",
     );
+  });
+
+  it("reports failed Project and milestone post-write verification", async () => {
+    const { client, desired } = await fixture();
+    client.failProjectVerification = true;
+    client.failMilestoneVerification = true;
+
+    const repaired = await auditLiveWorkspace(
+      client as unknown as LinearClient,
+      desired,
+      true,
+    );
+
+    expect(
+      repaired.exceptions.some((item) =>
+        item.summary.includes("Lifecycle Project mirror repair did not verify"),
+      ),
+    ).toBe(true);
+    expect(
+      repaired.exceptions.some((item) =>
+        item.summary.includes("Lifecycle milestone repair did not verify"),
+      ),
+    ).toBe(true);
+    expect(
+      repaired.repairReceipts
+        .filter(
+          (item) =>
+            item.operation === "project-authority-update" ||
+            item.operation === "project-milestone-update",
+        )
+        .every((item) => !item.verified),
+    ).toBe(true);
+  });
+
+  it("does not let stale Linear Initiative ordering rewrite repository authority", async () => {
+    const { client, desired } = await fixture();
+    client.initiativeNames = ["Stale Initiative", "Other Initiative"];
+
+    const repaired = await auditLiveWorkspace(
+      client as unknown as LinearClient,
+      desired,
+      true,
+    );
+
+    expect(repaired.exceptions).toEqual([]);
+    expect(client.projectDescription).toContain(
+      "Linear Initiative relationship is authoritative for portfolio ownership",
+    );
+    expect(client.projectDescription).not.toContain("Stale Initiative");
+  });
+
+  it("audits a manifest-declared primary Initiative independently", async () => {
+    const { client, desired } = await fixture();
+    const project = desired.projects[0]!;
+    project.primaryInitiative = "Canonical Initiative";
+    client.initiativeNames = ["Stale Initiative", "Canonical Initiative"];
+
+    const repaired = await auditLiveWorkspace(
+      client as unknown as LinearClient,
+      desired,
+      true,
+    );
+
+    expect(repaired.exceptions).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          summary:
+            "Primary Initiative relationship should be exactly Canonical Initiative",
+        }),
+      ]),
+    );
+    expect(client.projectDescription).toContain(
+      "Primary Initiative: Canonical Initiative",
+    );
+  });
+});
+
+describe("canonical Project mirror policy", () => {
+  function twoTaskFixture(): {
+    project: ProjectContract;
+    group: ScheduleGroup;
+  } {
+    const first: TaskContract = {
+      id: "T1",
+      canonicalKey: "example:T1",
+      title: "First",
+      body: "1. First.",
+      projectSlug: "example",
+      order: 1,
+      dependencies: [],
+      sharedPaths: [],
+      proof: { required: [], validationCommands: [], rollback: "stop" },
+      frontendImpact: "none",
+      visualGate: "not-required",
+    };
+    const second: TaskContract = {
+      ...first,
+      id: "T2",
+      canonicalKey: "example:T2",
+      title: "Second",
+      body: "2. Second.",
+      order: 2,
+    };
+    return {
+      project: {
+        slug: "example",
+        canonicalKey: "project:example",
+        name: "Lifecycle — example",
+        folder: "docs/product-development/example",
+        documents: [],
+        tasks: [first, second],
+        projectDependencies: [],
+        sharedPaths: [],
+        frontendAudit: { status: "passed", visualGate: "not-required" },
+        admission: "ready",
+        admissionBlockers: [],
+      },
+      group: {
+        id: "G01",
+        projectSlugs: ["example"],
+        taskKeys: ["example:T1"],
+      },
+    };
+  }
+
+  it.each([
+    {
+      name: "Building",
+      states: new Map<string, IssueState>([
+        ["example:T1", "Done"],
+        ["example:T2", "In Progress"],
+      ]),
+      phase: "Building",
+      next: "T2",
+    },
+    {
+      name: "Validating",
+      states: new Map<string, IssueState>([
+        ["example:T1", "Done"],
+        ["example:T2", "In Review"],
+      ]),
+      phase: "Validating",
+      next: "T2",
+    },
+    {
+      name: "Completed",
+      states: new Map<string, IssueState>([
+        ["example:T1", "Canceled"],
+        ["example:T2", "Won’t Do"],
+      ]),
+      phase: "Completed",
+      next: undefined,
+    },
+  ])("derives $name from canonical task states", ({ states, phase, next }) => {
+    const { project, group } = twoTaskFixture();
+    const progress = desiredProjectMirrorProgress(
+      project,
+      group,
+      [group],
+      states,
+    );
+    expect(progress.phase).toBe(phase);
+    expect(progress.nextTask?.id).toBe(next);
+  });
+
+  it("treats missing tasks as incomplete and ignores extra task-like Issues", () => {
+    const { project, group } = twoTaskFixture();
+    const progress = desiredProjectMirrorProgress(
+      project,
+      group,
+      [group],
+      new Map<string, IssueState>([
+        ["example:T1", "Done"],
+        ["example:T99", "In Review"],
+      ]),
+    );
+    expect(progress.phase).toBe("Building");
+    expect(progress.terminalTasks).toBe(1);
+    expect(progress.nextTask).toBeUndefined();
+  });
+
+  it("never advertises Duplicate as executable next work", () => {
+    const { project, group } = twoTaskFixture();
+    const progress = desiredProjectMirrorProgress(
+      project,
+      group,
+      [group],
+      new Map<string, IssueState>([
+        ["example:T1", "Duplicate"],
+        ["example:T2", "Ready For Codex"],
+      ]),
+    );
+    expect(progress.nextTask?.id).toBe("T2");
+  });
+
+  it("closes an all-Duplicate Project without advertising next work", () => {
+    const { project, group } = twoTaskFixture();
+    const progress = desiredProjectMirrorProgress(
+      project,
+      group,
+      [group],
+      new Map<string, IssueState>([
+        ["example:T1", "Duplicate"],
+        ["example:T2", "Duplicate"],
+      ]),
+    );
+    expect(progress.phase).toBe("Completed");
+    expect(progress.terminalTasks).toBe(2);
+    expect(progress.verifiedTasks).toBe(0);
+    expect(progress.nextTask).toBeUndefined();
   });
 });
