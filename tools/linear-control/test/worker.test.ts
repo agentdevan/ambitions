@@ -1578,6 +1578,9 @@ describe("durable mutation checkpoints", () => {
           };
           return statement;
         },
+        async batch(statements: D1PreparedStatement[]) {
+          return Promise.all(statements.map((statement) => statement.run()));
+        },
       } as unknown as D1Database;
       const env = { CONTROL_DB: d1 } as unknown as Env;
       const intent: LiveMutationIntent = {
@@ -1641,13 +1644,25 @@ describe("durable mutation checkpoints", () => {
         result_hash: null,
         error: "LINEAR_POST_WRITE_READ_TIMEOUT",
       });
-      await durableMutationCallbacks(env, "run-four", "a".repeat(40))
-        .onMutationCheckpoint!({
+      const checkpointCallbacks = durableMutationCallbacks(
+        env,
+        "run-four",
+        "a".repeat(40),
+      );
+      await checkpointCallbacks.onMutationCheckpoint!({
         ...unknownIntent,
         resultHash: unknownIntent.desiredHash,
         verified: true,
         reconciled: true,
       });
+      expect(
+        database
+          .prepare(
+            "SELECT status FROM mutation_receipts WHERE desired_hash = 'unknown-desired'",
+          )
+          .get(),
+      ).toEqual({ status: "pending" });
+      await checkpointCallbacks.flushCheckpoints();
       expect(
         database
           .prepare(
