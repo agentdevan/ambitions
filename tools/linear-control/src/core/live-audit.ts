@@ -311,6 +311,7 @@ export function desiredLiveStatesByDependency(
   projects: readonly ProjectContract[],
   currentStates: ReadonlyMap<string, IssueState>,
   proofByKey: ReadonlyMap<string, TaskProofEvidence>,
+  liveDependencyBlockedKeys: ReadonlySet<string> = new Set(),
 ): Map<string, IssueState> {
   const entries = projects.flatMap((project) =>
     project.tasks.map((task) => ({ project, task })),
@@ -321,10 +322,12 @@ export function desiredLiveStatesByDependency(
     for (const { project, task } of entries) {
       const current = currentStates.get(task.canonicalKey);
       if (!current) continue;
-      const dependencyBlocked = task.dependencies.some((dependency) => {
-        const state = desiredStates.get(dependency);
-        return state === undefined || !terminalTaskStates.has(state);
-      });
+      const dependencyBlocked =
+        liveDependencyBlockedKeys.has(task.canonicalKey) ||
+        task.dependencies.some((dependency) => {
+          const state = desiredStates.get(dependency);
+          return state === undefined || !terminalTaskStates.has(state);
+        });
       const desired = desiredLiveIssueState(
         current,
         dependencyBlocked,
@@ -680,14 +683,21 @@ export async function auditLiveWorkspace(
       .map((project) => [project.name.replace(/^Lifecycle — /, ""), project]),
   );
   const issuesByKey = new Map<string, LiveIssue>();
+  const liveDependencyBlockedKeys = new Set<string>();
   for (const issue of issues) {
     if (!issue.project?.name.startsWith("Lifecycle — ")) continue;
     const order = taskNumber(issue.title);
     if (order === undefined) continue;
-    issuesByKey.set(
-      `${issue.project.name.replace(/^Lifecycle — /, "")}:T${order}`,
-      issue,
-    );
+    const canonicalKey = `${issue.project.name.replace(/^Lifecycle — /, "")}:T${order}`;
+    issuesByKey.set(canonicalKey, issue);
+    if (
+      issue.inverseRelations.nodes.some(
+        (relation) =>
+          relation.type === "blocks" &&
+          !terminalTaskStates.has(relation.issue.state.name),
+      )
+    )
+      liveDependencyBlockedKeys.add(canonicalKey);
   }
 
   const exactSetChecks: Array<{
@@ -785,6 +795,7 @@ export async function auditLiveWorkspace(
     admitted,
     currentStatesByKey,
     proofByKey,
+    liveDependencyBlockedKeys,
   );
   const readFreshIssueState = async (id: string): Promise<LiveIssue> =>
     (
