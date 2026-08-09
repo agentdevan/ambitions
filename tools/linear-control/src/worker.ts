@@ -5,15 +5,21 @@ import { LinearClient } from "./adapters/linear.js";
 import { GitHubEvidenceClient } from "./adapters/github.js";
 import {
   DEFAULT_RETRY_POLICY,
+  ExternalRequestBudget,
+  ExternalRequestBudgetExhausted,
   fetchWithRetry,
   type RetryPolicy,
   type RetryRuntime,
 } from "./adapters/http.js";
-import { auditLiveWorkspace } from "./core/live-audit.js";
+import {
+  auditLiveWorkspace,
+  RepairBudgetExhausted,
+} from "./core/live-audit.js";
 import type {
   LiveAuditOptions,
   LiveMutationCheckpoint,
   LiveMutationIntent,
+  LiveProofReceipt,
 } from "./core/live-audit.js";
 import type {
   DesiredWorkspaceManifest,
@@ -32,6 +38,9 @@ declare global {
 }
 
 const encoder = new TextEncoder();
+export const EVENT_REPAIR_BUDGET = 3;
+export const EXTERNAL_REQUEST_ATTEMPT_LIMIT = 44;
+const CONTINUATION_DELAY_SECONDS = 5;
 const exactCommitSha = /^[0-9a-f]{40}$/;
 const exactContentHash = /^[0-9a-f]{64}$/;
 type Fetcher = typeof fetch;
@@ -332,7 +341,7 @@ export function taskProofResolver(
   authorityCommit: string,
   client: Pick<
     GitHubEvidenceClient,
-    "pullRequest" | "commitIncludes"
+    "pullRequest" | "commitIncludes" | "exactHeadCodeQuality"
   > = new GitHubEvidenceClient(env.GITHUB_API_TOKEN),
 ): (input: {
   issueIdentifier: string;
@@ -395,6 +404,30 @@ export function taskProofResolver(
         pullRequest.mergeCommitSha,
         authorityCommit,
       );
+      if (!included)
+        return {
+          source: "github",
+          authorityCommit,
+          mergedToMain: false,
+          proofPassed: false,
+          requiredProofFailed: false,
+          issueIdentifier,
+          pullRequestUrl,
+          mergeCommitSha: pullRequest.mergeCommitSha,
+          pullRequestHeadSha: pullRequest.headSha,
+        };
+      const codeQuality = await client.exactHeadCodeQuality(
+        env.GITHUB_REPOSITORY,
+        pullRequest.headSha,
+      );
+      const codeQualityPassed =
+        codeQuality?.headSha === pullRequest.headSha &&
+        codeQuality.name === "Code Quality" &&
+        codeQuality.appSlug === "github-actions" &&
+        Number.isSafeInteger(codeQuality.appId) &&
+        codeQuality.appId > 0 &&
+        codeQuality.status === "completed" &&
+        codeQuality.conclusion === "success";
       const proofContractCovered =
         task.proof.validationCommands.length === 0 &&
         task.proof.required.every((requirement) => requirement === "audit");
@@ -402,11 +435,25 @@ export function taskProofResolver(
         source: "github",
         authorityCommit,
         mergedToMain: included,
-        proofPassed: included && proofContractCovered,
-        requiredProofFailed: false,
+        proofPassed: proofContractCovered && codeQualityPassed,
+        requiredProofFailed:
+          codeQuality?.status === "completed" &&
+          codeQuality.conclusion !== "success",
         issueIdentifier,
         pullRequestUrl,
         mergeCommitSha: pullRequest.mergeCommitSha,
+        pullRequestHeadSha: pullRequest.headSha,
+        ...(codeQuality
+          ? {
+              codeQualityCheckId: codeQuality.id,
+              codeQualityCheckName: codeQuality.name,
+              codeQualityCheckAppId: codeQuality.appId,
+              codeQualityCheckAppSlug: codeQuality.appSlug,
+              ...(codeQuality.conclusion
+                ? { codeQualityCheckConclusion: codeQuality.conclusion }
+                : {}),
+            }
+          : {}),
       };
     })();
     cache.set(cacheKey, resolved);
@@ -415,12 +462,18 @@ export function taskProofResolver(
 }
 
 interface StoredTaskProofEvidence {
-  schemaVersion: 1;
+  schemaVersion: 2;
   authorityCommit: string;
   canonicalKey: string;
   issueIdentifier: string;
   pullRequestUrl: string;
   mergeCommitSha: string;
+  pullRequestHeadSha: string;
+  codeQualityCheckId: number;
+  codeQualityCheckName: "Code Quality";
+  codeQualityCheckConclusion: "success";
+  codeQualityCheckAppId: number;
+  codeQualityCheckAppSlug: "github-actions";
   proofContractHash: string;
 }
 
@@ -469,9 +522,21 @@ async function verifiedTaskProofReceipts(
     const issueIdentifier = property(evidence, "issueIdentifier");
     const pullRequestUrl = property(evidence, "pullRequestUrl");
     const mergeCommitSha = property(evidence, "mergeCommitSha");
+    const pullRequestHeadSha = property(evidence, "pullRequestHeadSha");
+    const codeQualityCheckId = property(evidence, "codeQualityCheckId");
+    const codeQualityCheckName = property(evidence, "codeQualityCheckName");
+    const codeQualityCheckConclusion = property(
+      evidence,
+      "codeQualityCheckConclusion",
+    );
+    const codeQualityCheckAppId = property(evidence, "codeQualityCheckAppId");
+    const codeQualityCheckAppSlug = property(
+      evidence,
+      "codeQualityCheckAppSlug",
+    );
     const proofContractHash = property(evidence, "proofContractHash");
     if (
-      property(evidence, "schemaVersion") !== 1 ||
+      property(evidence, "schemaVersion") !== 2 ||
       property(evidence, "authorityCommit") !== authorityCommit ||
       canonicalKey !== row.canonical_key ||
       typeof canonicalKey !== "string" ||
@@ -481,18 +546,33 @@ async function verifiedTaskProofReceipts(
       pullRequestNumber(env.GITHUB_REPOSITORY, pullRequestUrl) === null ||
       typeof mergeCommitSha !== "string" ||
       !exactCommitSha.test(mergeCommitSha) ||
+      typeof pullRequestHeadSha !== "string" ||
+      !exactCommitSha.test(pullRequestHeadSha) ||
+      !Number.isSafeInteger(codeQualityCheckId) ||
+      (codeQualityCheckId as number) < 1 ||
+      codeQualityCheckName !== "Code Quality" ||
+      codeQualityCheckConclusion !== "success" ||
+      !Number.isSafeInteger(codeQualityCheckAppId) ||
+      (codeQualityCheckAppId as number) < 1 ||
+      codeQualityCheckAppSlug !== "github-actions" ||
       typeof proofContractHash !== "string" ||
       !exactContentHash.test(proofContractHash) ||
       (await sha256Text(stableJson(evidence))) !== row.desired_hash
     )
       continue;
     const parsed: StoredTaskProofEvidence = {
-      schemaVersion: 1,
+      schemaVersion: 2,
       authorityCommit,
       canonicalKey,
       issueIdentifier,
       pullRequestUrl,
       mergeCommitSha,
+      pullRequestHeadSha,
+      codeQualityCheckId: codeQualityCheckId as number,
+      codeQualityCheckName: "Code Quality",
+      codeQualityCheckConclusion: "success",
+      codeQualityCheckAppId: codeQualityCheckAppId as number,
+      codeQualityCheckAppSlug: "github-actions",
       proofContractHash,
     };
     const existing = receipts.get(canonicalKey);
@@ -510,6 +590,7 @@ export async function taskProofResolverForEvent(
   env: Env,
   authorityCommit: string,
   fresh: TaskProofResolver = taskProofResolver(env, authorityCommit),
+  onFreshReceipt?: (receipt: LiveProofReceipt) => Promise<void>,
 ): Promise<TaskProofResolver> {
   const receipts = await verifiedTaskProofReceipts(env, authorityCommit);
   return async (input) => {
@@ -545,10 +626,109 @@ export async function taskProofResolverForEvent(
           issueIdentifier: receipt.issueIdentifier,
           pullRequestUrl: receipt.pullRequestUrl,
           mergeCommitSha: receipt.mergeCommitSha,
+          pullRequestHeadSha: receipt.pullRequestHeadSha,
+          codeQualityCheckId: receipt.codeQualityCheckId,
+          codeQualityCheckName: receipt.codeQualityCheckName,
+          codeQualityCheckConclusion: receipt.codeQualityCheckConclusion,
+          codeQualityCheckAppId: receipt.codeQualityCheckAppId,
+          codeQualityCheckAppSlug: receipt.codeQualityCheckAppSlug,
         };
     }
-    return fresh(input);
+    const evidence = await fresh(input);
+    const freshReceipt = await taskProofReceipt(
+      env.GITHUB_REPOSITORY,
+      authorityCommit,
+      input,
+      evidence,
+    );
+    if (freshReceipt) await onFreshReceipt?.(freshReceipt);
+    return evidence;
   };
+}
+
+async function taskProofReceipt(
+  repository: string,
+  authorityCommit: string,
+  input: TaskProofInput,
+  evidence: TaskProofEvidence,
+): Promise<LiveProofReceipt | null> {
+  const attachmentNumbers = input.attachmentUrls.flatMap((url) => {
+    const number = pullRequestNumber(repository, url);
+    return number === null ? [] : [number];
+  });
+  const evidenceNumber = evidence.pullRequestUrl
+    ? pullRequestNumber(repository, evidence.pullRequestUrl)
+    : null;
+  if (
+    evidence.source !== "github" ||
+    evidence.authorityCommit !== authorityCommit ||
+    !evidence.mergedToMain ||
+    !evidence.proofPassed ||
+    evidence.requiredProofFailed ||
+    evidence.issueIdentifier !== input.issueIdentifier ||
+    !evidence.pullRequestUrl ||
+    evidenceNumber === null ||
+    attachmentNumbers.length !== 1 ||
+    attachmentNumbers[0] !== evidenceNumber ||
+    !evidence.mergeCommitSha ||
+    !exactCommitSha.test(evidence.mergeCommitSha) ||
+    !evidence.pullRequestHeadSha ||
+    !exactCommitSha.test(evidence.pullRequestHeadSha) ||
+    !Number.isSafeInteger(evidence.codeQualityCheckId) ||
+    (evidence.codeQualityCheckId ?? 0) < 1 ||
+    evidence.codeQualityCheckName !== "Code Quality" ||
+    evidence.codeQualityCheckConclusion !== "success" ||
+    !Number.isSafeInteger(evidence.codeQualityCheckAppId) ||
+    (evidence.codeQualityCheckAppId ?? 0) < 1 ||
+    evidence.codeQualityCheckAppSlug !== "github-actions" ||
+    input.task.proof.validationCommands.length !== 0 ||
+    !input.task.proof.required.every((requirement) => requirement === "audit")
+  )
+    return null;
+  const evidenceJson = stableJson({
+    schemaVersion: 2,
+    authorityCommit,
+    canonicalKey: input.task.canonicalKey,
+    issueIdentifier: input.issueIdentifier,
+    pullRequestUrl: evidence.pullRequestUrl,
+    mergeCommitSha: evidence.mergeCommitSha,
+    pullRequestHeadSha: evidence.pullRequestHeadSha,
+    codeQualityCheckId: evidence.codeQualityCheckId,
+    codeQualityCheckName: evidence.codeQualityCheckName,
+    codeQualityCheckConclusion: evidence.codeQualityCheckConclusion,
+    codeQualityCheckAppId: evidence.codeQualityCheckAppId,
+    codeQualityCheckAppSlug: evidence.codeQualityCheckAppSlug,
+    proofContractHash: await sha256Text(stableJson(input.task.proof)),
+  });
+  return {
+    canonicalKey: input.task.canonicalKey,
+    evidenceHash: await sha256Text(evidenceJson),
+    evidenceJson,
+  };
+}
+
+async function persistTaskProofReceipt(
+  env: Env,
+  runId: string,
+  receipt: LiveProofReceipt,
+  verifiedAt = new Date().toISOString(),
+): Promise<void> {
+  await env.CONTROL_DB.prepare(
+    "INSERT OR REPLACE INTO mutation_receipts (id, run_id, canonical_key, operation, before_hash, desired_hash, result_hash, status, created_at, verified_at, error, evidence_json) VALUES (?, ?, ?, 'task-proof', NULL, ?, ?, 'verified', ?, ?, NULL, ?)",
+  )
+    .bind(
+      await sha256Text(
+        `${runId}\0${receipt.canonicalKey}\0task-proof\0${receipt.evidenceHash}`,
+      ),
+      runId,
+      receipt.canonicalKey,
+      receipt.evidenceHash,
+      receipt.evidenceHash,
+      verifiedAt,
+      verifiedAt,
+      receipt.evidenceJson,
+    )
+    .run();
 }
 
 export async function fetchRepositoryText(
@@ -596,11 +776,27 @@ export function durableMutationCallbacks(
   env: Env,
   runId: string,
   authorityCommit: string,
+  repairLimit = Number.POSITIVE_INFINITY,
 ): Pick<
   LiveAuditOptions,
-  "onMutationIntent" | "onMutationResult" | "onMutationCheckpoint"
+  | "beforeMutation"
+  | "onMutationIntent"
+  | "onMutationResult"
+  | "onMutationCheckpoint"
 > {
+  if (
+    repairLimit !== Number.POSITIVE_INFINITY &&
+    (!Number.isSafeInteger(repairLimit) || repairLimit < 0)
+  )
+    throw new Error("INVALID_REPAIR_BUDGET");
+  let claimedMutations = 0;
   const activeAttemptIds = new Map<string, string>();
+  const beforeMutation = async (): Promise<void> => {
+    await Promise.resolve();
+    if (claimedMutations >= repairLimit)
+      throw new RepairBudgetExhausted(repairLimit);
+    claimedMutations += 1;
+  };
   const onMutationIntent = async (
     intent: LiveMutationIntent,
   ): Promise<void> => {
@@ -696,7 +892,12 @@ export function durableMutationCallbacks(
       )
       .run();
   };
-  return { onMutationIntent, onMutationResult, onMutationCheckpoint };
+  return {
+    beforeMutation,
+    onMutationIntent,
+    onMutationResult,
+    onMutationCheckpoint,
+  };
 }
 
 function json(value: unknown, status = 200): Response {
@@ -833,6 +1034,32 @@ async function enqueue(
   );
 }
 
+export async function continuePinnedEvent(
+  env: Env,
+  event: EventEnvelope,
+  runId: string,
+): Promise<void> {
+  const continuedAt = new Date().toISOString();
+  const receiptCount = await env.CONTROL_DB.prepare(
+    "SELECT COUNT(*) AS count FROM mutation_receipts WHERE run_id = ? AND operation <> 'task-proof' AND status = 'verified' AND COALESCE(json_extract(evidence_json, '$.skipped'), 0) = 0",
+  )
+    .bind(runId)
+    .first<{ count: number }>();
+  const verifiedRepairs = receiptCount?.count ?? 0;
+  await env.CONTROL_DB.batch([
+    env.CONTROL_DB.prepare(
+      "UPDATE runs SET status = 'continuing', mutation_count = ?, completed_at = ?, error = NULL WHERE id = ?",
+    ).bind(verifiedRepairs, continuedAt, runId),
+    env.CONTROL_DB.prepare(
+      "UPDATE deliveries SET status = 'continuing', updated_at = ?, last_error = NULL WHERE id = ?",
+    ).bind(continuedAt, event.deliveryId),
+  ]);
+  await env.CONTROL_QUEUE.send(event, {
+    contentType: "json",
+    delaySeconds: CONTINUATION_DELAY_SECONDS,
+  });
+}
+
 async function processEvent(
   env: Env,
   receivedEvent: EventEnvelope,
@@ -850,143 +1077,193 @@ async function processEvent(
   )
     .bind(started, receivedEvent.deliveryId)
     .run();
-  const { event } = await pinEventAuthority(env, receivedEvent);
-  if (!(await authorityIsCurrent(env, event))) {
-    await env.CONTROL_DB.prepare(
-      "UPDATE deliveries SET status = 'superseded', updated_at = ?, last_error = 'Superseded before reconciliation by newer main authority' WHERE id = ?",
-    )
-      .bind(started, event.deliveryId)
-      .run();
-    return;
-  }
+  let event = receivedEvent;
   const runId = crypto.randomUUID();
-  const manifest = await loadManifestForEvent(env, event);
-  const commit = manifest.authorityCommit;
-  const desiredHash = manifest.contractHash;
-  const github = new GitHubEvidenceClient(env.GITHUB_API_TOKEN);
-  const runtimeLifecycleTree = (
-    await github.repositoryTree(env.GITHUB_REPOSITORY, commit)
-  ).blobs;
-  let taskProofResolverPromise: Promise<TaskProofResolver> | undefined;
-  const resolveTaskProof: TaskProofResolver = async (input) => {
-    taskProofResolverPromise ??= taskProofResolverForEvent(env, commit);
-    return (await taskProofResolverPromise)(input);
+  const externalBudget = new ExternalRequestBudget(
+    EXTERNAL_REQUEST_ATTEMPT_LIMIT,
+  );
+  const requestRuntime: RetryRuntime = {
+    beforeAttempt: () => externalBudget.beforeAttempt(),
   };
-  await env.CONTROL_DB.prepare(
-    "INSERT INTO runs (id, delivery_id, mode, authority_commit, desired_hash, status, started_at) VALUES (?, ?, 'event', ?, ?, 'verifying', ?)",
-  )
-    .bind(runId, event.deliveryId, commit, desiredHash, started)
-    .run();
-  const mutationCallbacks = durableMutationCallbacks(env, runId, commit);
-  const audit = await auditLiveWorkspace(
-    new LinearClient(env.LINEAR_API_TOKEN, env.LINEAR_API_URL),
-    manifest,
-    env.MUTATIONS_ENABLED,
-    {
-      loadRepositoryText: async (path) => {
-        return fetchRepositoryText(env, commit, path);
-      },
-      runtimeLifecycleTree,
-      verifyRuntimeAuthority: async () => authorityIsCurrent(env, event),
-      resolveTaskProof,
-      ...mutationCallbacks,
-    },
-  );
-  if (!(await authorityIsCurrent(env, event)))
-    throw new Error("RUNTIME_AUTHORITY_SUPERSEDED");
-  const completed = new Date().toISOString();
-  const proofReceiptStatements = await Promise.all(
-    audit.proofReceipts.map(async (receipt) =>
-      env.CONTROL_DB.prepare(
-        "INSERT OR REPLACE INTO mutation_receipts (id, run_id, canonical_key, operation, before_hash, desired_hash, result_hash, status, created_at, verified_at, error, evidence_json) VALUES (?, ?, ?, 'task-proof', NULL, ?, ?, 'verified', ?, ?, NULL, ?)",
-      ).bind(
-        await sha256Text(
-          `${runId}\0${receipt.canonicalKey}\0task-proof\0${receipt.evidenceHash}`,
-        ),
-        runId,
-        receipt.canonicalKey,
-        receipt.evidenceHash,
-        receipt.evidenceHash,
-        completed,
-        completed,
-        receipt.evidenceJson,
-      ),
-    ),
-  );
-  await executeD1Batches(env.CONTROL_DB, proofReceiptStatements);
-  const mappingStatements = audit.mappings.map((mapping) =>
-    env.CONTROL_DB.prepare(
-      "INSERT INTO object_mappings (canonical_key, linear_id, object_type, authority_commit, desired_hash, verified_at) VALUES (?, ?, ?, ?, ?, ?) ON CONFLICT(canonical_key) DO UPDATE SET linear_id = excluded.linear_id, object_type = excluded.object_type, authority_commit = excluded.authority_commit, desired_hash = excluded.desired_hash, verified_at = excluded.verified_at",
-    ).bind(
-      mapping.canonicalKey,
-      mapping.linearId,
-      mapping.objectType,
+  try {
+    ({ event } = await pinEventAuthority(env, receivedEvent));
+    if (
+      !(await authorityIsCurrent(env, event, fetch, {
+        runtime: requestRuntime,
+      }))
+    ) {
+      await env.CONTROL_DB.prepare(
+        "UPDATE deliveries SET status = 'superseded', updated_at = ?, last_error = 'Superseded before reconciliation by newer main authority' WHERE id = ?",
+      )
+        .bind(started, event.deliveryId)
+        .run();
+      return;
+    }
+    const manifest = await loadManifestForEvent(env, event, fetch, {
+      runtime: requestRuntime,
+    });
+    const commit = manifest.authorityCommit;
+    const desiredHash = manifest.contractHash;
+    const github = new GitHubEvidenceClient(
+      env.GITHUB_API_TOKEN,
+      undefined,
+      fetch,
+      DEFAULT_RETRY_POLICY,
+      requestRuntime,
+    );
+    const runtimeLifecycleTree = (
+      await github.repositoryTree(env.GITHUB_REPOSITORY, commit)
+    ).blobs;
+    let taskProofResolverPromise: Promise<TaskProofResolver> | undefined;
+    const resolveTaskProof: TaskProofResolver = async (input) => {
+      taskProofResolverPromise ??= taskProofResolverForEvent(
+        env,
+        commit,
+        taskProofResolver(env, commit, github),
+        async (receipt) => persistTaskProofReceipt(env, runId, receipt),
+      );
+      return (await taskProofResolverPromise)(input);
+    };
+    await env.CONTROL_DB.prepare(
+      "INSERT INTO runs (id, delivery_id, mode, authority_commit, desired_hash, status, started_at) VALUES (?, ?, 'event', ?, ?, 'verifying', ?)",
+    )
+      .bind(runId, event.deliveryId, commit, desiredHash, started)
+      .run();
+    const mutationCallbacks = durableMutationCallbacks(
+      env,
+      runId,
       commit,
-      mapping.desiredHash,
-      completed,
-    ),
-  );
-  await executeD1Batches(env.CONTROL_DB, mappingStatements);
-  await env.CONTROL_DB.prepare(
-    "UPDATE exceptions SET resolved_at = ? WHERE resolved_at IS NULL",
-  )
-    .bind(completed)
-    .run();
-  const exceptionStatements = await Promise.all(
-    audit.exceptions.map(async (item) => {
-      const id = await sha256Text(
-        `${item.canonicalKey ?? "workspace"}\0${item.summary}`,
+      EVENT_REPAIR_BUDGET,
+    );
+    let audit;
+    try {
+      audit = await auditLiveWorkspace(
+        new LinearClient(
+          env.LINEAR_API_TOKEN,
+          env.LINEAR_API_URL,
+          fetch,
+          DEFAULT_RETRY_POLICY,
+          requestRuntime,
+        ),
+        manifest,
+        env.MUTATIONS_ENABLED,
+        {
+          loadRepositoryText: async (path) => {
+            return fetchRepositoryText(env, commit, path, fetch, {
+              runtime: requestRuntime,
+            });
+          },
+          runtimeLifecycleTree,
+          verifyRuntimeAuthority: async () =>
+            authorityIsCurrent(env, event, fetch, { runtime: requestRuntime }),
+          resolveTaskProof,
+          ...mutationCallbacks,
+        },
       );
-      return env.CONTROL_DB.prepare(
-        "INSERT INTO exceptions (id, canonical_key, category, severity, summary, first_seen_at, last_seen_at, resolved_at) VALUES (?, ?, ?, ?, ?, ?, ?, NULL) ON CONFLICT(id) DO UPDATE SET severity = excluded.severity, summary = excluded.summary, last_seen_at = excluded.last_seen_at, resolved_at = NULL",
+    } catch (error) {
+      if (error instanceof RepairBudgetExhausted) {
+        await continuePinnedEvent(env, event, runId);
+        return;
+      }
+      throw error;
+    }
+    if (
+      !(await authorityIsCurrent(env, event, fetch, {
+        runtime: requestRuntime,
+      }))
+    )
+      throw new Error("RUNTIME_AUTHORITY_SUPERSEDED");
+    const completed = new Date().toISOString();
+    await Promise.all(
+      audit.proofReceipts.map((receipt) =>
+        persistTaskProofReceipt(env, runId, receipt, completed),
+      ),
+    );
+    const mappingStatements = audit.mappings.map((mapping) =>
+      env.CONTROL_DB.prepare(
+        "INSERT INTO object_mappings (canonical_key, linear_id, object_type, authority_commit, desired_hash, verified_at) VALUES (?, ?, ?, ?, ?, ?) ON CONFLICT(canonical_key) DO UPDATE SET linear_id = excluded.linear_id, object_type = excluded.object_type, authority_commit = excluded.authority_commit, desired_hash = excluded.desired_hash, verified_at = excluded.verified_at",
       ).bind(
-        id,
-        item.canonicalKey ?? null,
-        item.category,
-        item.severity,
-        item.summary,
+        mapping.canonicalKey,
+        mapping.linearId,
+        mapping.objectType,
+        commit,
+        mapping.desiredHash,
         completed,
+      ),
+    );
+    await executeD1Batches(env.CONTROL_DB, mappingStatements);
+    await env.CONTROL_DB.prepare(
+      "UPDATE exceptions SET resolved_at = ? WHERE resolved_at IS NULL",
+    )
+      .bind(completed)
+      .run();
+    const exceptionStatements = await Promise.all(
+      audit.exceptions.map(async (item) => {
+        const id = await sha256Text(
+          `${item.canonicalKey ?? "workspace"}\0${item.summary}`,
+        );
+        return env.CONTROL_DB.prepare(
+          "INSERT INTO exceptions (id, canonical_key, category, severity, summary, first_seen_at, last_seen_at, resolved_at) VALUES (?, ?, ?, ?, ?, ?, ?, NULL) ON CONFLICT(id) DO UPDATE SET severity = excluded.severity, summary = excluded.summary, last_seen_at = excluded.last_seen_at, resolved_at = NULL",
+        ).bind(
+          id,
+          item.canonicalKey ?? null,
+          item.category,
+          item.severity,
+          item.summary,
+          completed,
+          completed,
+        );
+      }),
+    );
+    await executeD1Batches(env.CONTROL_DB, exceptionStatements);
+    await env.CONTROL_DB.prepare(
+      "INSERT INTO metric_snapshots (id, captured_at, authority_commit, payload_json) VALUES (?, ?, ?, ?)",
+    )
+      .bind(
+        crypto.randomUUID(),
         completed,
-      );
-    }),
-  );
-  await executeD1Batches(env.CONTROL_DB, exceptionStatements);
-  await env.CONTROL_DB.prepare(
-    "INSERT INTO metric_snapshots (id, captured_at, authority_commit, payload_json) VALUES (?, ?, ?, ?)",
-  )
-    .bind(crypto.randomUUID(), completed, commit, JSON.stringify(audit.metrics))
-    .run();
-  const status = audit.exceptions.length === 0 ? "converged" : "drift";
-  await env.CONTROL_DB.batch([
-    env.CONTROL_DB.prepare(
-      "UPDATE runs SET status = ?, mutation_count = ?, completed_at = ? WHERE id = ?",
-    ).bind(status, audit.repairs, completed, runId),
-    env.CONTROL_DB.prepare(
-      "UPDATE deliveries SET status = ?, updated_at = ?, last_error = NULL WHERE id = ?",
-    ).bind(
-      status === "converged" ? "verified" : "drift",
-      completed,
-      event.deliveryId,
-    ),
-    ...(status === "converged"
-      ? [
-          env.CONTROL_DB.prepare(
-            "UPDATE deliveries SET status = 'superseded', updated_at = ?, last_error = 'Superseded by a later converged full audit' WHERE status IN ('queued', 'processing', 'retrying', 'drift') AND received_at < ? AND id <> ?",
-          ).bind(completed, started, event.deliveryId),
-        ]
-      : []),
-  ]);
-  console.log(
-    JSON.stringify({
-      message: "workspace reconciliation completed",
-      deliveryId: event.deliveryId,
-      source: event.source,
-      mutationsEnabled: env.MUTATIONS_ENABLED,
-      status,
-      exceptions: audit.exceptions.length,
-      repairs: audit.repairs,
-    }),
-  );
+        commit,
+        JSON.stringify(audit.metrics),
+      )
+      .run();
+    const status = audit.exceptions.length === 0 ? "converged" : "drift";
+    await env.CONTROL_DB.batch([
+      env.CONTROL_DB.prepare(
+        "UPDATE runs SET status = ?, mutation_count = ?, completed_at = ? WHERE id = ?",
+      ).bind(status, audit.repairs, completed, runId),
+      env.CONTROL_DB.prepare(
+        "UPDATE deliveries SET status = ?, updated_at = ?, last_error = NULL WHERE id = ?",
+      ).bind(
+        status === "converged" ? "verified" : "drift",
+        completed,
+        event.deliveryId,
+      ),
+      ...(status === "converged"
+        ? [
+            env.CONTROL_DB.prepare(
+              "UPDATE deliveries SET status = 'superseded', updated_at = ?, last_error = 'Superseded by a later converged full audit' WHERE status IN ('queued', 'processing', 'continuing', 'retrying', 'drift') AND received_at < ? AND id <> ?",
+            ).bind(completed, started, event.deliveryId),
+          ]
+        : []),
+    ]);
+    console.log(
+      JSON.stringify({
+        message: "workspace reconciliation completed",
+        deliveryId: event.deliveryId,
+        source: event.source,
+        mutationsEnabled: env.MUTATIONS_ENABLED,
+        status,
+        exceptions: audit.exceptions.length,
+        repairs: audit.repairs,
+      }),
+    );
+  } catch (error) {
+    if (error instanceof ExternalRequestBudgetExhausted) {
+      await continuePinnedEvent(env, event, runId);
+      return;
+    }
+    throw error;
+  }
 }
 
 export default {

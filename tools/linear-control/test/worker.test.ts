@@ -5,7 +5,9 @@ import { describe, expect, it, vi } from "vitest";
 import worker, {
   authorityIsCurrent,
   authorityCommitFromPayload,
+  continuePinnedEvent,
   durableMutationCallbacks,
+  EXTERNAL_REQUEST_ATTEMPT_LIMIT,
   fetchRepositoryText,
   loadManifestForEvent,
   pinEventAuthority,
@@ -30,6 +32,7 @@ function environment(changeCount = 1): {
   env: Env;
   queueSend: ReturnType<typeof vi.fn>;
   prepare: ReturnType<typeof vi.fn>;
+  batch: ReturnType<typeof vi.fn>;
   statement: {
     bind: ReturnType<typeof vi.fn>;
     run: ReturnType<typeof vi.fn>;
@@ -50,6 +53,7 @@ function environment(changeCount = 1): {
     }),
   };
   const queueSend = vi.fn().mockResolvedValue(undefined);
+  const batch = vi.fn().mockResolvedValue([]);
   const prepare = vi.fn().mockReturnValue(statement);
   const env = {
     CONTROL_ADMIN_SECRET: "admin-secret",
@@ -59,13 +63,14 @@ function environment(changeCount = 1): {
     MANIFEST_PATH: "tools/linear-control/generated/desired-workspace.json",
     CONTROL_DB: {
       prepare,
+      batch,
     },
     CONTROL_QUEUE: {
       send: queueSend,
     },
     MAX_EVENT_BYTES: "65536",
   } as unknown as Env;
-  return { env, queueSend, prepare, statement };
+  return { env, queueSend, prepare, batch, statement };
 }
 
 function greenAuthorityRow(
@@ -138,12 +143,18 @@ async function proofReceiptRow(
 ) {
   const task = proofTask();
   const evidence = {
-    schemaVersion: 1,
+    schemaVersion: 2,
     authorityCommit,
     canonicalKey: task.canonicalKey,
     issueIdentifier: "AMB-1870",
     pullRequestUrl: "https://github.com/agentdevan/ambitions/pull/81",
     mergeCommitSha: "3".repeat(40),
+    pullRequestHeadSha: "2".repeat(40),
+    codeQualityCheckId: 81,
+    codeQualityCheckName: "Code Quality",
+    codeQualityCheckConclusion: "success",
+    codeQualityCheckAppId: 15368,
+    codeQualityCheckAppSlug: "github-actions",
     proofContractHash: await sha256Text(stableJson(task.proof)),
     ...overrides,
   };
@@ -546,6 +557,110 @@ describe("Worker ingress", () => {
     ).toBe(false);
   });
 
+  it("supersedes a pinned GitHub continuation when main advances", async () => {
+    const { env, prepare, queueSend } = environment();
+    const originalFetch = globalThis.fetch;
+    globalThis.fetch = vi
+      .fn<typeof fetch>()
+      .mockResolvedValue(Response.json({ sha: "f".repeat(40) }));
+    const continued = event("github", "e".repeat(40));
+    continued.payload = {
+      schemaVersion: 1,
+      kind: "code-quality",
+      authorityCommit: "e".repeat(40),
+      conclusion: "success",
+      repository: "agentdevan/ambitions",
+      workflowEvent: "push",
+      headBranch: "main",
+    };
+    const message = {
+      body: continued,
+      attempts: 0,
+      ack: vi.fn(),
+      retry: vi.fn(),
+    };
+    try {
+      await worker.queue(
+        { messages: [message] } as unknown as MessageBatch<EventEnvelope>,
+        env,
+      );
+    } finally {
+      globalThis.fetch = originalFetch;
+    }
+
+    expect(message.ack).toHaveBeenCalledOnce();
+    expect(message.retry).not.toHaveBeenCalled();
+    expect(queueSend).not.toHaveBeenCalled();
+    expect(
+      prepare.mock.calls.some(([query]) =>
+        String(query).includes("status = 'superseded'"),
+      ),
+    ).toBe(true);
+  });
+
+  it("marks a partial run continuing and requeues the exact pinned envelope", async () => {
+    const { env, queueSend, batch, statement } = environment();
+    const pinned = event("github", "a".repeat(40), "2026-08-09T00:00:00.000Z");
+
+    statement.first.mockResolvedValueOnce({ count: 2 });
+    await continuePinnedEvent(env, pinned, "run-continuing");
+
+    expect(batch).toHaveBeenCalledOnce();
+    expect(statement.bind).toHaveBeenCalledWith(
+      2,
+      expect.any(String),
+      "run-continuing",
+    );
+    expect(queueSend).toHaveBeenCalledWith(pinned, {
+      contentType: "json",
+      delaySeconds: 5,
+    });
+  });
+
+  it("leaves continuation recovery to the original message when requeue send fails", async () => {
+    const { env, queueSend, batch, statement } = environment();
+    const pinned = event("github", "a".repeat(40));
+    statement.first.mockResolvedValueOnce({ count: 1 });
+    queueSend.mockRejectedValueOnce(new Error("QUEUE_SEND_FAILED"));
+
+    await expect(
+      continuePinnedEvent(env, pinned, "run-continuing"),
+    ).rejects.toThrow("QUEUE_SEND_FAILED");
+
+    expect(batch).toHaveBeenCalledOnce();
+    expect(queueSend).toHaveBeenCalledOnce();
+  });
+
+  it("keeps the conservative continuation ceiling below the Worker limit", () => {
+    expect(EXTERNAL_REQUEST_ATTEMPT_LIMIT).toBe(44);
+    expect(EXTERNAL_REQUEST_ATTEMPT_LIMIT).toBeLessThan(50);
+  });
+
+  it("retries provider failures instead of acknowledging them as continuation", async () => {
+    const { env } = environment();
+    const originalFetch = globalThis.fetch;
+    globalThis.fetch = vi
+      .fn<typeof fetch>()
+      .mockRejectedValue(new Error("boom"));
+    const message = {
+      body: event("scheduled", "e".repeat(40)),
+      attempts: 0,
+      ack: vi.fn(),
+      retry: vi.fn(),
+    };
+    try {
+      await worker.queue(
+        { messages: [message] } as unknown as MessageBatch<EventEnvelope>,
+        env,
+      );
+    } finally {
+      globalThis.fetch = originalFetch;
+    }
+
+    expect(message.ack).not.toHaveBeenCalled();
+    expect(message.retry).toHaveBeenCalledOnce();
+  });
+
   it("checks signed GitHub authority against current main", async () => {
     const { env } = environment();
     const current = "2".repeat(40);
@@ -616,6 +731,16 @@ describe("Worker ingress", () => {
         merged: true,
         mergeCommitSha: "3".repeat(40),
         headBranch: "codex/amb-1870-onet-soc-esco",
+        headSha: "2".repeat(40),
+      }),
+      exactHeadCodeQuality: vi.fn().mockResolvedValue({
+        id: 81,
+        name: "Code Quality",
+        headSha: "2".repeat(40),
+        status: "completed",
+        conclusion: "success",
+        appId: 15368,
+        appSlug: "github-actions",
       }),
       commitIncludes: vi.fn().mockResolvedValue(true),
     };
@@ -636,18 +761,155 @@ describe("Worker ingress", () => {
       issueIdentifier: "AMB-1870",
       pullRequestUrl: "https://github.com/agentdevan/ambitions/pull/81",
       mergeCommitSha: "3".repeat(40),
+      pullRequestHeadSha: "2".repeat(40),
+      codeQualityCheckId: 81,
+      codeQualityCheckName: "Code Quality",
+      codeQualityCheckConclusion: "success",
+      codeQualityCheckAppId: 15368,
+      codeQualityCheckAppSlug: "github-actions",
     });
     expect(github.commitIncludes).toHaveBeenCalledWith(
       "agentdevan/ambitions",
       "3".repeat(40),
       authorityCommit,
     );
+    expect(github.exactHeadCodeQuality).toHaveBeenCalledWith(
+      "agentdevan/ambitions",
+      "2".repeat(40),
+    );
+  });
+
+  it.each([
+    ["absent", null],
+    [
+      "pending",
+      {
+        id: 81,
+        name: "Code Quality",
+        headSha: "2".repeat(40),
+        status: "in_progress",
+      },
+    ],
+    [
+      "failed",
+      {
+        id: 81,
+        name: "Code Quality",
+        headSha: "2".repeat(40),
+        status: "completed",
+        conclusion: "failure",
+      },
+    ],
+  ])(
+    "fails task proof closed when exact-head Code Quality is %s",
+    async (_name, check) => {
+      const { env } = environment();
+      const authorityCommit = "4".repeat(40);
+      const github = {
+        pullRequest: vi.fn().mockResolvedValue({
+          number: 81,
+          title: "AMB-1870: Implement O*NET-SOC and gated O*NET-ESCO",
+          state: "closed",
+          merged: true,
+          mergeCommitSha: "3".repeat(40),
+          headBranch: "codex/amb-1870-onet-soc-esco",
+          headSha: "2".repeat(40),
+        }),
+        exactHeadCodeQuality: vi.fn().mockResolvedValue(check),
+        commitIncludes: vi.fn().mockResolvedValue(true),
+      };
+
+      await expect(
+        taskProofResolver(
+          env,
+          authorityCommit,
+          github,
+        )({
+          issueIdentifier: "AMB-1870",
+          attachmentUrls: ["https://github.com/agentdevan/ambitions/pull/81"],
+          task: proofTask(),
+        }),
+      ).resolves.toMatchObject({
+        mergedToMain: true,
+        proofPassed: false,
+      });
+    },
+  );
+
+  it("does not spend a check-run request when the merge commit is absent from authority", async () => {
+    const { env } = environment();
+    const authorityCommit = "4".repeat(40);
+    const github = {
+      pullRequest: vi.fn().mockResolvedValue({
+        number: 81,
+        title: "AMB-1870: Implement O*NET-SOC and gated O*NET-ESCO",
+        state: "closed",
+        merged: true,
+        mergeCommitSha: "3".repeat(40),
+        headBranch: "codex/amb-1870-onet-soc-esco",
+        headSha: "2".repeat(40),
+      }),
+      exactHeadCodeQuality: vi.fn(),
+      commitIncludes: vi.fn().mockResolvedValue(false),
+    };
+
+    await expect(
+      taskProofResolver(
+        env,
+        authorityCommit,
+        github,
+      )({
+        issueIdentifier: "AMB-1870",
+        attachmentUrls: ["https://github.com/agentdevan/ambitions/pull/81"],
+        task: proofTask(),
+      }),
+    ).resolves.toMatchObject({ mergedToMain: false, proofPassed: false });
+    expect(github.exactHeadCodeQuality).not.toHaveBeenCalled();
+  });
+
+  it("rejects a successful exact-head Code Quality check from a non-GitHub-Actions app", async () => {
+    const { env } = environment();
+    const authorityCommit = "4".repeat(40);
+    const github = {
+      pullRequest: vi.fn().mockResolvedValue({
+        number: 81,
+        title: "AMB-1870: Implement O*NET-SOC and gated O*NET-ESCO",
+        state: "closed",
+        merged: true,
+        mergeCommitSha: "3".repeat(40),
+        headBranch: "codex/amb-1870-onet-soc-esco",
+        headSha: "2".repeat(40),
+      }),
+      exactHeadCodeQuality: vi.fn().mockResolvedValue({
+        id: 81,
+        name: "Code Quality",
+        headSha: "2".repeat(40),
+        status: "completed",
+        conclusion: "success",
+        appId: 999,
+        appSlug: "third-party-ci",
+      }),
+      commitIncludes: vi.fn().mockResolvedValue(true),
+    };
+
+    await expect(
+      taskProofResolver(
+        env,
+        authorityCommit,
+        github,
+      )({
+        issueIdentifier: "AMB-1870",
+        attachmentUrls: ["https://github.com/agentdevan/ambitions/pull/81"],
+        task: proofTask(),
+      }),
+    ).resolves.toMatchObject({ mergedToMain: true, proofPassed: false });
   });
 
   it("fails task proof closed when PR mapping is ambiguous", async () => {
     const { env } = environment();
     const github = {
       pullRequest: vi.fn(),
+      exactHeadCodeQuality: vi.fn(),
       commitIncludes: vi.fn(),
     };
     const authorityCommit = "4".repeat(40);
@@ -689,6 +951,7 @@ describe("Worker ingress", () => {
     const { env } = environment();
     const github = {
       pullRequest: vi.fn(),
+      exactHeadCodeQuality: vi.fn(),
       commitIncludes: vi.fn(),
     };
     const authorityCommit = "4".repeat(40);
@@ -730,7 +993,9 @@ describe("Worker ingress", () => {
         merged: true,
         mergeCommitSha: "3".repeat(40),
         headBranch: identity.headBranch,
+        headSha: "2".repeat(40),
       }),
+      exactHeadCodeQuality: vi.fn(),
       commitIncludes: vi.fn(),
     };
     const authorityCommit = "4".repeat(40);
@@ -761,6 +1026,16 @@ describe("Worker ingress", () => {
         merged: true,
         mergeCommitSha: "3".repeat(40),
         headBranch: "codex/amb-1870-onet-soc",
+        headSha: "2".repeat(40),
+      }),
+      exactHeadCodeQuality: vi.fn().mockResolvedValue({
+        id: 81,
+        name: "Code Quality",
+        headSha: "2".repeat(40),
+        status: "completed",
+        conclusion: "success",
+        appId: 15368,
+        appSlug: "github-actions",
       }),
       commitIncludes: vi.fn().mockResolvedValue(true),
     };
@@ -813,6 +1088,55 @@ describe("Worker ingress", () => {
     expect(fresh).not.toHaveBeenCalled();
   });
 
+  it("persists fresh exact-authority proof immediately for the next chunk", async () => {
+    const { env, statement } = environment();
+    const authorityCommit = "4".repeat(40);
+    statement.all.mockResolvedValueOnce({ results: [] });
+    const fresh = vi.fn().mockResolvedValue({
+      source: "github",
+      authorityCommit,
+      mergedToMain: true,
+      proofPassed: true,
+      requiredProofFailed: false,
+      issueIdentifier: "AMB-1870",
+      pullRequestUrl: "https://github.com/agentdevan/ambitions/pull/81",
+      mergeCommitSha: "3".repeat(40),
+      pullRequestHeadSha: "2".repeat(40),
+      codeQualityCheckId: 81,
+      codeQualityCheckName: "Code Quality",
+      codeQualityCheckConclusion: "success",
+      codeQualityCheckAppId: 15368,
+      codeQualityCheckAppSlug: "github-actions",
+    });
+    const persist = vi.fn().mockResolvedValue(undefined);
+    const input = {
+      issueIdentifier: "AMB-1870",
+      attachmentUrls: ["https://github.com/agentdevan/ambitions/pull/81"],
+      task: proofTask(),
+    };
+
+    const first = await taskProofResolverForEvent(
+      env,
+      authorityCommit,
+      fresh,
+      persist,
+    );
+    await expect(first(input)).resolves.toMatchObject({ proofPassed: true });
+    expect(persist).toHaveBeenCalledOnce();
+
+    statement.all.mockResolvedValueOnce({
+      results: [await proofReceiptRow(authorityCommit)],
+    });
+    const nextFresh = vi.fn();
+    const next = await taskProofResolverForEvent(
+      env,
+      authorityCommit,
+      nextFresh,
+    );
+    await expect(next(input)).resolves.toMatchObject({ source: "receipt" });
+    expect(nextFresh).not.toHaveBeenCalled();
+  });
+
   it("does not reuse a receipt when duplicate equivalent PR rows exist", async () => {
     const { env, statement } = environment();
     const authorityCommit = "4".repeat(40);
@@ -859,6 +1183,12 @@ describe("Worker ingress", () => {
       issueIdentifier: "AMB-1870",
       pullRequestUrl: "https://github.com/agentdevan/ambitions/pull/81",
       mergeCommitSha: "3".repeat(40),
+      pullRequestHeadSha: "2".repeat(40),
+      codeQualityCheckId: 81,
+      codeQualityCheckName: "Code Quality",
+      codeQualityCheckConclusion: "success",
+      codeQualityCheckAppId: 15368,
+      codeQualityCheckAppSlug: "github-actions",
     });
     const resolve = await taskProofResolverForEvent(env, newAuthority, fresh);
     const input = {
@@ -888,6 +1218,18 @@ describe("Worker ingress", () => {
       row: async () =>
         proofReceiptRow("4".repeat(40), {
           issueIdentifier: ["AMB-1870", "AMB-1871"],
+        }),
+    },
+    {
+      name: "legacy schema-v1",
+      row: async () => proofReceiptRow("4".repeat(40), { schemaVersion: 1 }),
+    },
+    {
+      name: "third-party Code Quality app",
+      row: async () =>
+        proofReceiptRow("4".repeat(40), {
+          codeQualityCheckAppId: 999,
+          codeQualityCheckAppSlug: "third-party-ci",
         }),
     },
   ])("never authorizes a $name task-proof receipt", async ({ row }) => {
@@ -1163,6 +1505,34 @@ describe("D1 authority-pin migration", () => {
     } finally {
       database.close();
     }
+  });
+});
+
+describe("bounded durable mutation claims", () => {
+  it("rejects the fourth unit before creating another pending receipt", async () => {
+    const { env, statement } = environment();
+    const callbacks = durableMutationCallbacks(
+      env,
+      "run-budget",
+      "a".repeat(40),
+      3,
+    );
+    const intent: LiveMutationIntent = {
+      canonicalKey: "example:T1",
+      operation: "issue-state-update",
+      beforeHash: "before",
+      desiredHash: "desired",
+    };
+
+    for (let index = 0; index < 3; index += 1) {
+      await callbacks.beforeMutation!(intent);
+      await callbacks.onMutationIntent!(intent);
+    }
+    await expect(callbacks.beforeMutation!(intent)).rejects.toThrow(
+      "REPAIR_BUDGET_EXHAUSTED:3",
+    );
+
+    expect(statement.run).toHaveBeenCalledTimes(3);
   });
 });
 

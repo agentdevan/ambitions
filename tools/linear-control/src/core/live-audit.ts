@@ -111,6 +111,16 @@ export interface LiveMutationCheckpoint extends LiveMutationIntent {
   error?: string;
 }
 
+export class RepairBudgetExhausted extends Error {
+  readonly limit: number;
+
+  constructor(limit: number) {
+    super(`REPAIR_BUDGET_EXHAUSTED:${limit}`);
+    this.name = "RepairBudgetExhausted";
+    this.limit = limit;
+  }
+}
+
 interface SkippedMutationWrite {
   skipped: true;
   resultHash: string;
@@ -145,6 +155,7 @@ export interface LiveAuditOptions {
     authorityCommit: string;
     task: TaskContract;
   }) => Promise<TaskProofEvidence>;
+  beforeMutation?: (intent: LiveMutationIntent) => Promise<void>;
   onMutationIntent?: (intent: LiveMutationIntent) => Promise<void>;
   onMutationResult?: (result: LiveMutationCheckpoint) => Promise<void>;
   onMutationCheckpoint?: (checkpoint: LiveMutationCheckpoint) => Promise<void>;
@@ -615,6 +626,7 @@ export async function auditLiveWorkspace(
     write: () => Promise<unknown>,
     readResultHash: () => Promise<string>,
   ): Promise<LiveMutationCheckpoint> => {
+    await options.beforeMutation?.(intent);
     await assertMutationAuthority();
     await options.onMutationIntent?.(intent);
     let resultHash: string;
@@ -924,38 +936,7 @@ export async function auditLiveWorkspace(
         continue;
       }
 
-      const fresh = await readFreshIssueState(issue.id);
-      if (fresh.attachments.pageInfo.hasNextPage)
-        throw new Error(
-          `LINEAR_ATTACHMENT_PAGE_INCOMPLETE:${fresh.identifier}`,
-        );
-      if (preservedTerminalStates.has(fresh.state.name)) {
-        plannedStatesByKey.set(task.canonicalKey, fresh.state.name);
-        continue;
-      }
-      const dependencyBlocked =
-        task.dependencies.some((dependency) => {
-          const state = plannedStatesByKey.get(dependency);
-          return state === undefined || !terminalTaskStates.has(state);
-        }) ||
-        fresh.inverseRelations.nodes.some(
-          (relation) =>
-            relation.type === "blocks" &&
-            !terminalTaskStates.has(relation.issue.state.name),
-        );
-      const freshDesiredState = desiredLiveIssueState(
-        fresh.state.name,
-        dependencyBlocked,
-        project,
-        task,
-        proof,
-      );
-      plannedStatesByKey.set(task.canonicalKey, freshDesiredState);
-      if (
-        freshDesiredState === fresh.state.name ||
-        preservedTerminalStates.has(fresh.state.name)
-      )
-        continue;
+      const freshDesiredState = plannedState;
       const stateId = workflowStateIds.get(freshDesiredState);
       if (!stateId) {
         exceptions.push(
@@ -966,12 +947,8 @@ export async function auditLiveWorkspace(
         );
         continue;
       }
-      const beforeHash = await sha256Text(
-        stableJson({ state: fresh.state.name }),
-      );
-      const desiredHash = await sha256Text(
-        stableJson({ state: freshDesiredState }),
-      );
+      const beforeHash = snapshotBeforeHash;
+      const desiredHash = snapshotDesiredHash;
       let verified: LiveIssue | undefined;
       const result = await performMutation(
         {
@@ -990,6 +967,31 @@ export async function auditLiveWorkspace(
             throw new Error(
               `LINEAR_ATTACHMENT_PAGE_INCOMPLETE:${beforeWrite.identifier}`,
             );
+          let canonicalDependencyBlocked = false;
+          for (const dependency of task.dependencies) {
+            const dependencyIssue = issuesByKey.get(dependency);
+            if (!dependencyIssue) {
+              plannedStatesByKey.delete(dependency);
+              canonicalDependencyBlocked = true;
+              continue;
+            }
+            const freshDependency = await readFreshIssueState(
+              dependencyIssue.id,
+            );
+            const proofAwarePlannedState = plannedStatesByKey.get(dependency);
+            const freshIsTerminal = terminalTaskStates.has(
+              freshDependency.state.name,
+            );
+            const plannedIsTerminal =
+              proofAwarePlannedState !== undefined &&
+              terminalTaskStates.has(proofAwarePlannedState);
+            if (!freshIsTerminal)
+              plannedStatesByKey.set(dependency, freshDependency.state.name);
+            else if (plannedIsTerminal)
+              plannedStatesByKey.set(dependency, freshDependency.state.name);
+            if (!freshIsTerminal || !plannedIsTerminal)
+              canonicalDependencyBlocked = true;
+          }
           const beforeWriteHash = await sha256Text(
             stableJson({ state: beforeWrite.state.name }),
           );
@@ -1002,10 +1004,7 @@ export async function auditLiveWorkspace(
             };
           }
           const beforeWriteDependencyBlocked =
-            task.dependencies.some((dependency) => {
-              const state = plannedStatesByKey.get(dependency);
-              return state === undefined || !terminalTaskStates.has(state);
-            }) ||
+            canonicalDependencyBlocked ||
             beforeWrite.inverseRelations.nodes.some(
               (relation) =>
                 relation.type === "blocks" &&
@@ -1053,13 +1052,6 @@ export async function auditLiveWorkspace(
           ),
         );
     }
-    if (mutationsEnabled)
-      for (const task of project.tasks) {
-        const issue = issuesByKey.get(task.canonicalKey);
-        if (!issue) continue;
-        const fresh = await readFreshIssueState(issue.id);
-        plannedStatesByKey.set(task.canonicalKey, fresh.state.name);
-      }
     for (const task of project.tasks) {
       const issue = issuesByKey.get(task.canonicalKey);
       const proof = proofByKey.get(task.canonicalKey);
@@ -1073,16 +1065,28 @@ export async function auditLiveWorkspace(
         proof.requiredProofFailed ||
         proof.source === "receipt" ||
         !proof.pullRequestUrl ||
-        !proof.mergeCommitSha
+        !proof.mergeCommitSha ||
+        !proof.pullRequestHeadSha ||
+        !proof.codeQualityCheckId ||
+        proof.codeQualityCheckName !== "Code Quality" ||
+        proof.codeQualityCheckConclusion !== "success" ||
+        !proof.codeQualityCheckAppId ||
+        proof.codeQualityCheckAppSlug !== "github-actions"
       )
         continue;
       const evidenceJson = stableJson({
-        schemaVersion: 1,
+        schemaVersion: 2,
         authorityCommit: desired.authorityCommit,
         canonicalKey: task.canonicalKey,
         issueIdentifier: issue.identifier,
         pullRequestUrl: proof.pullRequestUrl,
         mergeCommitSha: proof.mergeCommitSha,
+        pullRequestHeadSha: proof.pullRequestHeadSha,
+        codeQualityCheckId: proof.codeQualityCheckId,
+        codeQualityCheckName: proof.codeQualityCheckName,
+        codeQualityCheckConclusion: proof.codeQualityCheckConclusion,
+        codeQualityCheckAppId: proof.codeQualityCheckAppId,
+        codeQualityCheckAppSlug: proof.codeQualityCheckAppSlug,
         proofContractHash: await sha256Text(stableJson(task.proof)),
       });
       const evidenceHash = await sha256Text(evidenceJson);

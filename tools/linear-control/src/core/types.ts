@@ -98,6 +98,12 @@ export interface TaskProofEvidence {
   issueIdentifier?: string;
   pullRequestUrl?: string;
   mergeCommitSha?: string;
+  pullRequestHeadSha?: string;
+  codeQualityCheckId?: number;
+  codeQualityCheckName?: string;
+  codeQualityCheckConclusion?: string;
+  codeQualityCheckAppId?: number;
+  codeQualityCheckAppSlug?: string;
 }
 
 export interface ScheduleGroup {
