@@ -1,0 +1,80 @@
+{
+  "schemaVersion": "relationship-registry-onet-soc-fixture-v1",
+  "kind": "relationshipRegistryONETSOCFixture",
+  "fixtureClass": "synthetic_contract",
+  "authority": {
+    "mappingSetId": "onet.onet-soc-2019-soc-2018.synthetic",
+    "mappingSetRevision": "1.0.0",
+    "releaseId": "onet.onet-soc-2019-soc-2018.synthetic-v1",
+    "subjectSchemeId": "onet-soc",
+    "subjectSchemeVersion": "2019",
+    "objectSchemeId": "soc",
+    "objectSchemeVersion": "2018",
+    "rightsId": "ambitions.synthetic.relationship-rights",
+    "rightsVersion": "1.0.0",
+    "rightsState": "approved"
+  },
+  "rows": [
+    {
+      "sourceRow": "onetsoc-001",
+      "onetConcept": {
+        "conceptId": "15-1252.00",
+        "label": "Synthetic software occupation",
+        "locator": null
+      },
+      "socConcept": {
+        "conceptId": "15-1252",
+        "label": "Synthetic software developers classification",
+        "locator": null
+      },
+      "sourceSpecificFields": [
+        {
+          "name": "relationshipGranularity",
+          "value": "exact O*NET-SOC occupation to SOC detailed occupation"
+        }
+      ]
+    },
+    {
+      "sourceRow": "onetsoc-002",
+      "onetConcept": {
+        "conceptId": "15-1252.01",
+        "label": "Synthetic software occupation A",
+        "locator": null
+      },
+      "socConcept": {
+        "conceptId": "15-1252",
+        "label": "Synthetic software developers classification",
+        "locator": null
+      },
+      "sourceSpecificFields": []
+    },
+    {
+      "sourceRow": "onetsoc-003",
+      "onetConcept": {
+        "conceptId": "15-1252.02",
+        "label": "Synthetic software occupation B",
+        "locator": null
+      },
+      "socConcept": {
+        "conceptId": "15-1252",
+        "label": "Synthetic software developers classification",
+        "locator": null
+      },
+      "sourceSpecificFields": []
+    },
+    {
+      "sourceRow": "onetsoc-004",
+      "onetConcept": {
+        "conceptId": "29-1141.00",
+        "label": "Synthetic nursing occupation",
+        "locator": null
+      },
+      "socConcept": {
+        "conceptId": "29-1141",
+        "label": "Synthetic nursing classification",
+        "locator": null
+      },
+      "sourceSpecificFields": []
+    }
+  ]
+}

@@ -66,6 +66,57 @@ AUTHORITY_FIELDS = frozenset(
 )
 CONCEPT_FIELDS = frozenset({"conceptId", "label", "locator"})
 SOURCE_FIELD_FIELDS = frozenset({"name", "value"})
+RELATIONSHIP_PRIVATE_SOURCE_FIELD_CANARIES = frozenset(
+    {
+        "userid",
+        "deviceid",
+        "ambition",
+        "goal",
+        "goalid",
+        "capability",
+        "proof",
+        "educationhistory",
+        "schedule",
+        "location",
+        "recommendation",
+        "correction",
+        "selection",
+        "rejection",
+    }
+)
+RELATIONSHIP_PRIVATE_SOURCE_FIELD_ID_BASES = frozenset(
+    {
+        "ambition",
+        "goal",
+        "capability",
+        "proof",
+        "educationhistory",
+        "schedule",
+        "location",
+        "recommendation",
+        "correction",
+        "selection",
+        "rejection",
+    }
+)
+RELATIONSHIP_PUBLIC_SOURCE_FIELD_QUALIFIERS = frozenset(
+    {"source", "mapping", "publisher", "standard"}
+)
+RELATIONSHIP_PUBLIC_LIFECYCLE_SOURCE_FIELD_ID_BASES = frozenset(
+    {"correction", "selection", "location"}
+)
+RELATIONSHIP_INTRINSIC_PRIVATE_SOURCE_FIELD_ID_BASES = frozenset(
+    {
+        "ambition",
+        "goal",
+        "capability",
+        "proof",
+        "educationhistory",
+        "schedule",
+        "recommendation",
+        "rejection",
+    }
+)
 PROFILE_PREDICATES = {
     "cip-edition-migration-v1": frozenset(
         {
@@ -81,6 +132,7 @@ PROFILE_PREDICATES = {
         }
     ),
     "cip-soc-relevance-v1": frozenset({"ambitions:educationOccupationRelevance"}),
+    "onet-soc-overlay-v1": frozenset({"ambitions:sourceTaxonomyRelationship"}),
 }
 PROFILE_PREDICATE_ENDPOINT_STATES = {
     ("cip-edition-migration-v1", "cip:unchanged"): (
@@ -112,6 +164,10 @@ PROFILE_PREDICATE_ENDPOINT_STATES = {
         frozenset({"current_for_mapping"}),
     ),
     ("cip-soc-relevance-v1", "ambitions:educationOccupationRelevance"): (
+        frozenset({"current_for_mapping"}),
+        frozenset({"current_for_mapping"}),
+    ),
+    ("onet-soc-overlay-v1", "ambitions:sourceTaxonomyRelationship"): (
         frozenset({"current_for_mapping"}),
         frozenset({"current_for_mapping"}),
     ),
@@ -304,6 +360,89 @@ def source_specific_fields(
         field_value = field["value"]
         if not isinstance(name, str) or not name or name in names:
             raise error_type(f"SOURCE_FIELD_NAME_INVALID:{location}[{index}]")
+        separated_name = re.sub(r"([a-z0-9])([A-Z])", r"\1_\2", name)
+        name_tokens = tuple(
+            token.casefold()
+            for token in re.split(r"[^A-Za-z0-9]+", separated_name)
+            if token
+        )
+        normalized_name = "".join(name_tokens)
+
+        def has_private_qualifier(qualifier: str) -> bool:
+            return qualifier in name_tokens or normalized_name.startswith(
+                (qualifier,)
+                + tuple(
+                    f"{public_qualifier}{qualifier}"
+                    for public_qualifier in RELATIONSHIP_PUBLIC_SOURCE_FIELD_QUALIFIERS
+                )
+            )
+
+        private_reason: str | None = None
+        if normalized_name in RELATIONSHIP_PRIVATE_SOURCE_FIELD_CANARIES:
+            private_reason = "named_private_canary"
+        elif has_private_qualifier("private"):
+            private_reason = "private_qualified_field"
+        elif has_private_qualifier("user"):
+            private_reason = "user_qualified_field"
+        elif has_private_qualifier("device"):
+            private_reason = "device_qualified_field"
+        elif normalized_name.endswith("id"):
+            id_tokens = name_tokens[:-1] if name_tokens[-1:] == ("id",) else name_tokens
+            normalized_id_base = normalized_name[:-2]
+            normalized_category_names = {normalized_id_base}
+            normalized_category_names.update(
+                normalized_id_base.removeprefix(qualifier)
+                for qualifier in RELATIONSHIP_PUBLIC_SOURCE_FIELD_QUALIFIERS
+                if normalized_id_base.startswith(qualifier)
+            )
+
+            def has_category(
+                category: str,
+                *,
+                normalized_suffix: bool = False,
+            ) -> bool:
+                normalized_match = category in normalized_category_names or (
+                    normalized_suffix
+                    and any(
+                        candidate.endswith(category)
+                        for candidate in normalized_category_names
+                    )
+                )
+                if category == "educationhistory":
+                    return (
+                        "educationhistory" in id_tokens
+                        or any(
+                            pair == ("education", "history")
+                            for pair in zip(id_tokens, id_tokens[1:], strict=False)
+                        )
+                        or normalized_match
+                    )
+                return category in id_tokens or normalized_match
+
+            is_public_lifecycle_id = (
+                any(
+                    qualifier in name_tokens or normalized_id_base.startswith(qualifier)
+                    for qualifier in RELATIONSHIP_PUBLIC_SOURCE_FIELD_QUALIFIERS
+                )
+                and any(
+                    has_category(base)
+                    for base in RELATIONSHIP_PUBLIC_LIFECYCLE_SOURCE_FIELD_ID_BASES
+                )
+                and not any(
+                    has_category(base, normalized_suffix=True)
+                    for base in RELATIONSHIP_INTRINSIC_PRIVATE_SOURCE_FIELD_ID_BASES
+                )
+            )
+            if not is_public_lifecycle_id and any(
+                has_category(base, normalized_suffix=True)
+                for base in RELATIONSHIP_PRIVATE_SOURCE_FIELD_ID_BASES
+            ):
+                private_reason = "private_category_id_field"
+        if private_reason is not None:
+            raise error_type(
+                f"PRIVATE_BOUNDARY:{location}[{index}].name:"
+                f"relationship_private_field:{private_reason}"
+            )
         if field_value is not None and not isinstance(
             field_value,
             (str, int, float, bool),

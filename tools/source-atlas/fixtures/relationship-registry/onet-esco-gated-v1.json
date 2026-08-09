@@ -1,0 +1,104 @@
+{
+  "schemaVersion": "relationship-registry-onet-esco-gated-fixture-v1",
+  "kind": "relationshipRegistryONETESCOGatedFixture",
+  "fixtureClass": "synthetic_contract",
+  "authority": {
+    "mappingSetId": "official.onet-esco.synthetic-reservation",
+    "mappingSetRevision": "1.0.0",
+    "releaseId": "official.onet-esco.synthetic-reservation-v1",
+    "subjectSchemeId": "onet-soc",
+    "subjectSchemeVersion": "fixture-onet-2022",
+    "objectSchemeId": "esco",
+    "objectSchemeVersion": "fixture-esco-1.1.1",
+    "rightsId": "ambitions.synthetic.relationship-rights",
+    "rightsVersion": "1.0.0",
+    "rightsState": "review_required"
+  },
+  "rows": [
+    {
+      "sourceRow": "onetesco-exact",
+      "predicateId": "skos:exactMatch",
+      "qaPartition": "human_validated",
+      "onetConcept": {
+        "conceptId": "15-1252.01",
+        "label": "Synthetic O*NET exact subject",
+        "locator": null
+      },
+      "escoConcept": {
+        "conceptId": "fixture-esco-exact",
+        "label": "Synthetic ESCO exact object",
+        "locator": null
+      },
+      "sourceSpecificFields": []
+    },
+    {
+      "sourceRow": "onetesco-close",
+      "predicateId": "skos:closeMatch",
+      "qaPartition": "human_validated",
+      "onetConcept": {
+        "conceptId": "15-1252.02",
+        "label": "Synthetic O*NET close subject",
+        "locator": null
+      },
+      "escoConcept": {
+        "conceptId": "fixture-esco-close",
+        "label": "Synthetic ESCO close object",
+        "locator": null
+      },
+      "sourceSpecificFields": []
+    },
+    {
+      "sourceRow": "onetesco-broad",
+      "predicateId": "skos:broadMatch",
+      "qaPartition": "human_validated",
+      "onetConcept": {
+        "conceptId": "15-1299.00",
+        "label": "Synthetic O*NET broad subject",
+        "locator": null
+      },
+      "escoConcept": {
+        "conceptId": "fixture-esco-broad",
+        "label": "Synthetic ESCO broad object",
+        "locator": null
+      },
+      "sourceSpecificFields": []
+    },
+    {
+      "sourceRow": "onetesco-narrow",
+      "predicateId": "skos:narrowMatch",
+      "qaPartition": "human_validated",
+      "onetConcept": {
+        "conceptId": "29-1141.00",
+        "label": "Synthetic O*NET narrow subject",
+        "locator": null
+      },
+      "escoConcept": {
+        "conceptId": "fixture-esco-narrow",
+        "label": "Synthetic ESCO narrow object",
+        "locator": null
+      },
+      "sourceSpecificFields": []
+    },
+    {
+      "sourceRow": "onetesco-related-lower-qa",
+      "predicateId": "skos:relatedMatch",
+      "qaPartition": "lower_qa_related",
+      "onetConcept": {
+        "conceptId": "13-1199.00",
+        "label": "Synthetic O*NET related subject",
+        "locator": null
+      },
+      "escoConcept": {
+        "conceptId": "fixture-esco-related",
+        "label": "Synthetic ESCO related object",
+        "locator": null
+      },
+      "sourceSpecificFields": [
+        {
+          "name": "qaNotice",
+          "value": "Synthetic related row is outside the higher-QA partition"
+        }
+      ]
+    }
+  ]
+}
