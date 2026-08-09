@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "authorityCommit": "05178082f28eca277d6cfce0b0469448bc2e2c8c",
+  "authorityCommit": "6047957db2383cbc6b2b8023b14725508c03e8e5",
   "projects": [
     {
       "slug": "adaptive-local-learning-and-replanning",
@@ -6008,6 +6008,232 @@
       "admissionBlockers": []
     },
     {
+      "slug": "owner-taste-design-governance",
+      "canonicalKey": "project:owner-taste-design-governance",
+      "name": "Lifecycle — Owner Taste Design Governance",
+      "folder": "docs/product-development/owner-taste-design-governance",
+      "documents": [
+        {
+          "kind": "research",
+          "path": "docs/product-development/owner-taste-design-governance/research.md",
+          "revision": "1",
+          "status": "approved",
+          "sha256": "11992f29615c11a3c241739efb58cbf173dfae9213243df822d301ead8d7b9a5",
+          "byteLength": 1247
+        },
+        {
+          "kind": "scope",
+          "path": "docs/product-development/owner-taste-design-governance/scope.md",
+          "revision": "1",
+          "status": "approved",
+          "sha256": "5b66b6e4bbd21a344846d9f19be784b039b6ef6df306d072df6df9b4f8fb6e71",
+          "byteLength": 1176
+        },
+        {
+          "kind": "design",
+          "path": "docs/product-development/owner-taste-design-governance/design.md",
+          "revision": "1",
+          "status": "approved",
+          "sha256": "e653961918483235378064d4afb2189f39351719857921c966d8c36cc79ff0e9",
+          "byteLength": 1727
+        },
+        {
+          "kind": "plan",
+          "path": "docs/product-development/owner-taste-design-governance/implementation/plan.md",
+          "revision": "1",
+          "status": "groomed",
+          "sha256": "b0d6933e3d9863a36e70c9fb24b232cbe7adf8714baa63a39618279dc2b7ac58",
+          "byteLength": 939
+        },
+        {
+          "kind": "tasks",
+          "path": "docs/product-development/owner-taste-design-governance/implementation/tasks.md",
+          "revision": "1",
+          "status": "groomed",
+          "sha256": "a74b7719994429913517bce85184bdb5bce8378d132a5417dccbaf80db6af814",
+          "byteLength": 1324
+        },
+        {
+          "kind": "verification",
+          "path": "docs/product-development/owner-taste-design-governance/implementation/verification.md",
+          "revision": "1",
+          "status": "groomed",
+          "sha256": "da8a11b5323e44bf71b2ca30e1134a640a6ae6a4c3f575721ac49aedcf7eae6a",
+          "byteLength": 869
+        }
+      ],
+      "tasks": [
+        {
+          "id": "T1",
+          "canonicalKey": "owner-taste-design-governance:T1",
+          "title": "Correct approved Research, Scope, and Design for supreme Owner Taste authority. Frontend: affected — future design routing only; Visual gate: not required.",
+          "body": "1. Correct approved Research, Scope, and Design for supreme Owner Taste authority. Frontend: affected — future design routing only; Visual gate: not required.",
+          "projectSlug": "owner-taste-design-governance",
+          "order": 1,
+          "dependencies": [],
+          "sharedPaths": [],
+          "proof": {
+            "required": [
+              "audit"
+            ],
+            "validationCommands": [],
+            "rollback": "Stop and preserve the last verified state."
+          },
+          "frontendImpact": "affected",
+          "visualGate": "unclassified"
+        },
+        {
+          "id": "T2",
+          "canonicalKey": "owner-taste-design-governance:T2",
+          "title": "Promote the registered owner-taste human/machine peers and separate non-design constraints from design precedence. Frontend: affected — decision source only; Visual gate: not required.",
+          "body": "2. Promote the registered owner-taste human/machine peers and separate non-design constraints from design precedence. Frontend: affected — decision source only; Visual gate: not required.",
+          "projectSlug": "owner-taste-design-governance",
+          "order": 2,
+          "dependencies": [],
+          "sharedPaths": [],
+          "proof": {
+            "required": [
+              "audit"
+            ],
+            "validationCommands": [],
+            "rollback": "Stop and preserve the last verified state."
+          },
+          "frontendImpact": "affected",
+          "visualGate": "unclassified"
+        },
+        {
+          "id": "T3",
+          "canonicalKey": "owner-taste-design-governance:T3",
+          "title": "Convert the VC contract, its concept dispositions, and selected directions into subordinate implementation/calibration. Frontend: affected — future calibration routing only; Visual gate: not required.",
+          "body": "3. Convert the VC contract, its concept dispositions, and selected directions into subordinate implementation/calibration. Frontend: affected — future calibration routing only; Visual gate: not required.",
+          "projectSlug": "owner-taste-design-governance",
+          "order": 3,
+          "dependencies": [],
+          "sharedPaths": [],
+          "proof": {
+            "required": [
+              "audit"
+            ],
+            "validationCommands": [],
+            "rollback": "Stop and preserve the last verified state."
+          },
+          "frontendImpact": "affected",
+          "visualGate": "unclassified"
+        },
+        {
+          "id": "T4",
+          "canonicalKey": "owner-taste-design-governance:T4",
+          "title": "Correct canon README, visual-system status, closure authority wording, and the current reconciliation graph. Frontend: affected — authority interpretation only; Visual gate: not required.",
+          "body": "4. Correct canon README, visual-system status, closure authority wording, and the current reconciliation graph. Frontend: affected — authority interpretation only; Visual gate: not required.",
+          "projectSlug": "owner-taste-design-governance",
+          "order": 4,
+          "dependencies": [],
+          "sharedPaths": [],
+          "proof": {
+            "required": [
+              "audit"
+            ],
+            "validationCommands": [],
+            "rollback": "Stop and preserve the last verified state."
+          },
+          "frontendImpact": "affected",
+          "visualGate": "unclassified"
+        },
+        {
+          "id": "T5",
+          "canonicalKey": "owner-taste-design-governance:T5",
+          "title": "Validate supreme status, conflict rule, precedence, constraint boundary, source binding, subordinate VC role, and evidence obligations. Frontend: none — compiler guardrail; Visual gate: not required.",
+          "body": "5. Validate supreme status, conflict rule, precedence, constraint boundary, source binding, subordinate VC role, and evidence obligations. Frontend: none — compiler guardrail; Visual gate: not required.",
+          "projectSlug": "owner-taste-design-governance",
+          "order": 5,
+          "dependencies": [],
+          "sharedPaths": [],
+          "proof": {
+            "required": [
+              "audit"
+            ],
+            "validationCommands": [],
+            "rollback": "Stop and preserve the last verified state."
+          },
+          "frontendImpact": "none",
+          "visualGate": "not-required"
+        },
+        {
+          "id": "T6",
+          "canonicalKey": "owner-taste-design-governance:T6",
+          "title": "Project separate `supreme_design_authority` and `implementation_calibration` structures into generated output. Frontend: none — compiler output only; Visual gate: not required.",
+          "body": "6. Project separate `supreme_design_authority` and `implementation_calibration` structures into generated output. Frontend: none — compiler output only; Visual gate: not required.",
+          "projectSlug": "owner-taste-design-governance",
+          "order": 6,
+          "dependencies": [],
+          "sharedPaths": [],
+          "proof": {
+            "required": [
+              "audit"
+            ],
+            "validationCommands": [],
+            "rollback": "Stop and preserve the last verified state."
+          },
+          "frontendImpact": "none",
+          "visualGate": "not-required"
+        },
+        {
+          "id": "T7",
+          "canonicalKey": "owner-taste-design-governance:T7",
+          "title": "Rebuild, check, inspect routing, run focused tests and quality checks, then publish to `main`. Frontend: none — verification only; Visual gate: not required.",
+          "body": "7. Rebuild, check, inspect routing, run focused tests and quality checks, then publish to `main`. Frontend: none — verification only; Visual gate: not required.",
+          "projectSlug": "owner-taste-design-governance",
+          "order": 7,
+          "dependencies": [],
+          "sharedPaths": [],
+          "proof": {
+            "required": [
+              "audit"
+            ],
+            "validationCommands": [],
+            "rollback": "Stop and preserve the last verified state."
+          },
+          "frontendImpact": "none",
+          "visualGate": "not-required"
+        }
+      ],
+      "projectDependencies": [],
+      "sharedPaths": [],
+      "frontendAudit": {
+        "status": "blocked",
+        "visualGate": "unclassified",
+        "firstFrontendTaskKey": "owner-taste-design-governance:T1"
+      },
+      "admission": "pending",
+      "admissionBlockers": [
+        "implementation/tasks.md:T1:visual-gate-unclassified",
+        "implementation/tasks.md:T2:visual-gate-unclassified",
+        "implementation/tasks.md:T3:visual-gate-unclassified",
+        "implementation/tasks.md:T4:visual-gate-unclassified",
+        "research.md:frontend-field=Potential frontend impact:missing",
+        "research.md:frontend-field=Existing surfaces investigated:missing",
+        "research.md:frontend-field=Evidence and unknowns:missing",
+        "scope.md:frontend-field=Surface impact:missing",
+        "design.md:frontend-field=Surface impact:missing",
+        "scope.md:frontend-field=IA/navigation:missing",
+        "design.md:frontend-field=IA/navigation:missing",
+        "scope.md:frontend-field=Assets/iconography:missing",
+        "design.md:frontend-field=Assets/iconography:missing",
+        "scope.md:frontend-field=Visual language:missing",
+        "design.md:frontend-field=Visual language:missing",
+        "scope.md:frontend-field=Motion:missing",
+        "design.md:frontend-field=Motion:missing",
+        "scope.md:frontend-field=Copy/localization:missing",
+        "design.md:frontend-field=Copy/localization:missing",
+        "scope.md:frontend-field=Accessibility:missing",
+        "design.md:frontend-field=Accessibility:missing",
+        "scope.md:frontend-field=Visual proof:missing",
+        "design.md:frontend-field=Visual proof:missing",
+        "design.md:frontend-field=Visual gate:missing",
+        "design.md:frontend-contract-missing"
+      ]
+    },
+    {
       "slug": "personal-context-and-constraint-controls",
       "canonicalKey": "project:personal-context-and-constraint-controls",
       "name": "Lifecycle — Personal Context And Constraint Controls",
@@ -7705,8 +7931,8 @@
           "path": "docs/product-development/public-reference-knowledge-foundation/implementation/plan.md",
           "revision": "1",
           "status": "groomed",
-          "sha256": "418beb765fff4c21a62399a8501e6a08f9452809d032a35549b331d4d6c53330",
-          "byteLength": 2823
+          "sha256": "2279d9fdc8689fb12d18728eacbbb46c38fd15ad0979f5e6cc61766c3c6babe9",
+          "byteLength": 3396
         },
         {
           "kind": "tasks",
@@ -9738,5 +9964,5 @@
       ]
     }
   ],
-  "contractHash": "ec0c930eeed8842d67f05eb5603300c1793b8de023b8d82e8957729ca78c9aeb"
+  "contractHash": "6a5faf9d7974ce611d890e26afce11bd638870194e8ac56308137e8350135e3c"
 }
