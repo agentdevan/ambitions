@@ -295,7 +295,10 @@ def test_profiles_are_revision_bound_and_never_enable_inference() -> None:
     assert config["sourcePredicateGrantsEligibility"] is False
 
     for profile in config["profiles"]:
-        assert profile["revision"] == "1.0.0"
+        expected_revision = (
+            "1.1.0" if profile["profileId"] == "cip-edition-migration-v1" else "1.0.0"
+        )
+        assert profile["revision"] == expected_revision
         assert set(profile["allowedPurposes"]) <= PURPOSES
         assert profile["forbiddenPropagation"]
         assert MANDATORY_FORBIDDEN_PROPAGATION <= set(profile["forbiddenPropagation"])

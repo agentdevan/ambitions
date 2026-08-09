@@ -1,0 +1,46 @@
+{
+  "schemaVersion": "relationship-registry-cip-soc-fixture-v1",
+  "kind": "relationshipRegistryCIPSOCFixture",
+  "fixtureClass": "synthetic_contract",
+  "authority": {
+    "mappingSetId": "nces-bls.cip-2020-soc-2018.synthetic",
+    "mappingSetRevision": "1.0.0",
+    "releaseId": "nces-bls.cip-2020-soc-2018.synthetic-v1",
+    "subjectSchemeId": "cip",
+    "subjectSchemeVersion": "2020",
+    "objectSchemeId": "soc",
+    "objectSchemeVersion": "2018",
+    "rightsId": "ambitions.synthetic.relationship-rights",
+    "rightsVersion": "1.0.0",
+    "rightsState": "approved"
+  },
+  "rows": [
+    {
+      "sourceRow": "cipsoc-001",
+      "cipConcept": {"conceptId": "11.0101", "label": "Synthetic computing program", "locator": null},
+      "socConcepts": [
+        {"conceptId": "15-1252", "label": "Synthetic software occupation", "locator": null},
+        {"conceptId": "15-1299", "label": "Synthetic computing occupation", "locator": null}
+      ],
+      "sourceSpecificFields": [
+        {"name": "relationshipBasis", "value": "Synthetic source-description relevance"}
+      ]
+    },
+    {
+      "sourceRow": "cipsoc-002",
+      "cipConcept": {"conceptId": "11.0701", "label": "Synthetic systems program", "locator": null},
+      "socConcepts": [
+        {"conceptId": "15-1252", "label": "Synthetic software occupation", "locator": null}
+      ],
+      "sourceSpecificFields": []
+    },
+    {
+      "sourceRow": "cipsoc-003",
+      "cipConcept": {"conceptId": "30.7101", "label": "Synthetic interdisciplinary program", "locator": null},
+      "socConcepts": [
+        {"conceptId": "15-1299", "label": "Synthetic computing occupation", "locator": null}
+      ],
+      "sourceSpecificFields": []
+    }
+  ]
+}
