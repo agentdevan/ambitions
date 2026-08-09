@@ -102,6 +102,21 @@ RELATIONSHIP_PRIVATE_SOURCE_FIELD_ID_BASES = frozenset(
 RELATIONSHIP_PUBLIC_SOURCE_FIELD_QUALIFIERS = frozenset(
     {"source", "mapping", "publisher", "standard"}
 )
+RELATIONSHIP_PUBLIC_LIFECYCLE_SOURCE_FIELD_ID_BASES = frozenset(
+    {"correction", "selection", "location"}
+)
+RELATIONSHIP_INTRINSIC_PRIVATE_SOURCE_FIELD_ID_BASES = frozenset(
+    {
+        "ambition",
+        "goal",
+        "capability",
+        "proof",
+        "educationhistory",
+        "schedule",
+        "recommendation",
+        "rejection",
+    }
+)
 PROFILE_PREDICATES = {
     "cip-edition-migration-v1": frozenset(
         {
@@ -352,26 +367,77 @@ def source_specific_fields(
             if token
         )
         normalized_name = "".join(name_tokens)
+
+        def has_private_qualifier(qualifier: str) -> bool:
+            return qualifier in name_tokens or normalized_name.startswith(
+                (qualifier,)
+                + tuple(
+                    f"{public_qualifier}{qualifier}"
+                    for public_qualifier in RELATIONSHIP_PUBLIC_SOURCE_FIELD_QUALIFIERS
+                )
+            )
+
         private_reason: str | None = None
         if normalized_name in RELATIONSHIP_PRIVATE_SOURCE_FIELD_CANARIES:
             private_reason = "named_private_canary"
-        elif "private" in name_tokens:
+        elif has_private_qualifier("private"):
             private_reason = "private_qualified_field"
-        elif "user" in name_tokens:
+        elif has_private_qualifier("user"):
             private_reason = "user_qualified_field"
-        elif "device" in name_tokens:
+        elif has_private_qualifier("device"):
             private_reason = "device_qualified_field"
-        elif (
-            name_tokens[-1:] == ("id",)
-            and not RELATIONSHIP_PUBLIC_SOURCE_FIELD_QUALIFIERS.intersection(
-                name_tokens
+        elif normalized_name.endswith("id"):
+            id_tokens = name_tokens[:-1] if name_tokens[-1:] == ("id",) else name_tokens
+            normalized_id_base = normalized_name[:-2]
+            normalized_category_names = {normalized_id_base}
+            normalized_category_names.update(
+                normalized_id_base.removeprefix(qualifier)
+                for qualifier in RELATIONSHIP_PUBLIC_SOURCE_FIELD_QUALIFIERS
+                if normalized_id_base.startswith(qualifier)
             )
-            and any(
-                base in "".join(name_tokens[:-1])
+
+            def has_category(
+                category: str,
+                *,
+                normalized_suffix: bool = False,
+            ) -> bool:
+                normalized_match = category in normalized_category_names or (
+                    normalized_suffix
+                    and any(
+                        candidate.endswith(category)
+                        for candidate in normalized_category_names
+                    )
+                )
+                if category == "educationhistory":
+                    return (
+                        "educationhistory" in id_tokens
+                        or any(
+                            pair == ("education", "history")
+                            for pair in zip(id_tokens, id_tokens[1:], strict=False)
+                        )
+                        or normalized_match
+                    )
+                return category in id_tokens or normalized_match
+
+            is_public_lifecycle_id = (
+                any(
+                    qualifier in name_tokens or normalized_id_base.startswith(qualifier)
+                    for qualifier in RELATIONSHIP_PUBLIC_SOURCE_FIELD_QUALIFIERS
+                )
+                and any(
+                    has_category(base)
+                    for base in RELATIONSHIP_PUBLIC_LIFECYCLE_SOURCE_FIELD_ID_BASES
+                )
+                and not any(
+                    has_category(base, normalized_suffix=True)
+                    for base in RELATIONSHIP_INTRINSIC_PRIVATE_SOURCE_FIELD_ID_BASES
+                )
+            )
+            if not is_public_lifecycle_id and any(
+                has_category(base, normalized_suffix=True)
                 for base in RELATIONSHIP_PRIVATE_SOURCE_FIELD_ID_BASES
-            )
-        ):
-            private_reason = "private_category_id_field"
+            ):
+                private_reason = "private_category_id_field"
         if private_reason is not None:
             raise error_type(
                 f"PRIVATE_BOUNDARY:{location}[{index}].name:"

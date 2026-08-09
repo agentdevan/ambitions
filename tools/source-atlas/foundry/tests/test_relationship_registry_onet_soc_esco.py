@@ -60,9 +60,39 @@ REQ_011_PRIVATE_SOURCE_FIELD_VARIANTS = (
     "sourcePrivateCorrectionId",
     "mappingUserSelectionId",
     "publisherDeviceLocationId",
+    "sourceCorrectionCapabilityId",
+    "mappingLocationRecommendationId",
+    "publisherSelectionProofId",
+    "standardCorrectionEducationHistoryId",
+    "mappingcapabilityid",
+    "publisherproofid",
+    "standardeducationhistoryid",
+    "mappingprivatecorrectionid",
+    "publisheruserselectionid",
+    "standarddevicelocationid",
+    "sourcecorrectioncapabilityid",
+    "mappinglocationrecommendationid",
+    "publisherselectionproofid",
+    "standardcorrectioneducationhistoryid",
+)
+REQ_011_QUALIFIED_INTRINSIC_PRIVATE_ID_VARIANTS = tuple(
+    f"{qualifier}{category}Id"
+    for qualifier in ("source", "mapping", "publisher", "standard")
+    for category in (
+        "Ambition",
+        "Goal",
+        "Capability",
+        "Proof",
+        "EducationHistory",
+        "Schedule",
+        "Recommendation",
+        "Rejection",
+    )
 )
 REQ_011_REJECTED_SOURCE_FIELDS = (
-    REQ_011_PRIVATE_SOURCE_FIELD_CANARIES + REQ_011_PRIVATE_SOURCE_FIELD_VARIANTS
+    REQ_011_PRIVATE_SOURCE_FIELD_CANARIES
+    + REQ_011_PRIVATE_SOURCE_FIELD_VARIANTS
+    + REQ_011_QUALIFIED_INTRINSIC_PRIVATE_ID_VARIANTS
 )
 LEGITIMATE_PUBLIC_SOURCE_FIELDS = (
     "correctionDate",
@@ -74,6 +104,10 @@ LEGITIMATE_PUBLIC_SOURCE_FIELDS = (
     "mappingCorrectionId",
     "publisherSelectionId",
     "standardLocationId",
+    "sourcecorrectionid",
+    "mappingselectionid",
+    "standardlocationid",
+    "publisherlocationid",
 )
 
 
