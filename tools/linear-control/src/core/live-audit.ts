@@ -309,7 +309,7 @@ export async function auditLiveWorkspace(
   }>(`query {
     projects(first: 50) {
       nodes {
-        id name summary description status { id name }
+        id name summary: description description: content status { id name }
         initiatives { nodes { name } }
         labels { nodes { id name } }
         projectMilestones { nodes { id name description } }
@@ -599,14 +599,14 @@ export async function auditLiveWorkspace(
             `mutation($id: String!, $input: ProjectUpdateInput!) {
               projectUpdate(id: $id, input: $input) {
                 success
-                project { summary description status { name } }
+                project { summary: description description: content status { name } }
               }
             }`,
             {
               id: live.id,
               input: {
-                summary: desiredSummary,
-                description: desiredProjectDescription,
+                description: desiredSummary,
+                content: desiredProjectDescription,
                 statusId,
               },
             },

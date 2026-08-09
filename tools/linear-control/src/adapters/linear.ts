@@ -23,7 +23,15 @@ export class LinearClient {
         await new Promise((resolve) => setTimeout(resolve, 250 * 2 ** attempt));
         continue;
       }
-      if (!response.ok) throw new Error(`LINEAR_HTTP_${response.status}`);
+      if (!response.ok) {
+        const detail = (await response.text())
+          .replaceAll(this.token, "[REDACTED]")
+          .replace(/\s+/g, " ")
+          .slice(0, 1000);
+        throw new Error(
+          `LINEAR_HTTP_${response.status}${detail ? `:${detail}` : ""}`,
+        );
+      }
       const result: {
         data?: T;
         errors?: Array<{ message: string }>;
