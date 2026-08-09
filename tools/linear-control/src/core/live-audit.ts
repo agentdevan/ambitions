@@ -370,7 +370,11 @@ export async function auditLiveWorkspace(
       };
     } = await client.request(
       `query($after: String) {
-        issues(first: 25, after: $after) {
+        issues(
+          first: 25
+          after: $after
+          filter: { project: { name: { startsWith: "Lifecycle — " } } }
+        ) {
           nodes {
             id identifier title description state { id name type }
             project { name }
@@ -584,14 +588,24 @@ export async function auditLiveWorkspace(
       desired.contractHash,
       progress,
     );
-    if (
-      live.summary !== desiredSummary ||
-      live.description !== desiredProjectDescription ||
-      live.status.name !== phase
-    ) {
+    const staleProjectFields = [
+      ...(live.summary !== desiredSummary ? ["summary"] : []),
+      ...(live.description !== desiredProjectDescription
+        ? [
+            `description(${(live.description ?? "").length}:${(await sha256Text(live.description ?? "")).slice(0, 12)} -> ${desiredProjectDescription.length}:${(await sha256Text(desiredProjectDescription)).slice(0, 12)})`,
+          ]
+        : []),
+      ...(live.status.name !== phase
+        ? [`status(${live.status.name} -> ${phase})`]
+        : []),
+    ];
+    if (staleProjectFields.length > 0) {
       if (!mutationsEnabled) {
         exceptions.push(
-          exception(project.canonicalKey, "Lifecycle Project mirror is stale"),
+          exception(
+            project.canonicalKey,
+            `Lifecycle Project mirror is stale: ${staleProjectFields.join(", ")}`,
+          ),
         );
       } else {
         const statusId = projectStatusIds.get(phase);
