@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "record_id": "AMB-UNIFIED-MAXIMUM-POLISH-FRONTEND-PROGRAM-R01",
+  "status": "OWNER_APPROVED_ACTIVE_SINGLE_FRONTEND_PROGRAM",
+  "date": "2026-08-12",
+  "human_peer": "docs/canon/design/UNIFIED_MAXIMUM_POLISH_FRONTEND_PROGRAM.md",
+  "authority": {
+    "supreme_design_authority": "owner_taste",
+    "product_truth": "owning_canon",
+    "sole_frontend_program": "ambitions_unified_maximum_polish_frontend_program",
+    "supersedes_active_sequencing": [
+      "native_visual_foundry_standalone_program",
+      "reconciled_flagship_reconstruction_plan"
+    ]
+  },
+  "foundry": {
+    "role": "fixture_rendering_and_proof_harness",
+    "authority": "subordinate",
+    "owns_canonical_ui": false,
+    "renders_canonical_ui": true
+  },
+  "canonical_modules": {
+    "contracts": "AmbitionsPresentationContracts",
+    "design_system": "AmbitionsFlagshipFoundation",
+    "frontend": "AmbitionsFlagshipUI"
+  },
+  "milestones": [
+    "UFP-0",
+    "UFP-1",
+    "UFP-2",
+    "UFP-3",
+    "UFP-4",
+    "UFP-5",
+    "UFP-6",
+    "UFP-7",
+    "UFP-8"
+  ],
+  "integration_gate": "complete_fixture_frontend_and_design_system_owner_approval",
+  "component_dispositions": [
+    "promote",
+    "rebuild",
+    "fixture-only",
+    "historical",
+    "delete"
+  ],
+  "legacy_frontend": {
+    "disposition": "delete_all",
+    "visual_reuse": false,
+    "nonvisual_runtime_behavior_may_be_extracted": true,
+    "dual_renderer_ships": false,
+    "zero_legacy_required": true
+  },
+  "authorization_state": {
+    "fixture_driven_frontend_program": true,
+    "complete_frontend_approved": false,
+    "runtime_integration": false,
+    "production_cutover": false,
+    "legacy_deletion_complete": false,
+    "release": false,
+    "approved_for_swiftui": false
+  }
+}

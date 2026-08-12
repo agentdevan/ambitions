@@ -46,6 +46,11 @@ for implementation agents and repository tooling.
   design source. Product truth, safety, privacy, correctness, accessibility and
   platform requirements, and verified usability limits remain non-design
   constraints on feasible implementation.
+- [Unified Maximum Polish Frontend Program](design/UNIFIED_MAXIMUM_POLISH_FRONTEND_PROGRAM.md)
+  and its JSON peer define the sole active frontend sequence. Native Foundry is
+  its fixture/render/proof harness, not a peer program or separate frontend;
+  production integration follows complete fixture-driven frontend approval,
+  and final cutover requires deletion of the entire legacy frontend.
 - [Visual System R1](design/VISUAL_SYSTEM_R1.md) records the reconciled
   provisional cross-surface direction and historical Revision 1 provenance.
   Figma authorization, `APPROVED FOR SWIFTUI`, broad implementation, broad
@@ -95,8 +100,9 @@ data-safety, and performance checks.
   [truth/mutation/global authority](../adr/ADR-2026-07-22-truth-mutation-and-global-authority.md),
   and [local-first recovery/accessibility/platform scope](../adr/ADR-2026-07-22-local-first-recovery-accessibility-platform.md).
 - The [reconciled flagship reconstruction plan](../qa/frontend-flagship-shippability-remediation/RECONCILED_FLAGSHIP_RECONSTRUCTION_PLAN.md)
-  owns dependency sequencing; the adjacent traceability and supersession
-  registers preserve the authority graph and historical evidence.
+  is historical sequencing evidence superseded by the Unified Maximum Polish
+  Frontend Program; the adjacent traceability and supersession registers
+  preserve the earlier authority graph and evidence.
 
 - [CEBR-01 research package](references/research/cebr-01/README.md) preserves
   the product invention and technical design behind certified executable

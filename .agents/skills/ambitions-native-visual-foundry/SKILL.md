@@ -1,9 +1,19 @@
 ---
 name: ambitions-native-visual-foundry
-description: Use when calibrating fixture-driven native SwiftUI previews or proposing an Ambitions viewport for owner visual review.
+description: Run the subordinate fixture, rendering, scenario, screenshot, and bounded native-proof harness inside the Ambitions Unified Maximum Polish Frontend Program. Use when calibrating fixture-driven native SwiftUI or preparing an approved-program viewport for owner visual review.
 ---
 
-# Ambitions Native Visual Foundry
+# Ambitions Native Visual Foundry harness
+
+Native Visual Foundry is not a standalone program, design authority, component
+library, canonical UI source, or production renderer. It is the fixture and
+proof harness inside the sole Ambitions Unified Maximum Polish Frontend Program.
+
+Before using this harness, read and follow
+`../ambitions-unified-frontend-program/SKILL.md`, validate its schema-v2 ledger,
+and confirm that the requested viewport is the ledger's `next_component_id` or
+belongs to its active UFP milestone. This harness cannot maintain or advance an
+independent sequence.
 
 Produce one honest native visual iteration. Orchestrate the repository canon,
 SwiftUI preview, simulator, debugger, TDD, and verification workflows; do not
@@ -22,8 +32,13 @@ repeat their full instructions here.
 ## During editing
 
 - Change one viewport, posture, or interaction only.
-- Use production-intended SwiftUI behind a fixture adapter; keep runtime
-  adapters replaceable and disconnected.
+- Render canonical `AmbitionsFlagshipUI` through a synthetic fixture adapter.
+  Before UFP-4 establishes that source, treat Foundry-local views as candidates
+  awaiting `promote`, `rebuild`, `fixture-only`, `historical`, or `delete`—never
+  as implicitly canonical production components.
+- Keep runtime adapters replaceable and disconnected until the unified ledger
+  records complete fixture-frontend approval and separately authorizes runtime
+  integration.
 - Preserve system typography, natural scrolling, native controls, safe areas,
   and accessibility semantics.
 - Do not invent runtime capability or imply that fixture state proves runtime
@@ -53,6 +68,10 @@ Identify the fixture ID, viewport, device/OS, appearance, Dynamic Type size,
 accessibility settings, commands/tools, results, and screenshot paths. Mark
 fixture copy as non-canon and evaluation screenshots as non-production
 baselines.
+
+Update only the unified program ledger. Foundry evidence may satisfy a named
+fixture or Simulator proof item, but it cannot set complete-frontend, runtime,
+cutover, deletion, physical-device, or release approval.
 
 ## Escalate to full-app verification
 

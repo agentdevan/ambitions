@@ -1,0 +1,253 @@
+{
+  "schema_version": 1,
+  "program": "Ambitions Unified Maximum Polish Frontend Program",
+  "gate_status": "pending_ufp_4",
+  "allowed_final_dispositions": [
+    "promote",
+    "rebuild",
+    "fixture-only",
+    "historical",
+    "delete"
+  ],
+  "required_final_metadata": [
+    "source_owner",
+    "replacement",
+    "dependency_edges",
+    "proof_requirements",
+    "removal_condition",
+    "production_legacy"
+  ],
+  "production_frontend_disposition": "legacy_in_full_delete_original_sources",
+  "inventory_extensions": [
+    ".swift"
+  ],
+  "frontend_roots": [
+    "Packages/AmbitionsPresentation/Sources/AmbitionsPresentationContracts",
+    "Packages/AmbitionsPresentation/Sources/AmbitionsFlagshipFoundation",
+    "Packages/AmbitionsPresentation/Sources/AmbitionsFlagshipUI",
+    "Packages/AmbitionsPresentation/Sources/AmbitionsNativeVisualFoundry",
+    "Packages/AmbitionsPresentation/Tests",
+    "Packages/AmbitionsDesignSystem/Sources",
+    "Packages/AmbitionsDesignSystem/AppUI/Sources",
+    "Native/AmbitionsNativeFoundryHost",
+    "Native/AmbitionsNativeFoundryHostUITests",
+    "Native/AmbitionsShareExtension",
+    "Native/AmbitionsWidgetExtension",
+    "Native/AmbitionsUITests",
+    "Native/AmbitionsTests",
+    "Native/Ambitions/App",
+    "Native/Ambitions/Composer",
+    "Native/Ambitions/DesignSystem",
+    "Native/Ambitions/Interaction",
+    "Native/Ambitions/Language",
+    "Native/Ambitions/PreviewSupport",
+    "Native/Ambitions/Quality",
+    "Native/Ambitions/Rendering",
+    "Native/Ambitions/Scenarios",
+    "Native/Ambitions/Stage",
+    "Native/Ambitions/Surfaces",
+    "Native/Ambitions/Trust"
+  ],
+  "entries": [
+    {
+      "id": "presentation-contracts",
+      "path": "Packages/AmbitionsPresentation/Sources/AmbitionsPresentationContracts",
+      "kind": "tree",
+      "disposition": "pending",
+      "decision_gate": "UFP-4",
+      "production_legacy": false
+    },
+    {
+      "id": "flagship-foundation",
+      "path": "Packages/AmbitionsPresentation/Sources/AmbitionsFlagshipFoundation",
+      "kind": "tree",
+      "disposition": "pending",
+      "decision_gate": "UFP-4",
+      "production_legacy": false
+    },
+    {
+      "id": "flagship-ui",
+      "path": "Packages/AmbitionsPresentation/Sources/AmbitionsFlagshipUI",
+      "kind": "tree",
+      "disposition": "pending",
+      "decision_gate": "UFP-4",
+      "production_legacy": false
+    },
+    {
+      "id": "native-visual-foundry",
+      "path": "Packages/AmbitionsPresentation/Sources/AmbitionsNativeVisualFoundry",
+      "kind": "tree",
+      "disposition": "pending",
+      "decision_gate": "UFP-4",
+      "production_legacy": false
+    },
+    {
+      "id": "native-foundry-host",
+      "path": "Native/AmbitionsNativeFoundryHost",
+      "kind": "tree",
+      "disposition": "pending",
+      "decision_gate": "UFP-4",
+      "production_legacy": false
+    },
+    {
+      "id": "presentation-package-tests",
+      "path": "Packages/AmbitionsPresentation/Tests",
+      "kind": "tree",
+      "disposition": "pending",
+      "decision_gate": "UFP-4",
+      "production_legacy": false
+    },
+    {
+      "id": "native-foundry-host-ui-tests",
+      "path": "Native/AmbitionsNativeFoundryHostUITests",
+      "kind": "tree",
+      "disposition": "pending",
+      "decision_gate": "UFP-4",
+      "production_legacy": false
+    },
+    {
+      "id": "legacy-share-extension-frontend",
+      "path": "Native/AmbitionsShareExtension",
+      "kind": "tree",
+      "disposition": "pending",
+      "decision_gate": "UFP-4",
+      "production_legacy": true
+    },
+    {
+      "id": "legacy-widget-extension-frontend",
+      "path": "Native/AmbitionsWidgetExtension",
+      "kind": "tree",
+      "disposition": "pending",
+      "decision_gate": "UFP-4",
+      "production_legacy": true
+    },
+    {
+      "id": "package-design-system",
+      "path": "Packages/AmbitionsDesignSystem/Sources",
+      "kind": "tree",
+      "disposition": "pending",
+      "decision_gate": "UFP-4",
+      "production_legacy": true
+    },
+    {
+      "id": "package-widget-ui",
+      "path": "Packages/AmbitionsDesignSystem/AppUI/Sources",
+      "kind": "tree",
+      "disposition": "pending",
+      "decision_gate": "UFP-4",
+      "production_legacy": true
+    },
+    {
+      "id": "legacy-production-ui-tests",
+      "path": "Native/AmbitionsUITests",
+      "kind": "tree",
+      "disposition": "pending",
+      "decision_gate": "UFP-4",
+      "production_legacy": true
+    },
+    {
+      "id": "production-unit-test-census",
+      "path": "Native/AmbitionsTests",
+      "kind": "tree",
+      "disposition": "pending",
+      "decision_gate": "UFP-4",
+      "production_legacy": false
+    },
+    {
+      "id": "native-app-composition",
+      "path": "Native/Ambitions/App",
+      "kind": "tree",
+      "disposition": "pending",
+      "decision_gate": "UFP-4",
+      "production_legacy": true
+    },
+    {
+      "id": "native-composers",
+      "path": "Native/Ambitions/Composer",
+      "kind": "tree",
+      "disposition": "pending",
+      "decision_gate": "UFP-4",
+      "production_legacy": true
+    },
+    {
+      "id": "native-design-system",
+      "path": "Native/Ambitions/DesignSystem",
+      "kind": "tree",
+      "disposition": "pending",
+      "decision_gate": "UFP-4",
+      "production_legacy": true
+    },
+    {
+      "id": "native-interaction-language",
+      "path": "Native/Ambitions/Interaction",
+      "kind": "tree",
+      "disposition": "pending",
+      "decision_gate": "UFP-4",
+      "production_legacy": true
+    },
+    {
+      "id": "native-product-language",
+      "path": "Native/Ambitions/Language",
+      "kind": "tree",
+      "disposition": "pending",
+      "decision_gate": "UFP-4",
+      "production_legacy": true
+    },
+    {
+      "id": "native-preview-support",
+      "path": "Native/Ambitions/PreviewSupport",
+      "kind": "tree",
+      "disposition": "pending",
+      "decision_gate": "UFP-4",
+      "production_legacy": true
+    },
+    {
+      "id": "native-frontend-quality",
+      "path": "Native/Ambitions/Quality",
+      "kind": "tree",
+      "disposition": "pending",
+      "decision_gate": "UFP-4",
+      "production_legacy": true
+    },
+    {
+      "id": "native-rendering",
+      "path": "Native/Ambitions/Rendering",
+      "kind": "tree",
+      "disposition": "pending",
+      "decision_gate": "UFP-4",
+      "production_legacy": true
+    },
+    {
+      "id": "native-scenarios",
+      "path": "Native/Ambitions/Scenarios",
+      "kind": "tree",
+      "disposition": "pending",
+      "decision_gate": "UFP-4",
+      "production_legacy": true
+    },
+    {
+      "id": "native-stage",
+      "path": "Native/Ambitions/Stage",
+      "kind": "tree",
+      "disposition": "pending",
+      "decision_gate": "UFP-4",
+      "production_legacy": true
+    },
+    {
+      "id": "native-surfaces",
+      "path": "Native/Ambitions/Surfaces",
+      "kind": "tree",
+      "disposition": "pending",
+      "decision_gate": "UFP-4",
+      "production_legacy": true
+    },
+    {
+      "id": "native-trust-ui",
+      "path": "Native/Ambitions/Trust",
+      "kind": "tree",
+      "disposition": "pending",
+      "decision_gate": "UFP-4",
+      "production_legacy": true
+    }
+  ]
+}

@@ -27,7 +27,9 @@ Date: 2026-07-22
 | `docs/canon/design/VC_WAVE_1_FOUNDATION_CLOSURE.md` and JSON peer | Current Wave 1 closure authority | VC-01 through VC-06 are closed beneath the unchanged active AVF set; exact calibration and implementation remain deferred. |
 | `docs/canon/migration/UX_BLUEPRINT.md` and JSON peer | Current shadow design input | Reconciled overlay controls current UX direction; legacy inventory remains traceable. |
 | `docs/canon/generated/*`, including `visual-authority-manifest.json` | Generated | Regenerate through canon compiler; never hand-edit. |
-| This register, reconciliation traceability, and reconstruction plan | Current planning authority | Sequencing and authority cleanup only. |
+| This register and reconciliation traceability | Historical authority-classification evidence | Preserve reconciliation reasoning; neither owns the active frontend sequence. |
+| `docs/canon/design/UNIFIED_MAXIMUM_POLISH_FRONTEND_PROGRAM.md` and JSON peer | Current frontend program authority | Sole UFP-0 through UFP-8 sequence; Native Foundry is a subordinate fixture/proof harness. |
+| `docs/qa/frontend-flagship-shippability-remediation/RECONCILED_FLAGSHIP_RECONSTRUCTION_PLAN.md` | Superseded planning evidence | Preserve FR-1 through FR-7 reasoning and proof ceilings; no active sequencing authority. |
 | Current Swift source/tests | Implementation evidence | Establish current capability, not visual approval or future product authority. |
 
 ## Superseded or historical control

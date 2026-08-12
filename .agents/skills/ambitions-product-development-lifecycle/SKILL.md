@@ -83,9 +83,11 @@ Every implementation task declares either `Frontend: none — <reason>` or
 `Frontend: affected — <REQ/design trace>; Visual gate:
 <not-required|required|approved>`. New child/root surfaces, changed
 IA/navigation, custom assets, or changed visual language or motion require the
-`ambitions-native-visual-foundry` workflow and explicit owner visual approval
-before the task is executable. Bounded work inside an already approved native
-surface does not require a separate visual gate.
+`ambitions-unified-frontend-program` workflow and explicit owner visual
+approval before the task is executable. Its subordinate
+`ambitions-native-visual-foundry` harness supplies fixture and bounded native
+proof; it does not create a separate program or approval. Bounded work inside
+an already approved native surface does not require a separate visual gate.
 
 ## Boundaries and tooling
 

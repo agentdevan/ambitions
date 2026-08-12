@@ -2,12 +2,19 @@
 
 # Reconciled Flagship Reconstruction Plan
 
-Status: Current planning authority; `CAPTURE_NATIVE_CALIBRATION_PROVISIONALLY_CLOSED / FLAGSHIP_ENRICHMENT_AND_CROSS_ROOT_SYNTHESIS_NEXT_NOT_BEGUN / PRODUCTION_RECONSTRUCTION_BLOCKED`
+Status: `SUPERSEDED / HISTORICAL SEQUENCING EVIDENCE`
 Date: 2026-07-31
 Baseline: `e028eefbc18f9af2deb1b14beacd2a0eb0e5b40c` or later on `main`
 Owner control: `docs/audits/rp-01-08-evidence-audit/13-owner-reconciliation-decisions.md`
 
 ## Purpose and boundary
+
+> Superseded on 2026-08-12 by
+> `docs/canon/design/UNIFIED_MAXIMUM_POLISH_FRONTEND_PROGRAM.md` and owner
+> decision D-130. This file preserves the prior FR-1 through FR-7 reasoning and
+> proof boundaries but no longer owns active frontend sequencing. In
+> particular, production Today integration no longer precedes completion and
+> owner approval of the unified fixture-driven frontend and design system.
 
 This plan replaces the active sequencing in the historical frontend execution
 ledger. It consumes the reconciled canon and ADRs; it does not authorize an

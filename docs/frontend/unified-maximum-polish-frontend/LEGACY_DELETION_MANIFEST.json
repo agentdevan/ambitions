@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "program": "Ambitions Unified Maximum Polish Frontend Program",
+  "gate_status": "transition",
+  "remove_by": "UFP-7",
+  "legacy_paths": [
+    "Packages/AmbitionsDesignSystem/Sources",
+    "Packages/AmbitionsDesignSystem/AppUI/Sources",
+    "Native/AmbitionsShareExtension",
+    "Native/AmbitionsWidgetExtension",
+    "Native/AmbitionsUITests",
+    "Native/AmbitionsTests/App",
+    "Native/AmbitionsTests/DesignSystem",
+    "Native/AmbitionsTests/Motion",
+    "Native/AmbitionsTests/Projection",
+    "Native/AmbitionsTests/Quality",
+    "Native/AmbitionsTests/UI",
+    "Native/AmbitionsTests/DesignSystemAccessibilityCanonicalOwnershipTests.swift",
+    "Native/AmbitionsTests/DesignSystemFoundationsCanonicalOwnershipTests.swift",
+    "Native/AmbitionsTests/RenderingCanvasPrimitivesCanonicalOwnershipTests.swift",
+    "Native/AmbitionsTests/SurfacesCanonicalOwnershipTests.swift",
+    "Native/Ambitions/App",
+    "Native/Ambitions/Composer",
+    "Native/Ambitions/DesignSystem",
+    "Native/Ambitions/Interaction",
+    "Native/Ambitions/Language",
+    "Native/Ambitions/PreviewSupport",
+    "Native/Ambitions/Quality",
+    "Native/Ambitions/Rendering",
+    "Native/Ambitions/Scenarios",
+    "Native/Ambitions/Stage",
+    "Native/Ambitions/Surfaces",
+    "Native/Ambitions/Trust"
+  ],
+  "legacy_package_products": [
+    "AmbitionsDesignSystem",
+    "AmbitionsWidgetUI"
+  ],
+  "legacy_project_targets": [],
+  "legacy_project_dependencies": [
+    "AmbitionsPackages",
+    "AmbitionsDesignSystem",
+    "AmbitionsWidgetUI"
+  ],
+  "legacy_imports": [
+    "AmbitionsDesignSystem"
+  ],
+  "legacy_renderer_flags": [],
+  "legacy_wrappers": [
+    {
+      "path": "Native/Ambitions/App/AmbitionsStageHost.swift",
+      "symbol": "AmbitionsStageHost"
+    },
+    {
+      "path": "Native/Ambitions/App/AmbitionsRootStageSurfaceHost.swift",
+      "symbol": "AmbitionsRootStageSurfaceHost"
+    }
+  ],
+  "legacy_assets": [
+    "Native/Ambitions/Resources/Assets.xcassets"
+  ]
+}
