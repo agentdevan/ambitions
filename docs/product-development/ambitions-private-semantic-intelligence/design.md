@@ -1,23 +1,23 @@
 +++
 initiative = "ambitions-private-semantic-intelligence"
 document_type = "design"
-status = "draft"
+status = "approved"
 upstream = "scope.md"
 +++
 
 ## Ambitions Private Semantic Intelligence — Initial Provider-Neutral Design
 
-> **Phase boundary:** Devan approved Research and Scope on 2026-08-13. This is
-> the initial provider-neutral Design required by `REQ-014`. It defines the
+> **Phase boundary:** Devan approved Research, Scope, and this initial Design on
+> 2026-08-13. This approved provider-neutral Design defines the
 > logical computation boundary, Search/Capture integration boundaries,
 > isolation and safety contracts, evaluation architecture, and evidence gates.
 > It does not select an external production model, production semantic index,
 > asset-delivery mechanism, final physical module boundary, tokenizer,
 > quantization, actor topology, or numerical release budget. It authorizes no
 > evaluation implementation, model conversion, package/tool creation,
-> implementation grooming, production code, canon change, deployment, or
-> release. Only Devan's later explicit Design approval can authorize
-> evaluation-only implementation grooming.
+> production code, canon change, deployment, or release. Its approval authorizes
+> evaluation-only implementation grooming; evaluation execution remains
+> separately unauthorized by this artifact.
 
 **Repository evidence baseline:** Research inspected product and source at
 `0518378bd9b8f11ce7b50f1a290520ebdb947f90`. The three subsequent commits
@@ -663,8 +663,8 @@ thresholds.
 
 ### Lifecycle and graph proof
 
-- Product-doc checker proves Research and Scope approved, Design draft, one
-  canonical initiative directory, and no implementation artifacts.
+- Product-doc checker proves Research, Scope, and Design approved, one canonical
+  initiative directory, and exactly the three implementation grooming artifacts.
 - Dependency/resource/archive inspection proves evaluation code and assets are
   unreachable from the shipping app, extension, production packages, bundle,
   composition root, and archive.
@@ -828,8 +828,8 @@ return to Scope rather than amend Design around the product change.
 
 ## Design self-review
 
-**Verdict: PASS — no blocking initial-Design finding remains; ready for Devan's
-separate review and approval.**
+**Verdict: PASS — Devan approved this initial provider-neutral Design on
+2026-08-13; evaluation-only implementation grooming is authorized.**
 
 - Approved Research and approved Scope are the sole upstream authorities; the
   verified repository delta since the Research baseline contains lifecycle
@@ -863,7 +863,6 @@ separate review and approval.**
   resource, device, rollout/rollback, and adjacent-owner boundaries are explicit
   enough for evaluation-only grooming without inventing product behavior.
 
-Only Devan can approve this initial Design. Approval would authorize
-evaluation-only implementation grooming only; it would not itself authorize
-evaluation code, model conversion, package/tool creation, production
-implementation, canon changes, deployment, or release.
+This approved initial Design authorizes evaluation-only implementation grooming
+only. It does not authorize evaluation code, model conversion, package/tool
+creation, production implementation, canon changes, deployment, or release.

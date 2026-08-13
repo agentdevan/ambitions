@@ -5,13 +5,11 @@ status = "approved"
 upstream = "research.md"
 +++
 
-> **Phase boundary:** Devan approved the upstream Research on 2026-08-13 and
-> approved this Scope on 2026-08-13. This Scope defines product behavior and
-> architectural boundaries only. Its approval authorizes initial Design only;
-> it does not authorize evaluation implementation, model conversion, package or
-> tool creation, implementation grooming, production code, canon edits,
-> deployment, or release. Evaluation implementation may be groomed only after
-> the initial Design is separately approved.
+> **Phase boundary:** Devan approved the upstream Research, this Scope, and the
+> initial provider-neutral Design on 2026-08-13. The approved Design authorizes
+> evaluation-only implementation grooming. This Scope does not authorize the
+> evaluation tranche itself, model conversion, package or tool creation,
+> production code, canon edits, deployment, or release.
 > The Research performance numbers remain experimental comparison points and
 > gain no Scope or release authority here.
 
@@ -860,8 +858,9 @@ to Scope and owner approval.
 
 ## Scope review
 
-**Self-review verdict: PASS — Devan approved this Scope on 2026-08-13; initial
-Design is authorized, but no evaluation or implementation work is authorized.**
+**Self-review verdict: PASS — Devan approved this Scope and the initial Design
+on 2026-08-13; evaluation-only grooming is authorized, but evaluation and
+production implementation remain unauthorized.**
 
 - Approved Research is the sole upstream product/evidence authority. Research
   inspected the product/code baseline at
@@ -888,8 +887,8 @@ Design is authorized, but no evaluation or implementation work is authorized.**
 - Existing generative, evaluation, change-management, and grounded-proposal
   initiatives retain their owners; semantic v1 does not duplicate them.
 
-This approved Scope authorizes initial Design only. It does not authorize
-evaluation implementation, package/tool creation, model conversion,
-implementation grooming, canon changes, deployment, or release. Evaluation-only
-grooming requires owner-approved initial Design; production grooming requires
-owner re-approval of amended Design after evidence.
+This approved Scope and the approved initial Design authorize evaluation-only
+implementation grooming. They do not authorize evaluation implementation,
+package/tool creation, model conversion, production implementation, canon
+changes, deployment, or release. Production grooming requires owner re-approval
+of amended Design after evidence.
