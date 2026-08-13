@@ -10,8 +10,8 @@ upstream = ""
 **Evidence snapshot:** 2026-08-13  
 **Repository:** [`agentdevan/ambitions`](https://github.com/agentdevan/ambitions)  
 **Repository revision inspected:** [`0518378bd9b8f11ce7b50f1a290520ebdb947f90`](https://github.com/agentdevan/ambitions/tree/0518378bd9b8f11ce7b50f1a290520ebdb947f90) (`main`)  
-**Lifecycle state:** Draft Research; not approved Scope or Design  
-**Canonical destination if approved:** `docs/product-development/ambitions-private-semantic-intelligence/research.md`
+**Lifecycle state:** Approved Research; Scope draft; Design not started  
+**Canonical path:** `docs/product-development/ambitions-private-semantic-intelligence/research.md`
 
 > This document is Research only. It does not create a package, change production source, select a production model irrevocably, or authorize implementation. Measurements labeled **estimate** are planning calculations to be replaced by release-build measurements on physical devices. Performance thresholds are Research-phase experimental hypotheses only; they have no product, Scope, Design, implementation, or release authority unless a later approved phase explicitly adopts or revises them using measured baseline and candidate data.
 

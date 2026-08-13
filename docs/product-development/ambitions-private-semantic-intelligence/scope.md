@@ -862,9 +862,12 @@ to Scope and owner approval.
 **Self-review verdict: PASS — no blocking Scope finding remains; ready for
 Devan's separate review and approval.**
 
-- Approved Research is the sole upstream product/evidence authority; the live
-  repository head remains the Research-inspected revision
-  `0518378bd9b8f11ce7b50f1a290520ebdb947f90`.
+- Approved Research is the sole upstream product/evidence authority. Research
+  inspected the product/code baseline at
+  `0518378bd9b8f11ce7b50f1a290520ebdb947f90`; subsequent commits through
+  `dcfb436c15e6958bcda1af8b174cbe2b37c0d3fc` added only the approved Research
+  and draft Scope lifecycle artifacts, so no underlying product/source
+  implementation evidence changed between Research and Scope.
 - The outcome, exact v1 Search/Capture jobs, English-only boundary, exclusions,
   ownership, offline/privacy, delivery-neutral external-enhancement control,
   accessibility, platform, and rollout behavior are explicit.
