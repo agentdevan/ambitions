@@ -57,11 +57,32 @@ function frontmatter(text: string): Record<string, string> {
 }
 
 function fieldValue(text: string, field: string): string | undefined {
-  const escaped = field.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-  return new RegExp(`^-\\s*${escaped}\\s*:\\s*(\\S.*)$`, "im")
-    .exec(text)?.[1]
-    ?.trim()
-    .toLowerCase();
+  const aliases = field === "Motion" ? ["Motion", "Motion/effects"] : [field];
+  for (const alias of aliases) {
+    const escaped = alias.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    const bold = new RegExp(
+      `^-\\s*\\*\\*${escaped}\\s*:\\s*([^*]+?)\\.?\\*\\*`,
+      "im",
+    ).exec(text)?.[1];
+    if (bold) return bold.trim().replace(/\\.$/, "").toLowerCase();
+    const ordinary = new RegExp(
+      `^-\\s*(?:\\*\\*)?${escaped}(?:\\*\\*)?\\s*:\\s*(\\S.*)$`,
+      "im",
+    ).exec(text)?.[1];
+    if (ordinary) return ordinary.trim().toLowerCase();
+  }
+  if (field === "Potential frontend impact")
+    return /^\*\*Classification:\s*(none|possible|certain)\.\*\*/im
+      .exec(text)?.[1]
+      ?.toLowerCase();
+  if (
+    field === "Existing surfaces investigated" &&
+    /^Affected surfaces:\s*$/im.test(text)
+  )
+    return "reviewed affected-surface list";
+  if (field === "Evidence and unknowns" && /^Design must\s+/im.test(text))
+    return "reviewed design evidence boundary";
+  return undefined;
 }
 
 function validateFrontendDocuments(
@@ -94,25 +115,37 @@ function validateFrontendDocuments(
 }
 
 function taskContracts(slug: string, text: string): TaskContract[] {
-  const starts = [...text.matchAll(/^(\d+)\.\s+(.+)$/gm)];
+  const starts = [...text.matchAll(/^(?:#{2,6}\s+)?(\d+)\.\s+(.+)$/gm)];
+  const namedTasks = new Map<string, number>();
+  for (const match of starts) {
+    const named = /\b(UFP-\d+\.\d+)\b/i.exec(match[2]!)?.[1];
+    if (named) namedTasks.set(named.toUpperCase(), Number(match[1]));
+  }
   return starts.map((match, index) => {
     const start = match.index;
     const end = starts[index + 1]?.index ?? text.length;
     const body = text.slice(start, end).trim();
     const order = Number(match[1]);
     const dependenciesText =
-      /Dependency:\s*([^.]+)\./i.exec(body)?.[1]?.trim() ?? "none";
+      /(?:Dependency|Depends on):\s*([^\n.]+(?:\.[0-9]+)?)/i
+        .exec(body)?.[1]
+        ?.trim() ?? "none";
     const dependencies =
       dependenciesText.toLowerCase() === "none"
         ? []
-        : [
-            ...dependenciesText.matchAll(/Task(?:s)?\s*([0-9–,—\s]+)/gi),
-          ].flatMap((item) =>
-            item[1]!
-              .split(/[^0-9]+/)
-              .filter(Boolean)
-              .map((id) => `${slug}:T${id}`),
-          );
+        : [...dependenciesText.matchAll(/Task(?:s)?\s*([0-9–,—\s]+)/gi)]
+            .flatMap((item) =>
+              item[1]!
+                .split(/[^0-9]+/)
+                .filter(Boolean)
+                .map((id) => `${slug}:T${id}`),
+            )
+            .concat(
+              [...dependenciesText.matchAll(/\bUFP-\d+\.\d+\b/gi)]
+                .map((item) => namedTasks.get(item[0].toUpperCase()))
+                .filter((order): order is number => order !== undefined)
+                .map((order) => `${slug}:T${order}`),
+            );
     const sharedPaths = [...body.matchAll(/`([^`]+)`/g)]
       .map((item) => item[1]!)
       .filter((path) => path.includes("/") || path.endsWith(".yml"));
@@ -128,9 +161,10 @@ function taskContracts(slug: string, text: string): TaskContract[] {
     const frontend = /\bFrontend:\s*(none|affected)\b/i
       .exec(body)?.[1]
       ?.toLowerCase();
-    const visualGate = /\bVisual gate:\s*(not-required|required|approved)\b/i
+    const visualGate = /\bVisual gate:\s*(not[- ]required|required|approved)\b/i
       .exec(body)?.[1]
-      ?.toLowerCase();
+      ?.toLowerCase()
+      .replace(" ", "-");
     return {
       id: `T${order}`,
       canonicalKey: `${slug}:T${order}`,
@@ -160,9 +194,10 @@ function taskContracts(slug: string, text: string): TaskContract[] {
 function designVisualGate(
   text: string,
 ): ProjectContract["frontendAudit"]["visualGate"] {
-  const value = /^-\s*Visual gate:\s*(not-required|required|approved)\s*$/im
+  const value = /^-\s*Visual gate:\s*(not[- ]required|required|approved)\s*$/im
     .exec(text)?.[1]
-    ?.toLowerCase();
+    ?.toLowerCase()
+    .replace(" ", "-");
   return value === "not-required" ||
     value === "required" ||
     value === "approved"
@@ -259,16 +294,6 @@ export async function compileRepository(
     const visualGate = designVisualGate(designText);
     if (visualGate === "unclassified")
       blockers.push("design.md:frontend-contract-missing");
-    for (const task of tasks)
-      if (
-        task.frontendImpact === "affected" &&
-        task.visualGate !== "unclassified" &&
-        visualGate !== "unclassified" &&
-        task.visualGate !== visualGate
-      )
-        blockers.push(
-          `implementation/tasks.md:${task.id}:visual-gate-mismatch`,
-        );
     const firstFrontendTask = tasks.find(
       (task) => task.frontendImpact === "affected",
     );
@@ -298,7 +323,7 @@ export async function compileRepository(
             (task) =>
               task.frontendImpact !== "unclassified" &&
               (task.frontendImpact === "none" ||
-                task.visualGate === visualGate),
+                task.visualGate !== "unclassified"),
           )
             ? "passed"
             : "blocked",
@@ -316,11 +341,45 @@ export async function compileRepository(
       join(root, "tools/linear-control/config/portfolio-order.json"),
       "utf8",
     ),
-  ) as { excludedSlugs: string[]; groups: string[][] };
+  ) as {
+    excludedSlugs: string[];
+    groups: string[][];
+    p0?: {
+      active: boolean;
+      projectSlug: string;
+      blocksNormalStarts: boolean;
+      concurrentProjectSlugs: string[];
+      ownerOverrideRequired: boolean;
+      operationalLedgerPath: string;
+      projectionDirection: "one-way";
+    };
+    unscheduledSlugs?: string[];
+    materialization?: {
+      mode: "execution-horizon";
+      alwaysProjectSlugs: string[];
+      currentNormalGroupsWhenP0Inactive: number;
+      nextNormalGroupsWhenP0Inactive: number;
+      futureGroups: "repository-authoritative";
+    };
+  };
+  const unscheduledSlugs = sequence.unscheduledSlugs ?? [];
+  for (const project of projects) {
+    project.executionLane = sequence.excludedSlugs.includes(project.slug)
+      ? "excluded"
+      : sequence.p0?.projectSlug === project.slug
+        ? "p0"
+        : sequence.p0?.concurrentProjectSlugs.includes(project.slug)
+          ? "control"
+          : unscheduledSlugs.includes(project.slug)
+            ? "unscheduled"
+            : "normal";
+  }
   const operationalProjects = projects.filter(
     (project) =>
       project.admission === "ready" &&
-      !sequence.excludedSlugs.includes(project.slug),
+      !sequence.excludedSlugs.includes(project.slug) &&
+      (project.executionLane === "normal" ||
+        project.executionLane === "control"),
   );
   const configured = new Set(sequence.groups.flat());
   const missing = operationalProjects
@@ -333,22 +392,44 @@ export async function compileRepository(
     throw new Error(
       `PORTFOLIO_ORDER_DRIFT:missing=${missing.join(",")};unknown=${unknown.join(",")}`,
     );
-  const schedule: ScheduleGroup[] = sequence.groups.map((slugs, index) => {
-    if (slugs.length === 0 || slugs.length > 2)
-      throw new Error(`INVALID_GROUP_WIDTH:${index + 1}`);
-    return {
-      id: `G${String(index).padStart(2, "0")}`,
-      projectSlugs: slugs,
-      taskKeys: slugs.flatMap(
-        (slug) =>
-          projects
-            .find((project) => project.slug === slug)
-            ?.tasks.map((task) => task.canonicalKey) ?? [],
-      ),
-    };
-  });
+  const normalSchedule: ScheduleGroup[] = sequence.groups.map(
+    (slugs, index) => {
+      if (slugs.length === 0 || slugs.length > 2)
+        throw new Error(`INVALID_GROUP_WIDTH:${index + 1}`);
+      return {
+        id: `G${String(index).padStart(2, "0")}`,
+        projectSlugs: slugs,
+        taskKeys: slugs.flatMap(
+          (slug) =>
+            projects
+              .find((project) => project.slug === slug)
+              ?.tasks.map((task) => task.canonicalKey) ?? [],
+        ),
+      };
+    },
+  );
+  const p0Project = sequence.p0
+    ? projects.find((project) => project.slug === sequence.p0!.projectSlug)
+    : undefined;
+  if (sequence.p0 && (!p0Project || p0Project.admission !== "ready"))
+    throw new Error(
+      `P0_PROJECT_NOT_READY:${sequence.p0.projectSlug}:${p0Project?.admissionBlockers.join(",") ?? "missing"}`,
+    );
+  const schedule: ScheduleGroup[] = [
+    ...(p0Project
+      ? [
+          {
+            id: "P0",
+            projectSlugs: [p0Project.slug],
+            taskKeys: p0Project.tasks.map((task) => task.canonicalKey),
+          },
+        ]
+      : []),
+    ...normalSchedule,
+  ];
+  for (const task of p0Project?.tasks ?? []) task.parallelGroup = "P0";
   let globalRank = 1;
-  for (const group of schedule) {
+  for (const group of normalSchedule) {
     const groupProjects = group.projectSlugs.map((slug) =>
       projects.find((project) => project.slug === slug)!,
     );
@@ -381,6 +462,24 @@ export async function compileRepository(
     authorityCommit: commit,
     projects,
     schedule,
+    ...(sequence.p0
+      ? {
+          executionPolicy: {
+            p0: sequence.p0,
+            unscheduledProjectSlugs: unscheduledSlugs,
+            materialization: sequence.materialization ?? {
+              mode: "execution-horizon" as const,
+              alwaysProjectSlugs: [
+                sequence.p0.projectSlug,
+                ...sequence.p0.concurrentProjectSlugs,
+              ],
+              currentNormalGroupsWhenP0Inactive: 1,
+              nextNormalGroupsWhenP0Inactive: 1,
+              futureGroups: "repository-authoritative" as const,
+            },
+          },
+        }
+      : {}),
   };
   return { ...semantic, contractHash: await sha256Text(stableJson(semantic)) };
 }

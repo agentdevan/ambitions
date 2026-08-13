@@ -51,6 +51,45 @@ async function repository(task: string, visualGate: string): Promise<string> {
 }
 
 describe("frontend contract compilation", () => {
+  it("admits the reviewed UFP and semantic packages into explicit execution lanes", async () => {
+    const manifest = await compileRepository(
+      join(process.cwd(), "../.."),
+      "bdddbae2440b754786534e11be348b8d999ce3df",
+    );
+    const ufp = manifest.projects.find(
+      (project) => project.slug === "frontend-completion-program",
+    );
+    const semantic = manifest.projects.find(
+      (project) => project.slug === "ambitions-private-semantic-intelligence",
+    );
+
+    expect(ufp).toMatchObject({ admission: "ready", executionLane: "p0" });
+    expect(ufp?.tasks).toHaveLength(16);
+    expect(semantic).toMatchObject({
+      admission: "ready",
+      executionLane: "unscheduled",
+    });
+    expect(semantic?.tasks).toHaveLength(20);
+    expect(manifest.schedule[0]).toMatchObject({
+      id: "P0",
+      projectSlugs: ["frontend-completion-program"],
+    });
+    expect(manifest.schedule[1]?.id).toBe("G00");
+    expect(manifest.executionPolicy).toMatchObject({
+      p0: {
+        active: true,
+        projectSlug: "frontend-completion-program",
+        blocksNormalStarts: true,
+        concurrentProjectSlugs: ["linear-realtime-lifecycle-control"],
+        ownerOverrideRequired: true,
+        operationalLedgerPath:
+          "/Users/devan/.codex/output/Ambitions_Maximum_Polish_Program/PROGRAM.json",
+        projectionDirection: "one-way",
+      },
+      unscheduledProjectSlugs: ["ambitions-private-semantic-intelligence"],
+    });
+  });
+
   it("matches the exact current verification document identity fixture", async () => {
     const manifest = await compileRepository(
       join(process.cwd(), "../.."),

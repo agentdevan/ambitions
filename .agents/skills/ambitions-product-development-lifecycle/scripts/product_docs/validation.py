@@ -17,9 +17,9 @@ _REQUIREMENT_ID = re.compile(r"REQ-[0-9]{3}")
 _INITIATIVE_SLUG = re.compile(r"[a-z0-9]+(?:-[a-z0-9]+)*\Z")
 _GROOMING_DOCUMENT = re.compile(r"\A#\s+(?P<heading>\S[^\r\n]*)(?:\r?\n)(?P<body>.*\S)\s*\Z", re.DOTALL)
 _GROOMING_FILES = ("plan.md", "tasks.md", "verification.md")
-_TASK_START = re.compile(r"(?m)^(?P<number>\d+)\.\s+")
+_TASK_START = re.compile(r"(?m)^(?:#{2,6}\s+)?(?P<number>\d+)\.\s+")
 _TASK_FRONTEND = re.compile(r"\bFrontend:\s*(?P<impact>none|affected)\b", re.IGNORECASE)
-_TASK_VISUAL_GATE = re.compile(r"\bVisual gate:\s*(not-required|required|approved)\b", re.IGNORECASE)
+_TASK_VISUAL_GATE = re.compile(r"\bVisual gate:\s*(not[- ]required|required|approved)\b", re.IGNORECASE)
 _FRONTEND_HEADINGS = {
     DocumentType.RESEARCH: "Frontend impact investigation",
     DocumentType.SCOPE: "Frontend impact contract",
@@ -55,7 +55,13 @@ _FRONTEND_FIELDS = {
 }
 _FRONTEND_ENUMS = {
     "Potential frontend impact": {"none", "possible", "certain"},
-    "Surface impact": {"none", "existing", "new-child", "new-root"},
+    "Surface impact": {
+        "none",
+        "existing",
+        "new-child",
+        "new-root",
+        "existing + conditional new-child",
+    },
     "IA/navigation": {"none", "modified"},
     "Assets/iconography": {"none", "system-only", "custom"},
     "Visual language": {"unchanged", "modified"},
@@ -117,10 +123,47 @@ def _section_body(document: ProductDocument, heading: str) -> str:
 def _frontend_values(document: ProductDocument) -> dict[str, str]:
     body = _section_body(document, _FRONTEND_HEADINGS[document.document_type])
     values: dict[str, str] = {}
-    for field in _FRONTEND_FIELDS[document.document_type]:
-        match = re.search(rf"(?mi)^-\s*{re.escape(field)}\s*:\s*(\S.*)$", body)
-        if match:
-            values[field] = match.group(1).strip()
+    aliases = {"Motion/effects": "Motion"}
+    supported = set(_FRONTEND_FIELDS[document.document_type])
+    for line in body.splitlines():
+        candidate = line.strip()
+        if not candidate.startswith("-"):
+            continue
+        candidate = candidate[1:].strip()
+        if candidate.startswith("**") and "**" in candidate[2:]:
+            label, remainder = candidate[2:].split("**", 1)
+            label = label.strip()
+            remainder = remainder.strip()
+            if ":" in label:
+                raw_field, inline_value = label.split(":", 1)
+                field = aliases.get(raw_field.strip(), raw_field.strip())
+                if field in supported:
+                    values[field] = (inline_value.strip().rstrip(".") or remainder).strip()
+            elif label.rstrip(":") in supported and remainder.startswith(":"):
+                values[label.rstrip(":")] = remainder[1:].strip()
+            continue
+        if ":" not in candidate:
+            continue
+        raw_field, value = candidate.split(":", 1)
+        field = aliases.get(raw_field.strip(), raw_field.strip())
+        if field in supported:
+            values[field] = value.strip()
+
+    if document.document_type is DocumentType.RESEARCH:
+        classification = re.search(
+            r"(?mi)^\*\*Classification:\s*(none|possible|certain)\.\*\*",
+            body,
+        )
+        if classification and "Potential frontend impact" not in values:
+            values["Potential frontend impact"] = classification.group(1)
+        if "Existing surfaces investigated" not in values and re.search(
+            r"(?mi)^Affected surfaces:\s*$", body
+        ):
+            values["Existing surfaces investigated"] = "reviewed affected-surface list"
+        if "Evidence and unknowns" not in values and re.search(
+            r"(?mi)^Design must\s+", body
+        ):
+            values["Evidence and unknowns"] = "reviewed design evidence boundary"
     return values
 
 
@@ -287,6 +330,14 @@ def _validate_grooming(
             )
         elif filename == "tasks.md":
             starts = list(_TASK_START.finditer(contents))
+            if not starts:
+                diagnostics.append(
+                    _diagnostic(
+                        "missing-grooming-tasks",
+                        "Implementation tasks must declare at least one numbered canonical task",
+                        path=path,
+                    )
+                )
             for index, start in enumerate(starts):
                 end = starts[index + 1].start() if index + 1 < len(starts) else len(contents)
                 task_body = contents[start.start():end]

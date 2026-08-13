@@ -3,6 +3,7 @@ import { deletionIsSafe, desiredIssueState } from "./policy.js";
 import type {
   CurrentWorkspace,
   DesiredWorkspaceManifest,
+  ExecutionContext,
   Mutation,
   ReconciliationPlan,
 } from "./types.js";
@@ -66,7 +67,24 @@ export async function planReconciliation(
             ],
     };
     const desiredHash = await sha256Text(stableJson(payload));
+    const lane =
+      project.executionLane === "p0" ||
+      project.executionLane === "control" ||
+      project.executionLane === "unscheduled"
+        ? project.executionLane
+        : "normal";
+    const execution: ExecutionContext = {
+      p0Active: desired.executionPolicy?.p0.active ?? false,
+      lane,
+    };
     if (!issue) {
+      if (
+        desired.executionPolicy?.p0.active &&
+        !desired.executionPolicy.materialization.alwaysProjectSlugs.includes(
+          project.slug,
+        )
+      )
+        continue;
       mutations.push(
         await mutation(
           "create",
@@ -80,7 +98,7 @@ export async function planReconciliation(
       );
       continue;
     }
-    const state = desiredIssueState({ ...issue, ...frontend });
+    const state = desiredIssueState({ ...issue, ...frontend }, execution);
     if (state !== issue.state)
       mutations.push(
         await mutation(

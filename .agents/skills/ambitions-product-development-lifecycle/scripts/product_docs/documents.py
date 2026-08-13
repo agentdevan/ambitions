@@ -9,7 +9,7 @@ import tempfile
 import tomllib
 
 from .errors import Diagnostic, ProductDocsError
-from .markdown import parse_sections, render_sections
+from .markdown import HEADING, parse_sections, render_sections
 from .models import DocumentStatus, DocumentType, ProductDocument
 
 
@@ -107,7 +107,13 @@ def parse_document(source: Path | str, *, repository_root: Path | None = None) -
     try:
         frontmatter, body = _split_frontmatter(contents)
         initiative, document_type, status, upstream = _frontmatter(frontmatter)
-        sections = parse_sections(body)
+        first_section = HEADING.search(body)
+        if first_section is None:
+            sections = parse_sections(body)
+            preamble = ""
+        else:
+            preamble = body[: first_section.start()]
+            sections = parse_sections(body[first_section.start() :])
     except ProductDocsError as error:
         if source_path == _MEMORY_PATH:
             raise
@@ -122,6 +128,7 @@ def parse_document(source: Path | str, *, repository_root: Path | None = None) -
         upstream=upstream,
         sections=sections,
         source_path=source_path,
+        preamble=preamble,
     )
 
 
@@ -134,7 +141,7 @@ def render_document(document: ProductDocument) -> str:
             "upstream = " + repr(document.upstream),
         )
     )
-    return f"+++\n{frontmatter}\n+++\n{render_sections(document.sections)}"
+    return f"+++\n{frontmatter}\n+++\n{document.preamble}{render_sections(document.sections)}"
 
 
 def write_document_atomic(target: Path, document: ProductDocument | str, *, repository_root: Path | None = None) -> None:

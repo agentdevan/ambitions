@@ -86,10 +86,42 @@ describe("lifecycle policy", () => {
     );
   });
 
+  it("enforces the active P0 start lock without blocking control or review closure", () => {
+    const normal = { p0Active: true, lane: "normal" as const };
+    expect(desiredIssueState(issue({ state: "Backlog" }), normal)).toBe(
+      "Blocked",
+    );
+    expect(desiredIssueState(issue({ state: "Ready For Codex" }), normal)).toBe(
+      "Blocked",
+    );
+    expect(desiredIssueState(issue({ state: "In Progress" }), normal)).toBe(
+      "In Progress",
+    );
+    expect(desiredIssueState(issue({ state: "In Review" }), normal)).toBe(
+      "In Review",
+    );
+    expect(
+      desiredIssueState(
+        issue({ state: "In Review", mergedToMain: true, proofPassed: true }),
+        normal,
+      ),
+    ).toBe("Done");
+    expect(
+      desiredIssueState(issue(), { p0Active: true, lane: "control" }),
+    ).toBe("Ready For Codex");
+    expect(
+      desiredIssueState(issue(), { p0Active: false, lane: "normal" }),
+    ).toBe("Ready For Codex");
+  });
+
   it("derives project phases", () => {
     expect(desiredProjectPhase(["Ready For Codex"], true)).toBe("Grooming");
     expect(desiredProjectPhase(["In Progress"], true)).toBe("Building");
     expect(desiredProjectPhase(["In Review"], true)).toBe("Validating");
+    expect(desiredProjectPhase(["In Review", "Blocked"], true)).toBe(
+      "Building",
+    );
+    expect(desiredProjectPhase(["Done", "In Review"], true)).toBe("Validating");
     expect(desiredProjectPhase(["Done"], true)).toBe("Completed");
     expect(desiredProjectPhase(["Duplicate"], true)).toBe("Completed");
   });

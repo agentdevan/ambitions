@@ -114,4 +114,29 @@ describe("Linear authority mirrors", () => {
       ),
     ).not.toContain("PASS");
   });
+
+  it("renders P0 and held-lane summaries without inventing executable next work", () => {
+    const progress = {
+      phase: "Building",
+      terminalTasks: 0,
+      verifiedTasks: 0,
+      totalTasks: 6,
+      reviewTasks: 4,
+      blockedTasks: 2,
+      nextTask: task,
+      groupOrdinal: 2,
+      totalGroups: 21,
+      projectOrdinal: 1,
+    };
+    const held = { ...project, executionLane: "normal" as const };
+    expect(projectSummaryMirror(group, progress, held, true)).toBe(
+      "P0 hold • closure-only • 0/6 terminal • 4 in review • 2 blocked",
+    );
+    const p0 = { ...project, executionLane: "p0" as const };
+    expect(
+      projectSummaryMirror({ ...group, id: "P0" }, progress, p0, true),
+    ).toBe(
+      "P0 • UFP active • external ledger sync required • phase/task/progress withheld",
+    );
+  });
 });

@@ -15,6 +15,8 @@ export interface ProjectMirrorProgress {
   terminalTasks: number;
   verifiedTasks: number;
   totalTasks: number;
+  reviewTasks?: number;
+  blockedTasks?: number;
   nextTask?: TaskContract;
   groupOrdinal: number;
   totalGroups: number;
@@ -24,7 +26,30 @@ export interface ProjectMirrorProgress {
 export function projectSummaryMirror(
   group: ScheduleGroup,
   progress: ProjectMirrorProgress,
+  project?: ProjectContract,
+  p0Active = false,
 ): string {
+  if (project?.executionLane === "p0")
+    return "P0 • UFP active • external ledger sync required • phase/task/progress withheld";
+  if (p0Active && project?.executionLane === "normal") {
+    const closureOnly =
+      progress.terminalTasks > 0 || (progress.reviewTasks ?? 0) > 0;
+    return [
+      "P0 hold",
+      closureOnly ? "closure-only" : `staged ${group.id}`,
+      `${progress.terminalTasks}/${progress.totalTasks} terminal`,
+      ...(progress.reviewTasks ? [`${progress.reviewTasks} in review`] : []),
+      ...(progress.blockedTasks ? [`${progress.blockedTasks} blocked`] : []),
+    ].join(" • ");
+  }
+  if (project?.executionLane === "control")
+    return [
+      "G00 active control lane",
+      progress.phase,
+      `${progress.terminalTasks}/${progress.totalTasks} terminal`,
+      ...(progress.reviewTasks ? [`${progress.reviewTasks} in review`] : []),
+      ...(progress.blockedTasks ? [`${progress.blockedTasks} blocked`] : []),
+    ].join(" • ");
   const next = progress.nextTask ? ` • next ${progress.nextTask.id}` : "";
   return `${group.id} • ${progress.phase} • ${progress.terminalTasks}/${progress.totalTasks} terminal • ${progress.verifiedTasks} verified on current main${next}`;
 }
@@ -35,6 +60,7 @@ export function projectAuthorityMirror(
   authorityCommit: string,
   contractHash: string,
   progress: ProjectMirrorProgress,
+  p0Active = false,
 ): string {
   const peers = group.projectSlugs.filter((slug) => slug !== project.slug);
   const fullyVerified = progress.verifiedTasks === progress.totalTasks;
@@ -60,6 +86,20 @@ export function projectAuthorityMirror(
     `* Milestones: M0-M3 passed; M4 ${fullyVerified ? "passed" : terminallyClosed ? "closed without implementation proof" : "in progress"}; M5 ${fullyVerified ? "passed" : terminallyClosed ? "closed without validation proof" : "pending"}; M6 ${terminallyClosed ? "closed" : "pending"}`,
     `* Frontend contract: ${project.frontendAudit.status}`,
     `* Visual gate: ${project.frontendAudit.visualGate}${project.frontendAudit.firstFrontendTaskKey ? `; first frontend task ${project.frontendAudit.firstFrontendTaskKey}` : ""}`,
+    ...(project.executionLane === "p0"
+      ? [
+          "* Execution control: P0 highest-priority active delivery lane",
+          "* Operational state authority: external PROGRAM.json; one-way projection only",
+          "* External ledger status: unavailable to this runtime; phase/task/progress withheld",
+        ]
+      : p0Active && project.executionLane === "normal"
+        ? [
+            "* Execution control: P0 hold; no new starts",
+            "* Closure exception: existing review/repair work may close without scope expansion",
+          ]
+        : project.executionLane === "control"
+          ? ["* Execution control: G00 control lane; concurrent with P0"]
+          : []),
     "",
     "Repository content is authoritative. Linear is the execution mirror and portfolio dependency surface.",
   ].join("\n");
@@ -70,6 +110,7 @@ export function milestoneAuthorityMirror(
   project: ProjectContract,
   authorityCommit: string,
   progress: ProjectMirrorProgress,
+  p0Active = false,
 ): string {
   const fullyVerified = progress.verifiedTasks === progress.totalTasks;
   const terminallyClosed = progress.phase === "Completed";
@@ -82,11 +123,16 @@ export function milestoneAuthorityMirror(
   if (name === "M3 — Groomed for Implementation")
     return `PASS — Implementation plan groomed and synchronized at current main ${authorityCommit}.`;
   if (name === "M4 — Implementation Complete")
-    return fullyVerified
-      ? `PASS — ${progress.verifiedTasks} of ${progress.totalTasks} canonical Plan Tasks are verified on current main.`
-      : terminallyClosed
-        ? `CLOSED — ${progress.terminalTasks} of ${progress.totalTasks} canonical Plan Tasks are terminal, but only ${progress.verifiedTasks} are verified on current main. No implementation-complete proof is claimed.`
-        : `IN PROGRESS — ${progress.terminalTasks} of ${progress.totalTasks} canonical Plan Tasks are terminal; ${progress.verifiedTasks} are verified on current main. ${progress.nextTask ? `${progress.nextTask.id} is next in portfolio order.` : "No executable next task is currently identified."}`;
+    if (project.executionLane === "p0")
+      return "PENDING / LEDGER SYNC BLOCKED — terminal task count must come only from PROGRAM.json; no value is inferred.";
+    else if (p0Active && project.executionLane === "normal")
+      return `${progress.terminalTasks > 0 || (progress.reviewTasks ?? 0) > 0 ? "IN PROGRESS" : "NOT STARTED"} / P0 HOLD — ${progress.terminalTasks}/${progress.totalTasks} terminal; no new implementation start is authorized.`;
+    else
+      return fullyVerified
+        ? `PASS — ${progress.verifiedTasks} of ${progress.totalTasks} canonical Plan Tasks are verified on current main.`
+        : terminallyClosed
+          ? `CLOSED — ${progress.terminalTasks} of ${progress.totalTasks} canonical Plan Tasks are terminal, but only ${progress.verifiedTasks} are verified on current main. No implementation-complete proof is claimed.`
+          : `IN PROGRESS — ${progress.terminalTasks} of ${progress.totalTasks} canonical Plan Tasks are terminal; ${progress.verifiedTasks} are verified on current main. ${progress.nextTask ? `${progress.nextTask.id} is next in portfolio order.` : "No executable next task is currently identified."}`;
   if (name === "M5 — Validation and Merge")
     return fullyVerified
       ? "PASS — Project-level validation and current-main merge proof are complete."

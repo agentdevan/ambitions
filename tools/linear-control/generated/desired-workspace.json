@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "authorityCommit": "4e1917b34c006db90cd7ec9264c7f301ba96d1fb",
+  "authorityCommit": "bdddbae2440b754786534e11be348b8d999ce3df",
   "projects": [
     {
       "slug": "adaptive-local-learning-and-replanning",
@@ -283,7 +283,8 @@
         "firstFrontendTaskKey": "adaptive-local-learning-and-replanning:T8"
       },
       "admission": "ready",
-      "admissionBlockers": []
+      "admissionBlockers": [],
+      "executionLane": "normal"
     },
     {
       "slug": "adaptive-path-comparison",
@@ -525,7 +526,8 @@
         "firstFrontendTaskKey": "adaptive-path-comparison:T5"
       },
       "admission": "ready",
-      "admissionBlockers": []
+      "admissionBlockers": [],
+      "executionLane": "normal"
     },
     {
       "slug": "adaptive-skills-and-pathways",
@@ -773,7 +775,650 @@
         "visualGate": "not-required"
       },
       "admission": "ready",
-      "admissionBlockers": []
+      "admissionBlockers": [],
+      "executionLane": "normal"
+    },
+    {
+      "slug": "ambitions-private-semantic-intelligence",
+      "canonicalKey": "project:ambitions-private-semantic-intelligence",
+      "name": "Lifecycle — Ambitions Private Semantic Intelligence",
+      "folder": "docs/product-development/ambitions-private-semantic-intelligence",
+      "documents": [
+        {
+          "kind": "research",
+          "path": "docs/product-development/ambitions-private-semantic-intelligence/research.md",
+          "revision": "1",
+          "status": "approved",
+          "sha256": "64856c0a0de04b13e092669623a4fcf8e9464d919d2ad54b65146c6f02ee1725",
+          "byteLength": 125661,
+          "gitBlobOid": "0d0f638f1a3550d9a04e0638c0a98e7839c7bc57"
+        },
+        {
+          "kind": "scope",
+          "path": "docs/product-development/ambitions-private-semantic-intelligence/scope.md",
+          "revision": "1",
+          "status": "approved",
+          "sha256": "7918b2d68dfb50c9918495c6ad2bc1b687d53ce556a1d630c90154d68e185deb",
+          "byteLength": 54904,
+          "gitBlobOid": "0f1fe6bd4c8ba2f5de2004d5809acfcc25c92aca"
+        },
+        {
+          "kind": "design",
+          "path": "docs/product-development/ambitions-private-semantic-intelligence/design.md",
+          "revision": "1",
+          "status": "approved",
+          "sha256": "1191edecc14ba41f7cb17c29c7eb3733b162037c715f46e0a392ea0eb40dbf43",
+          "byteLength": 52650,
+          "gitBlobOid": "2e30bf752dc5ba8848462c3e334b8a74d679e19f"
+        },
+        {
+          "kind": "plan",
+          "path": "docs/product-development/ambitions-private-semantic-intelligence/implementation/plan.md",
+          "revision": "1",
+          "status": "groomed",
+          "sha256": "dd672b253a14a25a49c2be87c90e9367000fd7f1d58471f3de80afa311e549f7",
+          "byteLength": 32078,
+          "gitBlobOid": "330790b08cfc4329e2ddecdd5347ad6c1aec1b77"
+        },
+        {
+          "kind": "tasks",
+          "path": "docs/product-development/ambitions-private-semantic-intelligence/implementation/tasks.md",
+          "revision": "1",
+          "status": "groomed",
+          "sha256": "b114c5deb83f53f30589f9aafad10c6e334a382483485eb9660b10767240e884",
+          "byteLength": 30144,
+          "gitBlobOid": "41f665921bdf10767ae89ffe6efd5fd86a6d700c"
+        },
+        {
+          "kind": "verification",
+          "path": "docs/product-development/ambitions-private-semantic-intelligence/implementation/verification.md",
+          "revision": "1",
+          "status": "groomed",
+          "sha256": "e80c933d292d1163170609c28cdb0cd6f90a64e1886a05015d6ea33e5953c8f9",
+          "byteLength": 22752,
+          "gitBlobOid": "88c17c8a32bc1e022a7230414938877862b1b7b0"
+        }
+      ],
+      "tasks": [
+        {
+          "id": "T1",
+          "canonicalKey": "ambitions-private-semantic-intelligence:T1",
+          "title": "**Create the isolated evaluation package, schemas, and graph guard.**",
+          "body": "1. **Create the isolated evaluation package, schemas, and graph guard.**\n   Files: create `tools/ambitions-intelligence-evaluation/Package.swift`,\n   `README.md`, `.gitignore`, the four `Schemas/*.schema.json` files,\n   `Sources/AmbitionsIntelligenceEvaluationContracts/EvaluationIdentity.swift`,\n   `EvaluationModels.swift`, `EvaluationProvider.swift`,\n   `EvaluationResults.swift`,\n   `Tests/AmbitionsIntelligenceEvaluationContractsTests/EvaluationIdentityTests.swift`,\n   `EvaluationProviderBoundaryTests.swift`, `EvaluationSchemaTests.swift`, and\n   `Scripts/check_isolation.py`.\n   Dependencies: none. Trace: `REQ-002`, `REQ-011`, `REQ-013`, `REQ-014`,\n   `REQ-018`, `REQ-024`, `REQ-027`; Design “Framework-neutral computation contracts,”\n   “Initial physical boundary,” and “Evaluation isolation contract.” Acceptance:\n   the package exposes only evaluation value types/provider reads, builds on\n   macOS 15 and iOS 26, has no product/network/write API, and the graph checker\n   proves no reverse shipping edge, root project entry, archive copy, or release\n   resource. Tests/checks: `swift test --package-path\n   tools/ambitions-intelligence-evaluation --filter\n   AmbitionsIntelligenceEvaluationContractsTests`; run `python3\n   tools/ambitions-intelligence-evaluation/Scripts/check_isolation.py` and\n   `git diff --check`. Environment: macOS. Frontend: none — evaluation-only,\n   non-shipping. Shipping dependency introduction: prohibited.",
+          "projectSlug": "ambitions-private-semantic-intelligence",
+          "order": 1,
+          "dependencies": [],
+          "sharedPaths": [
+            "Schemas/*.schema.json",
+            "Scripts/check_isolation.py",
+            "Sources/AmbitionsIntelligenceEvaluationContracts/EvaluationIdentity.swift",
+            "Tests/AmbitionsIntelligenceEvaluationContractsTests/EvaluationIdentityTests.swift",
+            "python3\n   tools/ambitions-intelligence-evaluation/Scripts/check_isolation.py",
+            "swift test --package-path\n   tools/ambitions-intelligence-evaluation --filter\n   AmbitionsIntelligenceEvaluationContractsTests",
+            "tools/ambitions-intelligence-evaluation/Package.swift"
+          ],
+          "proof": {
+            "required": [
+              "audit"
+            ],
+            "validationCommands": [],
+            "rollback": "Stop and preserve the last verified state."
+          },
+          "frontendImpact": "none",
+          "visualGate": "not-required"
+        },
+        {
+          "id": "T2",
+          "canonicalKey": "ambitions-private-semantic-intelligence:T2",
+          "title": "**Implement immutable suite/run identity and atomic reporting primitives.**",
+          "body": "2. **Implement immutable suite/run identity and atomic reporting primitives.**\n   Files: create `Sources/AmbitionsIntelligenceEvaluationCore/SuiteLoader.swift`,\n   `ReportWriter.swift`, `Manifests/suite-v1.json`, and\n   `Tests/AmbitionsIntelligenceEvaluationCoreTests/SuiteIdentityTests.swift` and\n   `ReportWriterTests.swift`. Dependencies: Task 1. Trace: `REQ-013`, `REQ-014`,\n   `REQ-020`, `REQ-022`; Design “Evaluation architecture,” “Persistence,\n   migrations, concurrency, and replay,” and “Evidence handoff.” Acceptance:\n   canonical JSON digests bind fixtures, arms, provider/preprocessing,\n   conversion/precision, code/build, OS/device, scale, seed, calibration/fusion,\n   evidence dimensions, the live-Search behavioral oracle, and the exact Search\n   invocation context; partial output is explicitly invalid; writes are atomic;\n   the report permits no-winner. Tests/checks: focused `swift test`\n   filters for both files, schema validation of `suite-v1.json`, isolation check,\n   and `git diff --check`. Environment: macOS. Frontend: none — evaluation-only,\n   non-shipping. Shipping dependency introduction: prohibited.",
+          "projectSlug": "ambitions-private-semantic-intelligence",
+          "order": 2,
+          "dependencies": [],
+          "sharedPaths": [
+            "Manifests/suite-v1.json",
+            "Sources/AmbitionsIntelligenceEvaluationCore/SuiteLoader.swift",
+            "Tests/AmbitionsIntelligenceEvaluationCoreTests/SuiteIdentityTests.swift"
+          ],
+          "proof": {
+            "required": [
+              "audit"
+            ],
+            "validationCommands": [],
+            "rollback": "Stop and preserve the last verified state."
+          },
+          "frontendImpact": "none",
+          "visualGate": "not-required"
+        },
+        {
+          "id": "T3",
+          "canonicalKey": "ambitions-private-semantic-intelligence:T3",
+          "title": "**Create the canonical synthetic fixture release.**",
+          "body": "3. **Create the canonical synthetic fixture release.**\n   Files: create `Fixtures/v1/manifest.json`, `search-corpus.jsonl`,\n   `search-judgments.jsonl`, `capture-corpus.jsonl`,\n   `capture-judgments.jsonl`, `mutation-canaries.json`,\n   `privacy-canaries.json`, `spotlight-policy.json`, `reference-texts.jsonl`, plus\n   `Tests/AmbitionsIntelligenceEvaluationCoreTests/FixtureReleaseTests.swift`.\n   Dependencies: Tasks 1–2. Trace: `REQ-003`–`REQ-009`, `REQ-013`, `REQ-014`,\n   `REQ-018`, `REQ-019`; Design “Fixtures and test authority,” Search/Capture\n   boundaries, and quality/safety partitions. Acceptance: deterministic English\n   tuning/holdout partitions cover all named Search/Capture, privacy, deletion,\n   staleness, family, action, ambiguity, correction, and unsafe-assumption slices;\n   every file is digest-bound; the Search fixture identity pins the semantic-v1\n   full-screen invocation slice while other intents are labelled parity/sanity\n   slices only; no real person/content or production identifier is present.\n   Tests/checks: fixture schema/digest/partition/leak/coverage/invocation tests\n   and two identical regenerations produce byte-identical output. Environment:\n   macOS. Frontend: none — fixture data only. Shipping dependency introduction: prohibited.",
+          "projectSlug": "ambitions-private-semantic-intelligence",
+          "order": 3,
+          "dependencies": [],
+          "sharedPaths": [
+            "Fixtures/v1/manifest.json",
+            "Tests/AmbitionsIntelligenceEvaluationCoreTests/FixtureReleaseTests.swift"
+          ],
+          "proof": {
+            "required": [
+              "audit"
+            ],
+            "validationCommands": [],
+            "rollback": "Stop and preserve the last verified state."
+          },
+          "frontendImpact": "none",
+          "visualGate": "not-required"
+        },
+        {
+          "id": "T4",
+          "canonicalKey": "ambitions-private-semantic-intelligence:T4",
+          "title": "**Implement mutation and privacy/egress canaries.**",
+          "body": "4. **Implement mutation and privacy/egress canaries.**\n   Files: create `Sources/AmbitionsIntelligenceEvaluationCore/MutationCanaries.swift`,\n   `PrivacyCanaries.swift`,\n   `Tests/AmbitionsIntelligenceEvaluationCoreTests/MutationCanaryTests.swift`,\n   `PrivacyCanaryTests.swift`, and\n   `Scripts/inspect_run.py`. Dependencies: Tasks 1–3. Trace: `REQ-001`,\n   `REQ-002`, `REQ-004`, `REQ-007`, `REQ-014`, `REQ-018`, `REQ-019`; Design\n   “Authority topology,” “Evaluation isolation contract,” and privacy proof.\n   Acceptance: canaries hard-fail attempted Event/Projection/Receipt/Capture/\n   Goal/Step/correction/Search-action writes, production-path access, network\n   creation, content-bearing logs/reports, unauthorized Spotlight donation, and\n   authority claims. Tests/checks: each prohibited capability has a failing\n   injected test; a clean synthetic run passes; isolation checker passes.\n   Environment: macOS and simulator for platform hooks. Frontend: none —\n   evaluation-only. Shipping dependency introduction: prohibited.",
+          "projectSlug": "ambitions-private-semantic-intelligence",
+          "order": 4,
+          "dependencies": [],
+          "sharedPaths": [
+            "Scripts/inspect_run.py",
+            "Sources/AmbitionsIntelligenceEvaluationCore/MutationCanaries.swift",
+            "Tests/AmbitionsIntelligenceEvaluationCoreTests/MutationCanaryTests.swift"
+          ],
+          "proof": {
+            "required": [
+              "audit"
+            ],
+            "validationCommands": [],
+            "rollback": "Stop and preserve the last verified state."
+          },
+          "frontendImpact": "none",
+          "visualGate": "not-required"
+        },
+        {
+          "id": "T5",
+          "canonicalKey": "ambitions-private-semantic-intelligence:T5",
+          "title": "**Implement and lock the live user-facing deterministic Search/Capture baseline.**",
+          "body": "5. **Implement and lock the live user-facing deterministic Search/Capture baseline.**\n   Files: create\n   `Sources/AmbitionsIntelligenceEvaluationDeterministic/DeterministicSearchAdapter.swift`,\n   `DeterministicCaptureAdapter.swift`,\n   `SearchMigrationParityDiagnostics.swift`,\n   `Tests/AmbitionsIntelligenceEvaluationDeterministicTests/DeterministicSearchAdapterTests.swift`,\n   `DeterministicCaptureAdapterTests.swift`, `FixtureOracleParityTests.swift`,\n   `LiveSearchInvocationIdentityTests.swift`,\n   `SearchMigrationParityDiagnosticsTests.swift`,\n   `Fixtures/v1/deterministic-search-oracle.jsonl`,\n   `deterministic-capture-oracle.jsonl`, and\n   `Manifests/providers/deterministic.json`,\n   `Manifests/live-search-behavioral-oracle.json`, and\n   `Manifests/search-migration-parity-diagnostics.json`. Dependencies: Tasks 1–4.\n   Trace: `REQ-001`, `REQ-003`–`REQ-008`, `REQ-013`, `REQ-014`; Design\n   “Deterministic baseline,” Search/Capture integration boundaries. Acceptance:\n   the primary Search adapter is a fixture-side, non-production transcription of\n   the currently composed `SystemSurfaceBootstrap → DefaultMemoryLensService →\n   LocalSearchIndex` behavior. It covers current normalization/matching, result\n   construction and kinds/families, source/provenance semantics, combined and\n   family ranking, empty-query behavior, stable ordering/limit, trusted handoff,\n   and fixture-side result routing. It imports no production repository or app\n   store. The semantic-v1 identity pins the inspected full-screen contract:\n   `kind = .memoryLens`, `seedIntent = .memoryLens`,\n   `entrySource = .shellUtility`, `presentationContext = .recall`, initial\n   `query = \"\"`, `goalID = nil`, `captureID = nil`, and resolved `origin = nil`;\n   other intents are parity/sanity only.\n   The production behavioral oracle binds the exact source/test/call-site Git\n   blob hashes listed in `plan.md`, including at minimum\n   `SystemSurfaceBootstrap.swift`, `MemoryLensService.swift`,\n   `MemoryLensService+SearchResults.swift`, `LocalSearchIndex.swift`,\n   `MemoryLensServiceTests.swift`, the relevant `LocalSearchIndex` cases in\n   `SearchTests.swift`, and the full-screen call path. Any bound drift stops Task\n   5 for review and invalidates the baseline; no oracle is silently regenerated.\n   `FTSIndex`, `ResultRanker`, `SemanticLocalIndex`, `SearchActionValidator`, and\n   `RuntimeCanonicalSearch` run only as separately labelled\n   **Search migration/parity diagnostics** using fixtures/disposable stores. They are not provider\n   arms, are not blended with the live baseline, and imply no production Search\n   owner. Capture remains bound to current `CaptureClassifier` focused tests and\n   abstains/needs-triage where current rules do; all paths write nothing.\n   Tests/checks: package deterministic, invocation-identity, drift-invalidation,\n   and diagnostic-separation tests; focused current `MemoryLensServiceTests`,\n   relevant `SearchTests` LocalSearchIndex cases,\n   `P1FLocalSearchFoundationTests`, `AppShellNavigationTests`,\n   `ShellPresentationDependencyTests`, `CommandSearchObviousnessGauntletTests`,\n   diagnostic `RuntimeCanonicalSearchTests`, and `CaptureRoutingTests`.\n   Environment: macOS package tests and iOS simulator for current focused tests.\n   Frontend: none — baseline adapter only. Shipping dependency introduction: prohibited.",
+          "projectSlug": "ambitions-private-semantic-intelligence",
+          "order": 5,
+          "dependencies": [],
+          "sharedPaths": [
+            "Fixtures/v1/deterministic-search-oracle.jsonl",
+            "Manifests/live-search-behavioral-oracle.json",
+            "Manifests/providers/deterministic.json",
+            "Manifests/search-migration-parity-diagnostics.json",
+            "Sources/AmbitionsIntelligenceEvaluationDeterministic/DeterministicSearchAdapter.swift",
+            "Tests/AmbitionsIntelligenceEvaluationDeterministicTests/DeterministicSearchAdapterTests.swift"
+          ],
+          "proof": {
+            "required": [
+              "audit"
+            ],
+            "validationCommands": [],
+            "rollback": "Stop and preserve the last verified state."
+          },
+          "frontendImpact": "none",
+          "visualGate": "not-required"
+        },
+        {
+          "id": "T6",
+          "canonicalKey": "ambitions-private-semantic-intelligence:T6",
+          "title": "**Implement the `NLEmbedding` evaluation adapter.**",
+          "body": "6. **Implement the `NLEmbedding` evaluation adapter.**\n   Files: create\n   `Sources/AmbitionsIntelligenceEvaluationNaturalLanguage/NLEmbeddingAdapter.swift`,\n   `Tests/AmbitionsIntelligenceEvaluationNaturalLanguageTests/NLEmbeddingAdapterTests.swift`,\n   `NLEmbeddingAvailabilityTests.swift`, and\n   `Manifests/providers/nlembedding.json`. Dependencies: Tasks 1–4. Trace:\n   `REQ-009`, `REQ-010`, `REQ-013`, `REQ-014`, `REQ-016`, `REQ-021`, `REQ-027`;\n   Design “Provider boundary.” Acceptance: local English sentence embedding,\n   dimension, resolved OS/language revision evidence, normalization experiment,\n   cancellation, and abstention/unavailability are typed; no assets, network,\n   account, or product fallback behavior is introduced. Tests/checks: focused\n   package tests on macOS and simulator, airplane-mode device case later bound to\n   Task 17. Environment: macOS, simulator, physical iPhone for final runtime.\n   Frontend: none — evaluation adapter. Shipping dependency introduction: prohibited.",
+          "projectSlug": "ambitions-private-semantic-intelligence",
+          "order": 6,
+          "dependencies": [],
+          "sharedPaths": [
+            "Manifests/providers/nlembedding.json",
+            "Sources/AmbitionsIntelligenceEvaluationNaturalLanguage/NLEmbeddingAdapter.swift",
+            "Tests/AmbitionsIntelligenceEvaluationNaturalLanguageTests/NLEmbeddingAdapterTests.swift"
+          ],
+          "proof": {
+            "required": [
+              "audit"
+            ],
+            "validationCommands": [],
+            "rollback": "Stop and preserve the last verified state."
+          },
+          "frontendImpact": "none",
+          "visualGate": "not-required"
+        },
+        {
+          "id": "T7",
+          "canonicalKey": "ambitions-private-semantic-intelligence:T7",
+          "title": "**Build the shared offline conversion and reference-validation lane.**",
+          "body": "7. **Build the shared offline conversion and reference-validation lane.**\n   Files: create every `Conversion/*` file named in `plan.md`,\n   `Sources/AmbitionsIntelligenceEvaluationCoreML/CoreMLCandidateAdapter.swift`,\n   `ValidatedTokenizer.swift`,\n   `Tests/AmbitionsIntelligenceEvaluationCoreMLTests/CoreMLCandidateAdapterTests.swift`,\n   `ValidatedTokenizerTests.swift`, `InvalidConversionQuarantineTests.swift`,\n   `Manifests/security/conversion-policy.json`, `Scripts/check_provenance.py`,\n   and `Scripts/collect_archive_sizes.py`. Dependencies:\n   Tasks 1–4. Trace: `REQ-011`, `REQ-013`, `REQ-014`, `REQ-016`, `REQ-020`;\n   Design “External Core ML candidates,” conversion/provenance proof. Acceptance:\n   locked tools; immutable local inputs only; allowlisted safetensors/JSON/text;\n   rejection of mutable revision, remote code, pickle, unknown executable,\n   unpinned or escaping paths; tokenizer/mask/truncation/prompt/pooling/\n   normalization/dimension/vector/precision comparison; invalid conversion\n   quarantine. Tests/checks: `python3 -m unittest discover -s\n   tools/ambitions-intelligence-evaluation/Conversion/tests -p 'test_*.py'`,\n   focused Core ML Swift tests with synthetic tiny fixtures, isolation check.\n   Environment: macOS; no candidate conversion yet. Frontend: none — offline\n   conversion tooling. Shipping dependency introduction: prohibited.",
+          "projectSlug": "ambitions-private-semantic-intelligence",
+          "order": 7,
+          "dependencies": [],
+          "sharedPaths": [
+            "Conversion/*",
+            "Manifests/security/conversion-policy.json",
+            "Scripts/check_provenance.py",
+            "Scripts/collect_archive_sizes.py",
+            "Sources/AmbitionsIntelligenceEvaluationCoreML/CoreMLCandidateAdapter.swift",
+            "Tests/AmbitionsIntelligenceEvaluationCoreMLTests/CoreMLCandidateAdapterTests.swift",
+            "python3 -m unittest discover -s\n   tools/ambitions-intelligence-evaluation/Conversion/tests -p 'test_*.py'"
+          ],
+          "proof": {
+            "required": [
+              "audit"
+            ],
+            "validationCommands": [],
+            "rollback": "Stop and preserve the last verified state."
+          },
+          "frontendImpact": "none",
+          "visualGate": "not-required"
+        },
+        {
+          "id": "T8",
+          "canonicalKey": "ambitions-private-semantic-intelligence:T8",
+          "title": "**Convert and validate Snowflake Arctic Embed XS independently.**",
+          "body": "8. **Convert and validate Snowflake Arctic Embed XS independently.**\n   Files: complete `Manifests/providers/arctic-xs.json`; create\n   `Manifests/licenses/arctic-xs-LICENSE.txt`, `arctic-xs-NOTICE.txt`,\n   `Manifests/security/arctic-xs.json`, and\n   `Tests/AmbitionsIntelligenceEvaluationCoreMLTests/ArcticXSReferenceTests.swift`;\n   generate ignored `Artifacts/arctic-xs/{inputs,converted,compiled}/` and\n   `Runs/arctic-xs/reference-validation.json`. Dependencies: Task 7. Trace: `REQ-011`, `REQ-013`,\n   `REQ-014`, `REQ-020`, `REQ-022`; Design closed matrix and conversion proof.\n   Acceptance: exact reviewed checkpoint/files/hashes and converter identity;\n   tokenizer, query prefix, 512-token truncation, CLS pooling, normalization,\n   384 dimensions, reference vectors, and tested precision variants validated;\n   invalid variants quarantined. Tests/checks: Arctic-only converter and Swift\n   reference tests, provenance/security checks, offline load test, isolation\n   check. Environment: macOS then simulator/device functional load. Frontend:\n   none — evaluation asset only. Shipping dependency introduction: prohibited.",
+          "projectSlug": "ambitions-private-semantic-intelligence",
+          "order": 8,
+          "dependencies": [],
+          "sharedPaths": [
+            "Artifacts/arctic-xs/{inputs,converted,compiled}/",
+            "Manifests/licenses/arctic-xs-LICENSE.txt",
+            "Manifests/providers/arctic-xs.json",
+            "Manifests/security/arctic-xs.json",
+            "Runs/arctic-xs/reference-validation.json",
+            "Tests/AmbitionsIntelligenceEvaluationCoreMLTests/ArcticXSReferenceTests.swift"
+          ],
+          "proof": {
+            "required": [
+              "audit"
+            ],
+            "validationCommands": [],
+            "rollback": "Stop and preserve the last verified state."
+          },
+          "frontendImpact": "none",
+          "visualGate": "not-required"
+        },
+        {
+          "id": "T9",
+          "canonicalKey": "ambitions-private-semantic-intelligence:T9",
+          "title": "**Convert and validate BGE Small EN v1.5 independently.**",
+          "body": "9. **Convert and validate BGE Small EN v1.5 independently.**\n   Files: complete `Manifests/providers/bge-small-en-v1.5.json`; create\n   `Manifests/licenses/bge-small-en-v1.5-LICENSE.txt`,\n   `bge-small-en-v1.5-NOTICE.txt`, `Manifests/security/bge-small-en-v1.5.json`,\n   and `Tests/AmbitionsIntelligenceEvaluationCoreMLTests/BGESmallReferenceTests.swift`;\n   generate ignored `Artifacts/bge-small-en-v1.5/{inputs,converted,compiled}/`\n   and `Runs/bge-small-en-v1.5/reference-validation.json`. Dependencies:\n   Task 7. Trace: `REQ-011`, `REQ-013`, `REQ-014`, `REQ-020`, `REQ-022`;\n   Design closed matrix and conversion proof. Acceptance: exact checkpoint/files/hashes;\n   tokenizer, optional retrieval prompt experiment identity, truncation, CLS\n   pooling, normalization, 384 dimensions, reference vectors, clustered-score\n   calibration warning, and precision variants validated; invalid variants\n   quarantined. Tests/checks: BGE-only reference/conversion/offline/isolation\n   checks. Environment: macOS then simulator/device functional load. Frontend:\n   none — evaluation asset only. Shipping dependency introduction: prohibited.",
+          "projectSlug": "ambitions-private-semantic-intelligence",
+          "order": 9,
+          "dependencies": [],
+          "sharedPaths": [
+            "Artifacts/bge-small-en-v1.5/{inputs,converted,compiled}/",
+            "Manifests/licenses/bge-small-en-v1.5-LICENSE.txt",
+            "Manifests/providers/bge-small-en-v1.5.json",
+            "Manifests/security/bge-small-en-v1.5.json",
+            "Runs/bge-small-en-v1.5/reference-validation.json",
+            "Tests/AmbitionsIntelligenceEvaluationCoreMLTests/BGESmallReferenceTests.swift"
+          ],
+          "proof": {
+            "required": [
+              "audit"
+            ],
+            "validationCommands": [],
+            "rollback": "Stop and preserve the last verified state."
+          },
+          "frontendImpact": "none",
+          "visualGate": "not-required"
+        },
+        {
+          "id": "T10",
+          "canonicalKey": "ambitions-private-semantic-intelligence:T10",
+          "title": "**Convert and validate all-MiniLM-L6-v2 independently.**",
+          "body": "10. **Convert and validate all-MiniLM-L6-v2 independently.**\n    Files: complete `Manifests/providers/minilm-l6-v2.json`; create\n    `Manifests/licenses/minilm-l6-v2-LICENSE.txt`, `minilm-l6-v2-NOTICE.txt`,\n    `Manifests/security/minilm-l6-v2.json`, and\n    `Tests/AmbitionsIntelligenceEvaluationCoreMLTests/MiniLML6V2ReferenceTests.swift`;\n    generate ignored `Artifacts/minilm-l6-v2/{inputs,converted,compiled}/` and\n    `Runs/minilm-l6-v2/reference-validation.json`. Dependencies: Task 7.\n    Trace: `REQ-011`, `REQ-013`, `REQ-014`, `REQ-020`, `REQ-022`;\n    Design closed matrix and conversion proof. Acceptance: exact checkpoint/files/hashes; WordPiece,\n    declared 256-wordpiece behavior, attention-mask mean pooling, normalization,\n    384 dimensions, reference vectors, and precision variants validated; invalid\n    variants quarantined. Tests/checks: MiniLM-only reference/conversion/offline/\n    isolation checks. Environment: macOS then simulator/device functional load.\n    Frontend: none — evaluation asset only. Shipping dependency introduction: prohibited.",
+          "projectSlug": "ambitions-private-semantic-intelligence",
+          "order": 10,
+          "dependencies": [],
+          "sharedPaths": [
+            "Artifacts/minilm-l6-v2/{inputs,converted,compiled}/",
+            "Manifests/licenses/minilm-l6-v2-LICENSE.txt",
+            "Manifests/providers/minilm-l6-v2.json",
+            "Manifests/security/minilm-l6-v2.json",
+            "Runs/minilm-l6-v2/reference-validation.json",
+            "Tests/AmbitionsIntelligenceEvaluationCoreMLTests/MiniLML6V2ReferenceTests.swift"
+          ],
+          "proof": {
+            "required": [
+              "audit"
+            ],
+            "validationCommands": [],
+            "rollback": "Stop and preserve the last verified state."
+          },
+          "frontendImpact": "none",
+          "visualGate": "not-required"
+        },
+        {
+          "id": "T11",
+          "canonicalKey": "ambitions-private-semantic-intelligence:T11",
+          "title": "**Decide conditional mxbai admission without expanding the tranche.**",
+          "body": "11. **Decide conditional mxbai admission without expanding the tranche.**\n    Files: complete `Manifests/providers/mxbai-xsmall-conditional.json` and create\n    `Reports/mxbai-admission.json` only during execution; create\n    `Tests/AmbitionsIntelligenceEvaluationCoreMLTests/MXBaiAdmissionTests.swift`;\n    if admitted, create `Manifests/licenses/mxbai-xsmall-LICENSE.txt`,\n    `mxbai-xsmall-NOTICE.txt`, `Manifests/security/mxbai-xsmall.json`, and\n    generate ignored `Artifacts/mxbai-xsmall/` and\n    `Runs/mxbai-xsmall/reference-validation.json`—no new target, framework,\n    corpus, milestone, or schema. Dependencies: Tasks 7–10. Trace:\n    `REQ-011`, `REQ-013`, `REQ-014`; Design “Conditional mxbai admission.”\n    Acceptance: every approved low-cost condition is explicitly true or mxbai is\n    recorded `excluded_by_scope` and no assets are acquired. Tests/checks:\n    admission schema/policy test and isolation check; admitted path must pass the\n    same reference suite with no new architecture. Environment: macOS; optional\n    device only if admitted. Frontend: none — admission gate. Shipping dependency introduction: prohibited.",
+          "projectSlug": "ambitions-private-semantic-intelligence",
+          "order": 11,
+          "dependencies": [],
+          "sharedPaths": [
+            "Artifacts/mxbai-xsmall/",
+            "Manifests/licenses/mxbai-xsmall-LICENSE.txt",
+            "Manifests/providers/mxbai-xsmall-conditional.json",
+            "Manifests/security/mxbai-xsmall.json",
+            "Reports/mxbai-admission.json",
+            "Runs/mxbai-xsmall/reference-validation.json",
+            "Tests/AmbitionsIntelligenceEvaluationCoreMLTests/MXBaiAdmissionTests.swift"
+          ],
+          "proof": {
+            "required": [
+              "audit"
+            ],
+            "validationCommands": [],
+            "rollback": "Stop and preserve the last verified state."
+          },
+          "frontendImpact": "none",
+          "visualGate": "not-required"
+        },
+        {
+          "id": "T12",
+          "canonicalKey": "ambitions-private-semantic-intelligence:T12",
+          "title": "**Implement Search quality, safety, hydration, and stability evaluation.**",
+          "body": "12. **Implement Search quality, safety, hydration, and stability evaluation.**\n    Files: create `Sources/AmbitionsIntelligenceEvaluationCore/SearchEvaluationHarness.swift`,\n    `Metrics.swift`, `QualityRunner.swift`,\n    `Tests/AmbitionsIntelligenceEvaluationCoreTests/SearchEvaluationHarnessTests.swift`,\n    `SearchMetricsTests.swift`, `SearchSafetyTests.swift`, and\n    `SearchStabilityTests.swift`. Dependencies: Tasks\n    3–11. Trace: `REQ-003`–`REQ-005`, `REQ-010`–`REQ-014`, `REQ-018`, `REQ-019`;\n    Design Search harness and quality proof. Acceptance: identical arm partitions;\n    every semantic provider is compared against the Task 5 live user-facing\n    `DefaultMemoryLensService` / `LocalSearchIndex` baseline under the exact\n    pinned invocation; exact/prefix preservation, paraphrase/zero-overlap, hard\n    negatives, related objects, duplicates, Goal relevance, Recall@K/MRR/NDCG,\n    privacy/family/local-only/deleted/tombstoned/stale handling, fixture\n    hydration, pure action revalidation, and stability reported; holdout\n    isolated; Core Spotlight not silently combined. FTS/`SemanticLocalIndex`/\n    canonical-generation results are emitted only in a separate Search\n    migration/parity diagnostic section with no provider-arm, live-baseline, or\n    owner implication. Tests/checks: metric golden tests, primary-baseline delta\n    tests, diagnostic-label/no-blend tests, all hard-failure cases, repeated-run\n    byte stability, package Search suite. Environment: macOS;\n    platform arms also simulator/device. Frontend: none — evaluation harness.\n    Shipping dependency introduction: prohibited.",
+          "projectSlug": "ambitions-private-semantic-intelligence",
+          "order": 12,
+          "dependencies": [],
+          "sharedPaths": [
+            "Sources/AmbitionsIntelligenceEvaluationCore/SearchEvaluationHarness.swift",
+            "Tests/AmbitionsIntelligenceEvaluationCoreTests/SearchEvaluationHarnessTests.swift"
+          ],
+          "proof": {
+            "required": [
+              "audit"
+            ],
+            "validationCommands": [],
+            "rollback": "Stop and preserve the last verified state."
+          },
+          "frontendImpact": "none",
+          "visualGate": "not-required"
+        },
+        {
+          "id": "T13",
+          "canonicalKey": "ambitions-private-semantic-intelligence:T13",
+          "title": "**Implement Capture quality, calibration, and abstention evaluation.**",
+          "body": "13. **Implement Capture quality, calibration, and abstention evaluation.**\n    Files: create `Sources/AmbitionsIntelligenceEvaluationCore/CaptureEvaluationHarness.swift`,\n    `Tests/AmbitionsIntelligenceEvaluationCoreTests/CaptureEvaluationHarnessTests.swift`,\n    `CaptureMetricsTests.swift`, `CaptureCalibrationTests.swift`, and\n    `CaptureAbstentionTests.swift`. Dependencies: Tasks 3–11. Trace: `REQ-006`–`REQ-011`, `REQ-013`,\n    `REQ-014`; Design Capture harness and quality proof. Acceptance: route\n    evidence, per-class precision/recall/F1, duplicates, Goal association/no-\n    association, ambiguity, calibration, risk-coverage, abstention, selective\n    accuracy, correction, useful coverage, unsafe assumptions, and deterministic\n    precedence are reported; no route/correction is persisted or auto-accepted.\n    Tests/checks: confusion/calibration/risk-coverage golden tests, abstention and\n    zero-mutation canaries, repeated-run stability. Environment: macOS and\n    simulator/device for platform arms. Frontend: none — evaluation harness.\n    Shipping dependency introduction: prohibited.",
+          "projectSlug": "ambitions-private-semantic-intelligence",
+          "order": 13,
+          "dependencies": [],
+          "sharedPaths": [
+            "Sources/AmbitionsIntelligenceEvaluationCore/CaptureEvaluationHarness.swift",
+            "Tests/AmbitionsIntelligenceEvaluationCoreTests/CaptureEvaluationHarnessTests.swift"
+          ],
+          "proof": {
+            "required": [
+              "audit"
+            ],
+            "validationCommands": [],
+            "rollback": "Stop and preserve the last verified state."
+          },
+          "frontendImpact": "none",
+          "visualGate": "not-required"
+        },
+        {
+          "id": "T14",
+          "canonicalKey": "ambitions-private-semantic-intelligence:T14",
+          "title": "**Measure exact scanning at 1K, 10K, and supported 100K scales.**",
+          "body": "14. **Measure exact scanning at 1K, 10K, and supported 100K scales.**\n    Files: create `Sources/AmbitionsIntelligenceEvaluationCore/ScaleCorpusGenerator.swift`,\n    `ExactVectorScanner.swift`,\n    `Tests/AmbitionsIntelligenceEvaluationCoreTests/ScaleCorpusGeneratorTests.swift`,\n    `ExactVectorScannerTests.swift`, `ExactScanCancellationTests.swift`, and\n    ignored `Runs/scale/{1000,10000,100000}/`. Dependencies: Tasks 2–4 and at\n    least one valid embedding arm; full comparison follows Tasks 8–10. Trace:\n    `REQ-013`, `REQ-019`, `REQ-021`, `REQ-022`; Design scale rule. Acceptance:\n    deterministic scale digests; exact correctness; build/incremental throughput,\n    vector/metadata/staged/high-water bytes, latency distribution, memory, and\n    cancellation measured separately; disposable row-major format explicitly\n    nonprecedential. Tests/checks: deterministic generation, brute-force oracle,\n    cancellation, corruption, and scale smoke tests; real-device measurement in\n    Task 17. Environment: macOS, simulator functional, physical iPhone runtime.\n    Frontend: none — scale experiment. Shipping dependency introduction: prohibited.",
+          "projectSlug": "ambitions-private-semantic-intelligence",
+          "order": 14,
+          "dependencies": [],
+          "sharedPaths": [
+            "Runs/scale/{1000,10000,100000}/",
+            "Sources/AmbitionsIntelligenceEvaluationCore/ScaleCorpusGenerator.swift",
+            "Tests/AmbitionsIntelligenceEvaluationCoreTests/ScaleCorpusGeneratorTests.swift"
+          ],
+          "proof": {
+            "required": [
+              "audit"
+            ],
+            "validationCommands": [],
+            "rollback": "Stop and preserve the last verified state."
+          },
+          "frontendImpact": "none",
+          "visualGate": "not-required"
+        },
+        {
+          "id": "T15",
+          "canonicalKey": "ambitions-private-semantic-intelligence:T15",
+          "title": "**Run the ANN admission gate; implement only if exact scan is insufficient.**",
+          "body": "15. **Run the ANN admission gate; implement only if exact scan is insufficient.**\n    Files: first create only ignored `Reports/ann-admission.json`. If and only if\n    the approved trigger is demonstrated, create\n    `Sources/AmbitionsIntelligenceEvaluationANN/DisposableANNIndex.swift` and\n    `Tests/AmbitionsIntelligenceEvaluationANNTests/DisposableANNIndexTests.swift`\n    without changing production files or contracts. Dependencies:\n    Task 14 physical-device evidence. Trace: `REQ-013`, `REQ-014`, `REQ-022`;\n    Design exact-first ANN condition. Acceptance: absent trigger yields\n    `not_triggered` and no ANN source target; a triggered comparison names failing\n    scale/device/distribution/question and remains disposable/nonselective.\n    Tests/checks: policy test asserts no ANN target before trigger; if triggered,\n    compare recall, latency, memory, storage, build/update, cancellation, and\n    corruption against exact scan. Environment: macOS and the triggering physical\n    device. Frontend: none — conditional evaluation experiment. Shipping dependency introduction: prohibited.",
+          "projectSlug": "ambitions-private-semantic-intelligence",
+          "order": 15,
+          "dependencies": [],
+          "sharedPaths": [
+            "Reports/ann-admission.json",
+            "Sources/AmbitionsIntelligenceEvaluationANN/DisposableANNIndex.swift",
+            "Tests/AmbitionsIntelligenceEvaluationANNTests/DisposableANNIndexTests.swift"
+          ],
+          "proof": {
+            "required": [
+              "audit"
+            ],
+            "validationCommands": [],
+            "rollback": "Stop and preserve the last verified state."
+          },
+          "frontendImpact": "none",
+          "visualGate": "not-required"
+        },
+        {
+          "id": "T16",
+          "canonicalKey": "ambitions-private-semantic-intelligence:T16",
+          "title": "**Implement the isolated Core Spotlight evaluation arm.**",
+          "body": "16. **Implement the isolated Core Spotlight evaluation arm.**\n    Files: create `BenchmarkHost/project.yml`, `Sources/BenchmarkApp.swift`,\n    `BenchmarkCoordinator.swift`, `BenchmarkScenario.swift`,\n    `BenchmarkSignposts.swift`, `CoreSpotlightEvaluationArm.swift`,\n    `ResourcePressureController.swift`,\n    `Tests/CoreSpotlightIsolationTests.swift`, and\n    `CoreSpotlightPolicyTests.swift`. Dependencies: Tasks 1–4 and 12. Trace: `REQ-004`,\n    `REQ-012`–`REQ-014`, `REQ-018`, `REQ-019`, `REQ-023`, `REQ-024`, `REQ-027`; Design Core\n    Spotlight isolation. Acceptance: unique run domain/index and test-only IDs;\n    only authorized synthetic fixtures donated; no production ID/content/store;\n    returned candidates undergo canonical-fixture privacy/identity/family/\n    deletion/tombstone/staleness validation; cleanup on success/failure/cancel/\n    relaunch; separately labelled results. Tests/checks: XcodeGen host generation,\n    simulator isolation/donation/suppression/teardown/recovery tests, post-run\n    query confirms domain empty, graph/archive isolation check. Environment:\n    simulator and physical iPhone. Frontend: none — test-only host with no product\n    surface. Shipping dependency introduction: prohibited.",
+          "projectSlug": "ambitions-private-semantic-intelligence",
+          "order": 16,
+          "dependencies": [],
+          "sharedPaths": [
+            "BenchmarkHost/project.yml",
+            "Sources/BenchmarkApp.swift",
+            "Tests/CoreSpotlightIsolationTests.swift"
+          ],
+          "proof": {
+            "required": [
+              "audit"
+            ],
+            "validationCommands": [],
+            "rollback": "Stop and preserve the last verified state."
+          },
+          "frontendImpact": "none",
+          "visualGate": "not-required"
+        },
+        {
+          "id": "T17",
+          "canonicalKey": "ambitions-private-semantic-intelligence:T17",
+          "title": "**Implement offline, asset, cancellation, lifecycle, and pressure matrix.**",
+          "body": "17. **Implement offline, asset, cancellation, lifecycle, and pressure matrix.**\n    Files: complete `BenchmarkHost/Sources/BenchmarkCoordinator.swift`,\n    `BenchmarkScenario.swift`, `ResourcePressureController.swift`; create\n    `BenchmarkHost/Tests/BenchmarkCoordinatorTests.swift`,\n    `OfflineFailureMatrixTests.swift`, and\n    `Manifests/offline-failure-matrix-v1.json`. Dependencies: Tasks 5–16 as applicable. Trace: `REQ-001`,\n    `REQ-010`, `REQ-013`, `REQ-014`, `REQ-016`, `REQ-017`, `REQ-020`, `REQ-021`,\n    `REQ-023`, `REQ-027`; Design provider/asset/lifecycle recovery. Acceptance:\n    airplane mode; absent/never-acquired/interrupted/missing/corrupt/incompatible/\n    revoked/reclaimed asset; cancellation; memory warning/pressure; protected-data\n    state; foreground/background; expiration; crash/relaunch; and Spotlight\n    recovery leave deterministic runs available, partial runs invalid, and\n    canonical state impossible. Tests/checks: focused scenario tests plus recorded\n    simulator and physical-device matrix; no blind sleeps/retry-to-pass.\n    Environment: macOS for pure injection, simulator, physical iPhone. Frontend:\n    none — evaluation host states only. Shipping dependency introduction: prohibited.",
+          "projectSlug": "ambitions-private-semantic-intelligence",
+          "order": 17,
+          "dependencies": [],
+          "sharedPaths": [
+            "BenchmarkHost/Sources/BenchmarkCoordinator.swift",
+            "BenchmarkHost/Tests/BenchmarkCoordinatorTests.swift",
+            "Manifests/offline-failure-matrix-v1.json"
+          ],
+          "proof": {
+            "required": [
+              "audit"
+            ],
+            "validationCommands": [],
+            "rollback": "Stop and preserve the last verified state."
+          },
+          "frontendImpact": "none",
+          "visualGate": "not-required"
+        },
+        {
+          "id": "T18",
+          "canonicalKey": "ambitions-private-semantic-intelligence:T18",
+          "title": "**Complete provenance, license, NOTICE, and security evidence.**",
+          "body": "18. **Complete provenance, license, NOTICE, and security evidence.**\n    Files: complete every candidate license/NOTICE and security file named by\n    Tasks 8–11 plus `Manifests/security/nlembedding.json`,\n    `core-spotlight.json`, `Scripts/check_provenance.py`, and\n    `Scripts/collect_archive_sizes.py`; create\n    `Conversion/tests/test_provenance_security.py`.\n    Dependencies: Tasks 7–11 and 16. Trace: `REQ-013`, `REQ-014`, `REQ-016`,\n    `REQ-018`, `REQ-020`; Design provenance/supply-chain proof. Acceptance: every\n    arm binds immutable origin/revision/files/hashes/toolchain/compiled hash,\n    license/NOTICE/commercial-use review, scan/revocation; runtime Hub/account/\n    token/network absent; remote code, pickle, unknown executable, and unreviewed\n    downloads rejected; archive/install evidence proves no shipping copy.\n    Tests/checks: provenance/security negative fixtures, offline rerun, dependency\n    scan, archive inspection, license inventory review. Environment: macOS and\n    produced simulator/device archives. Frontend: none — manifests and audits.\n    Shipping dependency introduction: prohibited.",
+          "projectSlug": "ambitions-private-semantic-intelligence",
+          "order": 18,
+          "dependencies": [],
+          "sharedPaths": [
+            "Conversion/tests/test_provenance_security.py",
+            "Manifests/security/nlembedding.json",
+            "Scripts/check_provenance.py",
+            "Scripts/collect_archive_sizes.py"
+          ],
+          "proof": {
+            "required": [
+              "audit"
+            ],
+            "validationCommands": [],
+            "rollback": "Stop and preserve the last verified state."
+          },
+          "frontendImpact": "none",
+          "visualGate": "not-required"
+        },
+        {
+          "id": "T19",
+          "canonicalKey": "ambitions-private-semantic-intelligence:T19",
+          "title": "**Measure Release-build runtime, memory, storage, energy, thermal, and Low Power Mode.**",
+          "body": "19. **Measure Release-build runtime, memory, storage, energy, thermal, and Low Power Mode.**\n    Files: complete `BenchmarkHost/Sources/BenchmarkApp.swift` and\n    `BenchmarkSignposts.swift`; create\n    `BenchmarkHost/Tests/BenchmarkSignpostsTests.swift`,\n    `PhysicalDeviceRunManifestTests.swift`,\n    `Manifests/physical-device-matrix-v1.json`; generate ignored\n    `Runs/devices/` and `Artifacts/instruments/`. Dependencies:\n    Tasks 6, 8–10, 12–18; Task 11 only if admitted. Trace: `REQ-013`, `REQ-014`,\n    `REQ-021`, `REQ-022`, `REQ-027`; Design physical-device protocol. Acceptance:\n    oldest iOS 26 class (iPhone 11, SE-class when practical), middle non-Pro\n    (iPhone 14/15), and current Pro class cover phase-separated cold/warm load,\n    tokenization, inference, build/incremental, exact scan, fusion/hydration,\n    cancellation, peak/high-water memory, storage/archive, compute placement,\n    energy, thermal, Low Power Mode, lifecycle, and scales; simulator results are\n    labelled functional only. Tests/checks: Release host build, signpost interval\n    completeness, repeated randomized/cooldown device runs, Instruments/Power\n    Profiler attachment digests, no invented percentage or unlabeled hypothesis.\n    Environment: physical iPhones; simulator only for host functionality.\n    Frontend: none — non-shipping benchmark host. Shipping dependency introduction: prohibited.",
+          "projectSlug": "ambitions-private-semantic-intelligence",
+          "order": 19,
+          "dependencies": [],
+          "sharedPaths": [
+            "Artifacts/instruments/",
+            "BenchmarkHost/Sources/BenchmarkApp.swift",
+            "BenchmarkHost/Tests/BenchmarkSignpostsTests.swift",
+            "Manifests/physical-device-matrix-v1.json",
+            "Runs/devices/"
+          ],
+          "proof": {
+            "required": [
+              "audit"
+            ],
+            "validationCommands": [],
+            "rollback": "Stop and preserve the last verified state."
+          },
+          "frontendImpact": "none",
+          "visualGate": "not-required"
+        },
+        {
+          "id": "T20",
+          "canonicalKey": "ambitions-private-semantic-intelligence:T20",
+          "title": "**Synthesize the eleven-question report, dispose artifacts, and hand off evidence.**",
+          "body": "20. **Synthesize the eleven-question report, dispose artifacts, and hand off evidence.**\n    Files: create `Scripts/synthesize_report.py`, `Scripts/cleanup.py`,\n    `Scripts/tests/test_synthesize_report.py`, and `test_cleanup.py`; emit ignored\n    report during execution and, after review, one\n    redacted packet at\n    `docs/qa/evidence/ambitions-private-semantic-intelligence-evaluation-v1/`\n    containing\n    report JSON/Markdown, manifest, aggregate metrics, hard failures, limitations,\n    provenance/license inventory, device summaries, and attachment digests—not\n    models, vectors, fixture text, or private content. Dependencies: Tasks 1–19,\n    with Tasks 11 and 15 conditionally skipped by policy. Trace: all `REQ-001`\n    through `REQ-027`—including the evaluation N/A/deferred proof for `REQ-024`\n    and `REQ-025`—especially `REQ-013`–`REQ-015`;\n    Design “Evidence handoff and Design amendment gate.” Acceptance: all eleven\n    questions answered; Search-quality and decision-result lift use the locked\n    live user-facing deterministic baseline and exact invocation; Search\n    migration/parity diagnostics are separately labelled and excluded from arm\n    comparisons and owner conclusions; each arm and “no external model” remain\n    possible; shared-embedding ceiling, size/distribution data, hard disqualifiers, uncertainty,\n    experimental Research comparison labels, and IQSE handoff present; Spotlight,\n    assets, compiled caches, vector stores, builds, and partial runs removed;\n    Design remains unchanged pending amendment. Tests/checks: report schema/\n    completeness/bias/redaction tests, cleanup idempotence and failure recovery,\n    post-clean isolation/Spotlight/no-asset scans, product-doc check, `git diff\n    --check`. Environment: macOS plus verification of device artifacts. Frontend:\n    none — evidence handoff only. Shipping dependency introduction: prohibited.\n\n## Task trace summary\n\n| Evidence phase | Tasks |\n|---|---|\n| Isolation, contracts, identity, fixtures, canaries | 1–4 |\n| Baselines and candidate fidelity | 5–11 |\n| Search/Capture quality and scale | 12–15 |\n| Spotlight, failure/offline, provenance | 16–18 |\n| Physical-device measurement and handoff | 19–20 |\n\nEvery `REQ-013` question is closed by at least one task: live Search baseline and\ninvocation identity (5), Search quality (12),\nSearch safety (4, 12, 16), Capture quality (13), shared-embedding ceiling\n(12–13, 20), conversion fidelity (7–11), runtime (17, 19), scale (14–15, 19),\nfailure/offline (17), storage/distribution (14, 18–20), provenance/licensing\n(7–11, 18), and decision result (20).",
+          "projectSlug": "ambitions-private-semantic-intelligence",
+          "order": 20,
+          "dependencies": [],
+          "sharedPaths": [
+            "Scripts/cleanup.py",
+            "Scripts/synthesize_report.py",
+            "Scripts/tests/test_synthesize_report.py",
+            "docs/qa/evidence/ambitions-private-semantic-intelligence-evaluation-v1/"
+          ],
+          "proof": {
+            "required": [
+              "audit"
+            ],
+            "validationCommands": [],
+            "rollback": "Stop and preserve the last verified state."
+          },
+          "frontendImpact": "none",
+          "visualGate": "not-required"
+        }
+      ],
+      "projectDependencies": [],
+      "sharedPaths": [
+        "Artifacts/arctic-xs/{inputs,converted,compiled}/",
+        "Artifacts/bge-small-en-v1.5/{inputs,converted,compiled}/",
+        "Artifacts/instruments/",
+        "Artifacts/minilm-l6-v2/{inputs,converted,compiled}/",
+        "Artifacts/mxbai-xsmall/",
+        "BenchmarkHost/Sources/BenchmarkApp.swift",
+        "BenchmarkHost/Sources/BenchmarkCoordinator.swift",
+        "BenchmarkHost/Tests/BenchmarkCoordinatorTests.swift",
+        "BenchmarkHost/Tests/BenchmarkSignpostsTests.swift",
+        "BenchmarkHost/project.yml",
+        "Conversion/*",
+        "Conversion/tests/test_provenance_security.py",
+        "Fixtures/v1/deterministic-search-oracle.jsonl",
+        "Fixtures/v1/manifest.json",
+        "Manifests/licenses/arctic-xs-LICENSE.txt",
+        "Manifests/licenses/bge-small-en-v1.5-LICENSE.txt",
+        "Manifests/licenses/minilm-l6-v2-LICENSE.txt",
+        "Manifests/licenses/mxbai-xsmall-LICENSE.txt",
+        "Manifests/live-search-behavioral-oracle.json",
+        "Manifests/offline-failure-matrix-v1.json",
+        "Manifests/physical-device-matrix-v1.json",
+        "Manifests/providers/arctic-xs.json",
+        "Manifests/providers/bge-small-en-v1.5.json",
+        "Manifests/providers/deterministic.json",
+        "Manifests/providers/minilm-l6-v2.json",
+        "Manifests/providers/mxbai-xsmall-conditional.json",
+        "Manifests/providers/nlembedding.json",
+        "Manifests/search-migration-parity-diagnostics.json",
+        "Manifests/security/arctic-xs.json",
+        "Manifests/security/bge-small-en-v1.5.json",
+        "Manifests/security/conversion-policy.json",
+        "Manifests/security/minilm-l6-v2.json",
+        "Manifests/security/mxbai-xsmall.json",
+        "Manifests/security/nlembedding.json",
+        "Manifests/suite-v1.json",
+        "Reports/ann-admission.json",
+        "Reports/mxbai-admission.json",
+        "Runs/arctic-xs/reference-validation.json",
+        "Runs/bge-small-en-v1.5/reference-validation.json",
+        "Runs/devices/",
+        "Runs/minilm-l6-v2/reference-validation.json",
+        "Runs/mxbai-xsmall/reference-validation.json",
+        "Runs/scale/{1000,10000,100000}/",
+        "Schemas/*.schema.json",
+        "Scripts/check_isolation.py",
+        "Scripts/check_provenance.py",
+        "Scripts/cleanup.py",
+        "Scripts/collect_archive_sizes.py",
+        "Scripts/inspect_run.py",
+        "Scripts/synthesize_report.py",
+        "Scripts/tests/test_synthesize_report.py",
+        "Sources/AmbitionsIntelligenceEvaluationANN/DisposableANNIndex.swift",
+        "Sources/AmbitionsIntelligenceEvaluationContracts/EvaluationIdentity.swift",
+        "Sources/AmbitionsIntelligenceEvaluationCore/CaptureEvaluationHarness.swift",
+        "Sources/AmbitionsIntelligenceEvaluationCore/MutationCanaries.swift",
+        "Sources/AmbitionsIntelligenceEvaluationCore/ScaleCorpusGenerator.swift",
+        "Sources/AmbitionsIntelligenceEvaluationCore/SearchEvaluationHarness.swift",
+        "Sources/AmbitionsIntelligenceEvaluationCore/SuiteLoader.swift",
+        "Sources/AmbitionsIntelligenceEvaluationCoreML/CoreMLCandidateAdapter.swift",
+        "Sources/AmbitionsIntelligenceEvaluationDeterministic/DeterministicSearchAdapter.swift",
+        "Sources/AmbitionsIntelligenceEvaluationNaturalLanguage/NLEmbeddingAdapter.swift",
+        "Sources/BenchmarkApp.swift",
+        "Tests/AmbitionsIntelligenceEvaluationANNTests/DisposableANNIndexTests.swift",
+        "Tests/AmbitionsIntelligenceEvaluationContractsTests/EvaluationIdentityTests.swift",
+        "Tests/AmbitionsIntelligenceEvaluationCoreMLTests/ArcticXSReferenceTests.swift",
+        "Tests/AmbitionsIntelligenceEvaluationCoreMLTests/BGESmallReferenceTests.swift",
+        "Tests/AmbitionsIntelligenceEvaluationCoreMLTests/CoreMLCandidateAdapterTests.swift",
+        "Tests/AmbitionsIntelligenceEvaluationCoreMLTests/MXBaiAdmissionTests.swift",
+        "Tests/AmbitionsIntelligenceEvaluationCoreMLTests/MiniLML6V2ReferenceTests.swift",
+        "Tests/AmbitionsIntelligenceEvaluationCoreTests/CaptureEvaluationHarnessTests.swift",
+        "Tests/AmbitionsIntelligenceEvaluationCoreTests/FixtureReleaseTests.swift",
+        "Tests/AmbitionsIntelligenceEvaluationCoreTests/MutationCanaryTests.swift",
+        "Tests/AmbitionsIntelligenceEvaluationCoreTests/ScaleCorpusGeneratorTests.swift",
+        "Tests/AmbitionsIntelligenceEvaluationCoreTests/SearchEvaluationHarnessTests.swift",
+        "Tests/AmbitionsIntelligenceEvaluationCoreTests/SuiteIdentityTests.swift",
+        "Tests/AmbitionsIntelligenceEvaluationDeterministicTests/DeterministicSearchAdapterTests.swift",
+        "Tests/AmbitionsIntelligenceEvaluationNaturalLanguageTests/NLEmbeddingAdapterTests.swift",
+        "Tests/CoreSpotlightIsolationTests.swift",
+        "docs/qa/evidence/ambitions-private-semantic-intelligence-evaluation-v1/",
+        "python3\n   tools/ambitions-intelligence-evaluation/Scripts/check_isolation.py",
+        "python3 -m unittest discover -s\n   tools/ambitions-intelligence-evaluation/Conversion/tests -p 'test_*.py'",
+        "swift test --package-path\n   tools/ambitions-intelligence-evaluation --filter\n   AmbitionsIntelligenceEvaluationContractsTests",
+        "tools/ambitions-intelligence-evaluation/Package.swift"
+      ],
+      "frontendAudit": {
+        "status": "passed",
+        "visualGate": "not-required"
+      },
+      "admission": "ready",
+      "admissionBlockers": [],
+      "executionLane": "unscheduled"
     },
     {
       "slug": "capability-continuity-foundation",
@@ -1023,7 +1668,8 @@
         "firstFrontendTaskKey": "capability-continuity-foundation:T5"
       },
       "admission": "ready",
-      "admissionBlockers": []
+      "admissionBlockers": [],
+      "executionLane": "normal"
     },
     {
       "slug": "capability-export",
@@ -1269,7 +1915,8 @@
         "firstFrontendTaskKey": "capability-export:T5"
       },
       "admission": "ready",
-      "admissionBlockers": []
+      "admissionBlockers": [],
+      "executionLane": "normal"
     },
     {
       "slug": "career-destination-recommendations",
@@ -1474,9 +2121,7 @@
           "body": "6. Add typed handoff compatibility tests for destination-adoption-and-pivot,\n   then regenerate canon/project state and run verification. Dependency: Tasks\n   1-5. Trace: all REQ-001 through REQ-013. Acceptance: all requirements pass\n   without enabling adoption or direct network access. Tests: run\n   `implementation/verification.md` in full.\n   Frontend: none — this task is limited to canon, domain, data, runtime, tooling, integration, or verification foundations and does not create or modify a user interface.",
           "projectSlug": "career-destination-recommendations",
           "order": 6,
-          "dependencies": [
-            "career-destination-recommendations:T1"
-          ],
+          "dependencies": [],
           "sharedPaths": [
             "implementation/verification.md"
           ],
@@ -1511,7 +2156,61 @@
         "firstFrontendTaskKey": "career-destination-recommendations:T5"
       },
       "admission": "ready",
-      "admissionBlockers": []
+      "admissionBlockers": [],
+      "executionLane": "normal"
+    },
+    {
+      "slug": "component-sourcing-and-system",
+      "canonicalKey": "project:component-sourcing-and-system",
+      "name": "Lifecycle — Component Sourcing And System",
+      "folder": "docs/product-development/component-sourcing-and-system",
+      "documents": [
+        {
+          "kind": "research",
+          "path": "docs/product-development/component-sourcing-and-system/research.md",
+          "revision": "1",
+          "status": "absorbed",
+          "sha256": "0a668ac19073db4542e170bac1df50978d003e79c599bfd05458a31d7e17aa01",
+          "byteLength": 16266,
+          "gitBlobOid": "c0a38d938979dde7e2194239c7e8b37761fae7a2"
+        }
+      ],
+      "tasks": [],
+      "projectDependencies": [],
+      "sharedPaths": [],
+      "frontendAudit": {
+        "status": "blocked",
+        "visualGate": "unclassified"
+      },
+      "admission": "pending",
+      "admissionBlockers": [
+        "research.md:status=absorbed",
+        "scope.md:missing",
+        "design.md:missing",
+        "implementation/plan.md:missing",
+        "implementation/tasks.md:missing",
+        "implementation/verification.md:missing",
+        "implementation/tasks.md:no-tasks",
+        "scope.md:frontend-field=Surface impact:missing",
+        "design.md:frontend-field=Surface impact:missing",
+        "scope.md:frontend-field=IA/navigation:missing",
+        "design.md:frontend-field=IA/navigation:missing",
+        "scope.md:frontend-field=Assets/iconography:missing",
+        "design.md:frontend-field=Assets/iconography:missing",
+        "scope.md:frontend-field=Visual language:missing",
+        "design.md:frontend-field=Visual language:missing",
+        "scope.md:frontend-field=Motion:missing",
+        "design.md:frontend-field=Motion:missing",
+        "scope.md:frontend-field=Copy/localization:missing",
+        "design.md:frontend-field=Copy/localization:missing",
+        "scope.md:frontend-field=Accessibility:missing",
+        "design.md:frontend-field=Accessibility:missing",
+        "scope.md:frontend-field=Visual proof:missing",
+        "design.md:frontend-field=Visual proof:missing",
+        "design.md:frontend-field=Visual gate:missing",
+        "design.md:frontend-contract-missing"
+      ],
+      "executionLane": "normal"
     },
     {
       "slug": "context-quality-scheduling",
@@ -1751,7 +2450,8 @@
         "firstFrontendTaskKey": "context-quality-scheduling:T5"
       },
       "admission": "ready",
-      "admissionBlockers": []
+      "admissionBlockers": [],
+      "executionLane": "normal"
     },
     {
       "slug": "cross-taxonomy-relationship-authority",
@@ -2061,7 +2761,8 @@
         "firstFrontendTaskKey": "cross-taxonomy-relationship-authority:T9"
       },
       "admission": "ready",
-      "admissionBlockers": []
+      "admissionBlockers": [],
+      "executionLane": "normal"
     },
     {
       "slug": "current-opportunity-availability-intelligence",
@@ -2348,7 +3049,8 @@
         "firstFrontendTaskKey": "current-opportunity-availability-intelligence:T8"
       },
       "admission": "ready",
-      "admissionBlockers": []
+      "admissionBlockers": [],
+      "executionLane": "normal"
     },
     {
       "slug": "destination-adoption-and-pivot",
@@ -2616,7 +3318,8 @@
         "firstFrontendTaskKey": "destination-adoption-and-pivot:T6"
       },
       "admission": "ready",
-      "admissionBlockers": []
+      "admissionBlockers": [],
+      "executionLane": "normal"
     },
     {
       "slug": "education-destination-recommendations",
@@ -2858,7 +3561,8 @@
         "firstFrontendTaskKey": "education-destination-recommendations:T5"
       },
       "admission": "ready",
-      "admissionBlockers": []
+      "admissionBlockers": [],
+      "executionLane": "normal"
     },
     {
       "slug": "external-action-integration-orchestration",
@@ -3141,7 +3845,473 @@
         "firstFrontendTaskKey": "external-action-integration-orchestration:T8"
       },
       "admission": "ready",
-      "admissionBlockers": []
+      "admissionBlockers": [],
+      "executionLane": "normal"
+    },
+    {
+      "slug": "frontend-completion-program",
+      "canonicalKey": "project:frontend-completion-program",
+      "name": "Lifecycle — Frontend Completion Program",
+      "folder": "docs/product-development/frontend-completion-program",
+      "documents": [
+        {
+          "kind": "research",
+          "path": "docs/product-development/frontend-completion-program/research.md",
+          "revision": "1",
+          "status": "approved",
+          "sha256": "96b00305bab8b9b58abb58cd3cea65bc802df387d38241b55bf24568a3511f6e",
+          "byteLength": 7549,
+          "gitBlobOid": "815548c60e41f5ef514529cb34c86b440d9b4bbd"
+        },
+        {
+          "kind": "scope",
+          "path": "docs/product-development/frontend-completion-program/scope.md",
+          "revision": "1",
+          "status": "approved",
+          "sha256": "bc24c78d1cd72f6d48f4c8e5df87d0b95a87ca8b470651370db2ff251b992ce3",
+          "byteLength": 9940,
+          "gitBlobOid": "c8bbdd4e23ca0b4de1cf682908a321811855fe30"
+        },
+        {
+          "kind": "design",
+          "path": "docs/product-development/frontend-completion-program/design.md",
+          "revision": "1",
+          "status": "approved",
+          "sha256": "c0125cf1425ceec7b847d0ac27569fa978d2a45411be657e404971af7db0d481",
+          "byteLength": 11201,
+          "gitBlobOid": "4c60c78d6989cfe23f9190f3f92e3d8e2d0ab81e"
+        },
+        {
+          "kind": "plan",
+          "path": "docs/product-development/frontend-completion-program/implementation/plan.md",
+          "revision": "1",
+          "status": "groomed",
+          "sha256": "ad4a53b3e84ca612a24549b2d7da7380bf1ebff06bf766f855a7fa440a22bd49",
+          "byteLength": 5887,
+          "gitBlobOid": "4746893c4fe5d7d19ecaadbac2f8ff66b6261a56"
+        },
+        {
+          "kind": "tasks",
+          "path": "docs/product-development/frontend-completion-program/implementation/tasks.md",
+          "revision": "1",
+          "status": "groomed",
+          "sha256": "7b474c2a86ec64876f06d78c030a5975db39fdf278ef51fdf28863bd85065c61",
+          "byteLength": 10457,
+          "gitBlobOid": "cea34dd775905da2a97e37e288b4fbe9216a0408"
+        },
+        {
+          "kind": "verification",
+          "path": "docs/product-development/frontend-completion-program/implementation/verification.md",
+          "revision": "1",
+          "status": "groomed",
+          "sha256": "c0b603646369352a7fe3105c1f6a7d66f122198d880511e1d07edcb496de7926",
+          "byteLength": 6489,
+          "gitBlobOid": "75ece7fa6d7ee53c1f00f6838af5135832e82653"
+        }
+      ],
+      "tasks": [
+        {
+          "id": "T1",
+          "canonicalKey": "frontend-completion-program:T1",
+          "title": "UFP-0.1 Consolidate authority, lifecycle, ledger, and workflow controls",
+          "body": "### 1. UFP-0.1 Consolidate authority, lifecycle, ledger, and workflow controls\n\n- Files: sole outside-repository ledger; this packet; `project.yml`; `Packages/AmbitionsPresentation/Package.swift`.\n- Depends on: approved Design.\n- Acceptance: ledger records exact UFP-0…UFP-8 meaning, independent approvals, canonical boundary, and zero-legacy contract; no repo ledger exists.\n- Tests/proof: tracker schema/check and repository shadow-ledger/reference check.\n- Frontend: affected — REQ-001, REQ-002, REQ-003; Visual gate: not-required (program controls only).",
+          "projectSlug": "frontend-completion-program",
+          "order": 1,
+          "dependencies": [],
+          "sharedPaths": [
+            "Packages/AmbitionsPresentation/Package.swift",
+            "project.yml"
+          ],
+          "proof": {
+            "required": [
+              "audit"
+            ],
+            "validationCommands": [],
+            "rollback": "Stop and preserve the last verified state."
+          },
+          "frontendImpact": "affected",
+          "visualGate": "not-required",
+          "parallelGroup": "P0"
+        },
+        {
+          "id": "T2",
+          "canonicalKey": "frontend-completion-program:T2",
+          "title": "UFP-0.2 Establish final-byte component, target, and legacy controls",
+          "body": "### 2. UFP-0.2 Establish final-byte component, target, and legacy controls\n\n- Files: `project.yml`, `Packages/AmbitionsPresentation/Package.swift`, `Native/Ambitions/`, `Native/AmbitionsNativeFoundryHost/`, `Packages/AmbitionsPresentation/Sources/`; ledger artifacts only.\n- Depends on: UFP-0.1.\n- Acceptance: controls distinguish canonical candidates, Foundry, production, tests, extensions, previews, assets, wrappers, and legacy without promoting anything.\n- Tests/proof: final-byte path/import/target manifest and Foundry production-edge scan.\n- Frontend: affected — REQ-004, REQ-010, REQ-015; Visual gate: not-required (control baseline only).\n\n## UFP-1 — Finish primary directions",
+          "projectSlug": "frontend-completion-program",
+          "order": 2,
+          "dependencies": [
+            "frontend-completion-program:T1"
+          ],
+          "sharedPaths": [
+            "Native/Ambitions/",
+            "Native/AmbitionsNativeFoundryHost/",
+            "Packages/AmbitionsPresentation/Package.swift",
+            "Packages/AmbitionsPresentation/Sources/",
+            "project.yml"
+          ],
+          "proof": {
+            "required": [
+              "audit"
+            ],
+            "validationCommands": [],
+            "rollback": "Stop and preserve the last verified state."
+          },
+          "frontendImpact": "affected",
+          "visualGate": "not-required",
+          "parallelGroup": "P0"
+        },
+        {
+          "id": "T3",
+          "canonicalKey": "frontend-completion-program:T3",
+          "title": "UFP-1.1 Retain Today R04 D-129 as primary-direction evidence",
+          "body": "### 3. UFP-1.1 Retain Today R04 D-129 as primary-direction evidence\n\n- Files: `Packages/AmbitionsPresentation/Sources/AmbitionsNativeVisualFoundry/Today*`, Foundry host/tests, ledger evidence links.\n- Depends on: UFP-0.2.\n- Acceptance: Today R04 D-129 remains bounded approved direction; its proof ceiling is not expanded to runtime, cutover, device, or release.\n- Tests/proof: current fixture state/unit/UI/accessibility evidence and owner-decision linkage.\n- Frontend: affected — REQ-005, REQ-006, REQ-016, REQ-017; Visual gate: approved (bounded Today direction only).",
+          "projectSlug": "frontend-completion-program",
+          "order": 3,
+          "dependencies": [
+            "frontend-completion-program:T2"
+          ],
+          "sharedPaths": [
+            "Packages/AmbitionsPresentation/Sources/AmbitionsNativeVisualFoundry/Today*"
+          ],
+          "proof": {
+            "required": [
+              "audit"
+            ],
+            "validationCommands": [],
+            "rollback": "Stop and preserve the last verified state."
+          },
+          "frontendImpact": "affected",
+          "visualGate": "approved",
+          "parallelGroup": "P0"
+        },
+        {
+          "id": "T4",
+          "canonicalKey": "frontend-completion-program:T4",
+          "title": "UFP-1.2 Complete Time as the next primary direction",
+          "body": "### 4. UFP-1.2 Complete Time as the next primary direction\n\n- Files: `Packages/AmbitionsPresentation/Sources/AmbitionsNativeVisualFoundry/Time*`, `Native/AmbitionsNativeFoundryHost/TimeNativeFoundryHost.swift`, associated tests/evidence.\n- Depends on: UFP-1.1.\n- Acceptance: Time completes current research, audit, exploration, five passes, P01–P15, and one owner-review direction while retaining native/local-state truth.\n- Tests/proof: fixture/unit/UI, Dynamic Type/VoiceOver/RTL/contrast variants, explicit owner decision/proof ceiling.\n- Frontend: affected — REQ-005, REQ-006, REQ-007, REQ-016, REQ-017; Visual gate: required.\n\n## UFP-2 — Complete fixture coverage",
+          "projectSlug": "frontend-completion-program",
+          "order": 4,
+          "dependencies": [
+            "frontend-completion-program:T3"
+          ],
+          "sharedPaths": [
+            "Native/AmbitionsNativeFoundryHost/TimeNativeFoundryHost.swift",
+            "Packages/AmbitionsPresentation/Sources/AmbitionsNativeVisualFoundry/Time*"
+          ],
+          "proof": {
+            "required": [
+              "audit"
+            ],
+            "validationCommands": [],
+            "rollback": "Stop and preserve the last verified state."
+          },
+          "frontendImpact": "affected",
+          "visualGate": "required",
+          "parallelGroup": "P0"
+        },
+        {
+          "id": "T5",
+          "canonicalKey": "frontend-completion-program:T5",
+          "title": "UFP-2.1 Define and close the 47-screen/system-surface matrix",
+          "body": "### 5. UFP-2.1 Define and close the 47-screen/system-surface matrix\n\n- Files: Foundry fixture contracts, all Foundry surface fixtures/hosts/tests, sole-ledger coverage artifact.\n- Depends on: UFP-1.2.\n- Acceptance: exactly 47 screens/system surfaces have accountable typical, dense, very-dense, Light, Dark, keyboard, localization, RTL, accessibility, failure, and restoration coverage where applicable.\n- Tests/proof: coverage schema/count check and deterministic fixture-key test matrix.\n- Frontend: affected — REQ-005, REQ-014, REQ-016, REQ-017; Visual gate: required.",
+          "projectSlug": "frontend-completion-program",
+          "order": 5,
+          "dependencies": [
+            "frontend-completion-program:T4"
+          ],
+          "sharedPaths": [],
+          "proof": {
+            "required": [
+              "audit"
+            ],
+            "validationCommands": [],
+            "rollback": "Stop and preserve the last verified state."
+          },
+          "frontendImpact": "affected",
+          "visualGate": "required",
+          "parallelGroup": "P0"
+        },
+        {
+          "id": "T6",
+          "canonicalKey": "frontend-completion-program:T6",
+          "title": "UFP-2.2 Render and review the full matrix without source promotion",
+          "body": "### 6. UFP-2.2 Render and review the full matrix without source promotion\n\n- Files: `Packages/AmbitionsPresentation/Sources/AmbitionsNativeVisualFoundry/`, Foundry host/UI tests, fixture artifacts.\n- Depends on: UFP-2.1.\n- Acceptance: all 47 entries render deterministically with cross-root return; gaps are recorded rather than silently excluded.\n- Tests/proof: host journeys, screenshot geometry/copy comparisons, accessibility transformation matrix, coverage review.\n- Frontend: affected — REQ-004, REQ-005, REQ-014, REQ-017; Visual gate: required.\n\n## UFP-3 — Unified system and grammar",
+          "projectSlug": "frontend-completion-program",
+          "order": 6,
+          "dependencies": [
+            "frontend-completion-program:T5"
+          ],
+          "sharedPaths": [
+            "Packages/AmbitionsPresentation/Sources/AmbitionsNativeVisualFoundry/"
+          ],
+          "proof": {
+            "required": [
+              "audit"
+            ],
+            "validationCommands": [],
+            "rollback": "Stop and preserve the last verified state."
+          },
+          "frontendImpact": "affected",
+          "visualGate": "required",
+          "parallelGroup": "P0"
+        },
+        {
+          "id": "T7",
+          "canonicalKey": "frontend-completion-program:T7",
+          "title": "UFP-3.1 Derive shared design-system and cross-root grammar",
+          "body": "### 7. UFP-3.1 Derive shared design-system and cross-root grammar\n\n- Files: approved fixture candidates in Contracts/Foundation/UI planning paths, Foundry fixtures, ledger grammar artifacts.\n- Depends on: UFP-2.2.\n- Acceptance: shared components derive only from repeated approved consumer semantics, state, accessibility, and lifecycle; native substrate/hard-kill rules persist.\n- Tests/proof: consumer-to-grammar traceability, semantic/accessibility/motion/asset policy review.\n- Frontend: affected — REQ-007, REQ-008, REQ-009, REQ-016, REQ-017; Visual gate: required.",
+          "projectSlug": "frontend-completion-program",
+          "order": 7,
+          "dependencies": [
+            "frontend-completion-program:T6"
+          ],
+          "sharedPaths": [],
+          "proof": {
+            "required": [
+              "audit"
+            ],
+            "validationCommands": [],
+            "rollback": "Stop and preserve the last verified state."
+          },
+          "frontendImpact": "affected",
+          "visualGate": "required",
+          "parallelGroup": "P0"
+        },
+        {
+          "id": "T8",
+          "canonicalKey": "frontend-completion-program:T8",
+          "title": "UFP-3.2 Gain owner approval for unified design system and grammar",
+          "body": "### 8. UFP-3.2 Gain owner approval for unified design system and grammar\n\n- Files: UFP-3 grammar artifact, full matrix evidence, sole-ledger decision.\n- Depends on: UFP-3.1.\n- Acceptance: owner approves one system/grammar direction; no component-level approval is claimed as complete-frontend approval.\n- Tests/proof: hard-kill/taste review, cross-root evidence review, explicit owner decision/proof ceiling.\n- Frontend: affected — REQ-005, REQ-007, REQ-008, REQ-016; Visual gate: required.\n\n## UFP-4 — Canonical component source",
+          "projectSlug": "frontend-completion-program",
+          "order": 8,
+          "dependencies": [
+            "frontend-completion-program:T7"
+          ],
+          "sharedPaths": [],
+          "proof": {
+            "required": [
+              "audit"
+            ],
+            "validationCommands": [],
+            "rollback": "Stop and preserve the last verified state."
+          },
+          "frontendImpact": "affected",
+          "visualGate": "required",
+          "parallelGroup": "P0"
+        },
+        {
+          "id": "T9",
+          "canonicalKey": "frontend-completion-program:T9",
+          "title": "UFP-4.1 Assign one disposition to every component",
+          "body": "### 9. UFP-4.1 Assign one disposition to every component\n\n- Files: UFP-0 inventory and all source/asset/target/wrapper paths; ledger disposition artifact.\n- Depends on: UFP-3.2.\n- Acceptance: every in-scope component is exactly `promote`, `rebuild`, `fixture-only`, `historical`, or `delete`, with owner, replacement, dependency, proof, and delete/retention condition.\n- Tests/proof: one-of schema, final-byte source/asset/target reconciliation, owner disposition review.\n- Frontend: affected — REQ-008, REQ-010, REQ-011, REQ-015; Visual gate: approved.",
+          "projectSlug": "frontend-completion-program",
+          "order": 9,
+          "dependencies": [
+            "frontend-completion-program:T8"
+          ],
+          "sharedPaths": [],
+          "proof": {
+            "required": [
+              "audit"
+            ],
+            "validationCommands": [],
+            "rollback": "Stop and preserve the last verified state."
+          },
+          "frontendImpact": "affected",
+          "visualGate": "approved",
+          "parallelGroup": "P0"
+        },
+        {
+          "id": "T10",
+          "canonicalKey": "frontend-completion-program:T10",
+          "title": "UFP-4.2 Establish canonical Contracts/Foundation/UI source",
+          "body": "### 10. UFP-4.2 Establish canonical Contracts/Foundation/UI source\n\n- Files: `Packages/AmbitionsPresentation/Package.swift`, `Sources/AmbitionsPresentationContracts/FlagshipContracts.swift`, `Sources/AmbitionsFlagshipFoundation/FlagshipSemanticTokens.swift`, `Sources/AmbitionsFlagshipUI/FlagshipShell.swift` or approved replacements.\n- Depends on: UFP-4.1.\n- Acceptance: one canonical UI source follows Contracts/Foundation/UI rules; Foundry and production adapters render it without Foundry/runtime/legacy-design-system UI imports.\n- Tests/proof: package build/test, public API/Sendable review, import-cycle and forbidden-edge scans.\n- Frontend: affected — REQ-004, REQ-007, REQ-008, REQ-010; Visual gate: approved.\n\n## UFP-5 — Complete fixture frontend",
+          "projectSlug": "frontend-completion-program",
+          "order": 10,
+          "dependencies": [
+            "frontend-completion-program:T9"
+          ],
+          "sharedPaths": [
+            "Packages/AmbitionsPresentation/Package.swift",
+            "Sources/AmbitionsFlagshipFoundation/FlagshipSemanticTokens.swift",
+            "Sources/AmbitionsFlagshipUI/FlagshipShell.swift",
+            "Sources/AmbitionsPresentationContracts/FlagshipContracts.swift"
+          ],
+          "proof": {
+            "required": [
+              "audit"
+            ],
+            "validationCommands": [],
+            "rollback": "Stop and preserve the last verified state."
+          },
+          "frontendImpact": "affected",
+          "visualGate": "approved",
+          "parallelGroup": "P0"
+        },
+        {
+          "id": "T11",
+          "canonicalKey": "frontend-completion-program:T11",
+          "title": "UFP-5.1 Complete canonical fixture frontend through synthetic adapters",
+          "body": "### 11. UFP-5.1 Complete canonical fixture frontend through synthetic adapters\n\n- Files: UFP-4 canonical source, Foundry synthetic adapters/hosts/tests, all 47 fixture entries.\n- Depends on: UFP-4.2.\n- Acceptance: Foundry renders source-identical canonical UI through synthetic adapters for each matrix screen/state; production wiring and redesign remain absent.\n- Tests/proof: source-identity/import scan and full fixture matrix/unit/UI/accessibility evidence.\n- Frontend: affected — REQ-004, REQ-005, REQ-010, REQ-014, REQ-017; Visual gate: required.",
+          "projectSlug": "frontend-completion-program",
+          "order": 11,
+          "dependencies": [
+            "frontend-completion-program:T10"
+          ],
+          "sharedPaths": [],
+          "proof": {
+            "required": [
+              "audit"
+            ],
+            "validationCommands": [],
+            "rollback": "Stop and preserve the last verified state."
+          },
+          "frontendImpact": "affected",
+          "visualGate": "required",
+          "parallelGroup": "P0"
+        },
+        {
+          "id": "T12",
+          "canonicalKey": "frontend-completion-program:T12",
+          "title": "UFP-5.2 Obtain complete fixture-frontend owner approval",
+          "body": "### 12. UFP-5.2 Obtain complete fixture-frontend owner approval\n\n- Files: full fixture frontend evidence and ledger approval fields/artifacts.\n- Depends on: UFP-5.1.\n- Acceptance: owner explicitly approves the entire fixture-driven frontend and `approvals.frontend_design` is true; runtime integration remains independently unapproved until its own gate.\n- Tests/proof: final matrix review, explicit approval, `frontend-complete` tracker gate.\n- Frontend: affected — REQ-005, REQ-016, REQ-017; Visual gate: required.\n\n## UFP-6 — Runtime integration",
+          "projectSlug": "frontend-completion-program",
+          "order": 12,
+          "dependencies": [
+            "frontend-completion-program:T11"
+          ],
+          "sharedPaths": [],
+          "proof": {
+            "required": [
+              "audit"
+            ],
+            "validationCommands": [],
+            "rollback": "Stop and preserve the last verified state."
+          },
+          "frontendImpact": "affected",
+          "visualGate": "required",
+          "parallelGroup": "P0"
+        },
+        {
+          "id": "T13",
+          "canonicalKey": "frontend-completion-program:T13",
+          "title": "UFP-6.1 Runtime-integrate Today first",
+          "body": "### 13. UFP-6.1 Runtime-integrate Today first\n\n- Files: UFP-4 canonical source, Today app/runtime/projection/composition paths identified from final bytes, focused tests.\n- Depends on: UFP-5.2 and independent runtime-integration approval.\n- Acceptance: Today consumes real local projections and typed intents; persistence, replay, idempotency, revisions, receipts, recovery, and restoration remain runtime-owned.\n- Tests/proof: unit/integration/UI, migration/replay/restore, privacy/offline, Simulator visual, physical-device sample.\n- Frontend: affected — REQ-010, REQ-012, REQ-013, REQ-014, REQ-016, REQ-017; Visual gate: required.",
+          "projectSlug": "frontend-completion-program",
+          "order": 13,
+          "dependencies": [
+            "frontend-completion-program:T12"
+          ],
+          "sharedPaths": [],
+          "proof": {
+            "required": [
+              "audit"
+            ],
+            "validationCommands": [],
+            "rollback": "Stop and preserve the last verified state."
+          },
+          "frontendImpact": "affected",
+          "visualGate": "required",
+          "parallelGroup": "P0"
+        },
+        {
+          "id": "T14",
+          "canonicalKey": "frontend-completion-program:T14",
+          "title": "UFP-6.2 Runtime-integrate remaining production vertical slices",
+          "body": "### 14. UFP-6.2 Runtime-integrate remaining production vertical slices\n\n- Files: canonical source plus final-byte owners for Goals, Time, You, Search, Capture, shell, receipts, recovery, extensions/previews, `Native/Ambitions/Surfaces/`, `Composer/`, and `Core/LocalRuntimeOS/`.\n- Depends on: UFP-6.1.\n- Acceptance: all routes use canonical views and real runtime adapters without duplicate route/state/mutation authority or Foundry/legacy UI ownership.\n- Tests/proof: per-surface integration/UI/accessibility/privacy/recovery/restoration tests and physical-device samples.\n- Frontend: affected — REQ-007, REQ-010, REQ-012, REQ-013, REQ-014, REQ-016, REQ-017; Visual gate: required.\n\n## UFP-7 — Atomic cutover and zero legacy",
+          "projectSlug": "frontend-completion-program",
+          "order": 14,
+          "dependencies": [
+            "frontend-completion-program:T13"
+          ],
+          "sharedPaths": [
+            "Composer/",
+            "Core/LocalRuntimeOS/",
+            "Native/Ambitions/Surfaces/"
+          ],
+          "proof": {
+            "required": [
+              "audit"
+            ],
+            "validationCommands": [],
+            "rollback": "Stop and preserve the last verified state."
+          },
+          "frontendImpact": "affected",
+          "visualGate": "required",
+          "parallelGroup": "P0"
+        },
+        {
+          "id": "T15",
+          "canonicalKey": "frontend-completion-program:T15",
+          "title": "UFP-7.1 Perform atomic cutover and delete all legacy frontend",
+          "body": "### 15. UFP-7.1 Perform atomic cutover and delete all legacy frontend\n\n- Files: every UFP-4 `delete` row—legacy source/components, dependencies, package products/targets, XcodeGen entries, assets, wrappers, routes, previews, UI tests, flags, test helpers, resources, and live references; retained research/evidence excluded.\n- Depends on: UFP-6.2 plus production-cutover and legacy-deletion approvals.\n- Acceptance: one cutover occurs; final bytes show zero legacy frontend files, dependencies, targets, assets, wrappers, routes, previews, UI tests, flags, or live references; no dual renderer ships.\n- Tests/proof: no-reference scans, target/package/asset resolution, clean builds/tests, replacement parity, rollback rehearsal, `cutover` tracker gate.\n- Frontend: affected — REQ-015, REQ-018; Visual gate: required.\n\n## UFP-8 — Release closure",
+          "projectSlug": "frontend-completion-program",
+          "order": 15,
+          "dependencies": [
+            "frontend-completion-program:T14"
+          ],
+          "sharedPaths": [],
+          "proof": {
+            "required": [
+              "audit"
+            ],
+            "validationCommands": [],
+            "rollback": "Stop and preserve the last verified state."
+          },
+          "frontendImpact": "affected",
+          "visualGate": "required",
+          "parallelGroup": "P0"
+        },
+        {
+          "id": "T16",
+          "canonicalKey": "frontend-completion-program:T16",
+          "title": "UFP-8.1 Close physical-device, accessibility, performance, privacy, localization, migration, and release proof",
+          "body": "### 16. UFP-8.1 Close physical-device, accessibility, performance, privacy, localization, migration, and release proof\n\n- Files: final production app/extension/package configuration, localization catalogs, migration/replay tests, privacy artifacts, performance/device evidence, ledger release artifacts.\n- Depends on: UFP-7.1.\n- Acceptance: physical-device/manual accessibility/performance/privacy/energy/localization/migration evidence is complete, zero-legacy proof remains valid, and owner explicitly approves release.\n- Tests/proof: release archive, physical-iPhone final run, assistive-tech matrix, performance/energy observation, privacy/migration validation, `release` tracker gate.\n- Frontend: affected — REQ-016, REQ-017, REQ-018; Visual gate: required.",
+          "projectSlug": "frontend-completion-program",
+          "order": 16,
+          "dependencies": [
+            "frontend-completion-program:T15"
+          ],
+          "sharedPaths": [],
+          "proof": {
+            "required": [
+              "audit"
+            ],
+            "validationCommands": [],
+            "rollback": "Stop and preserve the last verified state."
+          },
+          "frontendImpact": "affected",
+          "visualGate": "required",
+          "parallelGroup": "P0"
+        }
+      ],
+      "projectDependencies": [],
+      "sharedPaths": [
+        "Composer/",
+        "Core/LocalRuntimeOS/",
+        "Native/Ambitions/",
+        "Native/Ambitions/Surfaces/",
+        "Native/AmbitionsNativeFoundryHost/",
+        "Native/AmbitionsNativeFoundryHost/TimeNativeFoundryHost.swift",
+        "Packages/AmbitionsPresentation/Package.swift",
+        "Packages/AmbitionsPresentation/Sources/",
+        "Packages/AmbitionsPresentation/Sources/AmbitionsNativeVisualFoundry/",
+        "Packages/AmbitionsPresentation/Sources/AmbitionsNativeVisualFoundry/Time*",
+        "Packages/AmbitionsPresentation/Sources/AmbitionsNativeVisualFoundry/Today*",
+        "Sources/AmbitionsFlagshipFoundation/FlagshipSemanticTokens.swift",
+        "Sources/AmbitionsFlagshipUI/FlagshipShell.swift",
+        "Sources/AmbitionsPresentationContracts/FlagshipContracts.swift",
+        "project.yml"
+      ],
+      "frontendAudit": {
+        "status": "passed",
+        "visualGate": "required",
+        "firstFrontendTaskKey": "frontend-completion-program:T1"
+      },
+      "admission": "ready",
+      "admissionBlockers": [],
+      "executionLane": "p0"
     },
     {
       "slug": "generalized-life-branch-simulation",
@@ -3424,7 +4594,8 @@
         "firstFrontendTaskKey": "generalized-life-branch-simulation:T9"
       },
       "admission": "ready",
-      "admissionBlockers": []
+      "admissionBlockers": [],
+      "executionLane": "normal"
     },
     {
       "slug": "goal-path-generation",
@@ -3668,7 +4839,8 @@
         "firstFrontendTaskKey": "goal-path-generation:T5"
       },
       "admission": "ready",
-      "admissionBlockers": []
+      "admissionBlockers": [],
+      "executionLane": "normal"
     },
     {
       "slug": "grounded-generative-destination-proposals",
@@ -3955,7 +5127,8 @@
         "firstFrontendTaskKey": "grounded-generative-destination-proposals:T7"
       },
       "admission": "ready",
-      "admissionBlockers": []
+      "admissionBlockers": [],
+      "executionLane": "normal"
     },
     {
       "slug": "grounded-generative-goal-path-proposals",
@@ -4238,7 +5411,8 @@
         "firstFrontendTaskKey": "grounded-generative-goal-path-proposals:T8"
       },
       "admission": "ready",
-      "admissionBlockers": []
+      "admissionBlockers": [],
+      "executionLane": "normal"
     },
     {
       "slug": "hobby-destination-recommendations",
@@ -4478,7 +5652,8 @@
         "firstFrontendTaskKey": "hobby-destination-recommendations:T5"
       },
       "admission": "ready",
-      "admissionBlockers": []
+      "admissionBlockers": [],
+      "executionLane": "normal"
     },
     {
       "slug": "intelligence-change-management",
@@ -4765,7 +5940,8 @@
         "firstFrontendTaskKey": "intelligence-change-management:T9"
       },
       "admission": "ready",
-      "admissionBlockers": []
+      "admissionBlockers": [],
+      "executionLane": "normal"
     },
     {
       "slug": "intelligence-quality-safety-evaluation",
@@ -4884,9 +6060,7 @@
           "body": "3. **Protected evaluation store and deletion.** Implement store schema, store,\n   and deletion service beneath the active runtime generation. Dependency: Task\n   2. Trace: `REQ-003`, `REQ-008`, `REQ-009`, `REQ-012`, `REQ-017`, `REQ-018`.\n   Acceptance: atomic/idempotent batches, immutable history, protected private\n   artifacts, backup/sync/export exclusion, index rebuild, disk-full recovery,\n   unsupported-schema failure, resumable deletion, and no derived influence.\n   Tests: `IntelligenceEvaluationStoreTests.swift`,\n   `IntelligenceEvaluationDeletionTests.swift`, and privacy storage cases.\n   Frontend: none — this task is limited to canon, domain, data, runtime, tooling, integration, or verification foundations and does not create or modify a user interface.",
           "projectSlug": "intelligence-quality-safety-evaluation",
           "order": 3,
-          "dependencies": [
-            "intelligence-quality-safety-evaluation:T2"
-          ],
+          "dependencies": [],
           "sharedPaths": [],
           "proof": {
             "required": [
@@ -5090,7 +6264,8 @@
         "firstFrontendTaskKey": "intelligence-quality-safety-evaluation:T7"
       },
       "admission": "ready",
-      "admissionBlockers": []
+      "admissionBlockers": [],
+      "executionLane": "normal"
     },
     {
       "slug": "life-branch-reconciliation",
@@ -5390,7 +6565,8 @@
         "firstFrontendTaskKey": "life-branch-reconciliation:T7"
       },
       "admission": "ready",
-      "admissionBlockers": []
+      "admissionBlockers": [],
+      "executionLane": "normal"
     },
     {
       "slug": "lifecycle-fixture",
@@ -5514,7 +6690,8 @@
         "visualGate": "not-required"
       },
       "admission": "ready",
-      "admissionBlockers": []
+      "admissionBlockers": [],
+      "executionLane": "excluded"
     },
     {
       "slug": "linear-realtime-lifecycle-control",
@@ -5860,7 +7037,8 @@
         "visualGate": "not-required"
       },
       "admission": "ready",
-      "admissionBlockers": []
+      "admissionBlockers": [],
+      "executionLane": "control"
     },
     {
       "slug": "multi-goal-portfolio-simulation",
@@ -6143,7 +7321,8 @@
         "firstFrontendTaskKey": "multi-goal-portfolio-simulation:T8"
       },
       "admission": "ready",
-      "admissionBlockers": []
+      "admissionBlockers": [],
+      "executionLane": "normal"
     },
     {
       "slug": "owner-taste-design-governance",
@@ -6224,7 +7403,7 @@
             "rollback": "Stop and preserve the last verified state."
           },
           "frontendImpact": "affected",
-          "visualGate": "unclassified"
+          "visualGate": "not-required"
         },
         {
           "id": "T2",
@@ -6243,7 +7422,7 @@
             "rollback": "Stop and preserve the last verified state."
           },
           "frontendImpact": "affected",
-          "visualGate": "unclassified"
+          "visualGate": "not-required"
         },
         {
           "id": "T3",
@@ -6262,7 +7441,7 @@
             "rollback": "Stop and preserve the last verified state."
           },
           "frontendImpact": "affected",
-          "visualGate": "unclassified"
+          "visualGate": "not-required"
         },
         {
           "id": "T4",
@@ -6281,7 +7460,7 @@
             "rollback": "Stop and preserve the last verified state."
           },
           "frontendImpact": "affected",
-          "visualGate": "unclassified"
+          "visualGate": "not-required"
         },
         {
           "id": "T5",
@@ -6350,10 +7529,6 @@
       },
       "admission": "pending",
       "admissionBlockers": [
-        "implementation/tasks.md:T1:visual-gate-unclassified",
-        "implementation/tasks.md:T2:visual-gate-unclassified",
-        "implementation/tasks.md:T3:visual-gate-unclassified",
-        "implementation/tasks.md:T4:visual-gate-unclassified",
         "research.md:frontend-field=Potential frontend impact:missing",
         "research.md:frontend-field=Existing surfaces investigated:missing",
         "research.md:frontend-field=Evidence and unknowns:missing",
@@ -6375,7 +7550,8 @@
         "design.md:frontend-field=Visual proof:missing",
         "design.md:frontend-field=Visual gate:missing",
         "design.md:frontend-contract-missing"
-      ]
+      ],
+      "executionLane": "normal"
     },
     {
       "slug": "personal-context-and-constraint-controls",
@@ -6658,7 +7834,8 @@
         "firstFrontendTaskKey": "personal-context-and-constraint-controls:T7"
       },
       "admission": "ready",
-      "admissionBlockers": []
+      "admissionBlockers": [],
+      "executionLane": "normal"
     },
     {
       "slug": "private-generative-model-runtime",
@@ -6966,7 +8143,8 @@
         "firstFrontendTaskKey": "private-generative-model-runtime:T9"
       },
       "admission": "ready",
-      "admissionBlockers": []
+      "admissionBlockers": [],
+      "executionLane": "normal"
     },
     {
       "slug": "production-career-reference-corpus",
@@ -7235,9 +8413,7 @@
           "body": "9. **Bundled base, refresh registry, and project generation.** Generate and\n   byte-review the bootstrap JSON and `.sacp`, update fixed refresh entries,\n   lifecycle scheduler, `project.yml`, and generated project. Dependency: Tasks\n   1-8. Trace: `REQ-001` through `REQ-012`, `REQ-016`, `REQ-018`, `REQ-019`.\n   Acceptance: clean install and upgrade expose all O*NET identities offline;\n   BLS requests use fixed public IDs; no user/location-derived request exists;\n   bundle/archive sizes are measured and within approved measured budgets.\n   Tests: decoder/store/coordinator/privacy and resource-bundle integration.\n   Frontend: none — this task is limited to canon, domain, data, runtime, tooling, integration, or verification foundations and does not create or modify a user interface.",
           "projectSlug": "production-career-reference-corpus",
           "order": 9,
-          "dependencies": [
-            "production-career-reference-corpus:T1"
-          ],
+          "dependencies": [],
           "sharedPaths": [
             "project.yml"
           ],
@@ -7292,7 +8468,8 @@
         "firstFrontendTaskKey": "production-career-reference-corpus:T8"
       },
       "admission": "ready",
-      "admissionBlockers": []
+      "admissionBlockers": [],
+      "executionLane": "normal"
     },
     {
       "slug": "production-education-credential-provider-corpus",
@@ -7668,7 +8845,8 @@
         "firstFrontendTaskKey": "production-education-credential-provider-corpus:T10"
       },
       "admission": "ready",
-      "admissionBlockers": []
+      "admissionBlockers": [],
+      "executionLane": "normal"
     },
     {
       "slug": "production-hobby-life-path-reference-corpus",
@@ -8068,7 +9246,8 @@
         "firstFrontendTaskKey": "production-hobby-life-path-reference-corpus:T10"
       },
       "admission": "ready",
-      "admissionBlockers": []
+      "admissionBlockers": [],
+      "executionLane": "normal"
     },
     {
       "slug": "public-reference-knowledge-foundation",
@@ -8312,7 +9491,8 @@
         "firstFrontendTaskKey": "public-reference-knowledge-foundation:T4"
       },
       "admission": "ready",
-      "admissionBlockers": []
+      "admissionBlockers": [],
+      "executionLane": "normal"
     },
     {
       "slug": "scoped-automation-authority",
@@ -8712,7 +9892,8 @@
         "firstFrontendTaskKey": "scoped-automation-authority:T7"
       },
       "admission": "ready",
-      "admissionBlockers": []
+      "admissionBlockers": [],
+      "executionLane": "normal"
     },
     {
       "slug": "user-owned-cloudkit-continuity",
@@ -9202,7 +10383,8 @@
         "firstFrontendTaskKey": "user-owned-cloudkit-continuity:T9"
       },
       "admission": "ready",
-      "admissionBlockers": []
+      "admissionBlockers": [],
+      "executionLane": "normal"
     },
     {
       "slug": "user-profile-archive-import",
@@ -9444,7 +10626,8 @@
         "firstFrontendTaskKey": "user-profile-archive-import:T5"
       },
       "admission": "ready",
-      "admissionBlockers": []
+      "admissionBlockers": [],
+      "executionLane": "normal"
     },
     {
       "slug": "verifiable-credential-import",
@@ -9718,10 +10901,35 @@
         "firstFrontendTaskKey": "verifiable-credential-import:T6"
       },
       "admission": "ready",
-      "admissionBlockers": []
+      "admissionBlockers": [],
+      "executionLane": "normal"
     }
   ],
   "schedule": [
+    {
+      "id": "P0",
+      "projectSlugs": [
+        "frontend-completion-program"
+      ],
+      "taskKeys": [
+        "frontend-completion-program:T1",
+        "frontend-completion-program:T2",
+        "frontend-completion-program:T3",
+        "frontend-completion-program:T4",
+        "frontend-completion-program:T5",
+        "frontend-completion-program:T6",
+        "frontend-completion-program:T7",
+        "frontend-completion-program:T8",
+        "frontend-completion-program:T9",
+        "frontend-completion-program:T10",
+        "frontend-completion-program:T11",
+        "frontend-completion-program:T12",
+        "frontend-completion-program:T13",
+        "frontend-completion-program:T14",
+        "frontend-completion-program:T15",
+        "frontend-completion-program:T16"
+      ]
+    },
     {
       "id": "G00",
       "projectSlugs": [
@@ -10168,5 +11376,31 @@
       ]
     }
   ],
-  "contractHash": "2dab4fc020d2c981dac13d5f89fd7cd2e2a017ca5ab42bf5c7a29fd4e02c0688"
+  "executionPolicy": {
+    "p0": {
+      "active": true,
+      "projectSlug": "frontend-completion-program",
+      "blocksNormalStarts": true,
+      "concurrentProjectSlugs": [
+        "linear-realtime-lifecycle-control"
+      ],
+      "ownerOverrideRequired": true,
+      "operationalLedgerPath": "/Users/devan/.codex/output/Ambitions_Maximum_Polish_Program/PROGRAM.json",
+      "projectionDirection": "one-way"
+    },
+    "unscheduledProjectSlugs": [
+      "ambitions-private-semantic-intelligence"
+    ],
+    "materialization": {
+      "mode": "execution-horizon",
+      "alwaysProjectSlugs": [
+        "frontend-completion-program",
+        "linear-realtime-lifecycle-control"
+      ],
+      "currentNormalGroupsWhenP0Inactive": 1,
+      "nextNormalGroupsWhenP0Inactive": 1,
+      "futureGroups": "repository-authoritative"
+    }
+  },
+  "contractHash": "e12b3850c173b2b2a6c90683677b2d4d5515ed93c9d24ee2f92b979c84979de6"
 }

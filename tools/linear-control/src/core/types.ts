@@ -78,6 +78,27 @@ export interface ProjectContract {
   };
   admission: "ready" | "pending";
   admissionBlockers: readonly string[];
+  executionLane?: "p0" | "control" | "normal" | "unscheduled" | "excluded";
+}
+
+export interface ExecutionPolicy {
+  p0: {
+    active: boolean;
+    projectSlug: string;
+    blocksNormalStarts: boolean;
+    concurrentProjectSlugs: readonly string[];
+    ownerOverrideRequired: boolean;
+    operationalLedgerPath: string;
+    projectionDirection: "one-way";
+  };
+  unscheduledProjectSlugs: readonly string[];
+  materialization: {
+    mode: "execution-horizon";
+    alwaysProjectSlugs: readonly string[];
+    currentNormalGroupsWhenP0Inactive: number;
+    nextNormalGroupsWhenP0Inactive: number;
+    futureGroups: "repository-authoritative";
+  };
 }
 
 export interface DesiredWorkspaceManifest {
@@ -87,6 +108,13 @@ export interface DesiredWorkspaceManifest {
   contractHash: string;
   projects: readonly ProjectContract[];
   schedule: readonly ScheduleGroup[];
+  executionPolicy?: ExecutionPolicy;
+}
+
+export interface ExecutionContext {
+  p0Active: boolean;
+  lane: "p0" | "control" | "normal" | "unscheduled";
+  ownerOverride?: boolean;
 }
 
 export interface TaskProofEvidence {

@@ -1,6 +1,7 @@
 import type {
   CurrentIssue,
   DeletionEvidence,
+  ExecutionContext,
   IssueState,
   LifecyclePhase,
   ProjectContract,
@@ -52,7 +53,10 @@ export const CONTROLLED_PROJECT_LABELS = [
   "acceptance:yellow",
 ] as const;
 
-export function desiredIssueState(issue: CurrentIssue): IssueState {
+export function desiredIssueState(
+  issue: CurrentIssue,
+  execution?: ExecutionContext,
+): IssueState {
   if (
     issue.state === "Canceled" ||
     issue.state === "Duplicate" ||
@@ -73,6 +77,22 @@ export function desiredIssueState(issue: CurrentIssue): IssueState {
       : "Blocked";
   if (issue.blockedBy.length > 0) return "Blocked";
   if (issue.mergedToMain && issue.proofPassed) return "Done";
+  if (
+    execution &&
+    !execution.ownerOverride &&
+    (execution.lane === "unscheduled" ||
+      (execution.p0Active && execution.lane === "normal")) &&
+    ["Backlog", "Blocked", "Ready For Codex"].includes(issue.state)
+  )
+    return "Blocked";
+  if (
+    execution &&
+    !execution.ownerOverride &&
+    execution.p0Active &&
+    execution.lane === "normal" &&
+    ["In Progress", "In Review", "Needs Repair"].includes(issue.state)
+  )
+    return issue.state;
   if (issue.pullRequestUrl || issue.mergedToMain) return "In Review";
   if (issue.branchName) return "In Progress";
   return "Ready For Codex";
@@ -94,9 +114,24 @@ export function desiredProjectPhase(
     )
   )
     return "Completed";
-  if (states.some((state) => state === "In Review" || state === "Needs Repair"))
+  const last = states.at(-1);
+  const implementationBodyComplete =
+    states.length > 0 &&
+    states
+      .slice(0, -1)
+      .every((state) =>
+        ["Done", "Canceled", "Duplicate", "Won’t Do"].includes(state),
+      );
+  if (
+    implementationBodyComplete &&
+    (last === "In Review" || last === "Needs Repair")
+  )
     return "Validating";
-  if (states.some((state) => state === "In Progress" || state === "Done"))
+  if (
+    states.some((state) =>
+      ["In Progress", "In Review", "Needs Repair", "Done"].includes(state),
+    )
+  )
     return "Building";
   return "Grooming";
 }

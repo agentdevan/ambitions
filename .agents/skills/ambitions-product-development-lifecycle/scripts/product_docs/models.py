@@ -35,6 +35,7 @@ class ProductDocument:
     upstream: str
     sections: tuple[Section, ...]
     source_path: Path
+    preamble: str = ""
 
 
 @dataclass(frozen=True)

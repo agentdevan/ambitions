@@ -349,10 +349,14 @@ class CliTests(TemporaryRepositoryTestCase):
             self.approve(phase)
         implementation = self.root / DOCUMENTS_PATH / "example" / "implementation"
         implementation.mkdir()
-        for filename in ("plan.md", "tasks.md", "verification.md"):
+        for filename in ("plan.md", "verification.md"):
             (implementation / filename).write_text(
                 "# Complete\n\nComplete grooming content.\n", encoding="utf-8"
             )
+        (implementation / "tasks.md").write_text(
+            "# Complete\n\n## 1. Example task\n\nFrontend: none — documentation only.\n",
+            encoding="utf-8",
+        )
 
         result, payload = self.invoke_json(
             "check", "docs/product-development/example/design.md"
@@ -388,10 +392,14 @@ class CliTests(TemporaryRepositoryTestCase):
             self.approve(phase)
         implementation = self.root / DOCUMENTS_PATH / "example" / "implementation"
         implementation.mkdir()
-        for filename in ("plan.md", "tasks.md", "verification.md"):
+        for filename in ("plan.md", "verification.md"):
             (implementation / filename).write_text(
                 "# Complete\n\nComplete grooming content.\n", encoding="utf-8"
             )
+        (implementation / "tasks.md").write_text(
+            "# Complete\n\n## 1. Example task\n\nFrontend: none — documentation only.\n",
+            encoding="utf-8",
+        )
 
         path_type = type(implementation)
         real_iterdir = path_type.iterdir

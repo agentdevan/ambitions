@@ -2,6 +2,7 @@ import type { LinearClient } from "../adapters/linear.js";
 import type {
   ControlException,
   DesiredWorkspaceManifest,
+  ExecutionContext,
   IssueState,
   ProjectContract,
   RepositoryBlobEvidence,
@@ -271,6 +272,7 @@ export function desiredLiveIssueState(
     proofPassed: false,
     requiredProofFailed: false,
   },
+  execution?: ExecutionContext,
 ): IssueState {
   if (["Canceled", "Duplicate", "Won’t Do"].includes(current)) return current;
   const frontendBlocked = requiredFrontendGateLabels(project, task).length > 0;
@@ -286,6 +288,13 @@ export function desiredLiveIssueState(
   if (current === "Done") return "In Review";
   if (["In Progress", "In Review", "Needs Repair"].includes(current))
     return current;
+  if (
+    execution &&
+    !execution.ownerOverride &&
+    (execution.lane === "unscheduled" ||
+      (execution.p0Active && execution.lane === "normal"))
+  )
+    return "Blocked";
   return dependencyBlocked ? "Blocked" : "Ready For Codex";
 }
 
@@ -312,6 +321,7 @@ export function desiredLiveStatesByDependency(
   currentStates: ReadonlyMap<string, IssueState>,
   proofByKey: ReadonlyMap<string, TaskProofEvidence>,
   liveDependencyBlockedKeys: ReadonlySet<string> = new Set(),
+  executionByProjectSlug: ReadonlyMap<string, ExecutionContext> = new Map(),
 ): Map<string, IssueState> {
   const entries = projects.flatMap((project) =>
     project.tasks.map((task) => ({ project, task })),
@@ -334,6 +344,7 @@ export function desiredLiveStatesByDependency(
         project,
         task,
         proofByKey.get(task.canonicalKey),
+        executionByProjectSlug.get(project.slug),
       );
       if (desiredStates.get(task.canonicalKey) !== desired) {
         desiredStates.set(task.canonicalKey, desired);
@@ -379,6 +390,9 @@ export function desiredProjectMirrorProgress(
       );
     }).length,
     totalTasks: project.tasks.length,
+    reviewTasks: canonicalStates.filter((state) => state === "In Review")
+      .length,
+    blockedTasks: canonicalStates.filter((state) => state === "Blocked").length,
     ...(nextTask ? { nextTask } : {}),
     groupOrdinal: schedule.indexOf(group) + 1,
     totalGroups: schedule.length,
@@ -796,6 +810,20 @@ export async function auditLiveWorkspace(
     currentStatesByKey,
     proofByKey,
     liveDependencyBlockedKeys,
+    new Map(
+      admitted.map((project) => [
+        project.slug,
+        {
+          p0Active: desired.executionPolicy?.p0.active ?? false,
+          lane:
+            project.executionLane === "p0" ||
+            project.executionLane === "control" ||
+            project.executionLane === "unscheduled"
+              ? project.executionLane
+              : "normal",
+        },
+      ]),
+    ),
   );
   const readFreshIssueState = async (id: string): Promise<LiveIssue> =>
     (
@@ -1027,6 +1055,15 @@ export async function auditLiveWorkspace(
             project,
             task,
             proof,
+            {
+              p0Active: desired.executionPolicy?.p0.active ?? false,
+              lane:
+                project.executionLane === "p0" ||
+                project.executionLane === "control" ||
+                project.executionLane === "unscheduled"
+                  ? project.executionLane
+                  : "normal",
+            },
           );
           plannedStatesByKey.set(task.canonicalKey, beforeWriteDesired);
           if (beforeWriteDesired !== freshDesiredState)
@@ -1115,7 +1152,12 @@ export async function auditLiveWorkspace(
       proofByKey,
       desired.authorityCommit,
     );
-    const phase = progress.phase;
+    const externalP0StateUnavailable =
+      project.executionLane === "p0" &&
+      project.tasks.some((task) => !currentStatesByKey.has(task.canonicalKey));
+    const phase = externalP0StateUnavailable
+      ? live.status.name
+      : progress.phase;
     const liveInitiatives = live.initiatives.nodes.map((item) => item.name);
     if (
       project.primaryInitiative &&
@@ -1128,13 +1170,19 @@ export async function auditLiveWorkspace(
           `Primary Initiative relationship should be exactly ${project.primaryInitiative}`,
         ),
       );
-    const desiredSummary = projectSummaryMirror(group, progress);
+    const desiredSummary = projectSummaryMirror(
+      group,
+      progress,
+      project,
+      desired.executionPolicy?.p0.active ?? false,
+    );
     const desiredProjectDescription = projectAuthorityMirror(
       project,
       group,
       desired.authorityCommit,
       desired.contractHash,
       progress,
+      desired.executionPolicy?.p0.active ?? false,
     );
     const staleProjectFields = [
       ...(live.summary !== desiredSummary ? ["summary"] : []),
@@ -1239,6 +1287,7 @@ export async function auditLiveWorkspace(
         project,
         desired.authorityCommit,
         progress,
+        desired.executionPolicy?.p0.active ?? false,
       );
       const currentDescription = milestone.description ?? "";
       const beforeHash = await sha256Text(currentDescription);

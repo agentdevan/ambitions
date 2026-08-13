@@ -104,6 +104,61 @@ def replace_section(contents: str, heading: str, body: str) -> str:
 
 
 class ValidationTests(unittest.TestCase):
+    def test_accepts_reviewed_frontend_field_variants_and_conditional_child(self) -> None:
+        research = replace_section(
+            completed_template("research"),
+            "Frontend impact investigation",
+            "\n".join(
+                (
+                    "**Classification: certain.** Existing surfaces are affected.",
+                    "",
+                    "Affected surfaces:",
+                    "",
+                    "- global Search and Capture;",
+                    "- Trust and settings.",
+                    "",
+                    "Design must fixture deterministic and refined states.",
+                )
+            ),
+        )
+        scope = replace_section(
+            completed_template("scope"),
+            "Frontend impact contract",
+            "\n".join(
+                (
+                    "- **Surface impact: existing + conditional new-child.** Existing Search/Capture plus an evidence-gated child.",
+                    "- **IA/navigation: none.** No root change.",
+                    "- **Assets/iconography: system-only.** SF Symbols only.",
+                    "- **Visual language: unchanged.** Existing system.",
+                    "- **Motion/effects: unchanged.** No special animation.",
+                    "- **Copy/localization:** Product language.",
+                    "- **Accessibility:** Native semantics.",
+                    "- **Visual proof:** Existing fixtures; conditional child requires approval.",
+                )
+            ),
+        )
+        design = replace_section(
+            completed_template("design"),
+            "Frontend experience specification",
+            "\n".join(
+                (
+                    "- Surface impact: existing + conditional new-child",
+                    "- IA/navigation: none",
+                    "- Assets/iconography: system-only",
+                    "- Visual language: unchanged",
+                    "- Motion: unchanged",
+                    "- Copy/localization: Product language.",
+                    "- Accessibility: Native semantics.",
+                    "- Visual proof: Existing fixtures; conditional child requires approval.",
+                    "- Visual gate: not-required",
+                )
+            ),
+        )
+
+        for contents in (research, scope, design):
+            result = validate_document(parse_document(contents))
+            self.assertTrue(result.valid, result.diagnostics)
+
     def test_approved_documents_require_complete_frontend_contract_fields(self) -> None:
         contents = replace_section(
             completed_template("scope"),

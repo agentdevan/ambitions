@@ -1,18 +1,53 @@
 {
   "excludedSlugs": ["lifecycle-fixture"],
+  "p0": {
+    "active": true,
+    "projectSlug": "frontend-completion-program",
+    "blocksNormalStarts": true,
+    "concurrentProjectSlugs": ["linear-realtime-lifecycle-control"],
+    "ownerOverrideRequired": true,
+    "operationalLedgerPath": "/Users/devan/.codex/output/Ambitions_Maximum_Polish_Program/PROGRAM.json",
+    "projectionDirection": "one-way"
+  },
+  "unscheduledSlugs": ["ambitions-private-semantic-intelligence"],
+  "materialization": {
+    "mode": "execution-horizon",
+    "alwaysProjectSlugs": [
+      "frontend-completion-program",
+      "linear-realtime-lifecycle-control"
+    ],
+    "currentNormalGroupsWhenP0Inactive": 1,
+    "nextNormalGroupsWhenP0Inactive": 1,
+    "futureGroups": "repository-authoritative"
+  },
   "groups": [
     ["linear-realtime-lifecycle-control"],
-    ["capability-continuity-foundation", "public-reference-knowledge-foundation"],
+    [
+      "capability-continuity-foundation",
+      "public-reference-knowledge-foundation"
+    ],
     ["capability-export", "personal-context-and-constraint-controls"],
     ["user-owned-cloudkit-continuity"],
     ["private-generative-model-runtime", "scoped-automation-authority"],
     ["cross-taxonomy-relationship-authority", "user-profile-archive-import"],
     ["adaptive-local-learning-and-replanning", "context-quality-scheduling"],
     ["production-career-reference-corpus", "verifiable-credential-import"],
-    ["career-destination-recommendations", "production-education-credential-provider-corpus"],
-    ["education-destination-recommendations", "production-hobby-life-path-reference-corpus"],
-    ["hobby-destination-recommendations", "intelligence-quality-safety-evaluation"],
-    ["current-opportunity-availability-intelligence", "intelligence-change-management"],
+    [
+      "career-destination-recommendations",
+      "production-education-credential-provider-corpus"
+    ],
+    [
+      "education-destination-recommendations",
+      "production-hobby-life-path-reference-corpus"
+    ],
+    [
+      "hobby-destination-recommendations",
+      "intelligence-quality-safety-evaluation"
+    ],
+    [
+      "current-opportunity-availability-intelligence",
+      "intelligence-change-management"
+    ],
     ["destination-adoption-and-pivot"],
     ["external-action-integration-orchestration", "goal-path-generation"],
     ["grounded-generative-destination-proposals"],

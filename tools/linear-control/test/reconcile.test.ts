@@ -101,4 +101,73 @@ describe("reconciliation planner", () => {
 
     expect(plan.mutations[0]!.payload.state).toBe("Blocked");
   });
+
+  it("holds existing normal issues and lazily avoids future issue creation while P0 is active", async () => {
+    const p0 = project("p0");
+    p0.executionLane = "p0";
+    const control = project("control");
+    control.executionLane = "control";
+    const normal = project("normal");
+    normal.executionLane = "normal";
+    const manifest: DesiredWorkspaceManifest = {
+      schemaVersion: 1,
+      authorityCommit: "abc",
+      contractHash: "hash",
+      projects: [p0, control, normal],
+      schedule: [
+        { id: "P0", projectSlugs: ["p0"], taskKeys: ["p0:T1"] },
+        {
+          id: "G00",
+          projectSlugs: ["control"],
+          taskKeys: ["control:T1"],
+        },
+        { id: "G01", projectSlugs: ["normal"], taskKeys: ["normal:T1"] },
+      ],
+      executionPolicy: {
+        p0: {
+          active: true,
+          projectSlug: "p0",
+          blocksNormalStarts: true,
+          concurrentProjectSlugs: ["control"],
+          ownerOverrideRequired: true,
+          operationalLedgerPath: "/authority/PROGRAM.json",
+          projectionDirection: "one-way",
+        },
+        unscheduledProjectSlugs: [],
+        materialization: {
+          mode: "execution-horizon",
+          alwaysProjectSlugs: ["p0", "control"],
+          currentNormalGroupsWhenP0Inactive: 1,
+          nextNormalGroupsWhenP0Inactive: 1,
+          futureGroups: "repository-authoritative",
+        },
+      },
+    };
+    const plan = await planReconciliation(manifest, {
+      projects: [],
+      issues: [
+        {
+          id: "normal-issue",
+          identifier: "AMB-3",
+          canonicalKey: "normal:T1",
+          state: "Ready For Codex",
+          labels: [],
+          blockedBy: [],
+          mergedToMain: false,
+          proofPassed: false,
+          requiredProofFailed: false,
+        },
+      ],
+    });
+
+    expect(
+      plan.mutations
+        .filter((mutation) => mutation.kind === "create")
+        .map((mutation) => mutation.canonicalKey),
+    ).toEqual(["p0:T1", "control:T1"]);
+    expect(
+      plan.mutations.find((mutation) => mutation.canonicalKey === "normal:T1")
+        ?.payload.state,
+    ).toBe("Blocked");
+  });
 });

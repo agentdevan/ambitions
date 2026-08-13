@@ -63,6 +63,49 @@ def complete_initiative(directory: Path) -> None:
 
 
 class GroomingValidationTests(unittest.TestCase):
+    def test_heading_numbered_tasks_are_structurally_validated(self) -> None:
+        with TemporaryDirectory() as temporary_directory:
+            initiative = Path(temporary_directory) / "example"
+            initiative.mkdir()
+            complete_initiative(initiative)
+            implementation = initiative / "implementation"
+            implementation.mkdir()
+            (implementation / "plan.md").write_text(
+                "# Plan\n\nImplementation order.\n", encoding="utf-8"
+            )
+            (implementation / "tasks.md").write_text(
+                "# Tasks\n\n## Phase\n\n### 1. UFP-0.1 Implement controls\n\n- Depends on: approved Design.\n- Frontend: affected — REQ-001; Visual gate: not-required (controls only).\n",
+                encoding="utf-8",
+            )
+            (implementation / "verification.md").write_text(
+                "# Verification\n\nRun the focused tests.\n", encoding="utf-8"
+            )
+
+            result = validate_initiative(initiative)
+
+        self.assertNotIn("missing-task-frontend-declaration", diagnostics(result))
+
+    def test_tasks_file_without_any_recognized_tasks_is_rejected(self) -> None:
+        with TemporaryDirectory() as temporary_directory:
+            initiative = Path(temporary_directory) / "example"
+            initiative.mkdir()
+            complete_initiative(initiative)
+            implementation = initiative / "implementation"
+            implementation.mkdir()
+            (implementation / "plan.md").write_text(
+                "# Plan\n\nImplementation order.\n", encoding="utf-8"
+            )
+            (implementation / "tasks.md").write_text(
+                "# Tasks\n\nNo canonical tasks are declared.\n", encoding="utf-8"
+            )
+            (implementation / "verification.md").write_text(
+                "# Verification\n\nRun the focused tests.\n", encoding="utf-8"
+            )
+
+            result = validate_initiative(initiative)
+
+        self.assertIn("missing-grooming-tasks", diagnostics(result))
+
     def test_groomed_tasks_require_explicit_frontend_classification(self) -> None:
         with TemporaryDirectory() as temporary_directory:
             initiative = Path(temporary_directory) / "example"

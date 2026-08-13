@@ -191,4 +191,26 @@ describe("live mirror audit", () => {
     expect(states.get("example:T1")).toBe("In Review");
     expect(states.get("example:T2")).toBe("Blocked");
   });
+
+  it("enforces the P0 start lock in live-state derivation while preserving closure", () => {
+    const { project, task } = contracts("not-required");
+    expect(
+      desiredLiveIssueState("Backlog", false, project, task, undefined, {
+        p0Active: true,
+        lane: "normal",
+      }),
+    ).toBe("Blocked");
+    expect(
+      desiredLiveIssueState("In Review", false, project, task, undefined, {
+        p0Active: true,
+        lane: "normal",
+      }),
+    ).toBe("In Review");
+    expect(
+      desiredLiveIssueState("Backlog", false, project, task, undefined, {
+        p0Active: true,
+        lane: "control",
+      }),
+    ).toBe("Ready For Codex");
+  });
 });

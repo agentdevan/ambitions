@@ -12,7 +12,7 @@ SCRIPTS_DIRECTORY = Path(__file__).resolve().parents[1] / "scripts"
 if str(SCRIPTS_DIRECTORY) not in sys.path:
     sys.path.insert(0, str(SCRIPTS_DIRECTORY))
 
-from product_docs.documents import parse_document
+from product_docs.documents import parse_document, render_document
 from product_docs.errors import ProductDocsError
 from product_docs.models import DocumentStatus, DocumentType
 
@@ -38,6 +38,24 @@ class DocumentIOTests(unittest.TestCase):
             document.sections[0].body,
             "\n<!-- PRODUCT-DOC-DRAFT: State the intended user and product outcome from approved Research. -->\n\n",
         )
+
+    def test_preserves_reviewed_preamble_before_level_two_sections(self) -> None:
+        contents = (TEMPLATE_DIRECTORY / "research.md").read_text(encoding="utf-8")
+        contents = contents.replace(
+            "\n## Idea and user problem",
+            "\n# Reviewed research title\n\n**Evidence snapshot:** 2026-08-13\n\n## Idea and user problem",
+            1,
+        )
+
+        document = parse_document(contents)
+
+        self.assertEqual(
+            document.preamble,
+            "\n# Reviewed research title\n\n**Evidence snapshot:** 2026-08-13\n\n",
+        )
+        rendered = render_document(document)
+        self.assertEqual(parse_document(rendered).preamble, document.preamble)
+        self.assertIn("# Reviewed research title", rendered)
 
     def test_rejects_extra_frontmatter_fields(self) -> None:
         contents = (TEMPLATE_DIRECTORY / "research.md").read_text(encoding="utf-8")
