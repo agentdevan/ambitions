@@ -60,7 +60,9 @@ Contract and injected-canary tests must prove no arm can:
 
 The evaluation contracts must expose none of those capabilities. Baseline action
 and hydration tests operate on fixture authority only. Focused existing Search
-and Capture tests remain green as behavioral oracles and are not replaced.
+and Capture tests remain green as behavioral oracles and are not replaced. The
+live Search transcription imports no production repository, app store, command
+client, or runtime generation store.
 
 ## Matrix, fixture, and run identity
 
@@ -75,15 +77,54 @@ and Capture tests remain green as behavioral oracles and are not replaced.
   user data.
 - Tuning and holdout partitions are disjoint.
 - Run identity binds suite/fixture/arm/provider/preprocessing/conversion/
-  precision/runtime/OS/device/build/scale/seed/fusion/calibration/code digests.
+  precision/runtime/OS/device/build/scale/seed/fusion/calibration/code digests,
+  the live-Search behavioral-oracle digest, and the exact Search invocation
+  context.
 - Interruption produces an invalid partial run; evidence from different
   identities is never combined silently.
 
 ## Search evidence
 
-For each applicable arm and each declared Search slice, report raw denominators,
+Final Search evidence has three non-interchangeable sections.
+
+### 1. Live user-facing deterministic baseline
+
+Prove and report:
+
+- a fixture-side, non-production reproduction of current
+  `DefaultMemoryLensService` / `LocalSearchIndex` behavior—not the FTS or
+  canonical-generation stack—including query normalization/matching, result
+  construction, kinds/families, source/provenance semantics, combined/family
+  ranking, empty-query behavior, stable ordering/limit, trusted handoff, and
+  fixture-side result routing;
+- shipping composition parity for `SystemSurfaceBootstrap →
+  DefaultMemoryLensService → LocalSearchIndex`;
+- behavioral-oracle parity against
+  `Native/AmbitionsTests/App/MemoryLensServiceTests.swift`, the relevant current
+  `LocalSearchIndex` cases in
+  `Native/AmbitionsTests/LocalRuntimeOS/Search/SearchTests.swift`, and the other
+  focused source/call-site tests locked by Task 5;
+- the exact Git blob and SHA-256 hashes for every source, directly used result
+  mapping/ranking source, test, and full-screen call site listed in `plan.md`;
+- the pinned semantic-v1 invocation identity:
+  `kind = .memoryLens`, `seedIntent = .memoryLens`,
+  `entrySource = .shellUtility`, `presentationContext = .recall`, initial
+  `query = ""`, `goalID = nil`, `captureID = nil`, and resolved `origin = nil`;
+  and
+- drift invalidation: any bound source, test, or call-site change stops the
+  baseline for review and cannot silently regenerate or bless its oracle.
+
+Other Search intents may be deterministic parity/sanity slices only. They must
+remain identity-labelled and cannot broaden or be pooled into semantic-v1 user-
+value evaluation.
+
+### 2. Semantic provider comparisons
+
+For each applicable provider and declared Search slice, report raw denominators,
 distributions, per-query redacted outcomes, aggregate metrics, confidence or
-bootstrap intervals where used, failures, and limitations:
+bootstrap intervals where used, failures, and limitations. Every provider is
+compared against the live baseline above under the same pinned invocation and
+fixture partition:
 
 - exact title and strong-prefix preservation, including top-result preservation;
 - lexical retrieval and zero-token-overlap paraphrase retrieval;
@@ -102,6 +143,19 @@ bootstrap intervals where used, failures, and limitations:
 Zero tolerance: privacy-ineligible/deleted/tombstoned result, fabricated identity,
 stale action eligibility, deterministic blockage, canonical mutation, or fourth
 Search authority.
+
+### 3. Search migration/parity diagnostics
+
+- `FTSIndex`, `ResultRanker`, `SemanticLocalIndex`, `SearchActionValidator`, and
+  `RuntimeCanonicalSearch` results are separately labelled
+  **Search migration/parity diagnostics**.
+- They use synthetic fixture authority and disposable candidate stores only.
+- They are not provider arms and are never blended with, substituted for, or
+  relabelled as the live user-facing deterministic baseline.
+- Their denominators, metrics, limitations, and invocation/diagnostic identity
+  remain separate from semantic provider comparisons.
+- They cannot select, imply, or establish a future production Search owner or
+  generation.
 
 ## Capture evidence
 
@@ -279,7 +333,7 @@ The final report must contain one complete section for each `REQ-013` question:
 
 | Question | Mandatory evidence |
 |---|---|
-| 1. Search quality | Search metric/slice report for deterministic, `NLEmbedding`, every valid required external candidate, and separate Spotlight |
+| 1. Search quality | User-value lift for `NLEmbedding`, every valid required external candidate, and separate Spotlight against the locked live `DefaultMemoryLensService` / `LocalSearchIndex` baseline under the pinned full-screen invocation; migration/parity diagnostics reported separately |
 | 2. Search safety | Hard filters, hydration, deletion/staleness, identity/action and mutation-canary results |
 | 3. Capture quality | Classification/association/duplicate/calibration/abstention/correction/selective-accuracy report |
 | 4. Shared-embedding ceiling | Paired Search/Capture benefit, coverage, regression, burden, and no-classifier/LLM conclusion |
@@ -289,7 +343,7 @@ The final report must contain one complete section for each `REQ-013` question:
 | 8. Failure/offline | Full airplane/asset/pressure/cancel/background/crash/recovery matrix |
 | 9. Storage/distribution | Converted/tokenizer/cache/index/archive/installed measurements without a delivery choice |
 | 10. Provenance/licensing | Immutable hashes, reproduction, scans, license/NOTICE, offline/no-token proof |
-| 11. Decision result | Arm-by-arm user-value lift, hard failures, device burden, uncertainty, and unbiased conclusion |
+| 11. Decision result | Arm-by-arm user-value lift against the locked live user-facing deterministic baseline, hard failures, device burden, uncertainty, and unbiased conclusion; Search migration/parity diagnostics cannot affect winner or owner language |
 
 ## Decision neutrality and handoff
 
@@ -305,6 +359,10 @@ rank does not select an arm. An external model may be recommended to amended
 Design only if it has valid conversion/provenance/license evidence, no hard
 failure, material paired Ambitions value, and measured device/storage burden
 that amended Design can assess. The evaluation itself sets no production budget.
+For Search, “material user value” means lift over the locked live
+`DefaultMemoryLensService` / `LocalSearchIndex` baseline under the pinned
+full-screen invocation. FTS/canonical-generation diagnostics cannot substitute
+for that comparison or decide production ownership.
 
 The final redacted packet contains run/suite identities, aggregate results,
 hard failures, limitations, provenance/license/security summaries, physical-
@@ -370,4 +428,9 @@ energy, thermal, memory, or compute-placement evidence.
 authority, complete Search/Capture/conversion/privacy/offline/scale/device
 evidence, all eleven `REQ-013` answers, exact-first conditional ANN behavior,
 Core Spotlight isolation/cleanup, decision neutrality, and Research-threshold
-nonauthority. It cannot pass by selecting Arctic or any external model.
+nonauthority. It makes the live `DefaultMemoryLensService` / `LocalSearchIndex`
+behavior and exact full-screen invocation the primary deterministic Search
+baseline, drift-locks its production oracle, and segregates FTS,
+`SemanticLocalIndex`, and canonical-generation behavior as non-owner
+Search migration/parity diagnostics. It cannot pass by selecting Arctic or any
+external model.

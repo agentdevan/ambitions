@@ -23,7 +23,8 @@ shipping schemes, app/extension composition, canon, or release resources.
 
 The closed arms are:
 
-1. current deterministic Search/Capture baseline;
+1. live user-facing deterministic Search (`DefaultMemoryLensService` /
+   `LocalSearchIndex`) plus the current deterministic Capture baseline;
 2. Apple `NLEmbedding`;
 3. Snowflake Arctic Embed XS;
 4. BGE Small EN v1.5;
@@ -60,7 +61,8 @@ tools/ambitions-intelligence-evaluation/
 │   │   └── SuiteLoader.swift
 │   ├── AmbitionsIntelligenceEvaluationDeterministic/
 │   │   ├── DeterministicCaptureAdapter.swift
-│   │   └── DeterministicSearchAdapter.swift
+│   │   ├── DeterministicSearchAdapter.swift
+│   │   └── SearchMigrationParityDiagnostics.swift
 │   ├── AmbitionsIntelligenceEvaluationNaturalLanguage/
 │   │   └── NLEmbeddingAdapter.swift
 │   ├── AmbitionsIntelligenceEvaluationCoreML/
@@ -109,6 +111,8 @@ tools/ambitions-intelligence-evaluation/
 │   └── reference-texts.jsonl
 ├── Manifests/
 │   ├── suite-v1.json
+│   ├── live-search-behavioral-oracle.json
+│   ├── search-migration-parity-diagnostics.json
 │   ├── offline-failure-matrix-v1.json
 │   ├── physical-device-matrix-v1.json
 │   ├── providers/
@@ -198,10 +202,14 @@ raising the shipping app minimum.
 framework-neutral value contracts:
 
 - `EvaluationSuiteIdentity`: schema version, fixture-release digest, closed-arm
-  digest, task/policy revisions, source commit, and evidence dimensions;
+  digest, task/policy revisions, source commit, live-Search behavioral-oracle
+  digest, pinned Search invocation digest, and evidence dimensions;
 - `EvaluationRunIdentity`: suite identity plus provider/preprocessing,
   conversion/precision, OS/device/build, scale, seed, calibration/fusion, and
-  start identity;
+  start identity; every Search run repeats the exact pinned invocation identity;
+- `SearchInvocationIdentity`: overlay kind, `seedIntent`, entry source,
+  presentation context, initial query, goal/capture context, resolved origin,
+  and semantic-v1 intent-slice label;
 - `EvaluationDocument` and `EvaluationQuery`: opaque synthetic IDs, authorized
   minimal text, family, privacy eligibility, source revision, tombstone/deletion,
   Goal relation, relevance judgments, and expected deterministic consequences;
@@ -218,9 +226,10 @@ framework-neutral value contracts:
   invalidation identity, and no universal score or release verdict.
 
 All JSON is canonicalized before SHA-256 identity. A run is valid only when its
-suite, fixtures, provider manifest, binaries/assets, device/OS/build, exact code
-commit, seed, scale, experiment settings, and output digest are complete. Partial
-or interrupted output is marked invalid and never merged with another run.
+suite, fixtures, provider manifest, live-Search behavioral oracle, pinned Search
+invocation, binaries/assets, device/OS/build, exact code commit, seed, scale,
+experiment settings, and output digest are complete. Partial or interrupted
+output is marked invalid and never merged with another run.
 
 ## Fixtures and test authority
 
@@ -240,23 +249,92 @@ Goal association/no-association, conflicts, unsupported language, correction,
 and unsafe-assumption canaries.
 
 The fixture corpus is the only Search/Capture authority in the tranche. The
-evaluation harness does not import production types. Baseline behavior is a
-fixture-side transcription of the current deterministic algorithms plus golden
-outputs captured from focused current Search/Capture tests; it is labelled with
-the inspected source file hashes and must be refreshed or invalidated if those
-owners change before execution.
+evaluation harness does not import production types, repositories, app stores,
+or production data. The primary Search baseline is a fixture-side transcription
+of the live `DefaultMemoryLensService` / `LocalSearchIndex` behavior, including
+result construction, kinds/families, source/provenance semantics, normalization,
+matching, ranking, empty-query handling, stable ordering, trusted handoff, and
+fixture-side routing consequences. Golden outputs are bound to focused current
+production tests and the exact source/test/call-site hashes below.
+
+The semantic-v1 quality slice pins the current full-screen global Search
+invocation exactly as inspected: `ShellOverlayKind.memoryLens`,
+`seedIntent = .memoryLens`, `entrySource = .shellUtility`,
+`presentationContext = .recall`, initial `query = ""`, `goalID = nil`,
+`captureID = nil`, and resolved `origin = nil`. The call path is
+`StageStore.presentMemoryLens(source: .shellUtility)` through `StageReducer` and
+`ShellOverlayState.memoryLens` into the full-screen
+`AmbitionsStage.shellSearchSeam`; query refresh passes
+`overlay.intent ?? .memoryLens` and `overlay.entrySource.originSurface` to
+`DefaultMemoryLensService`. Other intents may be deterministic parity/sanity
+slices only. They are identity-labelled and cannot broaden semantic-v1 quality
+scope or be merged into its value result.
+
+### Reviewed live Search behavioral-oracle lock
+
+The following Git blob hashes were inspected at repository commit
+`0bd0182f814eef813942f619928630fca947a685`. Product/source implementation is
+unchanged from the approved Research baseline; subsequent reviewed changes were
+lifecycle artifacts. Task 5 must verify every bound blob before generating an
+oracle and record these hashes plus SHA-256 values in
+`Manifests/live-search-behavioral-oracle.json`.
+
+| Bound source, test, or call site | Git blob hash |
+|---|---|
+| `Native/Ambitions/App/Bootstrap/SystemSurfaceBootstrap.swift` | `ca904f67a5c65c78e10eb7f40f54d85dc209ac6c` |
+| `Native/Ambitions/Core/LocalRuntimeOS/Search/MemoryLensService.swift` | `dfd39c0c6f3fe57e1a802b66c5e92246bd71a57d` |
+| `Native/Ambitions/Core/LocalRuntimeOS/Search/MemoryLensService+SearchResults.swift` | `0ec0952fc19383471203ddc58fb1fcd7ef852d94` |
+| `Native/Ambitions/Core/LocalRuntimeOS/Search/LocalSearchIndex.swift` | `175e8c22602d4ff3ff699e619523f383023d3b4c` |
+| `Native/Ambitions/Core/LocalRuntimeOS/Search/MemoryLensResult+SearchPresentation.swift` | `a6f869f70527e536fa261a32ef80b3adc33a8a44` |
+| `Native/Ambitions/Core/LocalRuntimeOS/Boundary/AppServices.swift` | `8369c7be76ad14582330003f4ce08d8f0fc7147a` |
+| `Native/Ambitions/App/ShellCommandDestination.swift` | `662bfcea86dc520032d14326a9e8f4f633dd0337` |
+| `Native/Ambitions/App/ShellCommandRouter.swift` | `11de91e87477ae0063a15d1cf2164bd9845805a3` |
+| `Native/Ambitions/App/ShellCommandModels.swift` | `3ed4a7bec65e4f06019a59f77dffb6436563585c` |
+| `Native/Ambitions/App/ShellCommandSourceModels.swift` | `c9e7cb40c7712fac0ea254086d97f478bacb06dc` |
+| `Native/Ambitions/Stage/StageStore.swift` | `631b8ef9b501ff7c82293019457147d8afd1eb13` |
+| `Native/Ambitions/Stage/StageReducer.swift` | `9a1b403bcde8a5701b7c559188b4ed5eb42095ed` |
+| `Native/Ambitions/Stage/Overlays/ShellOverlayState.swift` | `200a2e42931ebc54b17df023cc7212d22daa5e7c` |
+| `Native/Ambitions/Stage/Overlays/AppShellOverlayView.swift` | `b74a6644700946fad64f7916c4a5240a20bdd216` |
+| `Native/Ambitions/Stage/Overlays/QuietCommandMemoryLensOverlay.swift` | `f85c135c1f290eaf1e011a38636008076ac4faf7` |
+| `Native/Ambitions/Stage/AmbitionsStage.swift` | `faa1af5c57254f5cca8c64dec289efd88572b3fd` |
+| `Native/AmbitionsTests/App/MemoryLensServiceTests.swift` | `956de44f5436106dda846023663e9d52ab5f6f0b` |
+| `Native/AmbitionsTests/LocalRuntimeOS/Search/SearchTests.swift` | `36519fa719e335e121dec1aa4cc588a08a7d15b3` |
+| `Native/AmbitionsTests/Runtime/P1FLocalSearchFoundationTests.swift` | `82510906a626ffe0d889b80608913597c03864cb` |
+| `Native/AmbitionsTests/App/AppShellNavigationTests.swift` | `803264b529ab8e5f5e3d0615711f5fa0cfe1a649` |
+| `Native/AmbitionsTests/App/ShellPresentationDependencyTests.swift` | `43ade150425ca6745a6ee8ea7c62d81014fa24e4` |
+| `Native/AmbitionsTests/Today/CommandSearchObviousnessGauntletTests.swift` | `402aa2e2a34e12013af5f8c1aae7d38f6b44d391` |
+
+If any bound source, test, or call-site blob changes before Task 5 executes, the
+live baseline is invalid. Task 5 stops for review; it must not silently
+regenerate, bless, or substitute a new oracle.
 
 ## Provider adapters and conversion
 
 ### Deterministic baseline
 
-The deterministic Search adapter reproduces current token normalization,
-exact/prefix/body ranking, stem-overlap `SemanticLocalIndex`, privacy/family/
-local-only filters, deduplication, stable tie-breaking, and action revalidation
-against fixture authority. The Capture adapter reproduces the current
-`CaptureClassifier` rules and raw/needs-triage abstention without persisting a
-route or correction. Focused production tests remain the behavioral oracle; the
-adapter does not become a reusable product library.
+The primary deterministic Search adapter reproduces the behavior Ambitions users
+actually receive from `DefaultMemoryLensService` and `LocalSearchIndex` at the
+locked source baseline. It transcribes repository inputs into fixture records,
+constructs the current result kinds/families and source/provenance evidence,
+uses the current combined-result ordering and family priorities, normalizes to
+lowercase ASCII word tokens, applies contiguous substring matching, scores
+family priority plus the pinned origin and exact/title-contains bonuses, and
+stably orders ties by `updatedAt`, family raw value, then title with the current
+limit. It covers empty queries, the full-screen invocation above, trusted result
+filtering, and fixture-side destination/routing semantics. It never imports a
+production repository or store.
+
+`FTSIndex`, `ResultRanker`, `SemanticLocalIndex`, `SearchActionValidator`, and
+`RuntimeCanonicalSearch` remain useful only as separately labelled **Search
+migration/parity diagnostics**. They use synthetic fixture authority and
+disposable stores, are not provider arms, are never blended with or relabelled
+as the live user-facing baseline, and cannot select or imply a future production
+Search owner.
+
+The Capture adapter reproduces the current `CaptureClassifier` rules and
+raw/needs-triage abstention without persisting a route or correction. Focused
+production tests remain the behavioral oracle; neither adapter nor the Search
+migration/parity diagnostics become reusable product libraries.
 
 ### Apple `NLEmbedding`
 
@@ -303,10 +381,16 @@ records `excluded_by_scope` and ends the task; no compensating work is allowed.
 The Search harness performs retrieval, canonical-fixture hydration, privacy/
 family/local-only/revision/tombstone validation, deterministic fusion experiments,
 and action revalidation as separately measured phases. Providers may return only
-fixture IDs and evidence. Metrics include Recall@1/3/5/10, MRR, NDCG where useful,
-exact/prefix top-result preservation, zero-overlap recall, hard-negative error,
-duplicate precision/recall, Goal relevance, result stability, and every hard
-safety failure.
+fixture IDs and evidence. Every semantic provider comparison uses the locked
+live `DefaultMemoryLensService` / `LocalSearchIndex` reproduction as its primary
+user-value baseline under the pinned full-screen invocation. Metrics include
+Recall@1/3/5/10, MRR, NDCG where useful, exact/prefix top-result preservation,
+zero-overlap recall, hard-negative error, duplicate precision/recall, Goal
+relevance, result stability, and every hard safety failure.
+
+Search migration/parity diagnostics are emitted in a distinct report namespace
+with their own identity and denominators. They cannot enter provider aggregates,
+live-baseline deltas, winner language, or the production-owner decision.
 
 The Capture harness compares deterministic rules with semantic route-prototype,
 duplicate, Goal-association, and ambiguity evidence. It evaluates per-class
@@ -430,6 +514,10 @@ unbiased conclusions: external model wins; `NLEmbedding` is sufficient;
 deterministic-only is preferable; or no external candidate qualifies. Hard
 privacy, authority, identity/action, deletion/staleness, provenance/license,
 deterministic-availability, or shipping-isolation failure disqualifies the arm.
+Search user-value lift in that packet is always computed against the locked live
+user-facing `DefaultMemoryLensService` / `LocalSearchIndex` baseline under the
+pinned full-screen invocation. Search migration/parity diagnostics are appended
+separately and cannot alter that lift or imply a production Search owner.
 
 ## Persistence, migration, rollout, and disposal
 
@@ -462,8 +550,10 @@ N/A to weaken the approved eventual product accessibility requirements.
 ## Implementation order
 
 1. Establish tool isolation, schemas, immutable contracts, and structural tests.
-2. Build canonical synthetic fixtures, oracle refresh checks, and canaries.
-3. Implement deterministic and `NLEmbedding` baselines.
+2. Build canonical synthetic fixtures, live-Search drift-invalidating oracle
+   checks, the pinned invocation identity, and canaries.
+3. Implement the live user-facing deterministic Search/Capture baseline,
+   separately labelled Search migration/parity diagnostics, and `NLEmbedding`.
 4. Implement the shared offline conversion/reference-validation lane, then
    validate Arctic, BGE, and MiniLM independently; decide conditional mxbai.
 5. Implement Search, Capture, quality, exact-scale, Spotlight, offline/failure,
@@ -479,4 +569,7 @@ N/A to weaken the approved eventual product accessibility requirements.
 independent non-shipping root; closes the matrix; resolves disposable execution
 details without selecting production architecture; maps evidence to all eleven
 `REQ-013` questions; preserves Research numbers as nonauthoritative comparison
-points; and supports a legitimate no-external-model result.
+points; locks semantic Search value to the live `DefaultMemoryLensService` /
+`LocalSearchIndex` baseline and exact full-screen invocation; quarantines FTS,
+`SemanticLocalIndex`, and canonical-generation behavior as migration/parity
+diagnostics; and supports a legitimate no-external-model result.

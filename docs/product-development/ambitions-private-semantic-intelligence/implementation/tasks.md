@@ -70,8 +70,9 @@ physical-device command runs.
    migrations, concurrency, and replay,” and “Evidence handoff.” Acceptance:
    canonical JSON digests bind fixtures, arms, provider/preprocessing,
    conversion/precision, code/build, OS/device, scale, seed, calibration/fusion,
-   and evidence dimensions; partial output is explicitly invalid; writes are
-   atomic; the report permits no-winner. Tests/checks: focused `swift test`
+   evidence dimensions, the live-Search behavioral oracle, and the exact Search
+   invocation context; partial output is explicitly invalid; writes are atomic;
+   the report permits no-winner. Tests/checks: focused `swift test`
    filters for both files, schema validation of `suite-v1.json`, isolation check,
    and `git diff --check`. Environment: macOS. Frontend: none — evaluation-only,
    non-shipping. Shipping dependency introduction: prohibited.
@@ -87,9 +88,11 @@ physical-device command runs.
    boundaries, and quality/safety partitions. Acceptance: deterministic English
    tuning/holdout partitions cover all named Search/Capture, privacy, deletion,
    staleness, family, action, ambiguity, correction, and unsafe-assumption slices;
-   every file is digest-bound; no real person/content or production identifier is
-   present. Tests/checks: fixture schema/digest/partition/leak/coverage tests and
-   two identical regenerations produce byte-identical output. Environment:
+   every file is digest-bound; the Search fixture identity pins the semantic-v1
+   full-screen invocation slice while other intents are labelled parity/sanity
+   slices only; no real person/content or production identifier is present.
+   Tests/checks: fixture schema/digest/partition/leak/coverage/invocation tests
+   and two identical regenerations produce byte-identical output. Environment:
    macOS. Frontend: none — fixture data only. Shipping dependency introduction: prohibited.
 
 4. **Implement mutation and privacy/egress canaries.**
@@ -108,24 +111,52 @@ physical-device command runs.
    Environment: macOS and simulator for platform hooks. Frontend: none —
    evaluation-only. Shipping dependency introduction: prohibited.
 
-5. **Implement and lock the deterministic Search/Capture baseline.**
+5. **Implement and lock the live user-facing deterministic Search/Capture baseline.**
    Files: create
    `Sources/AmbitionsIntelligenceEvaluationDeterministic/DeterministicSearchAdapter.swift`,
    `DeterministicCaptureAdapter.swift`,
+   `SearchMigrationParityDiagnostics.swift`,
    `Tests/AmbitionsIntelligenceEvaluationDeterministicTests/DeterministicSearchAdapterTests.swift`,
    `DeterministicCaptureAdapterTests.swift`, `FixtureOracleParityTests.swift`,
+   `LiveSearchInvocationIdentityTests.swift`,
+   `SearchMigrationParityDiagnosticsTests.swift`,
    `Fixtures/v1/deterministic-search-oracle.jsonl`,
    `deterministic-capture-oracle.jsonl`, and
-   `Manifests/providers/deterministic.json`. Dependencies: Tasks 1–4.
+   `Manifests/providers/deterministic.json`,
+   `Manifests/live-search-behavioral-oracle.json`, and
+   `Manifests/search-migration-parity-diagnostics.json`. Dependencies: Tasks 1–4.
    Trace: `REQ-001`, `REQ-003`–`REQ-008`, `REQ-013`, `REQ-014`; Design
    “Deterministic baseline,” Search/Capture integration boundaries. Acceptance:
-   fixture-side behavior matches golden outputs from current `FTSIndex`,
-   `ResultRanker`, `SemanticLocalIndex`, `SearchActionValidator`, and
-   `CaptureClassifier` focused tests; source hashes are recorded; baseline
-   abstains/needs-triage where current rules do and writes nothing. Tests/checks:
-   package deterministic tests plus focused current
-   `SearchTests`, `RuntimeCanonicalSearchTests`, and `CaptureRoutingTests`; any
-   source-hash drift invalidates rather than silently refreshing the oracle.
+   the primary Search adapter is a fixture-side, non-production transcription of
+   the currently composed `SystemSurfaceBootstrap → DefaultMemoryLensService →
+   LocalSearchIndex` behavior. It covers current normalization/matching, result
+   construction and kinds/families, source/provenance semantics, combined and
+   family ranking, empty-query behavior, stable ordering/limit, trusted handoff,
+   and fixture-side result routing. It imports no production repository or app
+   store. The semantic-v1 identity pins the inspected full-screen contract:
+   `kind = .memoryLens`, `seedIntent = .memoryLens`,
+   `entrySource = .shellUtility`, `presentationContext = .recall`, initial
+   `query = ""`, `goalID = nil`, `captureID = nil`, and resolved `origin = nil`;
+   other intents are parity/sanity only.
+   The production behavioral oracle binds the exact source/test/call-site Git
+   blob hashes listed in `plan.md`, including at minimum
+   `SystemSurfaceBootstrap.swift`, `MemoryLensService.swift`,
+   `MemoryLensService+SearchResults.swift`, `LocalSearchIndex.swift`,
+   `MemoryLensServiceTests.swift`, the relevant `LocalSearchIndex` cases in
+   `SearchTests.swift`, and the full-screen call path. Any bound drift stops Task
+   5 for review and invalidates the baseline; no oracle is silently regenerated.
+   `FTSIndex`, `ResultRanker`, `SemanticLocalIndex`, `SearchActionValidator`, and
+   `RuntimeCanonicalSearch` run only as separately labelled
+   **Search migration/parity diagnostics** using fixtures/disposable stores. They are not provider
+   arms, are not blended with the live baseline, and imply no production Search
+   owner. Capture remains bound to current `CaptureClassifier` focused tests and
+   abstains/needs-triage where current rules do; all paths write nothing.
+   Tests/checks: package deterministic, invocation-identity, drift-invalidation,
+   and diagnostic-separation tests; focused current `MemoryLensServiceTests`,
+   relevant `SearchTests` LocalSearchIndex cases,
+   `P1FLocalSearchFoundationTests`, `AppShellNavigationTests`,
+   `ShellPresentationDependencyTests`, `CommandSearchObviousnessGauntletTests`,
+   diagnostic `RuntimeCanonicalSearchTests`, and `CaptureRoutingTests`.
    Environment: macOS package tests and iOS simulator for current focused tests.
    Frontend: none — baseline adapter only. Shipping dependency introduction: prohibited.
 
@@ -235,12 +266,18 @@ physical-device command runs.
     `SearchStabilityTests.swift`. Dependencies: Tasks
     3–11. Trace: `REQ-003`–`REQ-005`, `REQ-010`–`REQ-014`, `REQ-018`, `REQ-019`;
     Design Search harness and quality proof. Acceptance: identical arm partitions;
-    exact/prefix preservation, paraphrase/zero-overlap, hard negatives, related
-    objects, duplicates, Goal relevance, Recall@K/MRR/NDCG, privacy/family/
-    local-only/deleted/tombstoned/stale handling, fixture hydration, pure action
-    revalidation, and stability reported; holdout isolated; Core Spotlight not
-    silently combined. Tests/checks: metric golden tests, all hard-failure cases,
-    repeated-run byte stability, package Search suite. Environment: macOS;
+    every semantic provider is compared against the Task 5 live user-facing
+    `DefaultMemoryLensService` / `LocalSearchIndex` baseline under the exact
+    pinned invocation; exact/prefix preservation, paraphrase/zero-overlap, hard
+    negatives, related objects, duplicates, Goal relevance, Recall@K/MRR/NDCG,
+    privacy/family/local-only/deleted/tombstoned/stale handling, fixture
+    hydration, pure action revalidation, and stability reported; holdout
+    isolated; Core Spotlight not silently combined. FTS/`SemanticLocalIndex`/
+    canonical-generation results are emitted only in a separate Search
+    migration/parity diagnostic section with no provider-arm, live-baseline, or
+    owner implication. Tests/checks: metric golden tests, primary-baseline delta
+    tests, diagnostic-label/no-blend tests, all hard-failure cases, repeated-run
+    byte stability, package Search suite. Environment: macOS;
     platform arms also simulator/device. Frontend: none — evaluation harness.
     Shipping dependency introduction: prohibited.
 
@@ -376,8 +413,11 @@ physical-device command runs.
     through `REQ-027`—including the evaluation N/A/deferred proof for `REQ-024`
     and `REQ-025`—especially `REQ-013`–`REQ-015`;
     Design “Evidence handoff and Design amendment gate.” Acceptance: all eleven
-    questions answered; each arm and “no external model” remain possible; shared-
-    embedding ceiling, size/distribution data, hard disqualifiers, uncertainty,
+    questions answered; Search-quality and decision-result lift use the locked
+    live user-facing deterministic baseline and exact invocation; Search
+    migration/parity diagnostics are separately labelled and excluded from arm
+    comparisons and owner conclusions; each arm and “no external model” remain
+    possible; shared-embedding ceiling, size/distribution data, hard disqualifiers, uncertainty,
     experimental Research comparison labels, and IQSE handoff present; Spotlight,
     assets, compiled caches, vector stores, builds, and partial runs removed;
     Design remains unchanged pending amendment. Tests/checks: report schema/
@@ -396,7 +436,8 @@ physical-device command runs.
 | Spotlight, failure/offline, provenance | 16–18 |
 | Physical-device measurement and handoff | 19–20 |
 
-Every `REQ-013` question is closed by at least one task: Search quality (12),
+Every `REQ-013` question is closed by at least one task: live Search baseline and
+invocation identity (5), Search quality (12),
 Search safety (4, 12, 16), Capture quality (13), shared-embedding ceiling
 (12–13, 20), conversion fidelity (7–11), runtime (17, 19), scale (14–15, 19),
 failure/offline (17), storage/distribution (14, 18–20), provenance/licensing
