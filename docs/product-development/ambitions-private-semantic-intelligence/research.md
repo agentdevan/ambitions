@@ -5,7 +5,7 @@ status = "approved"
 upstream = ""
 +++
 
-## Ambitions Private Semantic Intelligence — Research
+# Ambitions Private Semantic Intelligence — Research
 
 **Evidence snapshot:** 2026-08-13  
 **Repository:** [`agentdevan/ambitions`](https://github.com/agentdevan/ambitions)  
@@ -817,13 +817,6 @@ This conflates retrieval, classification, generation and authority; increases la
 | Existing adjacent initiatives | Logical or extracted intelligence responsibilities could collide with generative/evaluation/change owners | Explicit ownership matrix in Scope/Design; no package default | Lifecycle review |
 
 ## Frontend impact investigation
-
-- Potential frontend impact: certain
-- Existing surfaces investigated: Global Search, Capture, contextual Trust, and
-  You settings/storage for a possible optional external asset.
-- Evidence and unknowns: Current canon and implementation establish the existing
-  surface and accessibility boundaries; exact semantic-refinement presentation
-  and any external-asset controls remain Design/evidence work.
 
 **Classification: certain.** The architecture itself is backend/derived-index work, but product quality and safe fallback require bounded changes in existing surfaces.
 

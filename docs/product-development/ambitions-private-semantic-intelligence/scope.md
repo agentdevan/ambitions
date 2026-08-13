@@ -5,8 +5,6 @@ status = "approved"
 upstream = "research.md"
 +++
 
-## Lifecycle state
-
 > **Phase boundary:** Devan approved the upstream Research on 2026-08-13 and
 > approved this Scope on 2026-08-13. This Scope defines product behavior and
 > architectural boundaries only. Its approval authorizes initial Design only;
@@ -741,45 +739,39 @@ dependency.
 
 ## Frontend impact contract
 
-- Surface impact: existing
-  Search and Capture are
+- **Surface impact: existing + conditional new-child.** Search and Capture are
   the only primary affected product surfaces. If and only if an external model
   qualifies, Design first determines whether its enablement, derived-data purge,
   disclosure, and delivery-specific controls fit an existing approved settings
   surface. A genuinely new child under the existing You/settings/storage
-  hierarchy is a conditional future branch and material frontend work; it is
-  not selected by this Scope's primary surface classification. No new root or
-  global capability is permitted.
-- IA/navigation: none
-  The shell remains Today, Goals, Time, and You, with
+  hierarchy is conditional material frontend work. No new root or global
+  capability is permitted.
+- **IA/navigation: none.** The shell remains Today, Goals, Time, and You, with
   Capture and Search as global capabilities. Existing entry points and hierarchy
   do not change; any conditional new child remains inside the existing settings
   hierarchy.
-- Assets/iconography: system-only
-  Use existing components and Apple system
+- **Assets/iconography: system-only.** Use existing components and Apple system
   symbols where an icon is needed. No custom AI/model/provider brand asset,
   mascot, sparkle language, or Hugging Face branding is permitted.
-- Visual language: unchanged
-  Semantic behavior uses the current native
+- **Visual language: unchanged.** Semantic behavior uses the current native
   Search, Capture, clarification, settings, Trust, and degraded-state visual
   language. It does not introduce chat bubbles, prompt chrome, confidence
   meters, inference dashboards, or a separate intelligence aesthetic.
-- Motion: unchanged
-  This classification concerns animation and
+- **Motion/effects: unchanged.** This classification concerns animation and
   transition effects, not a product destination. Semantic refinement requires
   no special animation and must respect Reduce Motion and stable focus.
-- Copy/localization: Visible copy describes the user benefit or uncertainty
+- **Copy/localization:** Visible copy describes the user benefit or uncertainty
   in product language—such as “Related wording,” “Same Goal,” “Possible
   duplicate,” “Which did you mean?”, or “Enhanced local understanding.” It must
   not expose model names, numeric confidence, framework/runtime terms, hidden
   certainty, or promotional AI claims. Semantic quality is English-only in v1;
   UI copy remains localization-ready and unsupported language degrades honestly.
-- Accessibility: `REQ-025` and `AC-024` are mandatory for deterministic,
+- **Accessibility:** `REQ-025` and `AC-024` are mandatory for deterministic,
   refining, ambiguous, duplicate, unavailable, disabled, failed, offline,
   derived-data-purged, and applicable delivery states. Required meaning is
   textual and operable with assistive technology, largest Dynamic Type,
   non-color cues, and reduced effects.
-- Visual proof: Design must inspect and fixture the current production Search
+- **Visual proof:** Design must inspect and fixture the current production Search
   and Capture surfaces for deterministic-first, refined, duplicate, ambiguity,
   provider-unavailable, and stale-result suppression states. This bounded work
   inside existing approved surfaces remains bounded existing-surface work and

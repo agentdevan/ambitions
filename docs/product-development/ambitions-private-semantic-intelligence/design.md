@@ -71,7 +71,8 @@ runtime, delivery, or package ownership.
    new query revision cancels the prior request.
 4. The logical intelligence boundary returns candidate references and evidence,
    or abstains. It returns no display model and no action authority.
-5. Search re-resolves every candidate through its selected canonical Search
+5. Once consolidation is complete, production Search re-resolves every
+   candidate through the eventual owner-approved production Search path and
    generation, removes ineligible, stale, deleted, tombstoned, wrong-owner,
    wrong-family, or privacy-suppressed candidates, and applies deterministic
    fusion. A valid exact result cannot be hidden or displaced solely by a model
@@ -165,7 +166,9 @@ separately governed material-frontend branch.
    arm.
 3. Each arm receives the same immutable Search/Capture fixture partitions,
    safety canaries, task definition, fusion/calibration experiment identity,
-   and device/runtime reporting contract where applicable.
+   and device/runtime reporting contract where applicable. The tranche uses
+   fixture/test authority and disposable candidate stores only; it neither
+   depends on nor selects a production Search path or generation.
 4. Candidate-specific conversion and tokenization exist only in the evaluation
    host. Reference-numeric checks must pass before results are considered valid.
 5. The runner records quality, safety, conversion, runtime, scale, failure,
@@ -257,7 +260,7 @@ valid generation or none across crash, migration, rebuild, and rollback.
 
 ## Frontend experience specification
 
-- Surface impact: existing
+- Surface impact: existing + conditional new-child
   Search and Capture are
   the only primary affected product surfaces. Search gains deterministic-first
   semantic refinement, bounded result reasons, and related/duplicate groups.
@@ -453,6 +456,16 @@ groomed architecture must include these logical parts:
   hard negatives, deletion/staleness cases, and expected owner behavior;
 - adapters for the five required arms, optional conditional mxbai, and separate
   Core Spotlight arm;
+- an isolated test-only Core Spotlight domain/index for only the synthetic or
+  canonical fixtures explicitly assigned to that arm, using test-only
+  identifiers and deterministic fixture provenance, with no production object
+  identifiers, private user content, production Search persistence, shipping-app
+  use, or product-authority implication, plus explicit cleanup at normal
+  closeout and failure recovery;
+- deliberate Core Spotlight boundary cases that distinguish fixtures ineligible
+  for donation under the tested policy from otherwise permissible synthetic
+  candidates returned for Ambitions post-retrieval privacy, identity, revision,
+  deletion, and staleness validation;
 - conversion-reference checks that quarantine numerically invalid candidate
   adapters before comparative metrics are accepted;
 - a Search harness that separates retrieval, candidate hydration/validation,
@@ -711,7 +724,18 @@ thresholds.
 - Seeded canaries prove source/query/Capture text, embeddings, candidate IDs,
   raw scores, corrections, fixtures, and content-bearing diagnostics appear in
   no network request, logs, crash material, analytics, shared report, screenshot,
-  clipboard, Spotlight, widget, or implicit export.
+  clipboard, widget, or implicit export. The evaluation host has no access to
+  live production stores, and private production Ambitions content never reaches
+  Core Spotlight for this evaluation.
+- Core Spotlight tests prove that no unauthorized or policy-ineligible fixture
+  is donated; explicitly authorized synthetic/canonical fixtures use only the
+  isolated test domain and test identifiers, never persist as production Search
+  state, are unreachable by the shipping app, and are removed during normal
+  teardown and failure recovery.
+- When the test is specifically measuring post-retrieval suppression for an
+  otherwise permissible synthetic Spotlight candidate, Search must still apply
+  Ambitions canonical privacy, identity, revision, deletion, and staleness
+  validation before the candidate can appear or support an action.
 - Airplane mode and no-account/no-token runs cover every arm after applicable
   public assets exist and every fallback state before/without them.
 - Delete, tombstone, revision, privacy reclassification, owner/purpose change,
@@ -829,10 +853,12 @@ separate review and approval.**
 - Evaluation is defined as a closed, disposable, non-production tranche outside
   the shipping dependency/resource graph, executable only after separate Design
   approval and evaluation-only grooming.
-- Frontend classifications exactly preserve Scope: existing-surface work now,
-  conditional future new-child governance, no IA change, system-only assets,
-  unchanged visual language and effects, bounded product copy, full
-  accessibility, and conditional unified-frontend governance.
+- Frontend classifications exactly match approved Scope: surface impact is
+  `existing + conditional new-child`; current Search/Capture work remains
+  bounded existing-surface work with a `not-required` visual gate, while an
+  amended Design selecting a genuine new child must use the unified-frontend
+  workflow and explicit owner visual approval. IA, assets, visual language,
+  effects, copy, and accessibility classifications remain unchanged.
 - Privacy, deletion/reclassification, offline, provenance, concurrency, replay,
   resource, device, rollout/rollback, and adjacent-owner boundaries are explicit
   enough for evaluation-only grooming without inventing product behavior.
