@@ -1082,6 +1082,7 @@ export async function continuePinnedEvent(
 async function processEvent(
   env: Env,
   receivedEvent: EventEnvelope,
+  allowQueueContinuation = true,
 ): Promise<void> {
   const existing = await env.CONTROL_DB.prepare(
     "SELECT status FROM deliveries WHERE id = ?",
@@ -1181,6 +1182,7 @@ async function processEvent(
       );
     } catch (error) {
       if (error instanceof RepairBudgetExhausted) {
+        if (!allowQueueContinuation) throw error;
         await continuePinnedEvent(env, event, runId);
         return;
       }
@@ -1279,11 +1281,60 @@ async function processEvent(
     );
   } catch (error) {
     if (error instanceof ExternalRequestBudgetExhausted) {
+      if (!allowQueueContinuation) throw error;
       await continuePinnedEvent(env, event, runId);
       return;
     }
     throw error;
   }
+}
+
+async function reconcileDirect(
+  env: Env,
+  event: EventEnvelope,
+): Promise<Response> {
+  const inserted = await persistDelivery(env, event);
+  if (!inserted)
+    return json({
+      accepted: true,
+      direct: true,
+      duplicate: true,
+      deliveryId: event.deliveryId,
+    });
+  try {
+    await processEvent(env, event, false);
+  } catch (error) {
+    const reason = error instanceof Error ? error.message : "UNKNOWN_ERROR";
+    await env.CONTROL_DB.prepare(
+      "UPDATE deliveries SET status = 'retrying', updated_at = ?, last_error = ? WHERE id = ?",
+    )
+      .bind(new Date().toISOString(), reason, event.deliveryId)
+      .run();
+    return json(
+      {
+        accepted: true,
+        direct: true,
+        duplicate: false,
+        deliveryId: event.deliveryId,
+        status: "retrying",
+        error: reason,
+      },
+      503,
+    );
+  }
+  const delivery = await env.CONTROL_DB.prepare(
+    "SELECT status, last_error FROM deliveries WHERE id = ?",
+  )
+    .bind(event.deliveryId)
+    .first<{ status: string; last_error: string | null }>();
+  return json({
+    accepted: true,
+    direct: true,
+    duplicate: false,
+    deliveryId: event.deliveryId,
+    status: delivery?.status ?? "unknown",
+    error: delivery?.last_error ?? null,
+  });
 }
 
 export default {
@@ -1326,6 +1377,11 @@ export default {
         return await enqueue(env, await signedEnvelope(request, env, "github"));
       if (url.pathname === "/reconcile")
         return await enqueue(env, await signedEnvelope(request, env, "manual"));
+      if (url.pathname === "/reconcile-direct")
+        return await reconcileDirect(
+          env,
+          await signedEnvelope(request, env, "manual"),
+        );
       if (url.pathname === "/replay") {
         const requestEvent = await signedEnvelope(request, env, "manual");
         const requested = requestEvent.payload as { deliveryId?: unknown };
